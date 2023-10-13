@@ -138,7 +138,7 @@ class Option {
 				<div class="insert-data">
 					<h1>Insert data</h1>
 					<div style="margin-top: 10px">
-						<input id="${Ids.globalResourceId}" placeholder="insert resource Id" style="color: #181d24" value="${Option.initCurrentCode()}">
+						<input id="${Ids.globalResourceId}" placeholder="insert product Code" style="color: #181d24" value="${Option.initCurrentCode()}">
 						<input id="${Ids.questionNumber}" placeholder="insert question number" style="color: #181d24" value="${this.initNextCurrentQuestionNumber()}">
 					</div>
 					<button id="${Ids.insertButton}">Insert</button>

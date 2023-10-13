@@ -90,7 +90,7 @@ class DefinitionProcess extends VWAProcess {
 
 	// ----------------- get field ----------------- //
 	getInflectedForm(row) {
-		return this.getField("Inflected Forms", row);
+		return this.getExactlyField("Inflected Forms", row);
 	}
 
 	getSynonyms(row) {
