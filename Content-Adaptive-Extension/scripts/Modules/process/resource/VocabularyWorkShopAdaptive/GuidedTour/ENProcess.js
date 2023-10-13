@@ -164,16 +164,16 @@ class ENProcess extends VWAProcess {
 	}
 
 	getItem(row, index) {
-		return this.getFieldOfRow("item", this.data[row][index - 1]);
+		return this.getExactlyFieldOfRow("Item", this.data[row][index - 1]);
 	}
 
 	getCorrectEmoji(row) {
-		const correctAnswerEmoji = this.data[row][0]["Correct emoji with feedback phrases randomly selected after all tiles are placed correctly whether by the student or by the program:"];
+		const correctAnswerEmoji = this.getFieldOfRow("Correct Emoji With Feedback", this.data[row][0]);
 		return this.beautifulEmoji(correctAnswerEmoji);
 	}
 
 	getIncorrectEmoji(row) {
-		const incorrectAnswerEmoji = this.data[row][0]["Incorrect emoji  with feedback phrases randomly selected:"];
+		const incorrectAnswerEmoji = this.getFieldOfRow("Incorrect Emoji With Feedback", this.data[row][0]);
 		return this.beautifulEmoji(incorrectAnswerEmoji);
 	}
 
@@ -185,7 +185,7 @@ class ENProcess extends VWAProcess {
 			const incorrectFeedback2 = row["Incorrect Feedback 2"];
 
 			return {
-				item: row["item"],
+				item: row["Item"],
 				correctAnswerFeedback: "",
 				incorrectFeedback1: this.updateFeedback1(incorrectFeedback1, wordId) || "",
 				incorrectFeedback2: this.updateFeedback2(incorrectFeedback2, wordId) || ""
