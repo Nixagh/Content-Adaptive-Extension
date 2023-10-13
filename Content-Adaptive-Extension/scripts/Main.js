@@ -2,7 +2,7 @@ class Main {
 	Initialize() {
 		const prepare = new Prepare();
 		prepare.init();
-		const option = new Option();
+		const option = new OptionContent();
 		option.init();
 	}
 }

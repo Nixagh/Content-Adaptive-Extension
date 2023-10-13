@@ -1,7 +1,7 @@
-class Option {
+class OptionContent {
 	init() {
-		Option.initButton();
-		Option.initOptionsModal().then();
+		OptionContent.initButton();
+		OptionContent.initOptionsModal().then();
 		// Option.initFastInsertButton();
 	}
 
@@ -18,7 +18,7 @@ class Option {
 
 		UI.Delegate(`.${Classes.mainMenu}`, "click", `.${Classes.optionsButton}`, () => {
 			const optionsModalKey = "optionsModal";
-			Option.showOptionsModal(optionsModalKey);
+			OptionContent.showOptionsModal(optionsModalKey);
 		});
 	}
 
@@ -28,7 +28,7 @@ class Option {
 
 		UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.insertButton}`, async () => {
 			if (!GProcess) return alert("No file loaded");
-			Option.insert();
+			OptionContent.insert();
 		});
 	}
 
@@ -42,8 +42,8 @@ class Option {
 	}
 
 	static async initOptionsModal() {
-		const data = Option.getOptionsModalData();
-		const innerHtml = Option.getOptionsModalInnerHtml();
+		const data = OptionContent.getOptionsModalData();
+		const innerHtml = OptionContent.getOptionsModalInnerHtml();
 		await Modal.Create(data, {html: innerHtml}, false);
 
 		UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.fileInputButton}`, async () => {
@@ -60,12 +60,12 @@ class Option {
 
 		UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.insertButton}`, async () => {
 			if (!GProcess) return alert("No file loaded");
-			Option.insert();
+			OptionContent.insert();
 		});
 
 		UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.insertAndSave}`, async () => {
 			if (!GProcess) return alert("No file loaded");
-			Option.insert();
+			OptionContent.insert();
 			document.getElementById(Ids.saveBtn).click();
 		})
 
@@ -123,7 +123,7 @@ class Option {
 				<div class="choose-unit">
 					<h1>\tDescription</h1>
 					<select id="${Ids.description}" style="color: #181d24">
-						${Option.getDescriptions()}
+						${OptionContent.getDescriptions()}
 					</select>
 				</div>
 				<div class="preview">
@@ -138,7 +138,7 @@ class Option {
 				<div class="insert-data">
 					<h1>Insert data</h1>
 					<div style="margin-top: 10px">
-						<input id="${Ids.globalResourceId}" placeholder="insert product Code" style="color: #181d24" value="${Option.initCurrentCode()}">
+						<input id="${Ids.globalResourceId}" placeholder="insert product Code" style="color: #181d24" value="${OptionContent.initCurrentCode()}">
 						<input id="${Ids.questionNumber}" placeholder="insert question number" style="color: #181d24" value="${this.initNextCurrentQuestionNumber()}">
 					</div>
 					<button id="${Ids.insertButton}">Insert</button>
