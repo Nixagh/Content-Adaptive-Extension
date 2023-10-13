@@ -174,10 +174,8 @@ class WSProcess extends VWAProcess {
 
 		const split = content.split("\n").filter(value => Utility.isNotNull(value));
 		const newSplit = split.map((value, index) => {
-			console.log("before:", value)
 			let _value = value.replaceAll("\n", "").replaceAll("\r", "").trim();
 			if (index % 2 === 0) _value = `<b>${_value}</b>`;
-			console.log("after:", _value)
 			return _value;
 		})
 		return newSplit.join("<br/>");
