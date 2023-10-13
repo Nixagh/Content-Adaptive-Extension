@@ -1,0 +1,89 @@
+{
+  "manifest_version": 3,
+  "name": "New Extension help typing",
+  "version": "1.0.0",
+  "description": "Welcome to my extension",
+  "icons": {
+    "16": "assets/16.png",
+    "48": "assets/48.png",
+    "128": "assets/128.png"
+  },
+  "action": {
+    "default_popup": "UI/popup.html",
+    "default_icon": {
+      "16": "assets/16.png",
+      "48": "assets/48.png",
+      "128": "assets/128.png"
+    },
+    "default_title": "Extension help typing"
+  },
+  "background": {
+    "service_worker": "scripts/Modules/Background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/*",
+        "scripts/*",
+        "styles/*",
+        "UI/*"
+      ],
+      "matches": [
+        "https://*.youtube.com/*"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://192.168.200.26:8090/*"
+      ],
+      "js": [
+        "scripts/Libs/external/Jui.js",
+        "scripts/Libs/external/REF.js",
+        "scripts/Libs/data/ELib.js",
+        "scripts/Libs/data/Classes.js",
+        "scripts/Libs/data/Ids.js",
+        "scripts/Libs/data/ExcelType.js",
+        "scripts/Compound.js",
+        "scripts/Libs/data/programs/resource/VWAResource.js",
+        "scripts/Libs/data/programs/ProgramSeries.js",
+        "scripts/Libs/Utility.js",
+        "scripts/Libs/Elements.js",
+        "scripts/Libs/Modal.js",
+        "scripts/Libs/Storage.js",
+        "scripts/Libs/UI.js",
+        "scripts/Modules/file/FileReader.js",
+        "scripts/Modules/process/utility/BasicInput.js",
+        "scripts/Modules/process/utility/Area.js",
+        "scripts/Modules/process/utility/Ske.js",
+        "scripts/Modules/process/resource/VWAProcess.js",
+        "scripts/Modules/process/resource/GuidedTour/CRWGTProcess.js",
+        "scripts/Modules/process/resource/GuidedTour/ENProcess.js",
+        "scripts/Modules/process/resource/GuidedTour/VCProcess.js",
+        "scripts/Modules/process/resource/GuidedTour/VCOLVProcess.js",
+        "scripts/Modules/process/resource/OnYourOwn/CRWOYOProcess.js",
+        "scripts/Modules/process/resource/OnYourOwn/CSProcess.js",
+        "scripts/Modules/process/resource/StartingPoint/DefinitionProcess.js",
+        "scripts/Modules/process/resource/StartingPoint/WSProcess.js",
+        "scripts/Modules/process/resource/StartingPoint/VisualProcess.js",
+        "scripts/Modules/Prepare.js",
+        "scripts/Modules/Content.js",
+        "scripts/Main.js"
+      ],
+      "css": [
+        "styles/my-style.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "type": "module"
+    }
+  ],
+  "author": "Nixagh"
+}
