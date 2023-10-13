@@ -15,7 +15,7 @@ class WSProcess extends VWAProcess {
 			return {
 				...word,
 				...ws,
-				questionNumber: wsRowNumber + 1
+				"Question Number": wsRowNumber + 1
 			}
 		});
 	}
@@ -91,7 +91,7 @@ class WSProcess extends VWAProcess {
 
 	// ------------------ get field ------------------ //
 	getQuestionNumber(row) {
-		return this.getField("questionNumber", row);
+		return this.getField("Question Number", row);
 	}
 
 	getInflectedForm(row) {
