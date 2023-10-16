@@ -12,8 +12,9 @@ const VWAResource = {
 	// "WT": {value: "Word Ties", insert: () => GProcess.insert(), process: () => new WTProcess("WT")},
 	"E/N": {value: "Example/Nonexample", new: () => new ENProcess("E/N", 1, [1, 1, 1, 1])},
 	// "DP1": {value: "Differentiated Passage 1", insert: () => GProcess.insert(), process: () => new DP1Process()},
-	// "DP2": {value: "Differentiated Passage 2", insert: () => GProcess.insert(), process: () => new DP2Process()},
+	// "DP2": {value: "Differentiated Passage 2", new: () => new DP2Process()},
 	"CS": {value: "Completing the Sentence", new: () => new CSProcess("CS", 1, [1, 1, 1, 0])},
+	"EOY": {value: "End of Year Test", new: () => new EOYTestProcess("EOY", 1, [1, 1, 1, 0])},
 }
 
 const getProcess = () => {

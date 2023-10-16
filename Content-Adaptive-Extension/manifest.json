@@ -64,6 +64,7 @@
         "scripts/Modules/process/utility/Area.js",
         "scripts/Modules/process/utility/Ske.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/VWAProcess.js",
+        "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/EOYTestProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/CRWGTProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/ENProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/VCProcess.js",

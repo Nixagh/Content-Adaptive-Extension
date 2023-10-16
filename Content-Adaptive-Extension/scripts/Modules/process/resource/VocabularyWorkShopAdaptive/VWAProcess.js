@@ -29,12 +29,12 @@ class VWAProcess {
     insert() {
         this.errors = [];
         // get row from question number
-        const row = parseInt(document.getElementById(Ids.questionNumber).value) - this.rowMinus;
+        const row = this.getRow();
 
         // set question tab
         if (this.setTab[0]) this.setQuestion(row, true);
         // set passage tab
-        if (this.setTab[1]) this.setPassage(row);
+        // if (this.setTab[1]) this.setPassage(row);
         // set question content tab
         if (this.setTab[2]) this.setQuestionContent(row);
         // set feedback tab
@@ -44,6 +44,10 @@ class VWAProcess {
         if (this.errors.length) {
             alert(this.errors.map(error => `${error.tab}: ${error.message}`).join("\n"));
         }
+    }
+
+    getRow() {
+        return parseInt(document.getElementById(Ids.questionNumber).value) - this.rowMinus;
     }
 
     setQuestion(row, autoScore) {

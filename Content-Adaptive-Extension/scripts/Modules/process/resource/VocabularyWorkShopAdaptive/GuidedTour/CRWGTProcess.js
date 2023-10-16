@@ -103,6 +103,7 @@ class CRWGTProcess extends VWAProcess {
 		const lastIndex = correctFeedback.lastIndexOf("</b>");
 		const word = correctFeedback.substring(firstIndex + 3, lastIndex);
 		const wordId = this.getWordIdFromWordList(word);
+		if (!wordId) this.addError(`FeedBack`, `Correct Feed Back wrong "${word}" can't find wordID in word list`);
 
 		const replaceValue = `<${wordId}>${wordId}:${word}</${wordId}>`;
 
@@ -160,13 +161,15 @@ class CRWGTProcess extends VWAProcess {
 		let option = '';
 		// <div idx="a" word="802906_GT_CTRW_u05_q01_ans01">debits</div>
 		answerChoices.forEach((answerChoice, index) => {
-			option += `<div idx="${String.fromCharCode(97 + index)}" word="${this.getWordIdFromWordList(answerChoice)}">${answerChoice}</div>`;
+			const wordId = this.getWordIdFromWordList(answerChoice);
+			if (!wordId) this.addError(`Question Content`, `Answer Choices wrong "${answerChoice}" can't find WordID in word list`);
+			option += `<div idx="${String.fromCharCode(97 + index)}" word="${wordId}">${answerChoice}</div>`;
 		});
 		return `<div subid="options">${option}</div>`;
 	}
 
 	getWordIdFromWordList(word) {
 		const wordObj = this.data.filter(wordObj => wordObj["Word"].toLowerCase() === word.toLowerCase());
-		return wordObj ? wordObj[0]["Word ID"] : () => {this.addError(`Question Content`, `Can't find word ${word} in word list`); return ""};
+		return wordObj.length ? wordObj[0]["Word ID"] : "";
 	}
 }

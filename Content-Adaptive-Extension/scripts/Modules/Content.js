@@ -105,7 +105,7 @@ class OptionContent {
 	static insert() {
 		const questionNumber = $(`#${Ids.questionNumber}`).val();
 		const totalLine = $(`#${Ids.totalLine}`).text();
-		if (parseInt(totalLine) < +questionNumber) return alert("Đã hết dữ liệu");
+		// if (parseInt(totalLine) < +questionNumber) return alert("Đã hết dữ liệu");
 
 		const process = JSON.parse(Storage.Get("GProcess"));
 		GProcess.insert();

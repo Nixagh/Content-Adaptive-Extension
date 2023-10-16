@@ -89,6 +89,10 @@ class WSProcess extends VWAProcess {
 		return JSON.stringify(correctAnswer);
 	}
 
+	getMaxScore() {
+		return 0;
+	}
+
 	// ------------------ get field ------------------ //
 	getQuestionNumber(row) {
 		return this.getField("Question Number", row);
