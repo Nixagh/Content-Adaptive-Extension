@@ -34,7 +34,7 @@ class VWAProcess {
         // set question tab
         if (this.setTab[0]) this.setQuestion(row, true);
         // set passage tab
-        // if (this.setTab[1]) this.setPassage(row);
+        if (this.setTab[1]) this.setPassage(row);
         // set question content tab
         if (this.setTab[2]) this.setQuestionContent(row);
         // set feedback tab

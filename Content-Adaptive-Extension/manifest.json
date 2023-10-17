@@ -69,6 +69,7 @@
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/ENProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/VCProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/VCOLVProcess.js",
+        "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/VCDProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/OnYourOwn/CRWOYOProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/OnYourOwn/CSProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/StartingPoint/DefinitionProcess.js",
