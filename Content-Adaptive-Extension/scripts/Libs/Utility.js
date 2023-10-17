@@ -184,6 +184,7 @@ class Utility {
 	}
 
 	static beautifullyHeader(header) {
-		return this.ucWords(header.replaceAll("_", " ").replaceAll("\r", " ").replaceAll("\n", " ").trim());
+		const step1 = this.ucWords(header.replaceAll("_", " ").replaceAll("\r", " ").replaceAll("\n", " ").trim());
+		return step1.split(" ").filter((value) => this.isNotNull(value)).join(" ");
 	}
 }
