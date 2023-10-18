@@ -74,6 +74,7 @@ class VCProcess extends VWAProcess {
 							rubricRule: null
 						}
 					],
+					maxScore: this.getMaxScore()
 				}
 			]
 		}
