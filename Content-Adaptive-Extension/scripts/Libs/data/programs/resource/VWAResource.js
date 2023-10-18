@@ -9,7 +9,7 @@ const VWAResource = {
 	"WS": {value: "Word Study", new: () => new WSProcess("WS", 1, [1, 0, 1, 0])},
 	// "OLV-P1": {value: "On-level Passage 1", insert: () => GProcess.insert(), process: () => new OLVP1Process()},
 	// "OLV-P2": {value: "On-level Passage 2", insert: () => GProcess.insert(), process: () => new OLVP2Process()},
-	// "WT": {value: "Word Ties", insert: () => GProcess.insert(), process: () => new WTProcess("WT")},
+	"WT": {value: "Word Ties", new: () => new WordTieProcess("WT", 1, [1, 0, 1, 0])},
 	"E/N": {value: "Example/Nonexample", new: () => new ENProcess("E/N", 1, [1, 0, 1, 1])},
 	// "DP1": {value: "Differentiated Passage 1", insert: () => GProcess.insert(), process: () => new DP1Process()},
 	// "DP2": {value: "Differentiated Passage 2", new: () => new DP2Process()},
@@ -18,6 +18,7 @@ const VWAResource = {
 	"BOY": {value: "Begin of Year Test", new: () => new BOYTestProcess("BOY", 1, [1, 0, 1, 0])},
 	"PreTest": {value: "Pre Test", new: () => new PreTestProcess("PreTest", 1, [1, 0, 1, 0])},
 	"PostTest": {value: "Post Test", new: () => new PostTestProcess("PostTest", 1, [1, 0, 1, 0])},
+	"CumTest": {value: "Cumulative Test", new: () => new CumulativeTestProcess("CumTest", 1, [1, 0, 1, 0])},
 }
 
 const getProcess = () => {
