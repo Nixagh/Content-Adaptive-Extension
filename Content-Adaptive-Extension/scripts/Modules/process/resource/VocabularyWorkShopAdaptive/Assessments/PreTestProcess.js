@@ -32,7 +32,6 @@ class PreTestProcess extends VWAProcess {
                     maxScore: this.getMaxScore()
                 }
             ],
-            maxScore: this.getMaxScore()
         }
         return JSON.stringify(componentScoreRules);
     }

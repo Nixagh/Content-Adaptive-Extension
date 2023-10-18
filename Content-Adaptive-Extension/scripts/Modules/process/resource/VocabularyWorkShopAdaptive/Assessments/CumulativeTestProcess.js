@@ -77,9 +77,9 @@ class CumulativeTestProcess extends VWAProcess {
                             rubricRule: null
                         }
                     ],
+                    maxScore: this.getMaxScore()
                 }
             ],
-            maxScore: this.getMaxScore()
         };
         return JSON.stringify(componentScoreRules);
     }
