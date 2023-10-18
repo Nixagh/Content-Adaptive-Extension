@@ -78,7 +78,8 @@ class EOYTestProcess extends VWAProcess {
                         }
                     ],
                 }
-            ]
+            ],
+            maxScore: this.getMaxScore()
         }
         return JSON.stringify(componentScoreRules);
     }
