@@ -110,7 +110,7 @@ class PostTestProcess extends VWAProcess {
         let optionHTML= '';
         answerChoices.forEach((answerChoice) => {
             const split = answerChoice.split(".");
-            optionHTML += `<div itemid="${split[0]}" itemlabel="">${split[1].trim()}</div>`
+            optionHTML += `<div itemid="${split[0].trim()}" itemlabel="">${split[1].trim()}</div>`
         });
         return optionHTML;
     }
