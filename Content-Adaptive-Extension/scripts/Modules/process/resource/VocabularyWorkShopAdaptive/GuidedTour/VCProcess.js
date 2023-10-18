@@ -81,10 +81,13 @@ class VCProcess extends VWAProcess {
 	}
 
 	getDirectionLineHTML(row) {
+		if (row === 0 || row === 6)
 		return this.getField("Direction Line", row);
+		return "";
 	}
 
 	getPassageContent(row) {
+		if (row !== 0 && row !== 6) return "";
 		const title = this.getPassageTitle(row);
 		const content = this.getPassageBody(row);
 

@@ -1,0 +1,3 @@
+class WordTieProcess extends VWAProcess {
+
+}
