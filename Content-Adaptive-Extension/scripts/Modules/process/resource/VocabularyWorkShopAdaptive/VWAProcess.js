@@ -63,6 +63,7 @@ class VWAProcess {
             pathway1: "pathwaySet1",
             pathway2: "pathwaySet2",
             adaptiveAnswerCount: "adaptiveAnswerCount",
+            setType: "setType"
         }
 
         const wordIdElement = new BasicInput(ids.wordId);
@@ -71,8 +72,8 @@ class VWAProcess {
         const questionTypeElement = new BasicInput(ids.questionTypeSelect);
         const questionTypeValueElement = new BasicInput(ids.questionTypeValue);
         const showQuestionTypeValueElement = new BasicInput("select2-chosen-1");
-
         if (autoScore) {
+
             // auto score
             const autoScoreElement = document.getElementById(ids.autoScore);
             autoScoreElement.checked = true;
@@ -80,10 +81,11 @@ class VWAProcess {
             const autoScoreParentElement = autoScoreElement.parentElement;
             autoScoreParentElement.classList.add("checked");
         }
-
         const componentGradingRulesElement = new BasicInput(ids.componentGradingRules);
+
         const pathway1Element = new BasicInput(ids.pathway1);
         const pathway2Element = new BasicInput(ids.pathway2);
+        const setTypeElement = new BasicInput(ids.setType);
         const adaptiveAnswerCountElement = new BasicInput(ids.adaptiveAnswerCount);
 
         wordIdElement.setValue(this.getWordId(row));
@@ -97,6 +99,7 @@ class VWAProcess {
 
         pathway1Element.setValue(this.getPathway1(row));
         pathway2Element.setValue(this.getPathway2(row));
+        setTypeElement.setValue(this.getSetType(row));
         adaptiveAnswerCountElement.setValue(this.getAdaptiveAnswerCount(row));
         console.log("Set question")
     }
@@ -169,6 +172,10 @@ class VWAProcess {
             return 'A';
         }
         return pathway2;
+    }
+
+    getSetType() {
+        return '';
     }
 
     getAdaptiveAnswerCount() {

@@ -10,7 +10,7 @@ class CumulativeTestProcess extends VWAProcess {
 
     getUnit() {
         // todo:
-        return 3;
+        return 4;
     }
 
     getCID(row) {

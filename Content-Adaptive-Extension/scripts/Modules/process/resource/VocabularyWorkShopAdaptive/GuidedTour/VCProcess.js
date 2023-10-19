@@ -34,7 +34,7 @@ class VCProcess extends VWAProcess {
 				word[`Item Standard`] = word[`Item ${i} Standard`];
 				word[`Item Answer Choices`] = word[`Item ${i} Answer Choices`];
 				word[`Item Correct Answer`] = word[`Item ${i} Correct Answer`];
-				word[`Item Correct Answer Feedback`] = word[`Item ${i} Correct Answer Feedback`];
+				word[`Item Correct Answer Feedback`] = word[`Item ${i} Correct Answer Feedback`] || word[`Item ${i} Correct Feedback`];
 				word[`Item Incorrect Feedback 1`] = word[`Item ${i} Incorrect Feedback 1`];
 				word[`Item Incorrect Feedback 2`] = word[`Item ${i} Incorrect Feedback 2`];
 			}
@@ -93,7 +93,7 @@ class VCProcess extends VWAProcess {
 		const content = this.getPassageBody(row);
 
 		const passageTitle = `<div class="title">${title}</div>`;
-		const passageContent = content.map((value, index) => {
+		const passageContent = content.map(value => {
 			// template : <paragraph id=0>The <b>aspiring</b> young actor was excited to be cast in his first play.</paragraph>
 			// index = 0;
 			// result : <div class="paragraph" id="1">The <b>aspiring</b> young actor was excited to be cast in his first play.</div>
@@ -104,17 +104,20 @@ class VCProcess extends VWAProcess {
 			// <word3186>inanimate</word3186> -> <word3186>word3186:inanimate</word3186>
 			//todo: <word3186>inanimate<word3186> -> <word3186>word3186:inanimate</word3186>
 			const regex = / <word\d+>/g;
-			const paragraphId = index + 1;
+			// <paragraph = 1> Dystopian fictio... </paragraph> => <div class="paragraph" id = "1"> Dystopian fictio... </div>
+			const step1GetParagraphId = value.split("paragraph = ") || value.split("paragraph id = ");
+			const paragraphId = step1GetParagraphId[1].split(">")[0];
 
-			return value.replaceAll("<paragraph", `<div class="paragraph" id="${paragraphId}"`)
+			return value
+				.replaceAll(`<paragraph = ${paragraphId}>`, `<div class="paragraph" id = "${paragraphId}">`)
 				.replaceAll("</paragraph>", "</div>")
+				.replaceAll(`</paragraph`, '</div>')
 				.replace("<paragraph>", `</div>`)
 				.replaceAll("<b>", `<mean><b>`)
 				.replaceAll("</b>", `</b></mean>`)
 				.replaceAll(`“`, `"`)
 				.replaceAll(`”`, `"`)
-				.replaceAll(regex, (match) => `${match}word${match.split("word")[1].split(">")[0]}:`);
-
+				.replaceAll(regex, (match) => `${match}word${match.split("word")[1].split(">")[0]}:`)
 		}).join("");
 		return `<div class="direction_section">
 					<div audio-source="" class="audio-inline" style="display: inline-flex; width: auto;"></div>
