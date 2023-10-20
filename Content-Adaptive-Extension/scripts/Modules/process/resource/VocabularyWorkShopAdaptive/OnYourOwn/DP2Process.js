@@ -1,6 +1,6 @@
-class OLVP2Process extends OLVProcess {
+class DP2Process extends DP1Process {
     getDescription() {
-        return 'OYO_OLP2';
+        return 'OYO_DP2';
     }
 
     getSheetValue() {
