@@ -123,32 +123,8 @@ class VCProcess extends VWAProcess {
         const content = this.getPassageBody(row);
 
         const passageTitle = `<div class="title">${title}</div>`;
-        const passageContent = content.map(value => {
-            // template : <paragraph id=0>The <b>aspiring</b> young actor was excited to be cast in his first play.</paragraph>
-            // index = 0;
-            // result : <div class="paragraph" id="1">The <b>aspiring</b> young actor was excited to be cast in his first play.</div>
-            // but some time not close by </paragraph> , is close by <paragraph>
 
-            // and if paragraph have word like <word3186>inanimate</word3186> replace to <word3186>word3186:inanimate</word3186>
-            // but some time not close by </word3186> , is close by <word3186>
-            // <word3186>inanimate</word3186> -> <word3186>word3186:inanimate</word3186>
-            //todo: <word3186>inanimate<word3186> -> <word3186>word3186:inanimate</word3186>
-            const regex = / <word\d+>/g;
-            // <paragraph = 1> Dystopian fictio... </paragraph> => <div class="paragraph" id = "1"> Dystopian fictio... </div>
-            const step1GetParagraphId = value.split("paragraph = ") || value.split("paragraph id = ");
-            const paragraphId = step1GetParagraphId[1].split(">")[0];
-
-            return value
-                .replaceAll(`<paragraph = ${paragraphId}>`, `<div class="paragraph" id = "${paragraphId}">`)
-                .replaceAll("</paragraph>", "</div>")
-                .replaceAll(`</paragraph`, '</div>')
-                .replace("<paragraph>", `</div>`)
-                .replaceAll("<b>", `<mean><b>`)
-                .replaceAll("</b>", `</b></mean>`)
-                .replaceAll(`“`, `"`)
-                .replaceAll(`”`, `"`)
-                .replaceAll(regex, (match) => `${match}word${match.split("word")[1].split(">")[0]}:`)
-        }).join("");
+        const passageContent = this.passageConverter(content);
         return `<div class="direction_section">
 					<div audio-source="" class="audio-inline" style="display: inline-flex; width: auto;"></div>
 					${passageTitle}
@@ -208,7 +184,8 @@ class VCProcess extends VWAProcess {
     }
 
     getItem(row) {
-        return this.getExactlyField(`Item`, row);
+        let item = this.getExactlyField("Item", row);
+        return this.replaceItalicOfItem(item);
     }
 
     getAnswerChoices(row) {

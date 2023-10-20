@@ -112,6 +112,7 @@ class VWAProcess {
     setPassage(row) {
         const directionLine = new Cke("cke_directionLine");
         const passageContent = new Cke("cke_2_contents");
+        const passageSummary = new Cke("cke_3_contents");
         const choosePassage = document.querySelectorAll("#questionTypeSelection")[1];
 
         if (row !== 0) {
@@ -119,10 +120,12 @@ class VWAProcess {
             this.getAjaxPassage(choosePassage.value).then(result => {
                 directionLine.setHtml(result.directionLineHTML);
                 passageContent.setHtml(result.passageContentHTML);
+                passageSummary.setHtml(result.passageSummaryHTML);
             });
         } else {
             directionLine.setHtml(this.getDirectionLineHTML(row));
             passageContent.setHtml(this.getPassageContent(row));
+            passageSummary.setHtml(this.getPassageSummaryText(row));
         }
         console.log("Set passage");
     }
@@ -130,7 +133,11 @@ class VWAProcess {
     async getAjaxPassage(passageId) {
         const url = `http://192.168.200.26:8090/cms/ajax/question/loadPassage.html?passageId=${passageId}`;
         const result = await $.ajax({url: url});
-        return { directionLineHTML: result["directionLine"], passageContentHTML: result["content"] };
+        return { directionLineHTML: result["directionLine"], passageContentHTML: result["content"], passageSummaryHTML: result["passageSummary"] };
+    }
+
+    getPassageSummaryText(row) {
+        return '';
     }
 
     setQuestionContent(row) {
@@ -351,5 +358,74 @@ class VWAProcess {
             tab: tab,
             message: message
         });
+    }
+
+    passageConverter(content) {
+        // find the first <bullet> tag and add <ul> tag before it
+        const firstBulletIndex = content.indexOf("<bullet>");
+        const passageBodyWithUl = firstBulletIndex !== -1 ? content.slice(0, firstBulletIndex) + "<ul>" + content.slice(firstBulletIndex) : content;
+        // find the last </bullet> tag and add </ul> tag after it
+        const lastBulletIndex = passageBodyWithUl.lastIndexOf("</bullet>");
+        const passageBodyWithUlAndLi = lastBulletIndex !== -1 ? passageBodyWithUl.slice(0, lastBulletIndex) + "</ul>" + passageBodyWithUl.slice(lastBulletIndex) : passageBodyWithUl;
+
+        // some time
+
+        return passageBodyWithUlAndLi.split("\n").map(value => {
+            // template : <paragraph id=0>The <b>aspiring</b> young actor was excited to be cast in his first play.</paragraph>
+            // index = 0;
+            // result : <div class="paragraph" id="1">The <b>aspiring</b> young actor was excited to be cast in his first play.</div>
+            // but some time not close by </paragraph> , is close by <paragraph>
+
+            // and if paragraph have word like <word3186>inanimate</word3186> replace to <word3186>word3186:inanimate</word3186>
+            // but some time not close by </word3186> , is close by <word3186>
+            // <word3186>inanimate</word3186> -> <word3186>word3186:inanimate</word3186>
+            //todo: <word3186>inanimate<word3186> -> <word3186>word3186:inanimate</word3186>
+            const regex = / <word\d+>/g;
+
+            const regexNumber = /\d+/;
+            const matchNumber = value.match(regexNumber);
+            const paragraphId = matchNumber ? matchNumber[0] : '';
+
+            return value
+                .replaceAll(`<paragraph = ${paragraphId}>`, `<div class="paragraph" id = "${paragraphId}">`)
+                .replaceAll(`<paragraph id = ${paragraphId}>`, `<div class="paragraph" id = "${paragraphId}">`)
+                .replaceAll("</paragraph>", "</div>")
+                .replaceAll(`</paragraph`, '</div>')
+                .replaceAll("<paragraph>", `</div>`)
+                .replaceAll(`</div> id = ${paragraphId}>`, `</div>`)
+                .replaceAll(`</div> = ${paragraphId}>`, `</div>`)
+                .replaceAll(`</paragraph id = ${paragraphId}>`, "")
+                .replaceAll(`</paragraph = ${paragraphId}>`, "")
+                .replaceAll(`<bullet>`, '<li>')
+                .replaceAll(`</bullet>`, '</li>')
+                .replaceAll(`“`, `"`)
+                .replaceAll(`”`, `"`)
+                .replaceAll(regex, (match) => `${match}word${match.split("word")[1].split(">")[0]}:`)
+                // remove /id = \d+/g if have
+                .replaceAll(/id = \d+/g, '')
+                .trim();
+        }).join("\n").trim();
+        // todo: still wrong if first data wrong format T.T ....
+    }
+
+    replaceItalicOfItem(item) {
+        // template : <i>-dub-</i> => <i style="white-space:nowrap;display:inline;">-dub-</i>
+        // <i>dub</i> => <i>dub</i>
+        // <i> -dub- </i> => <i style="white-space:nowrap;display:inline;">-dub-</i>
+        // <i>-dub</i> => <i style="white-space:nowrap;display:inline;">-dub</i>
+        // <i>dub-</i> => <i style="white-space:nowrap;display:inline;">dub-</i>
+
+        const regex = /<i>(\s*-\w+-\s*)<\/i>/g;
+        const match = item.match(regex);
+        if (match) {
+            match.forEach((m) => {
+                const replace = m.replaceAll('<i>', '<i style="white-space:nowrap;display:inline;">');
+                item = item.replace(m, replace);
+            })
+        }
+        // remove <label></label>
+        const regex_ = /<label>(.*?)<\/label>/;
+        const match_ = item.match(regex_)[0];
+        return item.replaceAll(match_, '').trim();
     }
 }
