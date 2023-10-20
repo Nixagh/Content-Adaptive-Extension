@@ -187,4 +187,20 @@ class Utility {
 		const step1 = this.ucWords(header.replaceAll("_", " ").replaceAll("\r", " ").replaceAll("\n", " ").trim());
 		return step1.split(" ").filter((value) => this.isNotNull(value)).join(" ");
 	}
+
+	static equals(a, b) {
+		try {
+			return a.trim().toLowerCase() === b.trim().toLowerCase();
+		} catch (err) {
+			throw new Error(`Utility.equals error: ${err}`);
+		}
+	}
+
+	static equalsWordId(a, b) {
+		try {
+			return a.trim().toLowerCase() === b.trim().toLowerCase();
+		} catch (err) {
+			return alert(`Word Id not found: ${err}`);
+		}
+	}
 }

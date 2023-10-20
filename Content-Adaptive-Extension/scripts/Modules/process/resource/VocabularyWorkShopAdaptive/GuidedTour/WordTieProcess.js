@@ -8,7 +8,7 @@ class WordTieProcess extends VWAProcess {
         const wordTieSheet = this.getWordTieSheet();
 
         return wordTieSheet.map(row => {
-            const word = wordListSheet.find(wordRow => wordRow["WordID"] === row["Word ID"]);
+            const word = wordListSheet.find(wordRow => Utility.equalsWordId(wordRow["WordID"], row["Word ID"]));
             return {
                 ...word,
                 ...row
@@ -49,6 +49,10 @@ class WordTieProcess extends VWAProcess {
         return 2;
     }
 
+    getDirectionLineHTML(row) {
+        return this.getField("Direction Line", 0);
+    }
+
     getQuestionHTML(row) {
         return `<div class="question-questionStem question-questionStem-1-column">
                     <div class="question-stem-content">
@@ -68,7 +72,7 @@ class WordTieProcess extends VWAProcess {
 
     getOptionHTML(row) {
         const answerChoices = this.getAnswerChoices(row);
-        return answerChoices.map((choice, index) => `<div itemid="${String.fromCharCode(index + 97)}" itemlabel="">${choice.trim()}</div>`)
+        return answerChoices.map((choice, index) => `<div itemid="${String.fromCharCode(index + 97)}" itemlabel="">${choice.replace(`"`, "").trim()}</div>`)
             .join("");
     }
 

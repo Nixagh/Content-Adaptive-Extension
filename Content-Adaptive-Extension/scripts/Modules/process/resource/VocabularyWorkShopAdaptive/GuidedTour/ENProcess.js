@@ -42,7 +42,7 @@ class ENProcess extends VWAProcess {
 
 	mapWordListWithContent(content, wordListContent) {
 		return content.map((row) => {
-			const word = wordListContent.find(word => word["WordID"] === row["Word ID"]);
+			const word = wordListContent.find(word => Utility.equalsWordId(word["WordID"], row["Word ID"]));
 			return {
 				...row,
 				...word

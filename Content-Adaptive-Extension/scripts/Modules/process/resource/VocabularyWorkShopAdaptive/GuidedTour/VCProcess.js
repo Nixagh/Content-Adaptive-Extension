@@ -9,7 +9,7 @@ class VCProcess extends VWAProcess {
         const vcContent = this.getVCSheet();
 
         const wtMap = wtContent.map((word) => {
-            const wt = wordListContent.find(wt => wt["WordID"] === word["Word ID"]);
+            const wt = wordListContent.find(wt => Utility.equalsWordId(wt["WordID"], word["Word ID"]));
             return {
                 ...word,
                 ...wt

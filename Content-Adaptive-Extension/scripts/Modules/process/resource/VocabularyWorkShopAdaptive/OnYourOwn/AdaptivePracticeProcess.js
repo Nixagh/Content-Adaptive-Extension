@@ -8,7 +8,7 @@ class AdaptivePracticeProcess extends VWAProcess {
         const adaptivePractice = this.getAdaptivePracticeSheet();
 
         return adaptivePractice.map(row => {
-            const wordList = wordLists.find(wordList => wordList["WordID"] === row["Word ID"]);
+            const wordList = wordLists.find(wordList => Utility.equalsWordId(wordList["WordID"], row["Word ID"]));
             return {
                 ...wordList,
                 ...row
