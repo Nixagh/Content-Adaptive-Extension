@@ -4,7 +4,7 @@ class CRWOYOProcess extends VWAProcess {
 		const crwContent = this.getCRWSheet();
 
 		return crwContent.map((crw) => {
-			const word = wordListContent.find(word => word["WordID"] === crw["Word ID"]);
+			const word = wordListContent.find(word => Utility.equalsWordId(word["WordID"], crw["Word ID"]));
 			return {
 				...word,
 				...crw

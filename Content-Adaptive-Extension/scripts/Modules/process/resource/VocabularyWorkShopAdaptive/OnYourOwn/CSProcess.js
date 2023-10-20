@@ -4,7 +4,7 @@ class CSProcess extends VWAProcess {
 		const csContent = this.getCSSheet();
 
 		return csContent.map((cs) => {
-			const word = wordListContent.find(word => word["WordID"] === cs["Word ID"]);
+			const word = wordListContent.find(word => Utility.equalsWordId(word["WordID"], cs["Word ID"]));
 			return {
 				...word,
 				...cs

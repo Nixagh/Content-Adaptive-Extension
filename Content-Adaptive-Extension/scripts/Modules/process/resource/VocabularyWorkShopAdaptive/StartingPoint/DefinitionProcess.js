@@ -4,7 +4,7 @@ class DefinitionProcess extends VWAProcess {
 		const wordListContent = this.getWordListSheet();
 
 		return wordListContent.map((word) => {
-			const definition = definitionsContent.find(definition => definition["WordID"] === word["WordID"]);
+			const definition = definitionsContent.find(definition => Utility.equalsWordId(definition["WordID"], word["WordID"]));
 			return {
 				...word,
 				...definition

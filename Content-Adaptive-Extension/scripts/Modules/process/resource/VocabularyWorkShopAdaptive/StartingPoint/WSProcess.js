@@ -9,9 +9,9 @@ class WSProcess extends VWAProcess {
 		const definitionsContent = this.getDefinitionSheet();
 
 		return wsContent.map((word) => {
-			const ws = wordListContent.find(ws => ws["WordID"] === word["WordID"]);
+			const ws = wordListContent.find(ws => Utility.equalsWordId(ws["WordID"], word["Word ID"]));
 			// get row number of wsContent in definitionsContent by WordID
-			const wsRowNumber = definitionsContent.findIndex(definition => definition["WordID"] === word["WordID"]);
+			const wsRowNumber = definitionsContent.findIndex(definition => Utility.equalsWordId(definition["WordID"], word["Word ID"]));
 			return {
 				...word,
 				...ws,

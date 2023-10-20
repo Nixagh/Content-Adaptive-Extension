@@ -6,9 +6,8 @@ class CRWGTProcess extends VWAProcess {
 	getFullContent() {
 		const wordListContent = this.getWordListSheet();
 		const crwContent = this.getCRWGTSheet();
-
 		return crwContent.map((crw) => {
-			const word = wordListContent.find(_crw => _crw["WordID"] === crw["Word ID"]);
+			const word = wordListContent.find(_crw => Utility.equalsWordId(_crw["WordID"], crw["Word ID"]));
 			return {
 				...word,
 				...crw
