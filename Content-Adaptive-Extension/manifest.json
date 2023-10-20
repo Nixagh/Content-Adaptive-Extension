@@ -24,8 +24,11 @@
   "permissions": [
     "storage",
     "activeTab",
-    "scripting"
+    "scripting",
+    "tabs",
+    "activeTab"
   ],
+  "host_permissions": ["http://192.168.200.26:8090/*"],
   "web_accessible_resources": [
     {
       "resources": [
@@ -35,7 +38,7 @@
         "UI/*"
       ],
       "matches": [
-        "https://*.youtube.com/*"
+        "http://192.168.200.26:8090/*"
       ]
     }
   ],
@@ -76,7 +79,11 @@
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/VCDProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/WordTieProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/OnYourOwn/CRWOYOProcess.js",
+        "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/OnYourOwn/OLVProcess.js",
+        "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/OnYourOwn/OLVP1Process.js",
+        "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/OnYourOwn/OLVP2Process.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/OnYourOwn/CSProcess.js",
+        "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/OnYourOwn/AdaptivePracticeProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/StartingPoint/DefinitionProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/StartingPoint/WSProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/StartingPoint/VisualProcess.js",

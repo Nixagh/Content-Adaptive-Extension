@@ -63,16 +63,18 @@ class VWAProcess {
             pathway1: "pathwaySet1",
             pathway2: "pathwaySet2",
             adaptiveAnswerCount: "adaptiveAnswerCount",
+            setType: "setType"
         }
 
         const wordIdElement = new BasicInput(ids.wordId);
+        const maxScoreElement = new BasicInput(ids.maxScore);
         const questionNumberElement = new BasicInput(ids.questionNumber);
         const standardsElement = new BasicInput(ids.standards);
         const questionTypeElement = new BasicInput(ids.questionTypeSelect);
         const questionTypeValueElement = new BasicInput(ids.questionTypeValue);
         const showQuestionTypeValueElement = new BasicInput("select2-chosen-1");
-
         if (autoScore) {
+
             // auto score
             const autoScoreElement = document.getElementById(ids.autoScore);
             autoScoreElement.checked = true;
@@ -80,13 +82,15 @@ class VWAProcess {
             const autoScoreParentElement = autoScoreElement.parentElement;
             autoScoreParentElement.classList.add("checked");
         }
-
         const componentGradingRulesElement = new BasicInput(ids.componentGradingRules);
+
         const pathway1Element = new BasicInput(ids.pathway1);
         const pathway2Element = new BasicInput(ids.pathway2);
+        const setTypeElement = new BasicInput(ids.setType);
         const adaptiveAnswerCountElement = new BasicInput(ids.adaptiveAnswerCount);
 
         wordIdElement.setValue(this.getWordId(row));
+        maxScoreElement.setValue(this.getMaxScore());
         questionNumberElement.setValue(this.getQuestionNumber(row));
         standardsElement.setValue(this.getStandard(row));
         questionTypeElement.setValue(this.getQuestionTypeSelect(row));
@@ -97,6 +101,7 @@ class VWAProcess {
 
         pathway1Element.setValue(this.getPathway1(row));
         pathway2Element.setValue(this.getPathway2(row));
+        setTypeElement.setValue(this.getSetType(row));
         adaptiveAnswerCountElement.setValue(this.getAdaptiveAnswerCount(row));
         console.log("Set question")
     }
@@ -104,9 +109,25 @@ class VWAProcess {
     setPassage(row) {
         const directionLine = new Cke("cke_directionLine");
         const passageContent = new Cke("cke_2_contents");
-        directionLine.setHtml(this.getDirectionLineHTML(row));
-        passageContent.setHtml(this.getPassageContent(row));
+        const choosePassage = document.querySelectorAll("#questionTypeSelection")[1];
+
+        if (row !== 0) {
+            choosePassage.value = choosePassage.options[1].value;
+            this.getAjaxPassage(choosePassage.value).then(result => {
+                directionLine.setHtml(result.directionLineHTML);
+                passageContent.setHtml(result.passageContentHTML);
+            });
+        } else {
+            directionLine.setHtml(this.getDirectionLineHTML(row));
+            passageContent.setHtml(this.getPassageContent(row));
+        }
         console.log("Set passage");
+    }
+
+    async getAjaxPassage(passageId) {
+        const url = `http://192.168.200.26:8090/cms/ajax/question/loadPassage.html?passageId=${passageId}`;
+        const result = await $.ajax({url: url});
+        return { directionLineHTML: result["directionLine"], passageContentHTML: result["content"] };
     }
 
     setQuestionContent(row) {
@@ -169,6 +190,10 @@ class VWAProcess {
             return 'A';
         }
         return pathway2;
+    }
+
+    getSetType() {
+        return '';
     }
 
     getAdaptiveAnswerCount() {
