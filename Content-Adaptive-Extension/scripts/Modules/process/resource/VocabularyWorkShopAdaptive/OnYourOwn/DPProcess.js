@@ -1,16 +1,12 @@
-class OLVProcess extends PassageProcess {
+class DPProcess extends PassageProcess {
     getPassageSheet() {
-        const olvSheetName = `OnLevelPsg`;
+        const olvSheetName = `DiffPsg`;
         const olvSheet = this.getSheet(olvSheetName);
         const olvHeader = this.getHeader(olvSheet);
         return this.getContent(olvSheet, olvHeader);
     }
 
-    getSheetValue() {
-        return this.getPassageSheet()[0];
-    }
-
     getPassageType() {
-        return this.passageType.ON_LEVEL;
+        return this.passageType.DIFFERENTIATED;
     }
 }
