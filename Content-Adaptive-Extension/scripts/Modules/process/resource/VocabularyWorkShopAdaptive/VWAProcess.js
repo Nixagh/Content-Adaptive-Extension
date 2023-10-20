@@ -63,7 +63,8 @@ class VWAProcess {
             pathway1: "pathwaySet1",
             pathway2: "pathwaySet2",
             adaptiveAnswerCount: "adaptiveAnswerCount",
-            setType: "setType"
+            setType: "setType",
+            linkToQuestion: "linkToQuestion"
         }
 
         const wordIdElement = new BasicInput(ids.wordId);
@@ -82,6 +83,7 @@ class VWAProcess {
             const autoScoreParentElement = autoScoreElement.parentElement;
             autoScoreParentElement.classList.add("checked");
         }
+        const linkToQuestionElement = new BasicInput(ids.linkToQuestion);
         const componentGradingRulesElement = new BasicInput(ids.componentGradingRules);
 
         const pathway1Element = new BasicInput(ids.pathway1);
@@ -97,6 +99,7 @@ class VWAProcess {
         const textShow = questionTypeElement.element.options[questionTypeElement.element.selectedIndex].text;
         questionTypeValueElement.setValue(this.getQuestionTypeValue(row));
         showQuestionTypeValueElement.setText(textShow);
+        linkToQuestionElement.setValue(this.getLinkToQuestion(row));
         componentGradingRulesElement.setValue(this.getComponentScoreRules(row));
 
         pathway1Element.setValue(this.getPathway1(row));
@@ -168,6 +171,10 @@ class VWAProcess {
     getQuestionTypeValue() {
         // this is default value for question type select
         return "TE";
+    }
+
+    getLinkToQuestion(row) {
+        return '';
     }
 
     getComponentScoreRules(row) {

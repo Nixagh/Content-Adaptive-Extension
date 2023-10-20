@@ -20,33 +20,61 @@ class OLVProcess extends VWAProcess {
         const olvContent = this.getOLVSheetValue();
         const newData = [];
         for (let i = 1; i <= 10; i++) {
-            const item = {
-                "Step": olvContent[`Step`],
-                "Choice Passage": olvContent[`Choice Passage`],
-                "Pathway": olvContent[`Pathway`],
-                "Choice page summary text": olvContent[`Choice page summary text`],
-                "Choice Page Photo": olvContent[`Choice Page Photo`],
-                "Direction Line": olvContent[`Direction Line`],
-                "Passage Body": olvContent[`On-Level Passage Body`],
-                "Lexile": olvContent[`Lexile`],
-                "Item Type": olvContent[`Item Type`],
-                "Item Part A": olvContent[`Item ${i} Part A`],
-                "Item Part A Choices": olvContent[`Item ${i} Part A Choices`],
-                "Item Part A Correct Answer": olvContent[`Item ${i} Part A Correct Answer`],
-                "Item Part A Standards": olvContent[`Item ${i} Part A Standards`],
-                "Item Part A Points": olvContent[`Item ${i} Part A Points`],
-                "Item Part B": olvContent[`Item ${i} Part B`],
-                "Item Part B Choices": olvContent[`Item ${i} Part B Choices`],
-                "Item Part B Correct Answer": olvContent[`Item ${i} Part B Correct Answer`],
-                "Item Part B Standards": olvContent[`Item ${i} Part B Standards`],
-                "Item Part B Points": olvContent[`Item ${i} Part B Points`],
-                "Item": olvContent[`Item ${i}`],
-                "Item Choices": olvContent[`Item ${i} Choices`],
-                "Item Correct Answer": olvContent[`Item ${i} Correct Answer`],
-                "Item Standards": olvContent[`Item ${i} Standards`],
-                "Item Points": olvContent[`Item ${i} Points`],
+            if (i === 1) {
+                const itemA = {
+                    "Step": olvContent[`Step`],
+                    "Choice Passage": olvContent[`Choice Passage`],
+                    "Pathway": olvContent[`Pathway`],
+                    "Choice page summary text": olvContent[`Choice page summary text`],
+                    "Choice Page Photo": olvContent[`Choice Page Photo`],
+                    "Direction Line": olvContent[`Direction Line`],
+                    "Passage Body": olvContent[`On-Level Passage Body`],
+                    "Lexile": olvContent[`Lexile`],
+                    "Item Type": olvContent[`Item Type`],
+                    "Item": olvContent[`Item ${i} Part A`],
+                    "Item Choices": olvContent[`Item ${i} Part A Choices`],
+                    "Item Correct Answer": olvContent[`Item ${i} Part A Correct Answer`],
+                    "Item Standards": olvContent[`Item ${i} Part A Standards`],
+                    "Item Points": olvContent[`Item ${i} Part A Points`],
+                }
+
+                const itemB = {
+                    "Step": olvContent[`Step`],
+                    "Choice Passage": olvContent[`Choice Passage`],
+                    "Pathway": olvContent[`Pathway`],
+                    "Choice page summary text": olvContent[`Choice page summary text`],
+                    "Choice Page Photo": olvContent[`Choice Page Photo`],
+                    "Direction Line": olvContent[`Direction Line`],
+                    "Passage Body": olvContent[`On-Level Passage Body`],
+                    "Lexile": olvContent[`Lexile`],
+                    "Item Type": olvContent[`Item Type`],
+                    "Item": olvContent[`Item ${i} Part B`],
+                    "Item Choices": olvContent[`Item ${i} Part B Answer Choices`],
+                    "Item Correct Answer": olvContent[`Item ${i} Part B Correct Answer`],
+                    "Item Standards": olvContent[`Item ${i} Part B Standards`],
+                    "Item Points": olvContent[`Item ${i} Part B Points`],
+                }
+                newData.push(itemA);
+                newData.push(itemB);
+            } else {
+                const item = {
+                    "Step": olvContent[`Step`],
+                    "Choice Passage": olvContent[`Choice Passage`],
+                    "Pathway": olvContent[`Pathway`],
+                    "Choice page summary text": olvContent[`Choice page summary text`],
+                    "Choice Page Photo": olvContent[`Choice Page Photo`],
+                    "Direction Line": olvContent[`Direction Line`],
+                    "Passage Body": olvContent[`On-Level Passage Body`],
+                    "Lexile": olvContent[`Lexile`],
+                    "Item Type": olvContent[`Item Type`],
+                    "Item": olvContent[`Item ${i}`],
+                    "Item Choices": olvContent[`Item ${i} Choices`],
+                    "Item Correct Answer": olvContent[`Item ${i} Correct Answer`],
+                    "Item Standards": olvContent[`Item ${i} Standards`],
+                    "Item Points": olvContent[`Item ${i} Points`],
+                }
+                newData.push(item);
             }
-            newData.push(item);
         }
         return newData;
     }
@@ -61,6 +89,10 @@ class OLVProcess extends VWAProcess {
 
     getPathway2(row) {
         return "B";
+    }
+
+    getLinkToQuestion(row) {
+        return row === 1 ? 1 : '';
     }
 
     getComponentScoreRules(row) {
@@ -97,6 +129,10 @@ class OLVProcess extends VWAProcess {
         return `802906_ipA_U1_Choice_P1_Drivers.mp3`;
     }
 
+    getDirectionLineHTML(row) {
+        return this.getField("Direction Line", row);
+    }
+
     getPassageTitle(row) {
         const passageBody = this.getPassageBody(row);
         const title = passageBody.split("\n")[0]
@@ -117,7 +153,7 @@ class OLVProcess extends VWAProcess {
 
                 const f = line.indexOf("paragraph = ") !== -1;
                 const s = line.indexOf("paragraph id = ") !== -1;
-                if(!f && !s) return line;
+                if (!f && !s) return line;
 
                 let step1GetParagraphId = line.split("paragraph = ");
                 if (s) step1GetParagraphId = line.split("paragraph id = ");
@@ -140,5 +176,66 @@ class OLVProcess extends VWAProcess {
                     .replaceAll(`”`, `"`)
                     .replaceAll(regex, (match) => `${match}word${match.split("word")[1].split(">")[0]}:`)
             }).join("\n");
+    }
+
+    getQuestionHTML(row) {
+        return `<div class="question-questionStem question-questionStem-1-column">
+                    <div class="question-stem-content">
+                        ${row < 2 ? `<div className="part-label">Part ${row === 0 ? 'A' : 'B'}</div>` : ''}
+                        <div class="question">${this.getItem(row)}
+                            <div cid="${this.getCID(row)}" ctype="MultipleChoice" layout="Vertical" qname="a${row + 1}" showlabel="true" subtype="MC">
+                                ${this.getOptionsHTML(row)}
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+    }
+
+    getItem(row) {
+        return this.getExactlyField("Item", row);
+    }
+
+    getOptionsHTML(row) {
+        const choices = this.getItemChoicesList(row);
+        return choices.map((choice, index) => `<div itemid="${String.fromCharCode(index + 97)}" itemlabel="">${choice.trim()}</div>`).join('');
+    }
+
+    getItemChoicesList(row) {
+        const itemChoices = this.getExactlyField("Item Choices", row);
+        return itemChoices.split(";").map((item) => item.split(".")[1].trim());
+    }
+
+    getCorrectAnswer(row) {
+        //{"comps":[{"id":"802909_ap_olp1_u4_q1_ans1","value":"d","type":"MultipleChoice"}]}
+        const correctAnswer = {
+            "comps": [{
+                "id": this.getCID(row),
+                "value": this.getCorrectAnswerValue(row),
+                "type": "MultipleChoice"
+            }]
+        }
+        return JSON.stringify(correctAnswer);
+    }
+
+    getCorrectAnswerValue(row) {
+        const correctAnswer = this.getExactlyField("Item Correct Answer", row);
+        return correctAnswer.split(".")[0].trim().toLowerCase();
+    }
+
+    getCorrectTextHTML(row) {
+        return this.getCorrectAnswerValue(row);
+    }
+
+    getFeedback(row) {
+        return JSON.stringify({
+            paragraphs: this.getNumberFromItem(row)
+        });
+    }
+
+    getNumberFromItem(row) {
+        const item = this.getItem(row);
+        const regex = /\d+/;
+        const match = item.match(regex);
+        return match ? match[0] : '';
     }
 }
