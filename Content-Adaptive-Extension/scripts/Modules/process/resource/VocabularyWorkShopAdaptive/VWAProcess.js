@@ -139,6 +139,8 @@ class VWAProcess {
         const correctAnswerHTML = new Cke("cke_38_contents");
 
         question.setHtml(this.getQuestionHTML(row));
+        correctAnswer.show();
+        correctAnswer.parentShow();
         correctAnswer.setValue(this.getCorrectAnswer(row));
         correctAnswerHTML.setHtml(this.getCorrectTextHTML(row));
         console.log("Set question content")
