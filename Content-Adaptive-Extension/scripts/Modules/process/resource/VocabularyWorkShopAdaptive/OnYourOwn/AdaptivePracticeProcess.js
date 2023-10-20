@@ -42,6 +42,10 @@ class AdaptivePracticeProcess extends VWAProcess {
         return JSON.stringify(componentScoreRules);
     }
 
+    getDirectionLineHTML(row) {
+        return this.getField("Direction Line", 0);
+    }
+
     getSetType() {
         return 'A';
     }
@@ -51,11 +55,16 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getQuestionHTML(row) {
-        return `<div adaptivetype="A" class="question-questionStem question-questionStem-1-column">
+        let adaptiveType = 'A';
+
+        if (row > 11 && row < 24) adaptiveType = 'B';
+        if (row > 23 && row < 36) adaptiveType = 'GO';
+
+        return `<div adaptivetype="${adaptiveType}" class="question-questionStem question-questionStem-1-column">
                     <div class="question-stem-content">
                         <div class="question">${this.getItem(row)}
                             <div cid="${this.getCID(row)}" ctype="MultipleChoice" layout="Vertical" qname="a${row + 1}" subtype="MC" total="12">
-                                ${this.getOptionsHTML()}
+                                ${adaptiveType === 'A' ? this.getOptionsHTML() : this.getOptionsHTMLSetB(row)}
                             </div>
                         </div>
                     </div>
@@ -64,6 +73,10 @@ class AdaptivePracticeProcess extends VWAProcess {
 
     getItem(row) {
         return this.getExactlyField("Item", row);
+    }
+
+    getOptionsHTMLSetB(row) {
+        const data = this.getField("Adaptive Item Answer Choices", row)
     }
 
     getOptionsHTML() {

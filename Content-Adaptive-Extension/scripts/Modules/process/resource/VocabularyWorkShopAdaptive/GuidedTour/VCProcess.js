@@ -204,7 +204,7 @@ class VCProcess extends VWAProcess {
         // const answerChoices = this.getListAnswerChoices(row);
         // const index = answerChoices.findIndex(value => value.includes(correctAnswer));
         // return String.fromCharCode(97 + index);
-        return correctAnswer.split(".").slice(1).join("");
+        return correctAnswer.split(".")[0].trim().toLowerCase();
     }
 
     getItem(row) {
@@ -253,30 +253,33 @@ class VCProcess extends VWAProcess {
             .replace(`</b>`, `</${wordId}>`)
             .replace(`<b>`, `</${wordId}>`)
             .replaceAll(`“`, `"`)
-            .replaceAll(`”`, `"`);
+            .replaceAll(`”`, `"`)
+            .trim();
     }
 
     getIncorrectFeedback1(row) {
-        return this.getField("Item Incorrect Feedback 1", row).split("\n");
+        const incorrectFeedback1 = this.getField("Item Incorrect Feedback 1", row);
+        return this.toArray(incorrectFeedback1, row);
     }
 
     getIncorrectFeedback2(row) {
-        return this.getField("Item Incorrect Feedback 2", row).split("\n");
+        const incorrectFeedback2 = this.getField("Item Incorrect Feedback 2", row);
+        return this.toArray(incorrectFeedback2, row);
     }
 
     getCorrectEmoji(row) {
         const correctEmoji = this.getField("Correct emoji with feedback phrases randomly selected:", row);
-        return this.toArray(correctEmoji);
+        return this.toArray(correctEmoji, row);
     }
 
     getIncorrectEmoji1(row) {
         const incorrectEmoji1 = this.getField("Incorrect emoji with Feedback phrases randomly selected:", row);
-        return this.toArray(incorrectEmoji1);
+        return this.toArray(incorrectEmoji1, row);
     }
 
     getIncorrectEmoji2(row) {
         const incorrectEmoji2 = this.getField("Incorrect emoji and Final incorrect feedback.", row);
-        return this.toArray(incorrectEmoji2)
+        return this.toArray(incorrectEmoji2, row)
     }
 
     getParagraphId(row) {
