@@ -60,9 +60,9 @@ class WSProcess extends VWAProcess {
 					<div class="question-stem-content">
 						${inflected ? `<div class="inflected-form">${inflected}</div>` : ""}
 						${characteristicsImage ? `<div class="characteristics-image">${characteristicsImage}</div>` : ""}
-						${prefix ? `<div class="prefix">${prefix}</div>` : ""}
-						${rootOrBase ? `<div class="root-or-base">${rootOrBase}</div>` : ""}
-						${suffix ? `<div class="suffix">${suffix}</div>` : ""}
+						${prefix ? prefix : ""}
+						${rootOrBase ? rootOrBase : ""}
+						${suffix ? suffix : ""}
 						${introduction ? `<div class="introduction">${introduction}</div>` : ""}
 						${firstSample ? `<div class="first-sample">${firstSample}</div>` : ""}
 						${firstExplain ? `<div class="first-explain">${firstExplain}</div>` : ""}
@@ -110,17 +110,20 @@ class WSProcess extends VWAProcess {
 
 	getPrefix(row) {
 		const prefix = this.getField("Prefix", row);
-		return this.processSplit(prefix);
+		const style = (value) => `<div class="prefix">${value}</div>`;
+		return this.processSplit(prefix, style);
 	}
 
 	getRootOrBase(row) {
 		const rootOrBase = this.getField("Root or Base", row);
-		return this.processSplit(rootOrBase);
+		const style = (value) => `<div class="root-or-base">${value}</div>`;
+		return this.processSplit(rootOrBase, style);
 	}
 
 	getSuffix(row) {
 		const suffix = this.getField("Suffix", row);
-		return this.processSplit(suffix);
+		const style = (value) => `<div class="suffix">${value}</div>`;
+		return this.processSplit(suffix, style);
 	}
 
 	getIntroduction(row) {
@@ -173,16 +176,24 @@ class WSProcess extends VWAProcess {
 	}
 
 	// ------------------ other ------------------ //
-	processSplit(content) {
+	processSplit(content, stringStyle) {
 		if (!Utility.isNotNull(content)) return "";
 
 		const split = content.split("\n").filter(value => Utility.isNotNull(value));
 		const newSplit = split.map((value, index) => {
-			let _value = value.replaceAll("\n", "").replaceAll("\r", "").trim();
+			let _value = value
+				.replaceAll("\n", "")
+				.replaceAll("\r", "")
+				.replace("'", "")
+				.trim();
 			if (index % 2 === 0) _value = `<b>${_value}</b>`;
 			return _value;
 		})
-		return newSplit.join("<br/>");
+		const step2 = newSplit.join("<br/>").split("<br/><b>");
+		return step2.map((value, index) => {
+			if (index % 2 === 1) return stringStyle(`<b>${value}`);
+			return stringStyle(value);
+		}).join("\n");
 	}
 
 	exampleReplace(example) {
