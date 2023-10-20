@@ -67,6 +67,7 @@ class VWAProcess {
         }
 
         const wordIdElement = new BasicInput(ids.wordId);
+        const maxScoreElement = new BasicInput(ids.maxScore);
         const questionNumberElement = new BasicInput(ids.questionNumber);
         const standardsElement = new BasicInput(ids.standards);
         const questionTypeElement = new BasicInput(ids.questionTypeSelect);
@@ -89,6 +90,7 @@ class VWAProcess {
         const adaptiveAnswerCountElement = new BasicInput(ids.adaptiveAnswerCount);
 
         wordIdElement.setValue(this.getWordId(row));
+        maxScoreElement.setValue(this.getMaxScore());
         questionNumberElement.setValue(this.getQuestionNumber(row));
         standardsElement.setValue(this.getStandard(row));
         questionTypeElement.setValue(this.getQuestionTypeSelect(row));
@@ -107,9 +109,25 @@ class VWAProcess {
     setPassage(row) {
         const directionLine = new Cke("cke_directionLine");
         const passageContent = new Cke("cke_2_contents");
-        directionLine.setHtml(this.getDirectionLineHTML(row));
-        passageContent.setHtml(this.getPassageContent(row));
+        const choosePassage = document.querySelectorAll("#questionTypeSelection")[1];
+
+        if (row !== 0) {
+            choosePassage.value = choosePassage.options[1].value;
+            this.getAjaxPassage(choosePassage.value).then(result => {
+                directionLine.setHtml(result.directionLineHTML);
+                passageContent.setHtml(result.passageContentHTML);
+            });
+        } else {
+            directionLine.setHtml(this.getDirectionLineHTML(row));
+            passageContent.setHtml(this.getPassageContent(row));
+        }
         console.log("Set passage");
+    }
+
+    async getAjaxPassage(passageId) {
+        const url = `http://192.168.200.26:8090/cms/ajax/question/loadPassage.html?passageId=${passageId}`;
+        const result = await $.ajax({url: url});
+        return { directionLineHTML: result["directionLine"], passageContentHTML: result["content"] };
     }
 
     setQuestionContent(row) {

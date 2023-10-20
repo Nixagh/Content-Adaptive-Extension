@@ -46,6 +46,10 @@ class VisualProcess extends VWAProcess {
 	}
 
 	// ------------------ get data ------------------ //
+	getMaxScore() {
+		return 0;
+	}
+
 	getVideoSource(row) {
 		//content/802906/007744939/VW_unavailablevideo.mp4
 		const productId = this.getGlobalResourceId();

@@ -11,4 +11,12 @@ class BasicInput {
 	setText(value) {
 		this.element.innerText = value;
 	}
+
+	getValue() {
+		return this.element.value;
+	}
+
+	getOptions(index) {
+		return this.element.options[index];
+	}
 }
