@@ -102,13 +102,13 @@ class OptionContent {
 		return nextCurrentQuestionNumberInt + 1;
 	}
 
-	async static insert() {
+	 static async insert() {
 		const questionNumber = $(`#${Ids.questionNumber}`).val();
 		const totalLine = $(`#${Ids.totalLine}`).text();
 		// if (parseInt(totalLine) < +questionNumber) return alert("Đã hết dữ liệu");
 
 		const process = JSON.parse(Storage.Get("GProcess"));
-		GProcess.insert();
+		await GProcess.insert();
 		Storage.Set("currentCode", $(`#${Ids.globalResourceId}`).val());
 		Storage.Set("CurrentQuestionNumber", questionNumber);
 	}
