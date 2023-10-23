@@ -32,7 +32,7 @@ class PassageProcess extends VWAProcess {
                     "Step": olvContent[`Step`],
                     "Choice Passage": olvContent[`Choice Passage`],
                     "Pathway": olvContent[`Pathway`],
-                    "Choice page summary text": olvContent[`Choice page summary text`],
+                    "Choice Page Summary Text": olvContent[`Choice Page Summary Text`],
                     "Choice Page Photo": olvContent[`Choice Page Photo`],
                     "Direction Line": olvContent[`Direction Line`],
                     "Passage Body": olvContent[body],
@@ -49,7 +49,7 @@ class PassageProcess extends VWAProcess {
                     "Step": olvContent[`Step`],
                     "Choice Passage": olvContent[`Choice Passage`],
                     "Pathway": olvContent[`Pathway`],
-                    "Choice page summary text": olvContent[`Choice page summary text`],
+                    "Choice Page Summary Text": olvContent[`Choice Page Summary Text`],
                     "Choice Page Photo": olvContent[`Choice Page Photo`],
                     "Direction Line": olvContent[`Direction Line`],
                     "Passage Body": olvContent[body],
@@ -68,7 +68,7 @@ class PassageProcess extends VWAProcess {
                     "Step": olvContent[`Step`],
                     "Choice Passage": olvContent[`Choice Passage`],
                     "Pathway": olvContent[`Pathway`],
-                    "Choice page summary text": olvContent[`Choice page summary text`],
+                    "Choice Page Summary Text": olvContent[`Choice Page Summary Text`],
                     "Choice Page Photo": olvContent[`Choice Page Photo`],
                     "Direction Line": olvContent[`Direction Line`],
                     "Passage Body": olvContent[body],
@@ -153,31 +153,31 @@ class PassageProcess extends VWAProcess {
     }
 
     getPassageContentHTML(row) {
-        const passageBody = this.getPassageBody(row);
-        return passageBody.split("\n").slice(1)
-            .map((line) => {
-                const regex = / <word\d+>/g;
+        const passageBody = this.getPassageBody(row).split("\n").slice(1).join("\n");
+        return this.passageConverter(passageBody);
+    }
 
-                const regexNumber = /\d+/;
-                const matchNumber = line.match(regexNumber);
-                const paragraphId = matchNumber ? matchNumber[0] : '';
+    getPassageSummaryText(row) {
+        const passageSummaryText = this.getField("Choice Page Summary Text", row);
+        const image = this.getField("Choice Page Photo", row)
+            .replaceAll("<image>", "")
+            .replaceAll("</image>", "")
+            .replaceAll(".png", "")
+            .replaceAll(".jpg", "")
+            .trim();
 
-                return line
-                    .replaceAll(`<paragraph = ${paragraphId}>`, `<div class="paragraph" id = "${paragraphId}">`)
-                    .replaceAll(`<paragraph id = ${paragraphId}>`, `<div class="paragraph" id = "${paragraphId}">`)
-                    .replaceAll("</paragraph>", "</div>")
-                    .replaceAll(`</paragraph`, '</div>')
-                    .replaceAll("<paragraph>", `</div>`)
-                    .replaceAll(`</div> id = ${paragraphId}>`, `</div>`)
-                    .replaceAll(`</div> = ${paragraphId}>`, `</div>`)
-                    .replaceAll(`</paragraph id = ${paragraphId}>`, "")
-                    .replaceAll(`</paragraph = ${paragraphId}>`, "")
-                    .replaceAll(`<bullet>`, '<li>')
-                    .replaceAll(`</bullet>`, '</li>')
-                    .replaceAll(`“`, `"`)
-                    .replaceAll(`”`, `"`)
-                    .replaceAll(regex, (match) => `${match}word${match.split("word")[1].split(">")[0]}:`)
-            }).join("\n");
+        const title = passageSummaryText.split("\n")[0]
+            .replaceAll(`<title>`, '')
+            .replaceAll(`</title>`, '')
+            .replaceAll(`“`, `"`)
+            .trim();
+        const content = passageSummaryText.split("\n").slice(1).join("\n").trim();
+
+        return `<div class="select-page" resourcelevel="true">
+                    <div class="sp-cover"><img alt="" src="/cms/repository/cms/images2020/${image}.jpg" /></div>
+                    <div class="sp_title">${title}</div>
+                    <div class="sp-description">${content}</div>
+                </div>`;
     }
 
     getQuestionHTML(row) {
@@ -194,7 +194,8 @@ class PassageProcess extends VWAProcess {
     }
 
     getItem(row) {
-        return this.getExactlyField("Item", row);
+        let item = this.getExactlyField("Item", row);
+        return this.replaceItalicOfItem(item);
     }
 
     getOptionsHTML(row) {
@@ -229,9 +230,10 @@ class PassageProcess extends VWAProcess {
     }
 
     getFeedback(row) {
-        return JSON.stringify({
-            paragraphs: this.getNumberFromItem(row)
-        });
+        const number = this.getNumberFromItem(row);
+        return number ? JSON.stringify({
+            paragraphs: number
+        }) : '';
     }
 
     getNumberFromItem(row) {
