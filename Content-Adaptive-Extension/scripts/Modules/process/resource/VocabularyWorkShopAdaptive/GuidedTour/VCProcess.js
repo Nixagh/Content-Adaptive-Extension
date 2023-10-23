@@ -135,7 +135,7 @@ class VCProcess extends VWAProcess {
     getPassageBody(row) {
         const passageBody = this.getField("Passage Body", row);
         const splitPassageBody = passageBody.split("\n");
-        return splitPassageBody.slice(1);
+        return splitPassageBody.slice(1).join("\n");
     }
 
     getPassageTitle(row) {
@@ -261,8 +261,25 @@ class VCProcess extends VWAProcess {
 
     getParagraphId(row) {
         const word = this.getWord(row);
-        const passageBody = this.getPassageBody(row);
-        return passageBody.findIndex(value => value.includes(word)) + 1;
+        const passageBody = this.getPassageBody(row).split("\n");
+
+        const regex = /<paragraph id = (\d+)>/;
+        const orRegex = /<paragraph = (\d+)\/>/;
+
+        const wordInPassage = passageBody.find(value => value.includes(word));
+
+        const match = wordInPassage.find(value => value.match(regex));
+        const orMatch = wordInPassage.find(value => value.match(orRegex));
+
+        if (match) {
+            return match.match(regex)[1];
+        }
+
+        if (orMatch) {
+            return orMatch.match(orRegex)[1];
+        }
+
+        return -1;
     }
 
     getWord(row) {
