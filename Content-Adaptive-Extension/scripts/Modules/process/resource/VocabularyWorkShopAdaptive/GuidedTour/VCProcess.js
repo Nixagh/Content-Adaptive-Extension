@@ -268,8 +268,8 @@ class VCProcess extends VWAProcess {
 
         const wordInPassage = passageBody.find(value => value.includes(word));
 
-        const match = wordInPassage.find(value => value.match(regex));
-        const orMatch = wordInPassage.find(value => value.match(orRegex));
+        const match = wordInPassage.match(regex)
+        const orMatch = wordInPassage.match(orRegex);
 
         if (match) {
             return match.match(regex)[1];
