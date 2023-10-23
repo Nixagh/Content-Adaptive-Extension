@@ -214,7 +214,7 @@ class VCProcess extends VWAProcess {
             "correctEmoji": this.getCorrectEmoji(row),
             "incorrectEmoji1": this.getIncorrectEmoji1(row),
             "incorrectEmoji2": this.getIncorrectEmoji2(row),
-            "paragraphId": this.getParagraphId(row),
+            "paragraphId": `${this.getParagraphId(row)}`,
         }
         return JSON.stringify(feedback);
     }
