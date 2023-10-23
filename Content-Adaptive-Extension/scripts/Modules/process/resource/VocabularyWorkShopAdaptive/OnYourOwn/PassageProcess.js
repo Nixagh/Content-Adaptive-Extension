@@ -7,6 +7,7 @@ class PassageProcess extends VWAProcess {
 
     getFullContent() {
         // const wordListContent = this.getWordListSheet();
+        // return {first: this.replaceItem(this.getPassageType()), second: []};
         return this.replaceItem(this.getPassageType());
     }
 
@@ -19,7 +20,7 @@ class PassageProcess extends VWAProcess {
     }
 
     getPassageType() {
-        return '';
+        return this.passageType.ON_LEVEL;
     }
 
     replaceItem(type) {
@@ -231,15 +232,14 @@ class PassageProcess extends VWAProcess {
 
     getFeedback(row) {
         const number = this.getNumberFromItem(row);
-        return number ? JSON.stringify({
-            paragraphs: number
-        }) : '';
+        return number ? JSON.stringify({paragraphs: number}) : '';
     }
 
     getNumberFromItem(row) {
         const item = this.getItem(row);
-        const regex = /\d+/;
+        const regex = /paragraph \d+/;
         const match = item.match(regex);
-        return match ? match[0] : '';
+        const number = match ? match[0].split(" ")[1] : '';
+        return number ? number : '';
     }
 }
