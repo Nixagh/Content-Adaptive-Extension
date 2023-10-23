@@ -28,7 +28,7 @@ class OptionContent {
 
 		UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.insertButton}`, async () => {
 			if (!GProcess) return alert("No file loaded");
-			OptionContent.insert();
+			await OptionContent.insert();
 		});
 	}
 
@@ -60,12 +60,12 @@ class OptionContent {
 
 		UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.insertButton}`, async () => {
 			if (!GProcess) return alert("No file loaded");
-			OptionContent.insert();
+			await OptionContent.insert();
 		});
 
 		UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.insertAndSave}`, async () => {
 			if (!GProcess) return alert("No file loaded");
-			OptionContent.insert();
+			await OptionContent.insert();
 			document.getElementById(Ids.saveBtn).click();
 		})
 
@@ -102,7 +102,7 @@ class OptionContent {
 		return nextCurrentQuestionNumberInt + 1;
 	}
 
-	static insert() {
+	async static insert() {
 		const questionNumber = $(`#${Ids.questionNumber}`).val();
 		const totalLine = $(`#${Ids.totalLine}`).text();
 		// if (parseInt(totalLine) < +questionNumber) return alert("Đã hết dữ liệu");
