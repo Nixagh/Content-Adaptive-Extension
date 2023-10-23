@@ -14,10 +14,12 @@ class VWAProcess {
         this.data = [];
         this.rowMinus = rowMinus;
         this.setTab = setTab;
+        this.errors = [];
     }
 
     process() {
         this.data = this.getFullContent();
+        this.showErrors();
         Storage.Set("GProcess", JSON.stringify(this));
     }
 
@@ -41,9 +43,7 @@ class VWAProcess {
         if (this.setTab[3]) this.setFeedback(row);
 
         console.log(`Insert Vocabulary Word Adaptive, resource: ${VWAResource[this.type].value}`);
-        if (this.errors.length) {
-            alert(this.errors.map(error => `${error.tab}: ${error.message}`).join("\n"));
-        }
+        this.showErrors();
     }
 
     getRow() {
@@ -358,6 +358,10 @@ class VWAProcess {
             tab: tab,
             message: message
         });
+    }
+
+    showErrors() {
+        if (this.errors.length) alert(this.errors.map(error => `${error.tab}: ${error.message}`).join("\n"));
     }
 
     passageConverter(content) {

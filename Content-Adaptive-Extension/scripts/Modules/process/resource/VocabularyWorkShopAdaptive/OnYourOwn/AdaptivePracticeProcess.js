@@ -1,4 +1,10 @@
 class AdaptivePracticeProcess extends VWAProcess {
+    adType = {
+        A: 'A',
+        B: 'B',
+        GO: 'GO'
+    }
+
     getDescription() {
         return 'OYO_AP';
     }
@@ -6,12 +12,15 @@ class AdaptivePracticeProcess extends VWAProcess {
     getFullContent() {
         const wordLists = this.getWordListSheet();
         const adaptivePractice = this.getAdaptivePracticeSheet();
-
         return adaptivePractice.map(row => {
             const wordList = wordLists.find(wordList => Utility.equalsWordId(wordList["WordID"], row["Word ID"]));
+            if (wordList === undefined) {
+                this.addError(`Question Content`, `Word ID: ${row["Word ID"]} not found in Word List`);
+                return;
+            }
             return {
                 ...wordList,
-                ...row
+                ...row,
             }
         })
     }
@@ -21,6 +30,13 @@ class AdaptivePracticeProcess extends VWAProcess {
         const adaptivePracticeSheet = this.getSheet(adaptivePracticeSheetName);
         const header = this.getHeader(adaptivePracticeSheet);
         return this.getContent(adaptivePracticeSheet, header);
+    }
+
+    getGoTicketSheet() {
+        const goTicketSheetName = 'GO Ticket';
+        const goTicketSheet = this.getSheet(goTicketSheetName);
+        const header = this.getHeader(goTicketSheet);
+        return this.getContent(goTicketSheet, header);
     }
 
     getComponentScoreRules(row) {
@@ -55,28 +71,39 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getQuestionHTML(row) {
-        let adaptiveType = 'A';
+        let adaptiveType = this.adType.A;
 
-        if (row > 11 && row < 24) adaptiveType = 'B';
-        if (row > 23 && row < 36) adaptiveType = 'GO';
+        if (row > 11 && row < 24) adaptiveType = this.adType.B;
+        if (row > 23) adaptiveType = this.adType.GO;
+        row = row % 12;
 
         return `<div adaptivetype="${adaptiveType}" class="question-questionStem question-questionStem-1-column">
                     <div class="question-stem-content">
-                        <div class="question">${this.getItem(row)}
-                            <div cid="${this.getCID(row)}" ctype="MultipleChoice" layout="Vertical" qname="a${row + 1}" subtype="MC" total="12">
-                                ${adaptiveType === 'A' ? this.getOptionsHTML() : this.getOptionsHTMLSetB(row)}
+                    ${adaptiveType === this.adType.GO ? `<div class="whatItMeans">${this.getMeanOfGo(row)}</div>` : ''}
+                        <div class="question">${adaptiveType === this.adType.GO ? this.getItemOfGo(row) : this.getItem(row)}
+                            <div cid="${this.getCID(row)}" ctype="MultipleChoice" layout="Vertical" qname="a${row + 1}" subtype="MC" total="${this.getTotalOfOption(adaptiveType)}">
+                                ${adaptiveType === this.adType.GO ? this.getOptionsHTMLOfGo(row) : adaptiveType === this.adType.A ? this.getOptionsHTML() : this.getOptionsHTMLSetB(row)}
                             </div>
                         </div>
                     </div>
                 </div>`;
     }
 
+
     getItem(row) {
         return this.getExactlyField("Item", row);
     }
 
+    getTotalOfOption(adaptiveType) {
+        return adaptiveType === this.adType.A ? 12 : 4;
+    }
+
     getOptionsHTMLSetB(row) {
-        const data = this.getField("Adaptive Item Answer Choices", row)
+        const data = this.getField("Adaptive Item Answer Choices", row);
+        const options = data.split(";").filter(row => row.length > 0).map(row => row.trim());
+        if (options.length === 0) this.addError(`Question Content`, `Adaptive Item Answer Choices: Row ${row + 1} is empty`);
+        if (options.length !== 4) this.addError(`Question Content`, `Adaptive Item Answer Choices: Row ${row + 1} must have 4 options`);
+        return options.map((option, index) => `<div itemid="${String.fromCharCode(97 + index)}" itemlabel="" word="${option}">${option}</div>`).join('');
     }
 
     getOptionsHTML() {
@@ -92,6 +119,27 @@ class AdaptivePracticeProcess extends VWAProcess {
                 value: row["Word"]
             }
         });
+    }
+
+    getMeanOfGo(row) {
+        const mean = this.getFieldOfRow("What It Means", this.getGoTicketSheet()[row]);
+        return mean.trim();
+    }
+
+    getItemOfGo(row) {
+        return this.getExactlyFieldOfRow("Item", this.getGoTicketSheet()[row]);
+    }
+
+    getOptionsHTMLOfGo(row) {
+        const options = this.getAnswerGoList(row);
+        if (options.length === 0) this.addError(`Question Content`, `Answer choices: Row ${row + 1} is empty`);
+        if (options.length !== 4) this.addError(`Question Content`, `Answer choices: Row ${row + 1} must have 4 options`);
+        return options.map((option, index) => `<div itemid="${String.fromCharCode(97 + index)}" itemlabel="" word="${option}">${option}</div>`).join('');
+    }
+
+    getAnswerGoList(row) {
+        const answer = this.getFieldOfRow("Answer choices", this.getGoTicketSheet()[row]);
+        return answer.split(";").filter(row => row.length > 0).map(row => row.replaceAll(`"`, "").trim());
     }
 
     getCorrectAnswer(row) {
@@ -111,16 +159,42 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getCorrectAnswerValue(row) {
+        const newRowValue = row % 12;
+        if (row > 23) return this.getCorrectAnswerValueOfGo(newRowValue);
+        if (row > 11 && row < 24) return this.getCorrectAnswerValueOfSetB(newRowValue);
+        return this.getCorrectAnswerValueOfSetA(newRowValue);
+    }
+
+    getCorrectAnswerValueOfGo(row) {
+        const options = this.getAnswerGoList(row);
+        const correctAnswer = this.getFieldOfRow("Correct Answer", this.getGoTicketSheet()[row]);
+        return String.fromCharCode(97 + options.indexOf(correctAnswer));
+    }
+
+    getCorrectAnswerValueOfSetB(row) {
+        const data = this.getField("Adaptive Item Answer Choices", row);
+        const options = data.split(";").filter(row => row.length > 0).map(row => row.trim());
         const correctAnswer = this.getField("Correct Answer", row);
-        return this.getOptions().find(option => option.value === correctAnswer).itemid;
+        return String.fromCharCode(97 + options.indexOf(correctAnswer));
+    }
+
+    getCorrectAnswerValueOfSetA(row) {
+        const options = this.getOptions();
+        const correctAnswer = this.getField("Correct Answer", row);
+        return options.find(option => option.value === correctAnswer).itemid;
     }
 
     getFeedback(row) {
+        let newRowValue = row % 12;
+        if (row > 23) {
+            const wordIdInGo = this.getFieldOfRow("Word ID", this.getGoTicketSheet()[newRowValue]);
+            newRowValue = this.data.findIndex(row => Utility.equalsWordId(row["Word ID"], wordIdInGo));
+        }
         const feedback = {
-            "correctFeedback": this.getCorrectFeedback(row),
-            "incorrectFeedback": this.getIncorrectFeedback(row),
-            "correctEmoji": this.getCorrectEmoji(row),
-            "incorrectEmoji": this.getIncorrectEmoji(row)
+            "correctFeedback": this.getCorrectFeedback(newRowValue),
+            "incorrectFeedback": this.getIncorrectFeedback(newRowValue),
+            "correctEmoji": this.getCorrectEmoji(newRowValue),
+            "incorrectEmoji": this.getIncorrectEmoji(newRowValue)
         }
         return JSON.stringify(feedback);
     }
@@ -152,6 +226,29 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     toArray(content) {
-        return content.split("\n").filter(row => row.length > 0).map(row => row.trim());
+        return content.split("\n").filter(row => row.trim().length > 0).map(row => row.trim());
+    }
+
+    getWordId(row) {
+        if (row > 23) return this.getFieldOfRow("Word ID", this.getGoTicketSheet()[row % 12]);
+        return this.getField("Word ID", row % 12);
+    }
+
+    getPathway1(row) {
+        let newRowValue = row % 12;
+        if (row > 23) {
+            const wordIdInGo = this.getFieldOfRow("Word ID", this.getGoTicketSheet()[newRowValue]);
+            newRowValue = this.data.findIndex(row => Utility.equalsWordId(row["Word ID"], wordIdInGo));
+        }
+        return this.getField("P1 Set", newRowValue);
+    }
+
+    getPathway2(row) {
+        let newRowValue = row % 12;
+        if (row > 23) {
+            const wordIdInGo = this.getFieldOfRow("Word ID", this.getGoTicketSheet()[newRowValue]);
+            newRowValue = this.data.findIndex(row => Utility.equalsWordId(row["Word ID"], wordIdInGo));
+        }
+        return this.getField("P2 Set", newRowValue);
     }
 }

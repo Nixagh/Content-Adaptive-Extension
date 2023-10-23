@@ -142,7 +142,7 @@ class OptionContent {
 						<input id="${Ids.questionNumber}" placeholder="insert question number" style="color: #181d24" value="${this.initNextCurrentQuestionNumber()}">
 					</div>
 					<button id="${Ids.insertButton}">Insert</button>
-					<button id="${Ids.insertAndSave}">Insert And Save</button>
+					<button id="${Ids.insertAndSave}" style="color: #181d24">Insert And Save</button>
 				</div>
 			</div>`;
 	}
