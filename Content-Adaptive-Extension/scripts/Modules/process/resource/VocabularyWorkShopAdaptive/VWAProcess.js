@@ -18,15 +18,15 @@ class VWAProcess {
     }
 
     process() {
-        // this.data = this.mapping(this.getFullContent());
-        this.data = this.getFullContent();
+        this.data = this.mapping(this.getFullContent());
+        // this.data = this.getFullContent();
         this.showErrors();
         Storage.Set("GProcess", JSON.stringify(this));
     }
 
-    mapping(first, second) {
+    mapping({first, second}) {
         return first.map(row => {
-            const wordID_1 = this.getFieldOfRow("WordID", first[row]);
+            const wordID_1 = this.getFieldOfRow("WordID", row);
             const wordList = second.find(wordList => Utility.equalsWordId(this.getFieldOfRow("WordID", wordList), wordID_1));
             if (wordList === undefined) {
                 this.addError(`Question Content`, `Word ID: ${row["Word ID"]} not found in Word List`);
@@ -41,8 +41,8 @@ class VWAProcess {
 
     getFullContent() {
         console.log("getFullContent");
-        // return {first: [], second: []};
-        return [];
+        return {first: [], second: []};
+        // return [];
     }
 
     async insert() {
@@ -147,7 +147,7 @@ class VWAProcess {
         }
 
         const listType = ["DP1", "DP2", "OLV-P1", "OLV-P2"];
-        if(listType.includes(this.type)) {
+        if (listType.includes(this.type)) {
             scramble.element.checked = true;
             scramble.element.parentElement.classList.add("checked");
         }

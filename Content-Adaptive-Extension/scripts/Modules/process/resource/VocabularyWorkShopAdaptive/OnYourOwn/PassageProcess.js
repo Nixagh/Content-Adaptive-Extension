@@ -8,6 +8,10 @@ class PassageProcess extends VWAProcess {
     getFullContent() {
         // const wordListContent = this.getWordListSheet();
         // return {first: this.replaceItem(this.getPassageType()), second: []};
+        return {first: [], second: []}
+    }
+
+    mapping({first, second}) {
         return this.replaceItem(this.getPassageType());
     }
 

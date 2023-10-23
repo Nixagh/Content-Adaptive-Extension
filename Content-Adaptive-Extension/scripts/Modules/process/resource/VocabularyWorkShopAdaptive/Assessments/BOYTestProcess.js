@@ -13,7 +13,11 @@ class BOYTestProcess extends VWAProcess {
     }
 
     getFullContent() {
-        return "";
+        return {first: [], second: []};
+    }
+
+    mapping({first, second}) {
+        return first;
     }
 
     // ------------------ get field ------------------ //

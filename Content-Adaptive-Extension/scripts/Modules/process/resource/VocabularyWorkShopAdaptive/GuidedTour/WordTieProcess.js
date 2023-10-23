@@ -7,13 +7,7 @@ class WordTieProcess extends VWAProcess {
         const wordListSheet = this.getWordListSheet();
         const wordTieSheet = this.getWordTieSheet();
 
-        return wordTieSheet.map(row => {
-            const word = wordListSheet.find(wordRow => Utility.equalsWordId(wordRow["WordID"], row["Word ID"]));
-            return {
-                ...word,
-                ...row
-            }
-        })
+        return {first: wordTieSheet, second: wordListSheet};
     }
 
     getWordTieSheet() {

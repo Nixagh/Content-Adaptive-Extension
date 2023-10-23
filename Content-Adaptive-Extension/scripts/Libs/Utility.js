@@ -195,4 +195,8 @@ class Utility {
     static equalsWordId(a, b) {
         return a.trim().toLowerCase() === b.trim().toLowerCase();
     }
+
+    static simplifyString(str) {
+        return this.beautifullyHeader(str).replaceAll(" ", "");
+    }
 }

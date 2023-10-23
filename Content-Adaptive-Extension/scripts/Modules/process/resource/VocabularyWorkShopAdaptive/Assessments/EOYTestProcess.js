@@ -22,11 +22,18 @@ class EOYTestProcess extends VWAProcess {
         const synonymSheet = this.getSynonymSheet();
         const chTheRWSSheet = this.getChTheRWSSheet();
         const wordAssociationSheet = this.getWordAssociationSheet();
-        return [{
-            "syn": synonymSheet,
-            "chTheRWS": chTheRWSSheet,
-            "wordAssoc": wordAssociationSheet
-        }];
+        return {
+            first: [{
+                "syn": synonymSheet,
+                "chTheRWS": chTheRWSSheet,
+                "wordAssoc": wordAssociationSheet
+            }],
+            second: []
+        }
+    }
+
+    mapping({first, second}) {
+        return first;
     }
 
     getSynonymSheet() {

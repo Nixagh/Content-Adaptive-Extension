@@ -6,25 +6,26 @@ class VCProcess extends VWAProcess {
     getFullContent() {
         const wordListContent = this.getWordListSheet();
         const wtContent = this.getWTSheet();
+
+        return {first: wtContent, second: wordListContent};
+    }
+
+    mapping({first, second}) {
         const vcContent = this.getVCSheet();
 
-        const wtMap = wtContent.map((word) => {
-            const wt = wordListContent.find(wt => Utility.equalsWordId(wt["WordID"], word["Word ID"]));
-            return {
-                ...word,
-                ...wt
+        return first.map((word) => {
+            const wordID_1 = this.getFieldOfRow("WordID", word);
+            const wordList = second.find(wordList => Utility.equalsWordId(this.getFieldOfRow("WordID", wordList), wordID_1));
+            if (wordList === undefined) {
+                this.addError(`Question Content`, `Word ID: ${word["Word ID"]} not found in Word List`);
+                return;
             }
-        });
-
-        const vcMap = wtMap.map((word) => {
-            const vc = vcContent.find(vc => vc["Pathway 2 Set "] === word["P2 Set"] || vc["Pathway 2 Set"] === word["P2 Set"]);
-            return {
-                ...word,
-                ...vc
-            }
-        });
-
-        return vcMap.map((word) => {
+            return {...word, ...wordList};
+        }).map((word) => {
+            const pathWay = this.getExactlyFieldOfRow("P2 Set", word);
+            const vc = vcContent.find(vc => Utility.equals(pathWay, this.getExactlyFieldOfRow("Pathway 2 Set", vc)));
+            return {...word, ...vc};
+        }).map((word) => {
             this.removeOtherField(word);
             return {...word}
         });
@@ -84,7 +85,7 @@ class VCProcess extends VWAProcess {
         return JSON.stringify(componentGradingRules);
     }
 
-     setPassage(row) {
+    setPassage(row) {
         const directionLine = new Cke("cke_directionLine");
         const passageContent = new Cke("cke_2_contents");
         const choosePassage = document.querySelectorAll("#questionTypeSelection")[1];
@@ -102,11 +103,11 @@ class VCProcess extends VWAProcess {
             directionLine.setHtml(directionLineHTML);
             passageContent.setHtml(passageContentHTML);
         } else {
-			this.getAjaxPassage(choosePassage.value).then(result => {
-				directionLine.setHtml(result.directionLineHTML);
-				passageContent.setHtml(result.passageContentHTML);
-			});
-		}
+            this.getAjaxPassage(choosePassage.value).then(result => {
+                directionLine.setHtml(result.directionLineHTML);
+                passageContent.setHtml(result.passageContentHTML);
+            });
+        }
 
         console.log("Set passage");
     }

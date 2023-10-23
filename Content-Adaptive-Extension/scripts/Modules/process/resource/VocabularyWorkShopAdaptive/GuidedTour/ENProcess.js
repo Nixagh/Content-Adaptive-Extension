@@ -15,7 +15,11 @@ class ENProcess extends VWAProcess {
 
 		// group eanContent by Item Number
 		// template: [{ "Item Number": 1, a: 1}, {"Item Number: 1, a: 2}] => {1: [{ "Item Number": 1, a: 1}, {"Item Number: 1, a: 2}]}
-		return this.groupByItemNumber(fullContent).slice(1);
+		return {first: this.groupByItemNumber(fullContent).slice(1), second: []};
+	}
+
+	mapping({first, second}) {
+		return first;
 	}
 
 	getEAN() {
