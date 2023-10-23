@@ -77,7 +77,7 @@ class PassageProcess extends VWAProcess {
                     "Item": olvContent[`Item ${i}`],
                     "Item Choices": olvContent[`Item ${i} Choices`],
                     "Item Correct Answer": olvContent[`Item ${i} Correct Answer`],
-                    "Item Standards": olvContent[`Item ${i} Standards`] || i === 10 ? olvContent[`Standards`] : '',
+                    "Item Standards": olvContent[`Item ${i} Standards`] || (i === 10 ? olvContent[`Standards`] : ''),
                     "Item Points": olvContent[`Item ${i} Points`],
                 }
                 newData.push(item);
