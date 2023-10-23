@@ -74,7 +74,8 @@ class DefinitionProcess extends VWAProcess {
                 {
                     id: `${this.getCID(row)}`,
                     value: this.getCorrectAnswerValue(row),
-                    type: "word"
+                    type: "Fill_in_Blank",
+					subtype: "word"
                 }]
         }
         return JSON.stringify(correctAnswer);
