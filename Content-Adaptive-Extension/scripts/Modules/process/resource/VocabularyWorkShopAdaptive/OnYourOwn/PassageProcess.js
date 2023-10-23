@@ -239,7 +239,7 @@ class PassageProcess extends VWAProcess {
         const item = this.getItem(row);
         const regex = /paragraph \d+/;
         const match = item.match(regex);
-        const number = match ? match[0].split(" ")[1] : '';
-        return number ? number : '';
+        const number = match ? match[0].split(" ")[1] : 0;
+        return parseInt(number);
     }
 }
