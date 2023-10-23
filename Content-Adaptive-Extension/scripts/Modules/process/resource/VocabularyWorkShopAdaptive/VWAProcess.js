@@ -131,6 +131,7 @@ class VWAProcess {
         const passageContent = new Cke("cke_2_contents");
         const passageSummary = new Cke("cke_3_contents");
         const choosePassage = document.querySelectorAll("#questionTypeSelection")[1];
+        const scramble = new BasicInput("scrambleCheckbox");
 
         if (row !== 0) {
             choosePassage.value = choosePassage.options[1].value;
@@ -144,6 +145,13 @@ class VWAProcess {
             passageContent.setHtml(this.getPassageContent(row));
             passageSummary.setHtml(this.getPassageSummaryText(row));
         }
+
+        const listType = ["DP1", "DP2", "OLV-P1", "OLV-P2"];
+        if(listType.includes(this.type)) {
+            scramble.element.checked = true;
+            scramble.element.parentElement.classList.add("checked");
+        }
+
         console.log("Set passage");
     }
 
