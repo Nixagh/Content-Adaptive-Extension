@@ -167,22 +167,31 @@ class WordTieProcess extends VWAProcess {
     }
 
     getCorrectEmoji(row) {
-        return this.getExactlyField("Correct emoji with feedback phrases randomly selected.", row).split("\n").filter(value => value !== "");
+        const correctEmoji = this.getExactlyField("Correct emoji with feedback phrases randomly selected.", 0);
+        return this.toArray(correctEmoji);
     }
 
     getIncorrectEmoji1(row) {
-        return this.getExactlyField("Incorrect emoji with growth mindset feedback.", row).split("\n").filter(value => value !== "");
+        const incorrectEmoji1 = this.getExactlyField("Incorrect emoji with growth mindset feedback.", 0);
+        return this.toArray(incorrectEmoji1);
     }
 
     getIncorrectEmoji2(row) {
-        return this.getExactlyField("Incorrect emoji with Feedback phrases randomly selected.", row).split("\n").filter(value => value !== "");
+        const incorrectEmoji2 = this.getExactlyField("Incorrect emoji with Feedback phrases randomly selected.", 0);
+        return this.toArray(incorrectEmoji2);
     }
 
     getIncorrectEmoji3(row) {
-        return this.getExactlyField("Incorrect emoji with Feedback phrases randomly selected.", row).split("\n").filter(value => value !== "");
+        const incorrectEmoji3 = this.getExactlyField("Incorrect emoji with Feedback phrases randomly selected.", 0);
+        return this.toArray(incorrectEmoji3);
     }
 
     getIncorrectEmoji4(row) {
-        return this.getExactlyField("Thinking emoji and Show Me button", row).split("\n").filter(value => value !== "");
+        const incorrectEmoji4 = this.getExactlyField("Thinking emoji and Show Me button", 0);
+        return this.toArray(incorrectEmoji4);
+    }
+
+    toArray(content) {
+        return content.split("\n").filter(value => value.trim() !== "" ).map(value => value.replaceAll("\r", "").trim());
     }
 }

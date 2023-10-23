@@ -18,17 +18,34 @@ class VWAProcess {
     }
 
     process() {
+        // this.data = this.mapping(this.getFullContent());
         this.data = this.getFullContent();
         this.showErrors();
         Storage.Set("GProcess", JSON.stringify(this));
     }
 
+    mapping(first, second) {
+        return first.map(row => {
+            const wordID_1 = this.getFieldOfRow("WordID", first[row]);
+            const wordList = second.find(wordList => Utility.equalsWordId(this.getFieldOfRow("WordID", wordList), wordID_1));
+            if (wordList === undefined) {
+                this.addError(`Question Content`, `Word ID: ${row["Word ID"]} not found in Word List`);
+                return;
+            }
+            return {
+                ...wordList,
+                ...row,
+            }
+        })
+    }
+
     getFullContent() {
         console.log("getFullContent");
+        // return {first: [], second: []};
         return [];
     }
 
-    insert() {
+    async insert() {
         this.errors = [];
         // get row from question number
         const row = this.getRow();
@@ -36,7 +53,7 @@ class VWAProcess {
         // set question tab
         if (this.setTab[0]) this.setQuestion(row, true);
         // set passage tab
-        if (this.setTab[1]) this.setPassage(row);
+        if (this.setTab[1]) await this.setPassage(row);
         // set question content tab
         if (this.setTab[2]) this.setQuestionContent(row);
         // set feedback tab
@@ -109,7 +126,7 @@ class VWAProcess {
         console.log("Set question")
     }
 
-    setPassage(row) {
+    async setPassage(row) {
         const directionLine = new Cke("cke_directionLine");
         const passageContent = new Cke("cke_2_contents");
         const passageSummary = new Cke("cke_3_contents");
@@ -117,11 +134,11 @@ class VWAProcess {
 
         if (row !== 0) {
             choosePassage.value = choosePassage.options[1].value;
-            this.getAjaxPassage(choosePassage.value).then(result => {
-                directionLine.setHtml(result.directionLineHTML);
-                passageContent.setHtml(result.passageContentHTML);
-                passageSummary.setHtml(result.passageSummaryHTML);
-            });
+            const result = await this.getAjaxPassage(choosePassage.value);
+
+            directionLine.setHtml(result.directionLineHTML);
+            passageContent.setHtml(result.passageContentHTML);
+            passageSummary.setHtml(result.passageSummaryHTML);
         } else {
             directionLine.setHtml(this.getDirectionLineHTML(row));
             passageContent.setHtml(this.getPassageContent(row));
@@ -133,7 +150,11 @@ class VWAProcess {
     async getAjaxPassage(passageId) {
         const url = `http://192.168.200.26:8090/cms/ajax/question/loadPassage.html?passageId=${passageId}`;
         const result = await $.ajax({url: url});
-        return { directionLineHTML: result["directionLine"], passageContentHTML: result["content"], passageSummaryHTML: result["passageSummary"] };
+        return {
+            directionLineHTML: result["directionLine"],
+            passageContentHTML: result["content"],
+            passageSummaryHTML: result["passageSummary"]
+        };
     }
 
     getPassageSummaryText(row) {
@@ -301,15 +322,19 @@ class VWAProcess {
     }
 
     getFieldOfRow(header, row) {
+        const simplifyHeader = Utility.simplifyString(header);
         for (let key in row) {
-            if (key.includes(Utility.beautifullyHeader(header))) return row[key];
+            const simplifyKey = Utility.simplifyString(Utility.beautifullyHeader(key));
+            if (simplifyKey.includes(simplifyHeader)) return row[key];
         }
         // return alert(`Can't find field ${header} in row ${row}`);
     }
 
     getExactlyFieldOfRow(header, row) {
+        const simplifyHeader = Utility.simplifyString(header);
         for (let key in row) {
-            if (key === Utility.beautifullyHeader(header)) return row[key];
+            const simplifyKey = Utility.simplifyString(Utility.beautifullyHeader(key));
+            if (simplifyHeader === simplifyKey) return row[key];
         }
         // return alert(`Can't find field ${header} in row ${row}`);
     }

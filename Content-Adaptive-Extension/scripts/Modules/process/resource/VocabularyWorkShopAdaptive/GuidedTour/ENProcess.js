@@ -79,6 +79,10 @@ class ENProcess extends VWAProcess {
 		return JSON.stringify(CSR);
 	}
 
+	getAdaptiveAnswerCount() {
+		return 2;
+	}
+
 	getDirectionLineHTML(row) {
 		return this.getExactlyFieldOfRow("Direction Line", this.data[row][0]);
 	}
