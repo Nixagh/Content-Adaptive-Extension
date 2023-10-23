@@ -263,23 +263,19 @@ class VCProcess extends VWAProcess {
         const word = this.getWord(row);
         const passageBody = this.getPassageBody(row).split("\n");
 
-        const regex = /<paragraph id = (\d+)>/;
-        const orRegex = /<paragraph = (\d+)\/>/;
+        const regex = /<paragraph id = \d+>/;
+        const orRegex = /<paragraph = \d+>/;
 
         const wordInPassage = passageBody.find(value => value.includes(word));
 
         const match = wordInPassage.match(regex)
         const orMatch = wordInPassage.match(orRegex);
 
-        if (match) {
-            return match.match(regex)[1];
-        }
+        const numberRegex = /\d+/;
 
-        if (orMatch) {
-            return orMatch.match(orRegex)[1];
-        }
+        const number = match ? match[0].match(numberRegex)[0] : orMatch ? orMatch[0].match(numberRegex)[0] : -1;
 
-        return -1;
+        return parseInt(number);
     }
 
     getWord(row) {
