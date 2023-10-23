@@ -62,8 +62,8 @@ class AdaptivePracticeProcess extends VWAProcess {
         return this.getField("Direction Line", 0);
     }
 
-    getSetType() {
-        return 'A';
+    getSetType(row) {
+        return row > 23 ? this.adType.GO : row > 11 && row < 24 ? this.adType.B : this.adType.A;
     }
 
     getAdaptiveAnswerCount() {
@@ -71,10 +71,7 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getQuestionHTML(row) {
-        let adaptiveType = this.adType.A;
-
-        if (row > 11 && row < 24) adaptiveType = this.adType.B;
-        if (row > 23) adaptiveType = this.adType.GO;
+        let adaptiveType = this.getSetType(row);
         row = row % 12;
 
         return `<div adaptivetype="${adaptiveType}" class="question-questionStem question-questionStem-1-column">
@@ -250,5 +247,14 @@ class AdaptivePracticeProcess extends VWAProcess {
             newRowValue = this.data.findIndex(row => Utility.equalsWordId(row["Word ID"], wordIdInGo));
         }
         return this.getField("P2 Set", newRowValue);
+    }
+
+    getStandard(row) {
+        let newRowValue = row % 12;
+        if (row > 23) {
+            const wordIdInGo = this.getFieldOfRow("Word ID", this.getGoTicketSheet()[newRowValue]);
+            newRowValue = this.data.findIndex(row => Utility.equalsWordId(row["Word ID"], wordIdInGo));
+        }
+        return this.getField("Standard", newRowValue);
     }
 }
