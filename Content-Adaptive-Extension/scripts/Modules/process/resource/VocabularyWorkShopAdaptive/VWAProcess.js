@@ -429,7 +429,6 @@ class VWAProcess {
         }
         // remove <label></label>
         const regex_ = /<label>(.*?)<\/label>/;
-        const match_ = item.match(regex_)[0];
-        return item.replaceAll(match_, '').trim();
+        return item.match(regex_) ? item.replaceAll(item.match(regex_)[0], '').trim() : item.trim();
     }
 }
