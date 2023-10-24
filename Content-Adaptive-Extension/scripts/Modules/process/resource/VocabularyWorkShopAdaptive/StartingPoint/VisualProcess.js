@@ -46,9 +46,10 @@ class VisualProcess extends VWAProcess {
 
 	getVideoSource(row) {
 		//content/802906/007744939/VW_unavailablevideo.mp4
-		const productId = this.getGlobalResourceId();
-		const videoNumber = "007744939" /*|| this.getVideoPickup(row)*/;
-		return `/content/${productId}/${videoNumber}/VW_unavailableVideo.mp4`;
+		const productId =  /*this.getGlobalResourceId() ||*/ "802906";
+		const videoNumber = /* this.getVideoPickup(row) || */ "007744939";
+		const word = /*this.getWord(row).replace("*", "").trim() ||*/ "VW_unavailableVideo.mp4";
+		return `/content/${productId}/${videoNumber}/${word}`;
 		// return "/content/802906/007744939/VW_unavailablevideo.mp4";
 	}
 
