@@ -125,7 +125,10 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getWordIDWithWord(word) {
-        return this.data.find(row => Utility.equalsWordId(row["Word"], word))["Word ID"].trim();
+        const _word = this.data.find(row => Utility.equalsWordId(row["Word"], word));
+        if (_word) return _word["Word ID"].trim();
+        this.addError("Question Content", `Word ID not found with word: ${word}`);
+        return "";
     }
 
     getOptionsHTML() {
