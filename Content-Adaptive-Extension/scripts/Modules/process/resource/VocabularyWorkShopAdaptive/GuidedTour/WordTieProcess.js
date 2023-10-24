@@ -7,13 +7,7 @@ class WordTieProcess extends VWAProcess {
         const wordListSheet = this.getWordListSheet();
         const wordTieSheet = this.getWordTieSheet();
 
-        return wordTieSheet.map(row => {
-            const word = wordListSheet.find(wordRow => Utility.equalsWordId(wordRow["WordID"], row["Word ID"]));
-            return {
-                ...word,
-                ...row
-            }
-        })
+        return {first: wordTieSheet, second: wordListSheet};
     }
 
     getWordTieSheet() {
@@ -82,7 +76,7 @@ class WordTieProcess extends VWAProcess {
         if (answerChoicesArray.length === 0 || answerChoicesArray.length !== 4) {
             return alert("Answer Choices is empty or not equal to 4");
         }
-        return answerChoicesArray.map(choice => choice.trim());
+        return answerChoicesArray.map(choice => choice[0] === `"` ? choice.substring(1, choice.length - 1): choice);
     }
 
     getCorrectAnswer(row) {

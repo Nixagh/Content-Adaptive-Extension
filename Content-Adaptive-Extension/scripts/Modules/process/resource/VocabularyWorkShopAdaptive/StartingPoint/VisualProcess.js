@@ -7,13 +7,7 @@ class VisualProcess extends VWAProcess {
 		const wordListContent = this.getWordListSheet();
 		const definitionsContent = this.getDefinitionSheet();
 
-		return definitionsContent.map((word) => {
-			const visual = wordListContent.find(visual => Utility.equalsWordId(visual["WordID"], word["WordID"]));
-			return {
-				...word,
-				...visual
-			}
-		});
+		return {first: wordListContent, second: definitionsContent};
 	}
 
 	getDefinitionSheet() {

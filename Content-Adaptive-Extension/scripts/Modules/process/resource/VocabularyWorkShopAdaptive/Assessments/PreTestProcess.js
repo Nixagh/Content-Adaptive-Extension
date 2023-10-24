@@ -4,7 +4,11 @@ class PreTestProcess extends VWAProcess {
     }
 
     getFullContent() {
-        return this.getPretestSheet();
+        return {first: this.getPretestSheet(), second: []};
+    }
+
+    mapping({first, second}) {
+        return first;
     }
 
     getPretestSheet() {

@@ -8,13 +8,18 @@ class WSProcess extends VWAProcess {
 		const wsContent = this.getWSSheet();
 		const definitionsContent = this.getDefinitionSheet();
 
-		return wsContent.map((word) => {
-			const ws = wordListContent.find(ws => Utility.equalsWordId(ws["WordID"], word["Word ID"]));
-			// get row number of wsContent in definitionsContent by WordID
-			const wsRowNumber = definitionsContent.findIndex(definition => Utility.equalsWordId(definition["WordID"], word["Word ID"]));
+		const firstMapping = this.getFirstMapping(wsContent, definitionsContent);
+
+		return {first: firstMapping, second: wordListContent};
+	}
+
+	getFirstMapping(wordStudy, definitions) {
+		return wordStudy.map((row) => {
+			const wordID_1 = this.getFieldOfRow("WordID", row);
+
+			const wsRowNumber = definitions.findIndex(definition => Utility.equalsWordId(this.getFieldOfRow("WordID", definition), wordID_1));
 			return {
-				...word,
-				...ws,
+				...row,
 				"Question Number": wsRowNumber + 1
 			}
 		});

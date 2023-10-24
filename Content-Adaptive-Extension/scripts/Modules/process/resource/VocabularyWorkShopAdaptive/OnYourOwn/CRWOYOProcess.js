@@ -1,15 +1,9 @@
 class CRWOYOProcess extends VWAProcess {
 	getFullContent() {
-		const wordListContent = this.getWordListSheet();
 		const crwContent = this.getCRWSheet();
+		const wordListContent = this.getWordListSheet();
 
-		return crwContent.map((crw) => {
-			const word = wordListContent.find(word => Utility.equalsWordId(word["WordID"], crw["Word ID"]));
-			return {
-				...word,
-				...crw
-			}
-		});
+		return {first: crwContent, second: wordListContent};
 	}
 
 	getCRWSheet() {

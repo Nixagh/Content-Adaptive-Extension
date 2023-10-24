@@ -10,19 +10,9 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getFullContent() {
-        const wordLists = this.getWordListSheet();
         const adaptivePractice = this.getAdaptivePracticeSheet();
-        return adaptivePractice.map(row => {
-            const wordList = wordLists.find(wordList => Utility.equalsWordId(wordList["WordID"], row["Word ID"]));
-            if (wordList === undefined) {
-                this.addError(`Question Content`, `Word ID: ${row["Word ID"]} not found in Word List`);
-                return;
-            }
-            return {
-                ...wordList,
-                ...row,
-            }
-        })
+        const wordLists = this.getWordListSheet();
+        return {first: adaptivePractice, second: wordLists};
     }
 
     getAdaptivePracticeSheet() {

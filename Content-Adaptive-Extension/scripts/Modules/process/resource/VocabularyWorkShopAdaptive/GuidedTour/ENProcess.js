@@ -15,7 +15,11 @@ class ENProcess extends VWAProcess {
 
 		// group eanContent by Item Number
 		// template: [{ "Item Number": 1, a: 1}, {"Item Number: 1, a: 2}] => {1: [{ "Item Number": 1, a: 1}, {"Item Number: 1, a: 2}]}
-		return this.groupByItemNumber(fullContent).slice(1);
+		return {first: this.groupByItemNumber(fullContent).slice(1), second: []};
+	}
+
+	mapping({first, second}) {
+		return first;
 	}
 
 	getEAN() {
@@ -168,7 +172,8 @@ class ENProcess extends VWAProcess {
 	}
 
 	getItem(row, index) {
-		return this.getExactlyFieldOfRow("Item", this.data[row][index - 1]);
+		const item = this.getExactlyFieldOfRow("Item", this.data[row][index - 1])
+		return item[0] === `"` ? item.substring(1, item.length - 1) : item;
 	}
 
 	getCorrectEmoji(row) {

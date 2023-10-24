@@ -10,7 +10,8 @@ class CumulativeTestProcess extends VWAProcess {
 
     getUnit() {
         // todo:
-        return 4;
+        const number = this.fileName.match(/\d+/g);
+        return number ? number[0] : 1;
     }
 
     getCID(row) {
@@ -21,13 +22,19 @@ class CumulativeTestProcess extends VWAProcess {
         const synonyms = this.getSynonymsSheet();
         const chTheRW2 = this.getCHTheRWSheet();
         const wordAssociations = this.getWordAssociationsSheet();
-        return [{
-            "syn": synonyms,
-            "chTheRW2": chTheRW2,
-            "wordAssoc": wordAssociations
-        }];
+        return {
+            first: [{
+                "syn": synonyms,
+                "chTheRW2": chTheRW2,
+                "wordAssoc": wordAssociations
+            }],
+            second: []
+        }
     }
 
+    mapping({first, second}) {
+        return first;
+    }
 
     getSynonymsSheet() {
         const synonymsSheetName = `Synonyms`;
