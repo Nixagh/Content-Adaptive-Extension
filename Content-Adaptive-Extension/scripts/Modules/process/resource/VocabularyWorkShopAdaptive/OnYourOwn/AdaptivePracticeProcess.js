@@ -164,7 +164,7 @@ class AdaptivePracticeProcess extends VWAProcess {
 
     getAnswerGoList(row) {
         const answer = this.getFieldOfRow("Answer choices", this.getGoTicketSheet()[row]);
-        return answer.split(";").filter(row => row.length > 0).map(row => row.replaceAll(`"`, "").trim());
+        return answer.split(";").filter(row => row.length > 0).map(row => row.trim());
     }
 
     getCorrectAnswer(row) {
@@ -210,28 +210,28 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getFeedback(row) {
-        let newRowValue = row % 12;
-        if (row > 23) {
-            const wordIdInGo = this.getFieldOfRow("Word ID", this.getGoTicketSheet()[newRowValue]);
-            newRowValue = this.data.findIndex(row => Utility.equalsWordId(row["Word ID"], wordIdInGo));
-        }
+        // let newRowValue = row % 12;
+        if (row > 23) return '';
+
         const feedback = {
-            "correctFeedback": this.getCorrectFeedback(newRowValue),
-            "incorrectFeedback": this.getIncorrectFeedback(newRowValue),
-            "correctEmoji": this.getCorrectEmoji(newRowValue),
-            "incorrectEmoji": this.getIncorrectEmoji(newRowValue)
+            "correctFeedback": this.getCorrectFeedback(row),
+            "incorrectFeedback": this.getIncorrectFeedback(row),
+            "correctEmoji": this.getCorrectEmoji(row % 12),
+            "incorrectEmoji": this.getIncorrectEmoji(row % 12)
         }
         return JSON.stringify(feedback);
     }
 
     getCorrectFeedback(row) {
-        const correctFeedback = this.getField("Correct Feedback", row);
-        const wordId = this.getField("Word ID", row);
+        const newRowValue = row % 12;
+        const correctFeedback = row > 11 ? this.getField("Adaptive Item Correct Feedback", newRowValue) : this.getField("Correct Feedback", newRowValue);
+        const wordId = this.getField("Word ID", newRowValue);
         return this.toArray(correctFeedback.replace(`<${wordId}>`, `<${wordId}>${wordId}:`));
     }
 
     getIncorrectFeedback(row) {
-        const incorrectFeedback = this.getField("Incorrect Feedback", row);
+        const newRowValue = row % 12;
+        const incorrectFeedback = row > 11 ? this.getField("Adaptive Item Incorrect Feedback", newRowValue) : this.getField("Incorrect Feedback", newRowValue);
         const replaceValue = '<b>{0}</b>';
 
         const firstIndex = incorrectFeedback.indexOf("[");
