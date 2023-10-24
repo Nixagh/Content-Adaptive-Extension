@@ -120,7 +120,12 @@ class AdaptivePracticeProcess extends VWAProcess {
         const options = data.split(";").filter(row => row.length > 0).map(row => row.trim());
         if (options.length === 0) this.addError(`Question Content`, `Adaptive Item Answer Choices: Row ${row + 1} is empty`);
         if (options.length !== 4) this.addError(`Question Content`, `Adaptive Item Answer Choices: Row ${row + 1} must have 4 options`);
-        return options.map((option, index) => `<div itemid="${String.fromCharCode(97 + index)}" itemlabel="" word="${option}">${option}</div>`).join('');
+
+        return options.map((option, index) => `<div itemid="${String.fromCharCode(97 + index)}" itemlabel="" word="${this.getWordIDWithWord(option)}">${option}</div>`).join('');
+    }
+
+    getWordIDWithWord(word) {
+        return this.data.find(row => Utility.equalsWordId(row["Word"], word))["Word ID"].trim();
     }
 
     getOptionsHTML() {
@@ -151,7 +156,7 @@ class AdaptivePracticeProcess extends VWAProcess {
         const options = this.getAnswerGoList(row);
         if (options.length === 0) this.addError(`Question Content`, `Answer choices: Row ${row + 1} is empty`);
         if (options.length !== 4) this.addError(`Question Content`, `Answer choices: Row ${row + 1} must have 4 options`);
-        return options.map((option, index) => `<div itemid="${String.fromCharCode(97 + index)}" itemlabel="" word="${option}">${option}</div>`).join('');
+        return options.map((option, index) => `<div itemid="${String.fromCharCode(97 + index)}" itemlabel="">${option}</div>`).join('');
     }
 
     getAnswerGoList(row) {
