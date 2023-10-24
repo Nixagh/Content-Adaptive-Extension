@@ -267,7 +267,7 @@ class VCProcess extends VWAProcess {
         const regex = /<paragraph id = \d+>/;
         const orRegex = /<paragraph = \d+>/;
 
-        const wordInPassage = passageBody.find(value => value.includes(word));
+        const wordInPassage = passageBody.find(value => value.toLowerCase().includes(word));
 
         const match = wordInPassage.match(regex)
         const orMatch = wordInPassage.match(orRegex);
