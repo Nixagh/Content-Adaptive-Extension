@@ -58,4 +58,8 @@ class VisualProcess extends VWAProcess {
 		}
 		return `/content/${productId}/${videoNumber}/${word}.mp4`;
 	}
+
+	getWord(row) {
+		return this.getExactlyField("Word", row);
+	}
 }
