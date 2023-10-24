@@ -172,7 +172,8 @@ class ENProcess extends VWAProcess {
 	}
 
 	getItem(row, index) {
-		return this.getExactlyFieldOfRow("Item", this.data[row][index - 1]);
+		const item = this.getExactlyFieldOfRow("Item", this.data[row][index - 1])
+		return item[0] === `"` ? item.substring(1, item.length - 1) : item;
 	}
 
 	getCorrectEmoji(row) {

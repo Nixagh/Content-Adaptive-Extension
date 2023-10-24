@@ -65,8 +65,7 @@ class OptionContent {
 
 		UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.insertAndSave}`, async () => {
 			if (!GProcess) return alert("No file loaded");
-			await OptionContent.insert();
-			document.getElementById(Ids.saveBtn).click();
+			OptionContent.insert().then(() => document.getElementById(Ids.saveBtn).click());
 		})
 
 		UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "onload", `#${Ids.globalResourceId}`, async () => {
