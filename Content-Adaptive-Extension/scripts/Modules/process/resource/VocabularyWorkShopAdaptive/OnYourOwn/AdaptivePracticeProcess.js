@@ -93,7 +93,7 @@ class AdaptivePracticeProcess extends VWAProcess {
         return `<div adaptivetype="${adaptiveType}" class="question-questionStem question-questionStem-1-column">
                     <div class="question-stem-content">
                     ${adaptiveType === this.adType.GO ? `<div class="whatItMeans">${this.getMeanOfGo(row)}</div>` : ''}
-                        <div class="question">${adaptiveType === this.adType.GO ? this.getItemOfGo(row) : this.getItem(row)}
+                        <div class="question">${adaptiveType === this.adType.GO ? this.getItemOfGo(row) : adaptiveType === this.adType.A ? this.getItem(row) : this.getItemOfB(row)}
                             <div cid="${this.getCID(row)}" ctype="MultipleChoice" layout="Vertical" qname="a${row + 1}" subtype="MC" total="${this.getTotalOfOption(adaptiveType)}">
                                 ${adaptiveType === this.adType.GO ? this.getOptionsHTMLOfGo(row) : adaptiveType === this.adType.A ? this.getOptionsHTML() : this.getOptionsHTMLSetB(row)}
                             </div>
@@ -105,6 +105,10 @@ class AdaptivePracticeProcess extends VWAProcess {
 
     getItem(row) {
         return this.getExactlyField("Item", row);
+    }
+
+    getItemOfB(row) {
+        return this.getExactlyField("Adaptive Item", row);
     }
 
     getTotalOfOption(adaptiveType) {
