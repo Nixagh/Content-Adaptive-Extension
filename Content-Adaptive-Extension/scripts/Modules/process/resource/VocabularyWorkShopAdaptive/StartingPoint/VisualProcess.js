@@ -45,20 +45,17 @@ class VisualProcess extends VWAProcess {
 	}
 
 	getVideoSource(row) {
-		//content/802906/007744939/VW_unavailablevideo.mp4
-		const productId =  /*this.getGlobalResourceId() ||*/ "802906";
-		const videoNumber = /* this.getVideoPickup(row) || */ "007744939";
-		const word = /*this.getWord(row).replace("*", "").trim() ||*/ "VW_unavailableVideo.mp4";
-		return `/content/${productId}/${videoNumber}/${word}`;
-		// return "/content/802906/007744939/VW_unavailablevideo.mp4";
+		return this.getVideoPickup(row);
 	}
 
 	getVideoPickup(row) {
-		let video = this.getField("Instructional Video Pickup Code", row);
-		if (!video || video.toLowerCase().trim() === "New".toLowerCase()) {
-			this.addError("Question Content", "New video is not available");
-			video = "007744939";
+		const productId =  this.getGlobalResourceId();
+		const word = this.getWord(row).replace("*", "").trim();
+		let videoNumber = this.getField("Instructional Video Pickup Code", row);
+
+		if (!videoNumber || videoNumber.toLowerCase().trim() === "New".toLowerCase()) {
+			return "/content/802906/007744939/VW_unavailablevideo.mp4";
 		}
-		return video;
+		return `/content/${productId}/${videoNumber}/${word}.mp4`;
 	}
 }
