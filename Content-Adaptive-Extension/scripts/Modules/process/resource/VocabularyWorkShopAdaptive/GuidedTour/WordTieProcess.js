@@ -129,7 +129,7 @@ class WordTieProcess extends VWAProcess {
     }
 
     getCorrectFeedback(row) {
-
+        return [""];
     }
 
     getIncorrectFeedback1(row) {
