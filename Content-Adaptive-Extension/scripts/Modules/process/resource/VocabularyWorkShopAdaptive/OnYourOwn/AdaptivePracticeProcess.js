@@ -191,13 +191,13 @@ class AdaptivePracticeProcess extends VWAProcess {
     getCorrectAnswerValueOfSetB(row) {
         const data = this.getField("Adaptive Item Answer Choices", row);
         const options = data.split(";").filter(row => row.length > 0).map(row => row.trim());
-        const correctAnswer = this.getField("Correct Answer", row);
+        const correctAnswer = this.getExactlyFieldOfRow("Adaptive Item Answer Choices", row);
         return String.fromCharCode(97 + options.indexOf(correctAnswer.replaceAll(`"`, "").trim()));
     }
 
     getCorrectAnswerValueOfSetA(row) {
         const options = this.getOptions();
-        const correctAnswer = this.getField("Correct Answer", row);
+        const correctAnswer = this.getExactlyFieldOfRow("Correct Answer", row);
         return options.find(option => option.value === correctAnswer).itemid;
     }
 
