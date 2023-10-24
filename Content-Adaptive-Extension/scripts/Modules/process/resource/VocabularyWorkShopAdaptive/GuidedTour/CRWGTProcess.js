@@ -23,8 +23,10 @@ class CRWGTProcess extends VWAProcess {
 	getQuestionHTML(row) {
 		const item = this.getItem(row);
 		const option = `<div cid="${this.getCID(row)}" ctype="Drop_Down" qname="a${row + 1}">${this.getOption(row)}</div>`;
-		const replace = `[FIB: anno: ${this.getCorrectAnswerText(row)}]`;
-		const question = item.replace(replace, option);
+
+		const regex = /\[FIB: anno: (.*)]/;
+
+		const question = item.replace(regex, option);
 
 		return `<div class="question-questionStem question-questionStem-1-column">
 					<div class="question-stem-content">
@@ -80,7 +82,7 @@ class CRWGTProcess extends VWAProcess {
 	}
 	getAnswerChoices(row) {
 		const answerChoices = this.getField("Answer Choices", row);
-		return answerChoices ? answerChoices.split(",").map(word => word.trim()).filter(value => Utility.isNotNull(value)) : [];
+		return answerChoices ? answerChoices.split(",").map(word => Utility.removeExtraSpace(word)).filter(value => Utility.isNotNull(value)) : [];
 	}
 
 	getCorrectFeedback(row) {
@@ -146,7 +148,7 @@ class CRWGTProcess extends VWAProcess {
 
 	// ------------------ other ------------------ //
 	toArray(text) {
-		return text ? text.split("\n").map(item => item.replaceAll("\r", "").trim()).filter(value => Utility.isNotNull(value)) : [];
+		return text ? text.split("\n").map(item => Utility.removeExtraSpace(item).replaceAll("\r", "").trim()).filter(value => Utility.isNotNull(value)) : [];
 	}
 
 	getOption(row) {

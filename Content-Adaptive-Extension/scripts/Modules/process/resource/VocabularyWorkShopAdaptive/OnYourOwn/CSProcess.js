@@ -36,9 +36,14 @@ class CSProcess extends VWAProcess {
 
 	getQuestionHTML(row) {
 		const item = this.getItem(row);
-		const replace = `[FIB: anno: ${this.getCorrectWord(row)}]`;
 		const option = `<div cid="${this.getCID(row)}" ctype="Drop_Down" qname="a${row + 1}">${this.getOptions()}</div>`;
-		const question = item.replace(replace, option);
+		// template "The accusation was [FIB: anno: implausible or preposterous] given how little evidence there was to support it."
+		// => "The accusation was ${option} given how little evidence there was to support it."
+		// template "A(n) [FIB: anno: mediocre] student is one who neither fails nor excels in any subject."
+		// => "A(n) ${option} student is one who neither fails nor excels in any subject."
+		const regex = /\[FIB: anno: (.*)]/;
+
+		const question = item.replace(regex, option);
 
 		return `<div class="question-questionStem question-questionStem-1-column">
 					<div class="question-stem-content">
