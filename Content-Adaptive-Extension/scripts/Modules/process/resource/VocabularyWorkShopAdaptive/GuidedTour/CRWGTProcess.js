@@ -80,7 +80,7 @@ class CRWGTProcess extends VWAProcess {
 	}
 	getAnswerChoices(row) {
 		const answerChoices = this.getField("Answer Choices", row);
-		return answerChoices ? answerChoices.split(",").map(word => word.trim()).filter(value => Utility.isNotNull(value)) : [];
+		return answerChoices ? answerChoices.split(",").map(word => Utility.removeExtraSpace(word)).filter(value => Utility.isNotNull(value)) : [];
 	}
 
 	getCorrectFeedback(row) {
@@ -146,7 +146,7 @@ class CRWGTProcess extends VWAProcess {
 
 	// ------------------ other ------------------ //
 	toArray(text) {
-		return text ? text.split("\n").map(item => item.replaceAll("\r", "").trim()).filter(value => Utility.isNotNull(value)) : [];
+		return text ? text.split("\n").map(item => Utility.removeExtraSpace(item).replaceAll("\r", "").trim()).filter(value => Utility.isNotNull(value)) : [];
 	}
 
 	getOption(row) {

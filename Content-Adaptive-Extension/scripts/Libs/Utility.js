@@ -199,4 +199,11 @@ class Utility {
     static simplifyString(str) {
         return this.beautifullyHeader(str).replaceAll(" ", "");
     }
+
+
+    static removeExtraSpace(string) {
+        // i want make function for template
+        // template "  dsad a  sada dsad a " => "dsad a sada dsad a"
+        return string.replace(/\s+/g,' ').trim();
+    }
 }
