@@ -236,7 +236,7 @@ class PassageProcess extends VWAProcess {
 
     getFeedback(row) {
         const number = this.getNumberFromItem(row);
-        return number ? JSON.stringify({paragraphs: number}) : '';
+        return number ? JSON.stringify({paragraphId: number}) : null;
     }
 
     getNumberFromItem(row) {
