@@ -30,7 +30,9 @@ class VWAProcess {
             const wordList = second.find(wordList => Utility.equalsWordId(this.getFieldOfRow("WordID", wordList), wordID_1));
             if (wordList === undefined) {
                 this.addError(`Question Content`, `Word ID: ${row["Word ID"]} not found in Word List`);
-                return;
+                return {
+                    ...row,
+                };
             }
             return {
                 ...wordList,
