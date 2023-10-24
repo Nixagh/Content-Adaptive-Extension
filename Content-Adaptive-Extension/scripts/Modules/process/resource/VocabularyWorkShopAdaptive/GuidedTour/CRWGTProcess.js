@@ -23,8 +23,10 @@ class CRWGTProcess extends VWAProcess {
 	getQuestionHTML(row) {
 		const item = this.getItem(row);
 		const option = `<div cid="${this.getCID(row)}" ctype="Drop_Down" qname="a${row + 1}">${this.getOption(row)}</div>`;
-		const replace = `[FIB: anno: ${this.getCorrectAnswerText(row)}]`;
-		const question = item.replace(replace, option);
+
+		const regex = /\[FIB: anno: (.*)]/;
+
+		const question = item.replace(regex, option);
 
 		return `<div class="question-questionStem question-questionStem-1-column">
 					<div class="question-stem-content">
