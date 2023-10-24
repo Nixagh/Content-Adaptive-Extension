@@ -72,11 +72,11 @@ class WordTieProcess extends VWAProcess {
 
     getAnswerChoices(row) {
         const answerChoices = this.getField("Answer Choices", row);
-        const answerChoicesArray = answerChoices.split(";");
+        const answerChoicesArray = Utility.splitStringBySemi(answerChoices);
         if (answerChoicesArray.length === 0 || answerChoicesArray.length !== 4) {
             return alert("Answer Choices is empty or not equal to 4");
         }
-        return answerChoicesArray.map(choice => choice[0] === `"` ? choice.substring(1, choice.length - 1): choice);
+        return answerChoicesArray.map(choice => choice[0] === `"` ? choice.substring(1, choice.length - 1): choice).map(choice => choice.trim());
     }
 
     getCorrectAnswer(row) {
@@ -99,12 +99,7 @@ class WordTieProcess extends VWAProcess {
 
     getCorrectAnswerValue(row) {
         const correctAnswer = this.getField("Correct Answer", row);
-        const correctAnswerArray = correctAnswer.split(";").map(answer => {
-            const _ = answer.trim();
-            if(_[0] === `"` && _[_.length - 1] !== `"`) return `${_}"`;
-            if(_[0] !== `"` && _[_.length - 1] === `"`) return `"${_}`;
-            return _;
-        });
+        const correctAnswerArray = Utility.splitStringBySemi(correctAnswer).map(answer => answer[0] === `"` ? answer.substring(1, answer.length - 1): answer);
         const answerChoices = this.getAnswerChoices(row);
 
         const correctAnswerIndexArray = correctAnswerArray.map(answer => answerChoices.indexOf(answer));
