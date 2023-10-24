@@ -157,7 +157,7 @@ class WordTieProcess extends VWAProcess {
     }
 
     hover(context, wordId) {
-        return context.replace(`<${wordId}>`, `<${wordId}>$${wordId}:`).split("\n").filter(value => value !== "");
+        return context.replace(`<${wordId}>`, `<${wordId}>${wordId}:`).split("\n").filter(value => value !== "");
     }
 
     getCorrectEmoji(row) {
