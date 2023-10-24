@@ -164,7 +164,7 @@ class AdaptivePracticeProcess extends VWAProcess {
 
     getAnswerGoList(row) {
         const answer = this.getFieldOfRow("Answer choices", this.getGoTicketSheet()[row]);
-        return answer.split(";").filter(row => row.length > 0).map(row => row.trim());
+        return Utility.splitStringBySemi(answer).map(row => row.trim());
     }
 
     getCorrectAnswer(row) {
