@@ -227,6 +227,9 @@ class PassageProcess extends VWAProcess {
         answerC = answerC[answerC.length - 1] === ";" ? answerC.substring(0, answerC.length - 1) : answerC;
         answerD = answerD[answerD.length - 1] === ";" ? answerD.substring(0, answerD.length - 1) : answerD;
 
+        if (Utility.isEmpty(answerA) || Utility.isEmpty(answerB) || Utility.isEmpty(answerC) || Utility.isEmpty(answerD))
+            this.addError("Question Content", "Missing answer choice");
+
         return [answerA, answerB, answerC, answerD];
     }
 
@@ -244,7 +247,10 @@ class PassageProcess extends VWAProcess {
 
     getCorrectAnswerValue(row) {
         const correctAnswer = this.getExactlyField("Item Correct Answer", row);
-        return correctAnswer.split(".")[0].trim().toLowerCase();
+        const regex = /[abcd]\. .[^.](.*)/;
+        const match = correctAnswer.match(regex);
+        const answer = match ? match[0] : "";
+        return answer.split(".")[0].trim().toLowerCase();
     }
 
     getCorrectTextHTML(row) {
