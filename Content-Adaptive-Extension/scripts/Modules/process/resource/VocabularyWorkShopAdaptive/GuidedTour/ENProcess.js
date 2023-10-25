@@ -98,7 +98,7 @@ class ENProcess extends VWAProcess {
 										<div class="example">${this.getExampleColumnDirectionPOPUP(row)}</div>
 											<div class="neither">${this.getNeitherColumnDirectionPOPUP(row)}</div>
 												<div class="question">
-													<div cid="${this.getCID(row)}" ctype="Drag_n_Drop_Adaptive" evalsourceanswers="false" framesize="" initcount="" layout="fixed_layout" multipledrag="false" multipledrop="false" printtype="Write_on_Line" qname="a${parseInt(row)}" removeitemafterdrag="false" subtype="">
+													<div cid="${this.getCID(row)}" ctype="Drag_n_Drop_Adaptive" evalsourceanswers="false" framesize="" initcount="" layout="fixed_layout" multipledrag="false" multipledrop="false" printtype="Write_on_Line" qname="a${parseInt(row) + 1}" removeitemafterdrag="false" subtype="">
 													<div style="text-align:left" subid="sourceItems">
 													<div idx="1">${this.getItem(row, 1)}</div>
 													<div idx="2">${this.getItem(row, 2)}</div>
