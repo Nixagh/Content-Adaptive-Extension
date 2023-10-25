@@ -208,7 +208,7 @@ class AdaptivePracticeProcess extends VWAProcess {
 
     getCorrectAnswerValueOfSetA(row) {
         const options = this.getOptions();
-        const correctAnswer = this.getExactlyFieldOfRow("Correct Answer", row);
+        const correctAnswer = this.getExactlyField("Correct Answer", row);
         return options.find(option => option.value === correctAnswer).itemid;
     }
 
@@ -236,11 +236,18 @@ class AdaptivePracticeProcess extends VWAProcess {
         const newRowValue = row % 12;
         const incorrectFeedback = row > 11 ? this.getField("Adaptive Item Incorrect Feedback", newRowValue) : this.getField("Incorrect Feedback", newRowValue);
         const replaceValue = '<b>{0}</b>';
-
-        const firstIndex = incorrectFeedback.indexOf("[");
-        const lastIndex = incorrectFeedback.indexOf("]");
-        const word = incorrectFeedback.substring(firstIndex + 1, lastIndex);
-        return this.toArray(incorrectFeedback.replace(`[${word}]`, replaceValue));
+        const regex = /\[(.*)[\]|>]/g;
+        const matches = incorrectFeedback.match(regex);
+        if (matches) {
+            const replaceSearch = matches[0];
+            return this.toArray(incorrectFeedback.replace(replaceSearch, replaceValue));
+        }
+        this.addError("Incorrect Feedback", `Row ${row + 1} must have [Insert incorrect chosen]`);
+        return this.toArray(incorrectFeedback);
+        // const firstIndex = incorrectFeedback.indexOf("[");
+        // const lastIndex = incorrectFeedback.indexOf("]");
+        // const word = incorrectFeedback.substring(firstIndex + 1, lastIndex);
+        // return this.toArray(incorrectFeedback.replace(`[${word}]`, replaceValue));
     }
 
     getCorrectEmoji(row) {
