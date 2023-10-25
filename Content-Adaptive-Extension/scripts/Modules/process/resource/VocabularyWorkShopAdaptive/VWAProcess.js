@@ -399,9 +399,9 @@ class VWAProcess {
     showErrors() {
         if (this.errors.length) {
             alert(this.errors.map(error => `${error.tab}: ${error.message}`).join("\n"));
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     passageConverter(content) {

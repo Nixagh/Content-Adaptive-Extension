@@ -211,10 +211,10 @@ class PassageProcess extends VWAProcess {
     getItemChoicesList(row) {
         const itemChoices = this.getExactlyField("Item Choices", row);
 
-        const indexOfAnswerA = itemChoices.indexOf("a.");
-        const indexOfAnswerB = itemChoices.indexOf("b.");
-        const indexOfAnswerC = itemChoices.indexOf("c.");
-        const indexOfAnswerD = itemChoices.indexOf("d.");
+        const indexOfAnswerA = itemChoices.indexOf("a. ");
+        const indexOfAnswerB = itemChoices.indexOf("b. ");
+        const indexOfAnswerC = itemChoices.indexOf("c. ");
+        const indexOfAnswerD = itemChoices.indexOf("d. ");
 
         let answerA = itemChoices.substring(indexOfAnswerA, indexOfAnswerB).trim();
         let answerB = itemChoices.substring(indexOfAnswerB, indexOfAnswerC).trim();
@@ -226,6 +226,11 @@ class PassageProcess extends VWAProcess {
         answerB = answerB[answerB.length - 1] === ";" ? answerB.substring(0, answerB.length - 1) : answerB;
         answerC = answerC[answerC.length - 1] === ";" ? answerC.substring(0, answerC.length - 1) : answerC;
         answerD = answerD[answerD.length - 1] === ";" ? answerD.substring(0, answerD.length - 1) : answerD;
+
+        answerA = answerA.replaceAll("a.", "").trim();
+        answerB = answerB.replaceAll("b.", "").trim();
+        answerC = answerC.replaceAll("c.", "").trim();
+        answerD = answerD.replaceAll("d.", "").trim();
 
         if (Utility.isEmpty(answerA) || Utility.isEmpty(answerB) || Utility.isEmpty(answerC) || Utility.isEmpty(answerD))
             this.addError("Question Content", "Missing answer choice");
