@@ -200,10 +200,25 @@ class Utility {
         return this.beautifullyHeader(str).replaceAll(" ", "");
     }
 
+    static removeSpecialCharacter(string) {
+        return string.replaceAll(/\r/g, "").replaceAll(/\t/g, "");
+    }
+
 
     static removeExtraSpace(string) {
         // i want make function for template
         // template "  dsad a  sada dsad a " => "dsad a sada dsad a"
         return string.replace(/\s+/g,' ').trim();
+    }
+
+    static splitStringBySemi(string) {
+        return this.splitStringBySpecialCharacter(string, ";");
+    }
+
+    static splitStringBySpecialCharacter(string, character) {
+        const split = string.split(character);
+        const removeExtraSpace = split.map((value) => this.removeExtraSpace(value));
+        const removeSpecialCharacter = removeExtraSpace.map((value) => this.removeSpecialCharacter(value));
+        return removeSpecialCharacter.filter((value) => this.isNotNull(value));
     }
 }
