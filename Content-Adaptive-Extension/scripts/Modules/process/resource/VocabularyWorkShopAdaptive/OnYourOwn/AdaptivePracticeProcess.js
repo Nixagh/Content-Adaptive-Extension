@@ -164,7 +164,10 @@ class AdaptivePracticeProcess extends VWAProcess {
 
     getAnswerGoList(row) {
         const answer = this.getFieldOfRow("Answer choices", this.getGoTicketSheet()[row]);
-        return Utility.splitStringBySemi(answer).map(row => row.trim());
+        const options = Utility.splitStringBySemi(answer).map(row => row.trim());
+        if (options.length === 0) this.addError(`Question Content`, `Answer choices: Row ${row + 1} is empty`);
+        if (options.length !== 4) this.addError(`Question Content`, `Answer choices: Row ${row + 1} must have 4 options`);
+        return options;
     }
 
     getCorrectAnswer(row) {
@@ -193,14 +196,14 @@ class AdaptivePracticeProcess extends VWAProcess {
     getCorrectAnswerValueOfGo(row) {
         const options = this.getAnswerGoList(row);
         const correctAnswer = this.getFieldOfRow("Correct Answer", this.getGoTicketSheet()[row]);
-        return String.fromCharCode(97 + options.indexOf(correctAnswer.replaceAll(`"`, "").trim()));
+        return String.fromCharCode(97 + options.indexOf(correctAnswer.trim()));
     }
 
     getCorrectAnswerValueOfSetB(row) {
         const data = this.getField("Adaptive Item Answer Choices", row);
-        const options = data.split(";").filter(row => row.length > 0).map(row => row.trim());
+        const options = Utility.splitStringBySemi(data).map(row => row.trim());
         const correctAnswer = this.getExactlyField("Adaptive Item Correct Answer", row);
-        return String.fromCharCode(97 + options.indexOf(correctAnswer.replaceAll(`"`, "").trim()));
+        return String.fromCharCode(97 + options.indexOf(correctAnswer.trim()));
     }
 
     getCorrectAnswerValueOfSetA(row) {

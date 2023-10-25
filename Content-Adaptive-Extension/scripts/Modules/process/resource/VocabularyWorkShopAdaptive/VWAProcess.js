@@ -62,7 +62,7 @@ class VWAProcess {
         if (this.setTab[3]) this.setFeedback(row);
 
         console.log(`Insert Vocabulary Word Adaptive, resource: ${VWAResource[this.type].value}`);
-        this.showErrors();
+        return this.showErrors();
     }
 
     getRow() {
@@ -397,7 +397,11 @@ class VWAProcess {
     }
 
     showErrors() {
-        if (this.errors.length) alert(this.errors.map(error => `${error.tab}: ${error.message}`).join("\n"));
+        if (this.errors.length) {
+            alert(this.errors.map(error => `${error.tab}: ${error.message}`).join("\n"));
+            return true;
+        }
+        return false;
     }
 
     passageConverter(content) {

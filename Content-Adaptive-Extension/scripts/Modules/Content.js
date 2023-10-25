@@ -65,7 +65,9 @@ class OptionContent {
 
 		UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.insertAndSave}`, async () => {
 			if (!GProcess) return alert("No file loaded");
-			OptionContent.insert().then(() => document.getElementById(Ids.saveBtn).click());
+			OptionContent.insert().then((result) => {
+				if (result) document.getElementById(Ids.saveBtn).click()
+			});
 		})
 
 		UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "onload", `#${Ids.globalResourceId}`, async () => {
@@ -106,10 +108,10 @@ class OptionContent {
 		const totalLine = $(`#${Ids.totalLine}`).text();
 		// if (parseInt(totalLine) < +questionNumber) return alert("Đã hết dữ liệu");
 
-		const process = JSON.parse(Storage.Get("GProcess"));
-		await GProcess.insert();
+		const error = await GProcess.insert();
 		Storage.Set("currentCode", $(`#${Ids.globalResourceId}`).val());
 		Storage.Set("CurrentQuestionNumber", questionNumber);
+		return error;
 	}
 
 	static getOptionsModalInnerHtml() {

@@ -210,7 +210,24 @@ class PassageProcess extends VWAProcess {
 
     getItemChoicesList(row) {
         const itemChoices = this.getExactlyField("Item Choices", row);
-        return itemChoices.split(";").map((item) => item.split(".")[1].trim());
+
+        const indexOfAnswerA = itemChoices.indexOf("a.");
+        const indexOfAnswerB = itemChoices.indexOf("b.");
+        const indexOfAnswerC = itemChoices.indexOf("c.");
+        const indexOfAnswerD = itemChoices.indexOf("d.");
+
+        let answerA = itemChoices.substring(indexOfAnswerA, indexOfAnswerB).trim();
+        let answerB = itemChoices.substring(indexOfAnswerB, indexOfAnswerC).trim();
+        let answerC = itemChoices.substring(indexOfAnswerC, indexOfAnswerD).trim();
+        let answerD = itemChoices.substring(indexOfAnswerD).trim();
+
+        // if last element of answer === ";" => remove it
+        answerA = answerA[answerA.length - 1] === ";" ? answerA.substring(0, answerA.length - 1) : answerA;
+        answerB = answerB[answerB.length - 1] === ";" ? answerB.substring(0, answerB.length - 1) : answerB;
+        answerC = answerC[answerC.length - 1] === ";" ? answerC.substring(0, answerC.length - 1) : answerC;
+        answerD = answerD[answerD.length - 1] === ";" ? answerD.substring(0, answerD.length - 1) : answerD;
+
+        return [answerA, answerB, answerC, answerD];
     }
 
     getCorrectAnswer(row) {
