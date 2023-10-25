@@ -188,7 +188,7 @@ class PassageProcess extends VWAProcess {
     getQuestionHTML(row) {
         return `<div class="question-questionStem question-questionStem-1-column">
                     <div class="question-stem-content">
-                        ${row < 2 ? `<div className="part-label">Part ${row === 0 ? 'A' : 'B'}</div>` : ''}
+                        ${row < 2 ? `<div class="part-label">Part ${row === 0 ? 'A' : 'B'}</div>` : ''}
                         <div class="question">${this.getItem(row)}
                             <div cid="${this.getCID(row)}" ctype="MultipleChoice" layout="Vertical" qname="a${row + 1}" showlabel="true" subtype="MC">
                                 ${this.getOptionsHTML(row)}
