@@ -244,10 +244,6 @@ class AdaptivePracticeProcess extends VWAProcess {
         }
         this.addError("Incorrect Feedback", `Row ${row + 1} must have [Insert incorrect chosen]`);
         return this.toArray(incorrectFeedback);
-        // const firstIndex = incorrectFeedback.indexOf("[");
-        // const lastIndex = incorrectFeedback.indexOf("]");
-        // const word = incorrectFeedback.substring(firstIndex + 1, lastIndex);
-        // return this.toArray(incorrectFeedback.replace(`[${word}]`, replaceValue));
     }
 
     getCorrectEmoji(row) {
