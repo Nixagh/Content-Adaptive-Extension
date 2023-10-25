@@ -66,7 +66,7 @@ class WordTieProcess extends VWAProcess {
 
     getOptionHTML(row) {
         const answerChoices = this.getAnswerChoices(row);
-        return answerChoices.map((choice, index) => `<div itemid="${String.fromCharCode(index + 97)}" itemlabel="">${choice.replace(`"`, "").trim()}</div>`)
+        return answerChoices.map((choice, index) => `<div itemid="${String.fromCharCode(index + 97)}" itemlabel="">${choice.trim()}</div>`)
             .join("");
     }
 
@@ -74,9 +74,9 @@ class WordTieProcess extends VWAProcess {
         const answerChoices = this.getField("Answer Choices", row);
         const answerChoicesArray = Utility.splitStringBySemi(answerChoices);
         if (answerChoicesArray.length === 0 || answerChoicesArray.length !== 4) {
-            return alert("Answer Choices is empty or not equal to 4");
+            this.addError("Question Content", "Answer Choices must be 4");
         }
-        return answerChoicesArray.map(choice => choice[0] === `"` ? choice.substring(1, choice.length - 1): choice).map(choice => choice.trim());
+        return answerChoicesArray;
     }
 
     getCorrectAnswer(row) {
@@ -99,12 +99,17 @@ class WordTieProcess extends VWAProcess {
 
     getCorrectAnswerValue(row) {
         const correctAnswer = this.getField("Correct Answer", row);
-        const correctAnswerArray = Utility.splitStringBySemi(correctAnswer).map(answer => answer[0] === `"` ? answer.substring(1, answer.length - 1): answer);
+        const correctAnswerArray = Utility.splitStringBySemi(correctAnswer);
         const answerChoices = this.getAnswerChoices(row);
 
-        const correctAnswerIndexArray = correctAnswerArray.map(answer => answerChoices.indexOf(answer));
-
-        return correctAnswerIndexArray.map(index => String.fromCharCode(index + 97)).join(",");
+        const index = [];
+        correctAnswerArray.forEach((value) => {
+            const indexOf = answerChoices.indexOf(value);
+            if (indexOf !== -1) {
+                index.push(String.fromCharCode(indexOf + 97));
+            }
+        });
+        return index.join(",");
     }
 
     getFeedback(row) {
