@@ -116,9 +116,12 @@ class CRWGTProcess extends VWAProcess {
 
 	replaceCorrectFeedback(correctFeedback) {
 		correctFeedback = correctFeedback.replaceAll("[", "").replaceAll("]", "");
-		const firstIndex = correctFeedback.indexOf("<b>");
-		const lastIndex = correctFeedback.lastIndexOf("</b>");
-		const word = correctFeedback.substring(firstIndex + 3, lastIndex);
+
+		const regex = /<b>(.*)<(\/|)b>/;
+
+		const match = correctFeedback.match(regex);
+		const word = match ? match[0].replaceAll(/<b>|<\/b>/g, "") : "";
+
 		const wordId = this.getWordIdFromWordList(word).trim();
 		if (!wordId) this.addError(`FeedBack`, `Correct Feed Back wrong "${word}" can't find wordID in word list`);
 
@@ -141,12 +144,9 @@ class CRWGTProcess extends VWAProcess {
 	}
 
 	replaceIncorrectFeedback(incorrectFeedback) {
-		incorrectFeedback = incorrectFeedback.replaceAll("[", "").replaceAll("]", "");
-		const firstIndex = incorrectFeedback.indexOf("<b>");
-		const lastIndex = incorrectFeedback.lastIndexOf("</b>");
-		const replace = incorrectFeedback.substring(firstIndex, lastIndex + 4);
+		const regex = /(\[|)<(\/|)b>(.*)<(\/|)b>(\[|)/g;
 		const replaceBy = `<b>{0}</b>`;
-		return incorrectFeedback.replace(replace, replaceBy).trim();
+		return incorrectFeedback.replace(regex, replaceBy).trim();
 	}
 
 	getCorrectEmoji() {
