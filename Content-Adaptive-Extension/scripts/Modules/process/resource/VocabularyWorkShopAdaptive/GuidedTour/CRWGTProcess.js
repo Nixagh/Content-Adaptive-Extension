@@ -119,7 +119,7 @@ class CRWGTProcess extends VWAProcess {
 		const firstIndex = correctFeedback.indexOf("<b>");
 		const lastIndex = correctFeedback.lastIndexOf("</b>");
 		const word = correctFeedback.substring(firstIndex + 3, lastIndex);
-		const wordId = this.getWordIdFromWordList(word);
+		const wordId = this.getWordIdFromWordList(word).trim();
 		if (!wordId) this.addError(`FeedBack`, `Correct Feed Back wrong "${word}" can't find wordID in word list`);
 
 		const replaceValue = `<${wordId}>${wordId}:${word}</${wordId}>`;
