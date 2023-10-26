@@ -16,6 +16,28 @@ class CRWGTProcess extends VWAProcess {
 		return this.getContent(crwSheet, crwHeader);
 	}
 
+	getComponentScoreRules(row) {
+		//{"test":null,"scoringGroups":[{"componentGradingRules":[{"802906_GT_CTRW_u01_q01_ans01,"componentType":"Drop_Down","componentSubtype":null,"autoScore":true,"rubricRule":null}],"maxScore":1}]}
+		const componentScoreRules = {
+			test: null,
+			scoringGroups: [
+				{
+					componentGradingRules: [
+						{
+							id: `${this.getCID(row)}`,
+							componentType: "Drop_Down",
+							componentSubtype: null,
+							autoScore: true,
+							rubricRule: null
+						}
+					],
+					maxScore: this.getMaxScore()
+				}
+			]
+		}
+		return JSON.stringify(componentScoreRules);
+	}
+
 	getDirectionLineHTML(row) {
 		return this.getField("Direction Line", 0);
 	}
