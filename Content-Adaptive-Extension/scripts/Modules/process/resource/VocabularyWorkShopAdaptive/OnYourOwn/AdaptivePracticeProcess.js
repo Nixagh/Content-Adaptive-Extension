@@ -75,7 +75,7 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getDirectionLineHTMLOfGo(row) {
-        return this.getFieldOfRow("Direction Line", this.getGoTicketSheet()[row]);
+        return this.getFieldOfRow("Direction Line", this.getGoTicketSheet()[0]);
     }
 
     getSetType(row) {
@@ -133,6 +133,8 @@ class AdaptivePracticeProcess extends VWAProcess {
 
     getOptionsHTML() {
         const data = this.getOptions();
+        if (data.length === 0) this.addError(`Question Content`, `Options: Row ${row + 1} is empty`);
+        if (data.length !== 12) this.addError(`Question Content`, `Options: Row ${row + 1} must have 12 options`);
         return data.map(row => `<div itemid="${row.itemid}" itemlabel="" word="${row.word}">${row.value}</div>`).join('');
     }
 
@@ -157,8 +159,6 @@ class AdaptivePracticeProcess extends VWAProcess {
 
     getOptionsHTMLOfGo(row) {
         const options = this.getAnswerGoList(row);
-        if (options.length === 0) this.addError(`Question Content`, `Answer choices: Row ${row + 1} is empty`);
-        if (options.length !== 4) this.addError(`Question Content`, `Answer choices: Row ${row + 1} must have 4 options`);
         return options.map((option, index) => `<div itemid="${String.fromCharCode(97 + index)}" itemlabel="">${option}</div>`).join('');
     }
 
