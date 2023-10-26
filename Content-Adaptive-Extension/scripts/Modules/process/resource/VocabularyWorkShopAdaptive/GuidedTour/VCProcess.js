@@ -33,7 +33,7 @@ class VCProcess extends VWAProcess {
 
     removeOtherField(word) {
         for (let i = 1; i <= 6; i++) {
-            if (word[`Item ${i}`].includes(word["Word"])) {
+            if (word[`Item ${i} Incorrect Feedback 1`].includes(word["WordID"])) {
                 word[`Item`] = word[`Item ${i}`];
                 word[`Item Standard`] = word[`Item ${i} Standard`];
                 word[`Item Answer Choices`] = word[`Item ${i} Answer Choices`];
