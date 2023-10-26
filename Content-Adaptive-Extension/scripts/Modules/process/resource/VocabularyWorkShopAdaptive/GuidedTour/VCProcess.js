@@ -303,6 +303,8 @@ class VCProcess extends VWAProcess {
     }
 
     getStandard(row) {
-        return this.getField("Item Standard", row).split("\n").join(",");
+        const standard = this.getField("Item Standard", row);
+        if (!standard) this.addError(`Standard`, `Standard is empty at row ${row + 1}`);
+        return standard;
     }
 }
