@@ -33,7 +33,19 @@ class VCProcess extends VWAProcess {
 
     removeOtherField(word) {
         for (let i = 1; i <= 6; i++) {
-            if (word[`Item ${i} Incorrect Feedback 1`].includes(word["WordID"])) {
+            const _word = word[`Word`].toLowerCase().trim();
+            const wordIDs = this.getWordListSheet().filter(wordList => wordList["Word"].toLowerCase().trim() === _word).map(item => item["WordID"]);
+            const onWord = word[`Item ${i}`].includes(word[`Word`]);
+            const CorrectFeedback= word[`Item ${i} Correct Feedback`] || word[`Item ${i} Correct Answer Feedback`];
+            const onCorrectFeedback = wordIDs.map(wordID => CorrectFeedback.includes(wordID));
+            const onIncorrectFeedback1 = wordIDs.map(wordID => word[`Item ${i} Incorrect Feedback 1`].includes(wordID));
+            const onIncorrectFeedback2 = wordIDs.map(wordID => word[`Item ${i} Incorrect Feedback 2`].includes(wordID));
+
+            if (onWord
+                || onCorrectFeedback.reduce((x, y) => x || y)
+                || onIncorrectFeedback1.reduce((x, y) => x || y)
+                || onIncorrectFeedback2.reduce((x, y) => x || y)
+            ) {
                 word[`Item`] = word[`Item ${i}`];
                 word[`Item Standard`] = word[`Item ${i} Standard`];
                 word[`Item Answer Choices`] = word[`Item ${i} Answer Choices`];
@@ -227,9 +239,13 @@ class VCProcess extends VWAProcess {
 
     replaceCorrectFeedback(value, row) {
         const wordId = this.getWordIdSpecial(row);
-        return value.replace(`<b>`, `<${wordId}>${wordId}:`)
-            .replace(`</b>`, `</${wordId}>`)
-            .replace(`<b>`, `</${wordId}>`)
+
+        const regex = /<(\/|)b>.*<(\/|)b>/g;
+        const match = value.match(regex);
+        const word = match ? match[0].replaceAll(/<(\/|)b>/g, "") : "";
+        const replaceValue = `<${wordId}>${wordId}:${word}</${wordId}>`;
+
+        return value.replace(regex, replaceValue)
             .replaceAll(`“`, `"`)
             .replaceAll(`”`, `"`)
             .trim();
@@ -261,21 +277,11 @@ class VCProcess extends VWAProcess {
     }
 
     getParagraphId(row) {
-        const word = this.getWord(row);
-        const passageBody = this.getPassageBody(row).split("\n");
-
-        const regex = /<paragraph id = \d+>/;
-        const orRegex = /<paragraph = \d+>/;
-
-        const wordInPassage = passageBody.find(value => value.toLowerCase().includes(word));
-
-        const match = wordInPassage.match(regex)
-        const orMatch = wordInPassage.match(orRegex);
-
+        const item = this.getItem(row);
+        const regex = /paragraph \d+/g;
+        const match = item.match(regex);
         const numberRegex = /\d+/;
-
-        const number = match ? match[0].match(numberRegex)[0] : orMatch ? orMatch[0].match(numberRegex)[0] : -1;
-
+        const number = match ? match[0].match(numberRegex)[0] : -1;
         return parseInt(number);
     }
 
@@ -289,7 +295,14 @@ class VCProcess extends VWAProcess {
 
     replaceFeedback(value, row) {
         const wordId = this.getWordIdSpecial(row);
-        return value.replace(`<${wordId}>`, `<${wordId}>${wordId}:`)
+
+        const regex = /<(b|word(\d+))>[^$](.*)<(\/)(b|word(\d+))>/g
+        const match = value.match(regex);
+        const word = match ? match[0].replaceAll(/<(\/|)(b|word(\d+))>/g, "") : "";
+        const replaceValue = `<${wordId}>${wordId}:${word}</${wordId}>`;
+
+        return value
+            .replace(regex, replaceValue)
             .replaceAll(`“`, `"`)
             .replaceAll(`”`, `"`);
     }
