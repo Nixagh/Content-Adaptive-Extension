@@ -171,12 +171,12 @@ class PassageProcess extends VWAProcess {
             .replaceAll(".jpg", "")
             .trim();
 
-        const title = passageSummaryText.split("\n")[0]
-            .replaceAll(`<title>`, '')
-            .replaceAll(`</title>`, '')
-            .replaceAll(`“`, `"`)
-            .trim();
-        const content = passageSummaryText.split("\n").slice(1).join("\n").trim();
+        const regex = /<title>(.*)<(\/|)title>/;
+        const match = passageSummaryText.match(regex);
+        // get group 0
+        const title = match
+            ? match[0].replaceAll(/<title>|<\/title>/g, "").trim()
+            : "";
 
         return `<div class="select-page" resourcelevel="true">
                     <div class="sp-cover"><img alt="" src="/cms/repository/cms/images2020/${image}.jpg" /></div>

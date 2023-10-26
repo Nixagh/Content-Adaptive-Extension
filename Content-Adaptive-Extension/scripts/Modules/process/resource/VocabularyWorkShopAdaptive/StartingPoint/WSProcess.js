@@ -148,6 +148,8 @@ class WSProcess extends VWAProcess {
 	getSecondExample(row) {
 		let secondExample = this.getField("Sample Sentence 2", row);
 		// secondExample = this.beautifulParagraph(secondExample);
+		if (secondExample && secondExample.startsWith("or ")) secondExample = secondExample.substring(3);
+
 		return this.exampleReplace(secondExample);
 	}
 

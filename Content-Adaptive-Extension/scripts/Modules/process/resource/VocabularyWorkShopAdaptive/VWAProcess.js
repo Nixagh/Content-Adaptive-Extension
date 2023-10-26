@@ -201,7 +201,9 @@ class VWAProcess {
     }
 
     getStandard(row) {
-        return this.getField("Standard", row);
+        const standard = this.getField("Standard", row);
+        if (!standard) this.addError("Question", `Can't find Standard in row ${row + 1}`);
+        return standard;
     }
 
     getQuestionTypeSelect() {
