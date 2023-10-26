@@ -117,20 +117,16 @@ class CRWGTProcess extends VWAProcess {
 	replaceCorrectFeedback(correctFeedback) {
 		correctFeedback = correctFeedback.replaceAll("[", "").replaceAll("]", "");
 
-		const regex = /<b>(.*)<(\/|)b>/;
+		const regex = /<(\/|)b>(.*)<(\/|)b>/g;
 
 		const match = correctFeedback.match(regex);
-		const word = match ? match[0].replaceAll(/<b>|<\/b>/g, "") : "";
+		const word = match ? match[0].replaceAll(/<b>|<\/b>/g, "").trim() : "";
 
 		const wordId = this.getWordIdFromWordList(word).trim();
 		if (!wordId) this.addError(`FeedBack`, `Correct Feed Back wrong "${word}" can't find wordID in word list`);
 
 		const replaceValue = `<${wordId}>${wordId}:${word}</${wordId}>`;
-
-		const step1 = correctFeedback.replace(`<b>${word}</b>`, replaceValue);
-		if(!step1.includes("<b>")) return step1.trim();
-
-		return correctFeedback.replace(`<b>${word}<b>`, replaceValue);
+		return correctFeedback.replace(regex, replaceValue);
 	}
 
 	getIncorrectFeedback1(row) {
