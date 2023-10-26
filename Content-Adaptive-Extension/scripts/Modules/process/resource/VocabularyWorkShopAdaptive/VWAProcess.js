@@ -134,7 +134,7 @@ class VWAProcess {
         const passageSummary = new Cke("cke_3_contents");
         const choosePassage = document.querySelectorAll("#questionTypeSelection")[1];
         // const scramble = new BasicInput("scrambleCheckbox");
-        const  choicePassageCheckBox = new BasicInput("choicePassageCheckbox");
+        const choicePassageCheckBox = new BasicInput("choicePassageCheckbox");
 
         if (row !== 0) {
             choosePassage.value = choosePassage.options[1].value;
@@ -472,5 +472,47 @@ class VWAProcess {
         // remove <label></label>
         const regex_ = /<label>(.*?)<\/label>/;
         return item.match(regex_) ? item.replaceAll(item.match(regex_)[0], '').trim() : item.trim();
+    }
+
+    passageConverterV02(content) {
+        const f_regex = /<paragraph (id|)( |)=( |)(\d+)>/g;
+        const l_regex = /<\/paragraph (id|)( |)=( |)(\d+)>/g;
+
+        const word_regex = /<word(\d+)>/g;
+
+        const title_regex = /<title>.*<(\/|)title>/g;
+
+        content = content
+            .replace(title_regex, "")                                   // remove title tag
+            .replaceAll(/<bullet>/g, "<li>")                            // replace <bullet> tag to <li> tag
+            .replaceAll(/<\/bullet>/g, "</li>")   // replace </bullet> tag to </li> tag
+            .replaceAll(/[“”]/g, '"')             // replace “ or ” to "
+
+        // add <ul> tag before first <li> tag
+        const firstLiIndex = content.indexOf("<li>");
+        const passageBodyWithUl = firstLiIndex !== -1 ? content.slice(0, firstLiIndex) + "<ul>" + content.slice(firstLiIndex) : content;
+        // add </ul> tag after last <li> tag
+        const lastLiIndex = passageBodyWithUl.lastIndexOf("</li>");
+        const passageBodyWithUlAndLi = lastLiIndex !== -1 ? passageBodyWithUl.slice(0, lastLiIndex) + "</ul>" + passageBodyWithUl.slice(lastLiIndex) : passageBodyWithUl;
+
+        // replace <paragraph id=0> to <div class="paragraph" id="0">
+        const replaceDiv = (match) => {
+            const regexNumber = /\d+/;
+            const matchNumber = match.match(regexNumber);
+            const paragraphId = matchNumber ? matchNumber[0] : '';
+            return `<div class="paragraph" id="${paragraphId}">`;
+        }
+
+        // replace <word3186>inanimate</word3186> to <word3186>word3186:inanimate</word3186>
+        const replaceWord = (match) => {
+            const regexNumber = /\d+/;
+            const matchNumber = match.match(regexNumber);
+            const wordId = matchNumber ? matchNumber[0] : '';
+            return `<word${wordId}>word${wordId}:`;
+        }
+
+        return passageBodyWithUlAndLi.replaceAll(f_regex, replaceDiv) // replace <paragraph id=0> to <div class="paragraph" id="0">
+            .replaceAll(l_regex, "</div>")  // replace </paragraph> tag to </div> tag
+            .replaceAll(word_regex, replaceWord); // replace <word3186>inanimate</word3186> to <word3186>word3186:inanimate</word3186>
     }
 }

@@ -158,8 +158,8 @@ class PassageProcess extends VWAProcess {
     }
 
     getPassageContentHTML(row) {
-        const passageBody = this.getPassageBody(row).split("\n").slice(1).join("\n");
-        return this.passageConverter(passageBody);
+        const passageBody = this.getPassageBody(row);
+        return this.passageConverterV02(passageBody);
     }
 
     getPassageSummaryText(row) {
@@ -171,12 +171,14 @@ class PassageProcess extends VWAProcess {
             .replaceAll(".jpg", "")
             .trim();
 
-        const regex = /<title>(.*)<(\/|)title>/;
+        const regex = /<title>(.*)<(\/|)title>/g;
         const match = passageSummaryText.match(regex);
         // get group 0
         const title = match
             ? match[0].replaceAll(/<title>|<\/title>/g, "").trim()
             : "";
+
+        const content = passageSummaryText.replaceAll(regex, "").trim();
 
         return `<div class="select-page" resourcelevel="true">
                     <div class="sp-cover"><img alt="" src="/cms/repository/cms/images2020/${image}.jpg" /></div>
