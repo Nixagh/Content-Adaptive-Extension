@@ -238,17 +238,7 @@ class VCProcess extends VWAProcess {
     }
 
     replaceCorrectFeedback(value, row) {
-        const wordId = this.getWordIdSpecial(row);
-
-        const regex = /<(\/|)b>.*<(\/|)b>/g;
-        const match = value.match(regex);
-        const word = match ? match[0].replaceAll(/<(\/|)b>/g, "") : "";
-        const replaceValue = `<${wordId}>${wordId}:${word}</${wordId}>`;
-
-        return value.replace(regex, replaceValue)
-            .replaceAll(`“`, `"`)
-            .replaceAll(`”`, `"`)
-            .trim();
+        return this.replaceFeedback(value, row);
     }
 
     getIncorrectFeedback1(row) {
@@ -303,8 +293,8 @@ class VCProcess extends VWAProcess {
 
         return value
             .replace(regex, replaceValue)
-            .replaceAll(`“`, `"`)
-            .replaceAll(`”`, `"`);
+            .replaceAll(/[“|”]/g, `"`)
+            .trim();
     }
 
     getWordIdSpecial(row) {
