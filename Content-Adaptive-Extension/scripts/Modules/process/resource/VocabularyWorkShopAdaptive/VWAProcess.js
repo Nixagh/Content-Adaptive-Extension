@@ -478,7 +478,7 @@ class VWAProcess {
         const f_regex = /<paragraph (id|)( |)=( |)(\d+)>/g;
         const l_regex = /<\/paragraph (id|)( |)=( |)(\d+)>/g;
 
-        const word_regex = /<word(\d+)>/g;
+        const word_regex = /<word(\d+)>.+?<(\/|)word(\d+)>/g;
 
         const title_regex = /<title>.*<(\/|)title>/g;
 
@@ -508,7 +508,8 @@ class VWAProcess {
             const regexNumber = /\d+/;
             const matchNumber = match.match(regexNumber);
             const wordId = matchNumber ? matchNumber[0] : '';
-            return `<word${wordId}>word${wordId}:`;
+            const word = match.replaceAll(/<(\/|)word\d+>/g, '').trim();
+            return `<word${wordId}>word${wordId}:${word}</word${wordId}>`;
         }
 
         return passageBodyWithUlAndLi.replaceAll(f_regex, replaceDiv) // replace <paragraph id=0> to <div class="paragraph" id="0">
