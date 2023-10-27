@@ -296,7 +296,7 @@ class VCProcess extends VWAProcess {
     replaceFeedback(value, row) {
         const wordId = this.getWordIdSpecial(row);
 
-        const regex = /<(b|word(\d+))>[^$](.*)<(\/)(b|word(\d+))>/g
+        const regex = /<(b|word(\d+))>.*?<(\/)(b|word(\d+))>/g
         const match = value.match(regex);
         const word = match ? match[0].replaceAll(/<(\/|)(b|word(\d+))>/g, "") : "";
         const replaceValue = `<${wordId}>${wordId}:${word}</${wordId}>`;
