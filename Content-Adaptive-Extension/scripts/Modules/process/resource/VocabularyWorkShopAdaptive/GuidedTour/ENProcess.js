@@ -228,7 +228,7 @@ class ENProcess extends VWAProcess {
 	}
 
 	updateFeedback1(incorrectFeedback1, wordId) {
-		const regex = /<((?<wordId>word\d+)|b)>(?<word>.+?)<(\/|)(word\d+|b)>/g
+		const regex = /<((?<wordId1>(word|)\d+)|b)>(?<word>.+?)<(\/|)((?<wordId2>(word|)\d+)|b)>/g
 
 		const match = incorrectFeedback1.match(regex);
 
@@ -236,8 +236,12 @@ class ENProcess extends VWAProcess {
 
 		const execute = regex.exec(incorrectFeedback1);
 
-		const __ = execute.groups.wordId;
-		const _wordId = __ || wordId;
+		const wordId1 = execute.groups.wordId1;
+		const wordId2 = execute.groups.wordId2;
+
+		if(wordId1 !== wordId2) this.addError("Incorrect Feedback", "Word ID is not match");
+
+		const _wordId = wordId1 || wordId;
 		const word = execute.groups.word;
 
 		return incorrectFeedback1.replace(regex, `<${_wordId}>${_wordId}:${word}</${_wordId}>`).trim();
