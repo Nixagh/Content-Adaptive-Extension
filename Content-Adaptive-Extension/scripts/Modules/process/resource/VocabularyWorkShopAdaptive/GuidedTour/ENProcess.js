@@ -228,12 +228,19 @@ class ENProcess extends VWAProcess {
 	}
 
 	updateFeedback1(incorrectFeedback1, wordId) {
-		const _ = `<b>`;
-		const replace = `<${wordId}>`;
-		let step1 = incorrectFeedback1.replace(_, `${replace}${wordId}:`);
-		if (step1.includes(`<b>`)) step1 = step1.replace(`<b>`, `</${wordId}>`);
-		if (step1.includes(`</b>`)) step1 = step1.replace(`</b>`, `</${wordId}>`);
-		return step1.trim();
+		const regex = /<((?<wordId>word\d+)|b)>(?<word>.+?)<(\/|)(word\d+|b)>/g
+
+		const match = incorrectFeedback1.match(regex);
+
+		if (!match) return incorrectFeedback1;
+
+		const execute = regex.exec(incorrectFeedback1);
+
+		const __ = execute.groups.wordId;
+		const _wordId = __ || wordId;
+		const word = execute.groups.word;
+
+		return incorrectFeedback1.replace(regex, `<${_wordId}>${_wordId}:${word}</${_wordId}>`).trim();
 	}
 
 	updateFeedback2(incorrectFeedback2, wordId) {
