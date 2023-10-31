@@ -71,8 +71,10 @@ class WSProcess extends VWAProcess {
 						${introduction ? `<div class="introduction">${introduction}</div>` : ""}
 						${firstSample ? `<div class="first-sample">${firstSample}</div>` : ""}
 						${firstExplain ? `<div class="first-explain">${firstExplain}</div>` : ""}
+						${characteristicsImage === "Multiple-meaning Word" ? `<div class="first-alttext"></div>` : ""}
 						${secondSample ? `<div class="second-sample">${secondSample}</div>` : ""}
 						${secondExplain ? `<div class="second-explain">${secondExplain}</div>` : ""}
+						${characteristicsImage === "Multiple-meaning Word" ? `<div class="second-alttext"></div>` : ""}
 						${wordJournalPrompt ? `<div class="word-jounal-promt">${wordJournalPrompt}</div>` : ""}
 						${characteristicsImage === "Multiple-meaning Word" ? wordImage : ""}
 						<div class="question">
