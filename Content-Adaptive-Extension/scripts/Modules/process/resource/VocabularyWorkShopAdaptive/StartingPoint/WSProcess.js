@@ -210,6 +210,6 @@ class WSProcess extends VWAProcess {
 	}
 
 	genImageDetail(image, number) {
-		return image ? `<img src="/cms/repository/cms/images2020/${image}${number}.jpg" style="width: 334px; height: 234px;" />` : "";
+		return image ? `<img src="/cms/repository/cms/images2020/${image}.jpg" style="width: 334px; height: 234px;" />` : "";
 	}
 }
