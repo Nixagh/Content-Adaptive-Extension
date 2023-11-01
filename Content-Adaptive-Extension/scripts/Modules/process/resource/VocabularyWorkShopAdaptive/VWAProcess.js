@@ -345,7 +345,7 @@ class VWAProcess {
             const simplifyKey = Utility.simplifyString(Utility.beautifullyHeader(key));
             if (simplifyKey.includes(simplifyHeader)) return row[key];
         }
-        this.addError("Field", `Can't find field ${header} in row ${row + 1} please check your data`);
+        // this.addError("Field", `Can't find field ${header} in row ${row + 1} please check your data`);
         return "";
     }
 
@@ -355,7 +355,7 @@ class VWAProcess {
             const simplifyKey = Utility.simplifyString(Utility.beautifullyHeader(key));
             if (simplifyHeader === simplifyKey) return row[key];
         }
-        this.addError("Field", `Can't find field ${header} in row ${row + 1} please check your data`);
+        // this.addError("Field", `Can't find field ${header} in row ${row + 1} please check your data`);
         return "";
     }
 
