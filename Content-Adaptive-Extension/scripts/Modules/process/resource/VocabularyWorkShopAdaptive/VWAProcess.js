@@ -290,7 +290,12 @@ class VWAProcess {
     }
 
     getHeader(sheet) {
-        return XLSX.utils.sheet_to_json(sheet, {header: 1})[0].map(header => header.trim());
+        try {
+            return XLSX.utils.sheet_to_json(sheet, {header: 1})[0].map(header => header.trim());
+        } catch (e) {
+            alert(`Wrong format in excel file, please check your excel file`);
+            return null;
+        }
     }
 
     getContent(sheet, header) {
@@ -340,7 +345,8 @@ class VWAProcess {
             const simplifyKey = Utility.simplifyString(Utility.beautifullyHeader(key));
             if (simplifyKey.includes(simplifyHeader)) return row[key];
         }
-        // return alert(`Can't find field ${header} in row ${row}`);
+        this.addError("Field", `Can't find field ${header} in row ${row + 1} please check your data`);
+        return "";
     }
 
     getExactlyFieldOfRow(header, row) {
@@ -349,7 +355,8 @@ class VWAProcess {
             const simplifyKey = Utility.simplifyString(Utility.beautifullyHeader(key));
             if (simplifyHeader === simplifyKey) return row[key];
         }
-        // return alert(`Can't find field ${header} in row ${row}`);
+        this.addError("Field", `Can't find field ${header} in row ${row + 1} please check your data`);
+        return "";
     }
 
     getUnit() {

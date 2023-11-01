@@ -4,8 +4,10 @@ class CumulativeTestProcess extends VWAProcess {
     }
 
     getGrade() {
-        const globalResourceId = this.getGlobalResourceId();
-        return globalResourceId[globalResourceId.length - 1];
+        // const globalResourceId = this.getGlobalResourceId();
+        // return globalResourceId[globalResourceId.length - 1];
+        // todo: get grade from file name
+        return 10;
     }
 
     getUnit() {
@@ -138,6 +140,7 @@ class CumulativeTestProcess extends VWAProcess {
         const answerChoices = this.getAnswerChoices(row);
         const step1 = answerChoices.split(";");
         const step2 = step1.map((value) => value.split(".")[1].trim());
+        if (step2.length !== 4) this.addError("Question Content", "Answer Choices must have 4 options");
         return step2.map((value, index) => `<div itemid="${String.fromCharCode(index + 97)}" itemlabel="">${value}</div>`).join("");
     }
 

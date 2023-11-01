@@ -110,9 +110,9 @@ class EOYTestProcess extends VWAProcess {
         if (row >= 15 && row <= 29) {
             content = this.getChTheRWS();
         }
-        row = row % 15;
-        let item = this.getItem(row, content);
-        let option = this.getOptionHTML(row, content);
+        const newRow = row % 15;
+        let item = this.getItem(newRow, content);
+        let option = this.getOptionHTML(newRow, content);
 
         return `<div class="question-questionStem question-questionStem-1-column">
                     <div class="question-stem-content">${item}
@@ -143,6 +143,12 @@ class EOYTestProcess extends VWAProcess {
 
     getCorrectAnswer(row) {
         // {"comps":[{"id":"802916_g6_q1_ans01","value":"a","type":"MultipleChoice"}]}
+
+
+        return this.getCorrectAnswerContent(row);
+    }
+
+    getCorrectAnswerContent(row) {
         let content = this.getWordAssoc();
 
         if (row >= 0 && row <= 14) {
@@ -152,16 +158,12 @@ class EOYTestProcess extends VWAProcess {
         if (row >= 15 && row <= 29) {
             content = this.getChTheRWS();
         }
-
-        return this.getCorrectAnswerContent(row % 15, content);
-    }
-
-    getCorrectAnswerContent(row, content) {
+        const newRow = row % 15;
         const correctAnswer = {
             comps: [
                 {
                     id: this.getCID(row),
-                    value: this.getCorrectAnswerValue(row, content),
+                    value: this.getCorrectAnswerValue(newRow, content),
                     type: "MultipleChoice"
                 }
             ]

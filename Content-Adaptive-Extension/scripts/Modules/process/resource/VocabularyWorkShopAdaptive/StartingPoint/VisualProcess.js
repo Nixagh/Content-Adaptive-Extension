@@ -56,7 +56,7 @@ class VisualProcess extends VWAProcess {
 		if (!videoNumber || videoNumber.toLowerCase().trim() === "New".toLowerCase()) {
 			return "/content/802906/007744939/VW_unavailablevideo.mp4";
 		}
-		return `/content/${productId}/${videoNumber}/${word}.mp4`;
+		return `/content/${productId}/resourcecode/${word}.mp4`;
 	}
 
 	getWord(row) {

@@ -63,6 +63,7 @@
         "scripts/Libs/Storage.js",
         "scripts/Libs/UI.js",
         "scripts/Modules/file/FileReader.js",
+        "scripts/Modules/_video/videoUtility.js",
         "scripts/Modules/process/utility/BasicInput.js",
         "scripts/Modules/process/utility/Area.js",
         "scripts/Modules/process/utility/Ske.js",
