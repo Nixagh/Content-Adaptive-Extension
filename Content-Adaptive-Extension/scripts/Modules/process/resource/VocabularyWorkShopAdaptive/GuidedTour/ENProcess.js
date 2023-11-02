@@ -23,7 +23,7 @@ class ENProcess extends VWAProcess {
 	}
 
 	getEAN() {
-		const sheetName = `GP Examples and NonEx`;
+		const sheetName = `Examples and NonEx`;
 		const sheet = this.getSheet(sheetName);
 		const header = this.getHeader(sheet);
 		return this.getContent(sheet, header);
