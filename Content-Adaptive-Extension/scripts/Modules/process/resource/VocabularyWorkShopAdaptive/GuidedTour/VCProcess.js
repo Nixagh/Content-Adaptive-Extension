@@ -23,7 +23,7 @@ class VCProcess extends VWAProcess {
             return {...word, ...wordList};
         }).map((word) => {
             const pathWay = this.getExactlyFieldOfRow("P2 Set", word);
-            const vc = vcContent.find(vc => Utility.equals(pathWay, this.getExactlyFieldOfRow("Pathway 2 Set", vc)));
+            const vc = vcContent.find(vc => Utility.equals(pathWay, this.getFieldOfRow("Pathway 2", vc)));
             return {...word, ...vc};
         }).map((word) => {
             this.removeOtherField(word);
@@ -35,7 +35,7 @@ class VCProcess extends VWAProcess {
         for (let i = 1; i <= 6; i++) {
             const _word = word[`Word`].toLowerCase().trim();
             const wordIDs = this.getWordListSheet().filter(wordList => wordList["Word"].toLowerCase().trim() === _word).map(item => item["WordID"]);
-            const onWord = word[`Item ${i}`].includes(word[`Word`]);
+            const onWord = word[`Item ${i}`] ? word[`Item ${i}`].includes(word[`Word`]) : false;
             const CorrectFeedback= word[`Item ${i} Correct Feedback`] || word[`Item ${i} Correct Answer Feedback`];
             const onCorrectFeedback = wordIDs.map(wordID => CorrectFeedback.includes(wordID));
             const onIncorrectFeedback1 = wordIDs.map(wordID => word[`Item ${i} Incorrect Feedback 1`].includes(wordID));
