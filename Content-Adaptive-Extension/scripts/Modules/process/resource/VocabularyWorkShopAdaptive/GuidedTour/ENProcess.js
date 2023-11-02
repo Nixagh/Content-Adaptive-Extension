@@ -147,7 +147,8 @@ class ENProcess extends VWAProcess {
 	// ----------------- get field ----------------- //
 	getIndexAnswerType(row, type) {
 		const indexes = this.data[row].map((row, index) => {
-			if (row["Correct Answer"].toLowerCase().trim() === type.toLowerCase().trim()) {
+			const correctAnswer = this.getFieldOfRow("Correct Answer", row);
+			if (correctAnswer.toLowerCase().trim() === type.toLowerCase().trim()) {
 				return index + 1;
 			}
 			return 0;
@@ -191,7 +192,7 @@ class ENProcess extends VWAProcess {
 			const wordId = row["Word ID"];
 
 			const incorrectFeedback1 = this.getFieldOfRow("Incorrect Feedback 1", row);
-			const incorrectFeedback2 = row["Incorrect Feedback 2"];
+			const incorrectFeedback2 = this.getFieldOfRow("Incorrect Feedback 2", row);
 
 			return {
 				item: row["Item"],
