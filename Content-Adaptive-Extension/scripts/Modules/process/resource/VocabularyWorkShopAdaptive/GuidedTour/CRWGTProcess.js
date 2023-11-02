@@ -17,14 +17,14 @@ class CRWGTProcess extends VWAProcess {
 	}
 
 	getComponentScoreRules(row) {
-		//{"test":null,"scoringGroups":[{"componentGradingRules":[{"802906_GT_CTRW_u01_q01_ans01,"componentType":"Drop_Down","componentSubtype":null,"autoScore":true,"rubricRule":null}],"maxScore":1}]}
+		//{"test":null,"scoringGroups":[{"componentGradingRules":[{"": "802906_GT_CTRW_u01_q01_ans01,"componentType":"Drop_Down","componentSubtype":null,"autoScore":true,"rubricRule":null}],"maxScore":1}]}
 		const componentScoreRules = {
 			test: null,
 			scoringGroups: [
 				{
 					componentGradingRules: [
 						{
-							id: `${this.getCID(row)}`,
+							componentId: `${this.getCID(row)}`,
 							componentType: "Drop_Down",
 							componentSubtype: null,
 							autoScore: true,
