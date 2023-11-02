@@ -42,6 +42,10 @@ class CRWGTProcess extends VWAProcess {
 		return this.getField("Direction Line", 0);
 	}
 
+	getAdaptiveAnswerCount() {
+		return 2;
+	}
+
 	getQuestionHTML(row) {
 		const item = this.getItem(row);
 		const option = `<div cid="${this.getCID(row)}" ctype="Drop_Down" qname="a${row + 1}">${this.getOption(row)}</div>`;
