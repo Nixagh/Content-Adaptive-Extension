@@ -315,7 +315,7 @@ class VWAProcess {
 
         newContentWithBeautifulKey.forEach((row) => {
             for (const key in row) {
-                if (row[key] instanceof String) row[key] = row[key].trim();
+                if (row[key] instanceof String) row[key] = Utility.removeExtraSpace(row[key]);
             }
         });
 
