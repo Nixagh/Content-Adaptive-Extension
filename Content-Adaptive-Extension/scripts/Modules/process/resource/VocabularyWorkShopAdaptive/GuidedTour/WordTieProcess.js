@@ -133,25 +133,25 @@ class WordTieProcess extends VWAProcess {
     }
 
     getIncorrectFeedback1(row) {
-        const incorrectFeedback = this.getExactlyField("Incorrect Feedback 1 to use when all", row);
+        const incorrectFeedback = this.getField("Incorrect Feedback 1 to use when all", row);
         const wordId = this.getField("Word ID", row);
         return this.hover(incorrectFeedback, wordId);
     }
 
     getIncorrectFeedback2(row) {
-        const incorrectFeedback = this.getExactlyField("Incorrect Feedback 1 to use when none of the student's choices on first try were correct.", row);
+        const incorrectFeedback = this.getField("Incorrect Feedback 1 to use when none of the student's choices on first try were correct.", row);
         const wordId = this.getField("Word ID", row);
         return this.hover(incorrectFeedback, wordId);
     }
 
     getIncorrectFeedback3(row) {
-        const incorrectFeedback = this.getExactlyField("Incorrect Feedback 1 to use when not all", row);
+        const incorrectFeedback = this.getField("Incorrect Feedback 1 to use when not all", row);
         const wordId = this.getField("Word ID", row);
         return this.hover(incorrectFeedback, wordId);
     }
 
     getIncorrectFeedback4(row) {
-        const incorrectFeedback = this.getExactlyField("Final incorrect feedback for students who had a second try.", row);
+        const incorrectFeedback = this.getField("Final incorrect feedback for students who had a second try.", row);
         const wordId = this.getField("Word ID", row);
         return this.hover(incorrectFeedback, wordId);
     }
