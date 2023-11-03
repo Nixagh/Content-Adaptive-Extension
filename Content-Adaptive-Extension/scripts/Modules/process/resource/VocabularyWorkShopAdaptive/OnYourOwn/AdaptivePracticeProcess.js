@@ -194,22 +194,37 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getCorrectAnswerValueOfGo(row) {
-        const options = this.getAnswerGoList(row);
-        const correctAnswer = this.getFieldOfRow("Correct Answer", this.getGoTicketSheet()[row]);
-        return String.fromCharCode(97 + options.indexOf(correctAnswer.trim()));
+        try {
+            const options = this.getAnswerGoList(row);
+            const correctAnswer = this.getFieldOfRow("Correct Answer", this.getGoTicketSheet()[row]);
+            return String.fromCharCode(97 + options.indexOf(correctAnswer.trim()));
+        } catch (e) {
+            this.addError("QuestionContent", `set Go correct answer: some thing wrong at row ${row + 1}`);
+            return "";
+        }
     }
 
     getCorrectAnswerValueOfSetB(row) {
-        const data = this.getField("Adaptive Item Answer Choices", row);
-        const options = Utility.splitStringBySemi(data).map(row => row.trim());
-        const correctAnswer = this.getExactlyField("Adaptive Item Correct Answer", row);
-        return String.fromCharCode(97 + options.indexOf(correctAnswer.trim()));
+        try {
+            const data = this.getField("Adaptive Item Answer Choices", row);
+            const options = Utility.splitStringBySemi(data).map(row => row.trim());
+            const correctAnswer = this.getExactlyField("Adaptive Item Correct Answer", row);
+            return String.fromCharCode(97 + options.indexOf(correctAnswer.trim()));
+        } catch (e) {
+            this.addError("QuestionContent", `set B correct answer: some thing wrong at row ${row + 1}`);
+            return "";
+        }
     }
 
     getCorrectAnswerValueOfSetA(row) {
-        const options = this.getOptions();
-        const correctAnswer = this.getExactlyField("Correct Answer", row);
-        return options.find(option => option.value === correctAnswer).itemid;
+        try {
+            const options = this.getOptions();
+            const correctAnswer = this.getExactlyField("Correct Answer", row);
+            return options.find(option => option.value === correctAnswer).itemid;
+        } catch (e) {
+            this.addError("QuestionContent", `set A correct answer: some thing wrong at row ${row + 1}`);
+            return "";
+        }
     }
 
     getFeedback(row) {
