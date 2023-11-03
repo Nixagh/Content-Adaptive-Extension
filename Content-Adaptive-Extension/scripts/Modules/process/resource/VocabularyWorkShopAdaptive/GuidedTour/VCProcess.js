@@ -125,9 +125,7 @@ class VCProcess extends VWAProcess {
     }
 
     getDirectionLineHTML(row) {
-        if (row === 0 || row === 6)
-            return this.getField("Direction Line", row);
-        return "";
+        return "<i>Read the following passage, taking note of the boldface words and their contexts. Use the tools provided to annotate the text as you read. Then answer the questions.</i>";
     }
 
     getPassageContent(row) {
