@@ -250,18 +250,15 @@ class VCProcess extends VWAProcess {
     }
 
     getCorrectEmoji(row) {
-        const correctEmoji = this.getField("Correct emoji with feedback phrases randomly selected:", row);
-        return this.toArray(correctEmoji, row);
+        return ["Great job!","Way to go!","You did it!","Terrific!"];
     }
 
     getIncorrectEmoji1(row) {
-        const incorrectEmoji1 = this.getField("Incorrect emoji with Feedback phrases randomly selected:", row);
-        return this.toArray(incorrectEmoji1, row);
+        return ["You can do this!","Keep practicing.","Keep trying.","Nice try!","Try another way."];
     }
 
     getIncorrectEmoji2(row) {
-        const incorrectEmoji2 = this.getField("Incorrect emoji and Final incorrect feedback.", row);
-        return this.toArray(incorrectEmoji2, row)
+        return ["Nice try!"];
     }
 
     getParagraphId(row) {
