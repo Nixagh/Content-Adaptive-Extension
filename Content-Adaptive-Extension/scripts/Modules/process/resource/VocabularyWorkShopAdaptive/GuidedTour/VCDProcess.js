@@ -4,7 +4,7 @@ class VCDProcess extends VCProcess {
     }
 
     getVCSheet() {
-        const vcSheetName = `VIC Differentiated`;
+        const vcSheetName = `Differentiated`;
         const vcSheet = this.getSheet(vcSheetName);
         const vcHeader = this.getHeader(vcSheet);
         return this.getContent(vcSheet, vcHeader);

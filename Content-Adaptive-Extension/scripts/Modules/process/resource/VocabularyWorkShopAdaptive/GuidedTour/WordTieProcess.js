@@ -133,7 +133,7 @@ class WordTieProcess extends VWAProcess {
     }
 
     getIncorrectFeedback1(row) {
-        const incorrectFeedback = this.getExactlyField("Incorrect Feedback 1 to use when all correct answers are chosen on first try but also at least one incorrect answer is chosen. Students do not get a second try.", row);
+        const incorrectFeedback = this.getExactlyField("Incorrect Feedback 1 to use when all", row);
         const wordId = this.getField("Word ID", row);
         return this.hover(incorrectFeedback, wordId);
     }
@@ -145,7 +145,7 @@ class WordTieProcess extends VWAProcess {
     }
 
     getIncorrectFeedback3(row) {
-        const incorrectFeedback = this.getExactlyField("Incorrect Feedback 1 to use when not all of the correct answers were chosen on the first try. This is also for when the student chooses only one answer, and it is correct.", row);
+        const incorrectFeedback = this.getExactlyField("Incorrect Feedback 1 to use when not all", row);
         const wordId = this.getField("Word ID", row);
         return this.hover(incorrectFeedback, wordId);
     }
