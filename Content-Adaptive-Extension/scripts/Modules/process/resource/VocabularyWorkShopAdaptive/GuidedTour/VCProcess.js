@@ -5,70 +5,74 @@ class VCProcess extends VWAProcess {
 
     getFullContent() {
         const wordListContent = this.getWordListSheet();
-        const wtContent = this.getWTSheet();
+        const vcContent = this.getVCSheet();
 
-        return {first: wtContent, second: wordListContent};
+        return {first: vcContent, second: wordListContent};
     }
 
     mapping({first, second}) {
-        const vcContent = this.getVCSheet();
+        const setA = first[0];
+        const setB = first[1];
 
-        return first.map((word) => {
-            const wordID_1 = this.getFieldOfRow("WordID", word);
-            const wordList = second.find(wordList => Utility.equalsWordId(this.getFieldOfRow("WordID", wordList), wordID_1));
-            if (wordList === undefined) {
-                this.addError(`Question Content`, `Word ID: ${word["Word ID"]} not found in Word List`);
-                return;
-            }
-            return {...word, ...wordList};
-        }).map((word) => {
-            const pathWay = this.getExactlyFieldOfRow("P2 Set", word);
-            const vc = vcContent.find(vc => Utility.equals(pathWay, this.getFieldOfRow("Pathway 2", vc)));
-            return {...word, ...vc};
-        }).map((word) => {
-            this.removeOtherField(word);
-            return {...word}
-        });
+        const newArray = [];
+        newArray.push(...this.getFullRowData(setA, second));
+        newArray.push(...this.getFullRowData(setB, second));
+
+        return newArray;
     }
 
-    removeOtherField(word) {
+    getFullRowData(set, wordList) {
+        const directionLine = this.getFieldOfRow("Direction Line", set);
+        const passageBody = this.getFieldOfRow("Passage Body", set);
+        const pathway1 = this.getFieldOfRow("Pathway 1 Set", set);
+        const pathway2 = this.getFieldOfRow("Pathway 2 Set", set);
+
+        const newArray = [];
+
         for (let i = 1; i <= 6; i++) {
-            const _word = word[`Word`].toLowerCase().trim();
-            const wordIDs = this.getWordListSheet().filter(wordList => wordList["Word"].toLowerCase().trim() === _word).map(item => item["WordID"]);
-            const onWord = word[`Item ${i}`] ? word[`Item ${i}`].includes(word[`Word`]) : false;
-            const CorrectFeedback= word[`Item ${i} Correct Feedback`] || word[`Item ${i} Correct Answer Feedback`];
-            const onCorrectFeedback = wordIDs.map(wordID => CorrectFeedback.includes(wordID));
-            const onIncorrectFeedback1 = wordIDs.map(wordID => word[`Item ${i} Incorrect Feedback 1`].includes(wordID));
-            const onIncorrectFeedback2 = wordIDs.map(wordID => word[`Item ${i} Incorrect Feedback 2`].includes(wordID));
-
-            if (onWord
-                || onCorrectFeedback.reduce((x, y) => x || y)
-                || onIncorrectFeedback1.reduce((x, y) => x || y)
-                || onIncorrectFeedback2.reduce((x, y) => x || y)
-            ) {
-                word[`Item`] = word[`Item ${i}`];
-                word[`Item Standard`] = word[`Item ${i} Standard`];
-                word[`Item Answer Choices`] = word[`Item ${i} Answer Choices`];
-                word[`Item Correct Answer`] = word[`Item ${i} Correct Answer`];
-                word[`Item Correct Answer Feedback`] = word[`Item ${i} Correct Answer Feedback`] || word[`Item ${i} Correct Feedback`];
-                word[`Item Incorrect Feedback 1`] = word[`Item ${i} Incorrect Feedback 1`];
-                word[`Item Incorrect Feedback 2`] = word[`Item ${i} Incorrect Feedback 2`];
-            }
-            delete word[`Item ${i}`];
-            delete word[`Item ${i} Standard`];
-            delete word[`Item ${i} Answer Choices`];
-            delete word[`Item ${i} Correct Answer`];
-            delete word[`Item ${i} Correct Answer Feedback`];
-            delete word[`Item ${i} Incorrect Feedback 1`];
-            delete word[`Item ${i} Incorrect Feedback 2`];
+            newArray.push(
+                {
+                    "Direction Line": directionLine,
+                    "Passage Body": passageBody,
+                    "P1 Set": pathway1,
+                    "P2 Set": pathway2,
+                    "Item": this.getFieldOfRow(`Item ${i}`, set),
+                    "Item Standard": this.getFieldOfRow(`Item ${i} Standard`, set),
+                    "Item Answer Choices": this.getFieldOfRow(`Item ${i} Answer Choices`, set),
+                    "Item Correct Answer": this.getFieldOfRow(`Item ${i} Correct Answer`, set),
+                    "Item Correct Answer Feedback": this.getFieldOfRow(`Item ${i} Correct Answer Feedback`, set),
+                    "Item Incorrect Feedback 1": this.getFieldOfRow(`Item ${i} Incorrect Feedback 1`, set),
+                    "Item Incorrect Feedback 2": this.getFieldOfRow(`Item ${i} Incorrect Feedback 2`, set),
+                }
+            )
         }
-    }
 
-    getWTSheet() {
-        const wtSheetName = `WordTies`;
-        const wtSheet = this.getSheet(wtSheetName);
-        const wtHeader = this.getHeader(wtSheet);
-        return this.getContent(wtSheet, wtHeader);
+        return newArray.map((item, index) => {
+            const _item = item[`Item`].toLowerCase().trim();
+            const correctAnswer = item[`Item Correct Answer`].toLowerCase().trim();
+            const correctAnswerFeedback = item[`Item Correct Answer Feedback`].toLowerCase().trim();
+            const incorrectFeedback1 = item[`Item Incorrect Feedback 1`].toLowerCase().trim();
+            const incorrectFeedback2 = item[`Item Incorrect Feedback 2`].toLowerCase().trim();
+
+            const word = wordList.find(word => {
+                const wordID = word[`WordID`].toLowerCase().trim();
+                return _item.includes(wordID) ||
+                    correctAnswer.includes(wordID) ||
+                    correctAnswerFeedback.includes(wordID) ||
+                    incorrectFeedback1.includes(wordID) ||
+                    incorrectFeedback2.includes(wordID);
+            });
+
+            if (!word) {
+                this.addError("Word", `Word is not found at row ${index + 1} in Word List of pathway set ${pathway2}`);
+                return null;
+            }
+            const wordId = word[`WordID`].toLowerCase().trim();
+            return {
+                ...item,
+                "WordID": wordId,
+            }
+        });
     }
 
     getVCSheet() {
@@ -225,8 +229,12 @@ class VCProcess extends VWAProcess {
             "correctEmoji": this.getCorrectEmoji(row),
             "incorrectEmoji1": this.getIncorrectEmoji1(row),
             "incorrectEmoji2": this.getIncorrectEmoji2(row),
-            "paragraphId": `${this.getParagraphId(row)}`,
         }
+        const paragraphId = this.getParagraphId(row);
+        if (paragraphId !== -1) {
+            feedback["paragraphId"] = `${paragraphId}`;
+        }
+
         return JSON.stringify(feedback);
     }
 
@@ -254,11 +262,11 @@ class VCProcess extends VWAProcess {
     }
 
     getIncorrectEmoji1(row) {
-        return ["You can do this!","Keep practicing.","Keep trying.","Nice try!","Try another way."];
+        return ["Nice try!"];
     }
 
     getIncorrectEmoji2(row) {
-        return ["Nice try!"];
+        return ["You can do this!","Keep practicing.","Keep trying.","Nice try!","Try another way."];
     }
 
     getParagraphId(row) {
