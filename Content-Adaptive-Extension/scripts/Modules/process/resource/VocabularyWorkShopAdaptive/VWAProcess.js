@@ -483,7 +483,7 @@ class VWAProcess {
 
     passageConverterV02(content) {
         const f_regex = /<paragraph (id|)( |)=( |)(\d+)>/g;
-        const l_regex = /<\/paragraph (id|)( |)=( |)(\d+)>/g;
+        const l_regex = /<\/paragraph( (id|)( |)=( |)(\d+)|)>/g;
 
         const word_regex = /<word(\d+)>.+?<(\/|)word(\d+)>/g;
 
