@@ -313,4 +313,8 @@ class VCProcess extends VWAProcess {
         if (!standard) this.addError(`Standard`, `Standard is empty at row ${row + 1}`);
         return standard;
     }
+
+    getPathway1(row) {
+        return 'A';
+    }
 }

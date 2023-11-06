@@ -106,7 +106,7 @@ class WSProcess extends VWAProcess {
 	}
 
 	getInflectedForm(row) {
-		return this.getField("Inflected Forms", row);
+		return this.getField("Inflected Forms", row) || this.getField("Inflected Form", row);
 	}
 
 	getCharacterImage(row) {
