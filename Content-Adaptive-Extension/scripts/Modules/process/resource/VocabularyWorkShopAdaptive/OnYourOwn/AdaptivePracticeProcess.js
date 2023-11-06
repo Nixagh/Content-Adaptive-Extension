@@ -108,7 +108,9 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getItemOfB(row) {
-        return this.getExactlyField("Adaptive Item", row);
+        return this.getExactlyField("Adaptive Item", row)
+            || this.getExactlyField("Adaptive Item \n"
+            + "[Pick up sentence from column F; change synonym to simpler/more familiar one.]", row);
     }
 
     getTotalOfOption(adaptiveType) {
