@@ -35,7 +35,7 @@ class CRWOYOProcess extends VWAProcess {
 	}
 
 	getDirectionLineHTML(row) {
-		return this.getField("Direction Line", row);
+		return '<i>Select the word that best completes the sentence.</i>';
 	}
 
 	getQuestionHTML(row) {

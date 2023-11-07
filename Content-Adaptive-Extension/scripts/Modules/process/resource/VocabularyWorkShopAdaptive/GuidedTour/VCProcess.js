@@ -25,7 +25,7 @@ class VCProcess extends VWAProcess {
         const directionLine = this.getFieldOfRow("Direction Line", set);
         const passageBody = this.getFieldOfRow("Passage Body", set);
         const pathway1 = this.getFieldOfRow("Pathway 1 Set", set);
-        const pathway2 = this.getFieldOfRow("Pathway 2 Set", set);
+        const pathway2 = this.getFieldOfRow("Pathway 2", set);
 
         const newArray = [];
 
@@ -40,7 +40,7 @@ class VCProcess extends VWAProcess {
                     "Item Standard": this.getFieldOfRow(`Item ${i} Standard`, set),
                     "Item Answer Choices": this.getFieldOfRow(`Item ${i} Answer Choices`, set),
                     "Item Correct Answer": this.getFieldOfRow(`Item ${i} Correct Answer`, set),
-                    "Item Correct Answer Feedback": this.getFieldOfRow(`Item ${i} Correct Answer Feedback`, set),
+                    "Item Correct Answer Feedback": this.getFieldOfRow(`Item ${i} Correct Answer Feedback`, set) || this.getFieldOfRow(`Item ${i} Correct Feedback`, set),
                     "Item Incorrect Feedback 1": this.getFieldOfRow(`Item ${i} Incorrect Feedback 1`, set),
                     "Item Incorrect Feedback 2": this.getFieldOfRow(`Item ${i} Incorrect Feedback 2`, set),
                 }
