@@ -208,7 +208,7 @@ class Utility {
     static removeExtraSpace(string) {
         // i want make function for template
         // template "  dsad a  sada dsad a " => "dsad a sada dsad a"
-        return string.replace(/\s+/g,' ').trim();
+        return string.replaceAll(/\s+/g,' ').trim();
     }
 
     static splitStringBySemi(string) {

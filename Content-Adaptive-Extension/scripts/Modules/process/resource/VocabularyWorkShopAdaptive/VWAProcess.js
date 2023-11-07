@@ -319,7 +319,14 @@ class VWAProcess {
             }
         });
 
-        return newContentWithBeautifulKey;
+        return newContentWithBeautifulKey.map(row => {
+            const newRow = {};
+            for (const key in row) {
+                if (row[key] instanceof String) newRow[key] = Utility.removeExtraSpace(row[key]).trim();
+                else newRow[key] = row[key];
+            }
+            return {...newRow};
+        });
     }
 
     getWordListSheet() {
@@ -482,8 +489,8 @@ class VWAProcess {
     }
 
     passageConverterV02(content) {
-        const f_regex = /<paragraph (id|)( |)=( |)(\d+)>/g;
-        const l_regex = /<\/paragraph( (id|)( |)=( |)(\d+)|)>/g;
+        const f_regex = /<paragraph (id|ID|)( |)=( |)(\d+)>/g;
+        const l_regex = /<\/paragraph( (id|ID|)( |)=( |)(\d+)|)>/g;
 
         const word_regex = /<word(\d+)>.+?<(\/|)word(\d+)>/g;
 

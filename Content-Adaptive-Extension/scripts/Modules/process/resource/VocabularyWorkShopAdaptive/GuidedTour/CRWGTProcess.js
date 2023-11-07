@@ -77,7 +77,7 @@ class CRWGTProcess extends VWAProcess {
 	getCorrectAnswerValue(row) {
 		const answerChoices = this.getAnswerChoices(row);
 		const correctAnswer = this.getCorrectAnswerText(row);
-		const correctAnswerIndex = answerChoices.findIndex(answerChoice => answerChoice === correctAnswer);
+		const correctAnswerIndex = answerChoices.findIndex(answerChoice => answerChoice.trim() === correctAnswer.trim());
 		return String.fromCharCode(97 + correctAnswerIndex);
 	}
 
@@ -178,7 +178,7 @@ class CRWGTProcess extends VWAProcess {
 		let option = '';
 		// <div idx="a" word="802906_GT_CTRW_u05_q01_ans01">debits</div>
 		answerChoices.forEach((answerChoice, index) => {
-			const wordId = this.getWordIdFromWordList(answerChoice).trim();
+			const wordId = this.getWordIdFromWordList(answerChoice.trim()).trim();
 			if (!wordId) this.addError(`Question Content`, `Answer Choices wrong "${answerChoice}" can't find WordID in word list`);
 			option += `<div idx="${String.fromCharCode(97 + index)}" word="${wordId}">${answerChoice}</div>`;
 		});
@@ -186,7 +186,7 @@ class CRWGTProcess extends VWAProcess {
 	}
 
 	getWordIdFromWordList(word) {
-		const wordObj = this.data.filter(wordObj => wordObj["Word"].toLowerCase() === word.toLowerCase());
+		const wordObj = this.data.filter(wordObj => wordObj["Word"].trim().toLowerCase() === word.trim().toLowerCase());
 		return wordObj.length ? wordObj[0]["Word ID"] : "";
 	}
 }

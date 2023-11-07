@@ -25,7 +25,7 @@ class VCProcess extends VWAProcess {
         const directionLine = this.getFieldOfRow("Direction Line", set);
         const passageBody = this.getFieldOfRow("Passage Body", set);
         const pathway1 = this.getFieldOfRow("Pathway 1 Set", set);
-        const pathway2 = this.getFieldOfRow("Pathway 2 Set", set);
+        const pathway2 = this.getFieldOfRow("Pathway 2", set);
 
         const newArray = [];
 
