@@ -39,7 +39,7 @@ class CRWGTProcess extends VWAProcess {
 	}
 
 	getDirectionLineHTML(row) {
-		return this.getField("Direction Line", 0);
+		return '<i>Choose the word that <b>best</b> completes the sentence.</i>';
 	}
 
 	getAdaptiveAnswerCount() {
