@@ -229,10 +229,10 @@ class PassageProcess extends VWAProcess {
         answerC = answerC[answerC.length - 1] === ";" ? answerC.substring(0, answerC.length - 1) : answerC;
         answerD = answerD[answerD.length - 1] === ";" ? answerD.substring(0, answerD.length - 1) : answerD;
 
-        answerA = answerA.replaceAll("a.", "").trim();
-        answerB = answerB.replaceAll("b.", "").trim();
-        answerC = answerC.replaceAll("c.", "").trim();
-        answerD = answerD.replaceAll("d.", "").trim();
+        answerA = answerA.replace("a. ", "").trim();
+        answerB = answerB.replace("b. ", "").trim();
+        answerC = answerC.replace("c. ", "").trim();
+        answerD = answerD.replace("d. ", "").trim();
 
         if (Utility.isEmpty(answerA) || Utility.isEmpty(answerB) || Utility.isEmpty(answerC) || Utility.isEmpty(answerD))
             this.addError("Question Content", "Missing answer choice");
