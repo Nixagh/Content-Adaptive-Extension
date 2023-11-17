@@ -97,6 +97,7 @@
         "scripts/Modules/process/resource/WordList/WordListProcess.js",
 
         "scripts/Modules/process/settings/ResourceSetting.js",
+        "scripts/Libs/data/programs/resource/VWAResourceSetting.js",
 
         "scripts/Modules/Prepare.js",
         "scripts/Modules/Content.js",
