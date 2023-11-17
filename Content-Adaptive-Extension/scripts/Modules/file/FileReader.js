@@ -9,12 +9,15 @@ class FileReader {
 		if (!file) return "No file selected";
 		if (!ExcelType[file.type]) return "Invalid file type";
 
+		const program = this.getProgram();
+		if (!program) return "No program selected";
+
 		const desc = await FileReader.getDesc();
 		if (!desc) return "No description selected";
 
 		const arrayBuffer = await FileReader.getArrayBuffer(file);
 
-		GProcess = VWAResource[desc].new();
+		GProcess = Resource[program].resource[desc].new();
 		if (!GProcess) return "Invalid description";
 
 		GProcess.fileName = file.name;
@@ -29,6 +32,10 @@ class FileReader {
 
 		this.file = input[0].files[0];
 		return this.file;
+	}
+
+	getProgram() {
+		return $(`#${Ids.program}`).val();
 	}
 
 	static async getDesc() {

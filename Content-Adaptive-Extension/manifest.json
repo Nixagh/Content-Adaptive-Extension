@@ -67,6 +67,7 @@
         "scripts/Modules/process/utility/BasicInput.js",
         "scripts/Modules/process/utility/Area.js",
         "scripts/Modules/process/utility/Ske.js",
+        "scripts/Modules/process/utility/ExcelUtil.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/VWAProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/EOYTestProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/BOYTestProcess.js",
@@ -92,6 +93,11 @@
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/StartingPoint/DefinitionProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/StartingPoint/WSProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/StartingPoint/VisualProcess.js",
+
+        "scripts/Modules/process/resource/WordList/WordListProcess.js",
+
+        "scripts/Modules/process/settings/SettingScreen.js",
+
         "scripts/Modules/Prepare.js",
         "scripts/Modules/Content.js",
         "scripts/Main.js"

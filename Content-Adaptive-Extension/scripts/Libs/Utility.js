@@ -221,4 +221,28 @@ class Utility {
         const removeSpecialCharacter = removeExtraSpace.map((value) => this.removeSpecialCharacter(value));
         return removeSpecialCharacter.filter((value) => this.isNotNull(value));
     }
+
+    static getFieldOfRow(header, row) {
+        const simplifyHeader = Utility.simplifyString(header);
+        for (let key in row) {
+            const simplifyKey = Utility.simplifyString(Utility.beautifullyHeader(key));
+            if (simplifyKey.includes(simplifyHeader)) return row[key];
+        }
+        // this.addError("Field", `Can't find field ${header} in row ${row + 1} please check your data`);
+        return "";
+    }
+
+    static getExactlyFieldOfRow(header, row) {
+        const simplifyHeader = Utility.simplifyString(header);
+        for (let key in row) {
+            const simplifyKey = Utility.simplifyString(Utility.beautifullyHeader(key));
+            if (simplifyHeader === simplifyKey) return row[key];
+        }
+        // this.addError("Field", `Can't find field ${header} in row ${row + 1} please check your data`);
+        return "";
+    }
+
+    static getSheetNames(sheetName, allSheets) {
+        return allSheets["SheetNames"].filter((value) => value.includes(sheetName));
+    }
 }

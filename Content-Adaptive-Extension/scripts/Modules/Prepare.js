@@ -45,6 +45,7 @@ class Prepare {
 	}
 
 	static initProcess() {
+		currentProgram = Storage.Get("CurrentProgram");
 		GProcess = getProcess();
 	}
 

@@ -16,4 +16,17 @@ const Ids = {
 	totalLine: "total-line",
 	currentFile: "current-file",
 	currentDesc: "current-desc",
+	program: "program",
+	insertWordList: "insert-word-list",
+
+	openInsertQuestion: "open-insert-question",
+	openInsertType: "open-insert-word-list",
+
+	type: "type-select",
+	insertSettings: "insert-settings",
+}
+
+const ListModalIds = {
+	questionModal: "question-modal",
+	typeModal: "type-modal",
 }

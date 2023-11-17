@@ -1,3 +1,6 @@
+
+
+
 const VWAResource = {
 	"Definitions": {value: "Definitions", new: () => new DefinitionProcess("Definitions", 1, [1, 0, 1, 0])},
 	"Visuals": {value: "Visuals", new: () => new VisualProcess("Visuals", 1, [1, 0, 1, 0])},
@@ -21,14 +24,41 @@ const VWAResource = {
 	"CumTest": {value: "Cumulative Test", new: () => new CumulativeTestProcess("CumTest", 1, [1, 0, 1, 0])},
 }
 
+const WordListResource = {
+	"WordList": {value: "Word List", new: () => new WordListProcess()},
+}
+
+const Resource = {
+	"WL": {
+		resource: WordListResource,
+		insertButton: {
+			show: [Ids.insertWordList],
+			hide: [Ids.insertButton, Ids.insertAndSave]
+		},
+
+	},
+	"VWA": {
+		resource: VWAResource,
+		insertButton: {
+			show: [Ids.insertButton, Ids.insertAndSave],
+			hide: [Ids.insertWordList]
+		}
+	}
+}
+
 const getProcess = () => {
+	const program = Storage.Get("CurrentProgram");
+
 	if(localStorage.getItem("GProcess")) {
 		const parse = JSON.parse(localStorage.getItem("GProcess"));
-		const process = VWAResource[parse.type].new();
+		const process = Resource[program].resource[parse.type].new();
 		process.allSheets = parse.allSheets;
 		process.fileName = parse.fileName;
 		process.data = parse.data;
 		process.type = parse.type;
+		if (process.type === "WordList") {
+			process.themeDataWithWordId = parse.themeDataWithWordId;
+		}
 		return process;
 	}
 	return null;
