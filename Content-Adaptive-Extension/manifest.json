@@ -96,7 +96,7 @@
 
         "scripts/Modules/process/resource/WordList/WordListProcess.js",
 
-        "scripts/Modules/process/settings/SettingScreen.js",
+        "scripts/Modules/process/settings/ResourceSetting.js",
 
         "scripts/Modules/Prepare.js",
         "scripts/Modules/Content.js",

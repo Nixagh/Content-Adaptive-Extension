@@ -6,7 +6,7 @@ class setting {
     cssClass;
     sourceBrand;
     productResourceBrand;
-    iSEMenu; //(select option)
+    resourceTemplate; //(select option)
     pathway;
     wordJournalPrompt;
     groupActivity;
@@ -15,8 +15,9 @@ class setting {
     retryCount; //(int)
     choicePassage; //(true/false)
     programTocExam; //(select option)
+    resourceType;
 
-    constructor(alternativeResourceTitle, keyword, allowShuffled, subCategory, cssClass, sourceBrand, productResourceBrand, iSEMenu, pathway, wordJournalPrompt, groupActivity, resourceGroupActivity, resourceSubGroupActivity, retryCount, choicePassage, programTocExam) {
+    constructor(alternativeResourceTitle, keyword, allowShuffled, subCategory, cssClass, sourceBrand, productResourceBrand, resourceTemplate, pathway, wordJournalPrompt, groupActivity, resourceGroupActivity, resourceSubGroupActivity, retryCount, choicePassage, programTocExam) {
         this.alternativeResourceTitle = alternativeResourceTitle;
         this.keyword = keyword;
         this.allowShuffled = allowShuffled;
@@ -24,7 +25,7 @@ class setting {
         this.cssClass = cssClass;
         this.sourceBrand = sourceBrand;
         this.productResourceBrand = productResourceBrand;
-        this.iSEMenu = iSEMenu;
+        this.resourceTemplate = resourceTemplate;
         this.pathway = pathway;
         this.wordJournalPrompt = wordJournalPrompt;
         this.groupActivity = groupActivity;
@@ -36,10 +37,10 @@ class setting {
     }
 }
 
-const SettingScreen = {
+const ResourceSetting = {
     // SP
     "Definitions": new setting("Definition", "", false, "rs_practice_quiz.png",
-        "math2018", "ADAPTIVE", "ISE", null, "1,2", "Restate the definition(s) in your own words.",
+        "math2018", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "Restate the definition(s) in your own words.",
         "", "", "", null, false, null),
 
     "Visuals": new setting("Visual", "", false, "video.png",
@@ -99,11 +100,13 @@ const SettingScreen = {
     "OLV-P2": new setting("Passage", "", false, "ASSESSMENT.png",
         "", "ADAPTIVE", "ISE", null, "1,2", "",
         "Student Choice Activity", "Passage", "On Level Passage", 1, false, null),
+
+
 }
 
 class Screen {
     static insert(type) {
-        const setting = SettingScreen[type];
+        const setting = ResourceSetting[type];
         if(setting) this.getHtml(setting);
     }
 
@@ -116,7 +119,7 @@ class Screen {
         const sourceBrand = new BasicInput("pojo.sourceBrand");
         const productResourceBrand = new BasicInput("pojo.resourceBrand");
 
-        const iSEMenu = document.getElementsByName("pojo.integratedMenuStructure")[0];
+        const resourceTemplate = document.getElementsByName("pojo.resourceTemplate")[0];
 
         const pathway = new BasicInput("pojo.pathway");
         const wordJournalPrompt = new BasicInput("pojo.wordJournalPrompt");
@@ -127,6 +130,7 @@ class Screen {
         const choicePassage = new BasicInput("pojo.choicePassage1");
 
         const programTocExam = document.getElementsByName("pojo.programTocExam")[0];
+        const resourceType = new BasicInput("pojo.resourceType");
 
         alternativeResourceTitle.setValue(setting.alternativeResourceTitle);
         keyword.setValue(setting.keyword);
@@ -139,8 +143,10 @@ class Screen {
         productResourceBrand.setValue(setting.productResourceBrand);
 
         // todo:
-        if (setting.iSEMenu) iSEMenu.value = setting.iSEMenu;
-        const displayISEMenu = document.getElementById("select2-chosen-10");
+        const option = Array.from(resourceTemplate.options).find(option => option.innerText.includes(setting.resourceTemplate));
+        resourceTemplate.value = option.value;
+        const displayResourceTemplate = document.getElementById("select2-chosen-14");
+        displayResourceTemplate.innerText = option.text;
 
         pathway.setValue(setting.pathway);
         wordJournalPrompt.setValue(setting.wordJournalPrompt);
@@ -154,5 +160,7 @@ class Screen {
         // todo:
         if (setting.programTocExam) programTocExam.value = setting.programTocExam;
         const displayProgramTocExam = document.getElementById("select2-chosen-16");
+
+        resourceType.setValue(setting.resourceType || "LS");
     }
 }
