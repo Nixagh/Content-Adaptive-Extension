@@ -229,7 +229,7 @@ class OptionContent {
                 <div class="description">
                     <h1>Insert Type</h1>
                     <select id="${Ids.type}" style="color: #181d24">
-                        ${OptionContent.getDescriptions(VWAResource)}
+                        ${OptionContent.getDescriptions(VWAResourceSetting)}
                     </select>
                     <button id="${Ids.insertSettings}" style="color: black">Insert</button>
                 </div>
