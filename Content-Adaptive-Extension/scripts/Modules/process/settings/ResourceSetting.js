@@ -19,9 +19,10 @@ class setting {
     resourceType;
     singleQuestion; //true/false
     visible; //true/false
+    disableExport; //true/false
 
 
-    constructor(alternativeResourceTitle, keyword, allowShuffled, subCategory, assetFormat, cssClass, sourceBrand, productResourceBrand, resourceTemplate, pathway, wordJournalPrompt, groupActivity, resourceGroupActivity, resourceSubGroupActivity, retryCount, choicePassage, programTocExam, singleQuestion, visible) {
+    constructor(alternativeResourceTitle, keyword, allowShuffled, subCategory, assetFormat, cssClass, sourceBrand, productResourceBrand, resourceTemplate, pathway, wordJournalPrompt, groupActivity, resourceGroupActivity, resourceSubGroupActivity, retryCount, choicePassage, programTocExam, singleQuestion, visible, disableExport) {
         this.alternativeResourceTitle = alternativeResourceTitle;
         this.keyword = keyword;
         this.allowShuffled = allowShuffled;
@@ -41,6 +42,7 @@ class setting {
         this.programTocExam = programTocExam;
         this.singleQuestion = singleQuestion;
         this.visible = visible;
+        this.disableExport = disableExport;
     }
 }
 
@@ -49,72 +51,152 @@ const ResourceSetting = {
     "Definitions": new setting("Definition", "DF", false, "rs_practice_quiz.png","ASSESSMENT",
         "", "ADAPTIVE", "ISE", "", "1,2", "Restate the definition(s) in your own words.",
         "", "", "",
-        null, false, "", true, true),
+        null, false, "", true, true, false ),
 
     "Visuals": new setting("Visual", "", false, "video.png","ASSESSMENT",
         "", "ADAPTIVE", "ISE", "", "1,2", "",
         "", "", "",
-        null, false, "", true, true),
+        null, false, "", true, true, false),
 
     "WordStudy": new setting("", "", false, "rs_practice_quiz.png","ASSESSMENT",
         "", "ADAPTIVE", "ISE", "", "1,2", "",
         "", "", "",
-        null, false, "", true, true),
+        null, false, "", true, true, false),
 
     // GT
     "CRW-GT": new setting("", "", true, "ASSESSMENT.png","ASSESSMENT",
         "", "ADAPTIVE", "ISE", "", "1,2", "",
         "Student Choice Activity 1", "", "",
-        null, false, "", true, true),
+        null, false, "", true, true, false),
 
     "E/N": new setting("", "", true, "ASSESSMENT.png","ASSESSMENT",
         "", "ADAPTIVE", "ISE", "", "1,2", "",
         "Student Choice Activity 2", "", "",
-        null, false, "", true, true),
+        null, false, "", true, true, false),
 
     "VC-OLV": new setting("Vocabulary in Context", "", 	false, "ASSESSMENT.png","ASSESSMENT",
         "", "ADAPTIVE", "ISE", "", "1,2", "",
         "Student Choice Activity 1", "Vocabulary in Context", "On Level Passage",
-        null, false, "", true, true),
+        null, false, "", true, true, false),
 
     "VC-D": new setting("Vocabulary in Context", "", 	false, "ASSESSMENT.png","ASSESSMENT",
         "", "ADAPTIVE", "ISE", "", "2", "",
         "Student Choice Activity 1", "Vocabulary in Context", "Differentiated Passage",
-        null, false, "", true, true),
+        null, false, "", true, true, false),
 
     "WT": new setting("", "", true, "ASSESSMENT.png","ASSESSMENT",
         "", "ADAPTIVE", "ISE", "", "1,2", "",
         "Student Choice Activity 2", "", "",
-        null, false, "", true, true),
+        null, false, "", true, true, false),
 
     // OYO
     "AP": new setting("", "", true, "ASSESSMENT.png","ASSESSMENT",
         "", "ADAPTIVE", "ISE", "", "1,2", "",
         "", "", "",
-        null, false, "", true, true),
+        null, false, "", true, true, false),
 
     "CRW-OYO": new setting("", "", true, "ASSESSMENT.png","ASSESSMENT",
         "", "ADAPTIVE", "ISE", "", "1,2", "",
         "", "", "",
-        1, false, null, true, true),
+        1, false, null, true, true, false),
 
     "CS": new setting("", "", true, "ASSESSMENT.png","ASSESSMENT",
         "", "ADAPTIVE", "ISE", null, "1,2", "",
         "", "", "",
-        1, false, "", true, true),
+        1, false, "", true, true, false),
 
     "D-P": new setting("Passage", "", false, "ASSESSMENT.png","ASSESSMENT",
         "", "ADAPTIVE", "ISE", "", "2", "",
         "Student Choice Activity", "Passage", "Differentiated Passage",
-        1, false, "", true, true),
+        1, false, "", true, true, false),
 
     "OLV-P": new setting("Passage", "", false, "ASSESSMENT.png","ASSESSMENT",
         "", "ADAPTIVE", "ISE", "", "1,2", "",
         "Student Choice Activity", "Passage", "On Level Passage",
-        1, false, "", true, true),
+        1, false, "", true, true, false),
 
     //Assessment Adaptive ISE Assessment 2023
+    "BOY": new setting("", "", true, "assessment.png","ASSESSMENT",
+        "math2018", "ISE", "ISE", "Adaptive ISE Assessment 2023", "", "",
+        "", "", "",
+        null, false, "", false, true, false),
 
+    "EOY": new setting("", "", true, "assessment.png","ASSESSMENT",
+        "math2018", "ISE", "ISE", "Adaptive ISE Assessment 2023", "", "",
+        "", "", "",
+        null, false, "Unit 15", false, true, false),
+
+    "CumTest1": new setting("", "", true, "assessment.png","ASSESSMENT",
+        "math2018", "ISE", "ISE", "Adaptive ISE Assessment 2023", "", "",
+        "", "", "",
+        null, false, "Unit 4", false, true, false),
+
+    "CumTest2": new setting("", "", true, "assessment.png","ASSESSMENT",
+        "math2018", "ISE", "ISE", "Adaptive ISE Assessment 2023", "", "",
+        "", "", "",
+        null, false, "Unit 8", false, true, false),
+
+    "CumTest3": new setting("", "", true, "assessment.png","ASSESSMENT",
+        "math2018", "ISE", "ISE", "Adaptive ISE Assessment 2023", "", "",
+        "", "", "",
+        null, false, "Unit 12", false, true, false),
+
+    "CumTest4": new setting("", "", true, "assessment.png","ASSESSMENT",
+        "math2018", "ISE", "ISE", "Adaptive ISE Assessment 2023", "", "",
+        "", "", "",
+        null, false, "Unit 15", false, true, false),
+
+    "PreTest": new setting("", "", true, "assessment.png","ASSESSMENT",
+        "math2018", "ISE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "",
+        "", "", "",
+        null, false, "", false, true, false),
+
+    "PostTest": new setting("", "", true, "assessment.png","ASSESSMENT",
+        "math2018", "ISE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "",
+        "", "", "",
+        null, false, "", false, true, false),
+
+    //Games
+    "WPG": new setting("Static", "", true, "ASSESSMENT.png","HTML",
+        "", "WPG", "", "", "1,2", "",
+        "", "", "",
+        null, false, "", false, true, false),
+
+    "FC1": new setting("Static", "", true, "ASSESSMENT.png","HTML",
+        "", "FC", "", "", "1", "",
+        "", "", "",
+        null, false, "", false, true, false),
+
+    "FC2": new setting("Static", "", true, "ASSESSMENT.png","HTML",
+        "", "FC", "", "", "2", "",
+        "", "", "",
+        null, false, "", false, true, false),
+
+    "IW1": new setting("Static", "", true, "audio.png","HTML",
+        "", "IW", "", "", "1", "",
+        "", "", "",
+        null, false, "", false, true, false),
+
+    "IW2": new setting("Static", "", true, "audio.png","HTML",
+        "", "IW", "", "", "2", "",
+        "", "", "",
+        null, false, "", false, true, false),
+
+
+    "WW": new setting("Static", "", true, "resources.png","HTML",
+        "", "WW", "", "", "1,2", "",
+        "", "", "",
+        null, false, "", false, true, false),
+
+    "WWiA": new setting("LS", "WWIA", true, "resources.png","HTML",
+        "", "WWIA", "ADAP", "", "1,2", "",
+        "", "", "",
+        null, false, "", false, true, false),
+
+    "WC": new setting("LS", "", true, "resources.png","HTML",
+        "", "WORD_CONTINUUM", "", "", "1,2", "",
+        "", "", "",
+        null, false, "", false, true, false),
 
 }
 
@@ -148,6 +230,7 @@ class Screen {
         const resourceType = new BasicInput("pojo.resourceType");
         const singleQuestion = new BasicInput("pojo.singleQuestionMode1");
         const visible = new BasicInput("pojo.visible1");
+        const disableExport = new BasicInput("pojo.displayOnTOC1");
 
         alternativeResourceTitle.setValue(setting.alternativeResourceTitle);
         keyword.setValue(setting.keyword);
@@ -179,6 +262,7 @@ class Screen {
 
         choicePassage.element.checked = setting.choicePassage;
         singleQuestion.element.checked = setting.singleQuestion;
+        disableExport.element.checked = (setting.disableExport || true);
         visible.element.checked = setting.visible;
 
         // todo:

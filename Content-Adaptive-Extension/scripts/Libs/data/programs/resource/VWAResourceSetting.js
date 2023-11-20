@@ -23,8 +23,13 @@ const VWAResourceSetting = {
   "CumTest3": {value: "Cumulative Test 3: 9-12"},
   "CumTest4": {value: "Cumulative Test 4: 12-15"},
 
-  //Game
-  "FC": {value: "Flash Card"},
-  "IW": {value: "iWords"},
-  'WW': {value: "Word Web"}
+  //Games
+  "FC1": {value: "Flash Cards Pathway 1"},
+  "FC2": {value: "Flash Cards Pathway 2"},
+  "WPG": {value: "Word Part Gallery"},
+  "IW1": {value: "iWords Pathway 1"},
+  "IW2": {value: "iWords Pathway 2"},
+  "WW": {value: "Word Web"},
+  "WC": {value: "Word Continuum"},
+  "WWiA": {value: "Writing: Words in Action"}
 }
