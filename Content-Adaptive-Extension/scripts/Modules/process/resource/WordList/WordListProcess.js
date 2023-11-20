@@ -101,7 +101,7 @@ class WordListProcess {
     setHtml(wordListObject) {
         const wordId = new BasicInput(wordListIds.wordId);
         const word = new BasicInput(wordListIds.word);
-        const multiMeaning = new BasicInput(wordListIds.multiMeaning);
+        const multiMeaning = document.getElementById(wordListIds.multiMeaning);
 
         const themeResult = new BasicInput(wordListIds.themeResult);
         const themeSelect = new BasicInput(wordListIds.themeSelect);
@@ -124,18 +124,17 @@ class WordListProcess {
 
         wordId.setValue(wordListObject.wordId);
         word.setValue(wordListObject.word);
-        if (wordListObject.multiMeaning === "yes")
-        multiMeaning.element.checked = true;
+        multiMeaning.checked = wordListObject.multiMeaning;
 
         // get value from themeDataWithWordId
-        const themeData = this.themeDataWithWordId.find((themeData) => themeData.wordIds.includes(wordListObject.wordId));
+        const themeData = this.themeDataWithWordId.find((themeData) => themeData.wordIds.includes(wordListObject.wordId)) ;
         // get value of theme select
-        const options = themeSelect.element.options;
-        const option = Array.from(options).find((option) => option.text === themeData.header);
+        const themeOptions = themeSelect.element.options;
+        const themeOption = Array.from(themeOptions).find((option) => option.text === themeData.header) || themeOptions[0];
 
-        themeSelect.setValue(option.value);
+        themeSelect.setValue(themeOption.value);
         const displayThemeSelect = document.getElementById("select2-chosen-3");
-        displayThemeSelect.innerHTML = themeData.header;
+        displayThemeSelect.innerHTML = themeOption.text;
 
         pronunciation.setValue(wordListObject.pronunciation);
         partOfSpeech.setValue(wordListObject.partOfSpeech);
@@ -213,7 +212,43 @@ class WordListProcess {
             });
         });
 
+        // set Challenge Words
+        themeData.push(...this.getChallengeWords());
+
         return themeData;
+    }
+
+    getChallengeWords() {
+        const wordLists = this.getWordLists();
+        const length = wordLists.length;
+
+        const challengeWords1 = {
+            header: "Challenge Words 01",
+            bodyText: "Challenge Words 01",
+            wordIds: [],
+        }
+        const challengeWords2 = {
+            header: "Challenge Words 02",
+            bodyText: "Challenge Words 02",
+            wordIds: [],
+        }
+
+        const challengeWords = [challengeWords1, challengeWords2];
+
+        let index = 0;
+        const ChallengeWord = "Challenge";
+
+        // set challenge words 1
+        for (let i = 0; i < length; i++) {
+            const wordList = wordLists[i];
+            const wordId = this.getWordId(wordList);
+            const wordType = this.getWordType(wordList);
+            if (wordType.includes(ChallengeWord)) {
+                challengeWords[index]['wordIds'].push(wordId);
+                if (this.getWordType(wordLists[i + 1]) !== ChallengeWord) index++;
+            }
+        }
+        return challengeWords;
     }
 
     getWordLists() {
@@ -244,7 +279,8 @@ class WordListProcess {
     }
 
     getMultiMeaning(row) {
-        return Utility.getFieldOfRow("Multi-meaning", row);
+        const multiMeaning = Utility.getFieldOfRow("Multiple-Meaning", row) || Utility.getFieldOfRow("Multiple-Meaning", row);
+        return multiMeaning.toLowerCase().trim() === "yes";
     }
 
     getThemeResult(row) {
@@ -304,18 +340,42 @@ class WordListProcess {
     }
 
     getPrefix(row) {
-        return Utility.getFieldOfRow("Prefix", row);
+        const prefix = Utility.getFieldOfRow("Prefix", row);
+        return this.processSplit(prefix, (value) => `<span class="prefix">${value}</span>`);
     }
 
     getRootOrBase(row) {
-        return Utility.getFieldOfRow("Root or Base", row);
+        const rootOrBase = Utility.getFieldOfRow("Root or Base", row);
+        return this.processSplit(rootOrBase, (value) => `<span class="root-or-base">${value}</span>`);
     }
 
     getSuffix(row) {
-        return Utility.getFieldOfRow("Suffix", row);
+        const suffix = Utility.getFieldOfRow("Suffix", row);
+        return this.processSplit(suffix, (value) => `<span class="suffix">${value}</span>`);
     }
 
     getInflectedForm(row) {
         return Utility.getExactlyFieldOfRow("Inflected Form", row);
+    }
+
+    // ------------------ process ------------------ //
+    processSplit(content, stringStyle) {
+        if (!Utility.isNotNull(content)) return "";
+
+        const split = content.split("\n").filter(value => Utility.isNotNull(value));
+        const newSplit = split.map((value, index) => {
+            let _value = value
+                .replaceAll("\n", "")
+                .replaceAll("\r", "")
+                .replace("'", "")
+                .trim();
+            if (index % 2 === 0) _value = `<b>${_value}</b>`;
+            return _value;
+        })
+        const step2 = newSplit.join("<br/>").split("<br/><b>");
+        return step2.map((value, index) => {
+            if (index % 2 === 1) return stringStyle(`<b>${value}`);
+            return stringStyle(value);
+        }).join("\n");
     }
 }

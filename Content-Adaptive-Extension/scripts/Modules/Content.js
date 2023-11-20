@@ -135,7 +135,6 @@ class OptionContent {
     }
 
     static showAndHideModal(show) {
-        console.log("showAndHideModal" + show)
         const modals = ListModalIds;
         // show
         $(`#${show}`).show();
