@@ -312,7 +312,7 @@ class WordListProcess {
     getPartOfSpeechShort(row) {
         const rollover = this.getRolloverDefinition(row);
         const regex = /(?<short>\(.*?\))/g;
-        return regex.exec(rollover).groups.short;
+        return regex.exec(rollover).groups.short.replace(/[()]/, "");
     }
 
     getDefinition(row) {
@@ -322,15 +322,17 @@ class WordListProcess {
     }
 
     getRolloverDefinition(row) {
-        return Utility.getFieldOfRow("Rollover Definition", row) || Utility.getFieldOfRow("Definition", row);
+        return Utility.getFieldOfRow("Rollover Definition", row) || Utility.getExactlyFieldOfRow("Definition", row);
     }
 
     getSynonyms(row) {
-        return Utility.getFieldOfRow("Synonyms", row);
+        const synonyms = Utility.getFieldOfRow("Synonyms", row);
+        return Utility.isNotNull(synonyms) ? synonyms : "";
     }
 
     getAntonyms(row) {
-        return Utility.getFieldOfRow("Antonyms", row);
+        const antonyms = Utility.getFieldOfRow("Antonyms", row);
+        return Utility.isNotNull(antonyms) ? antonyms : "";
     }
 
     getPathway1(row) {
