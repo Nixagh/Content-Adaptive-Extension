@@ -108,4 +108,12 @@ class CSProcess extends VWAProcess {
 	getDescription() {
 		return "OYO_CTS";
 	}
+
+	getPathway2(row) {
+		const pathway2 = super.getPathway2(row);
+		// if data got 24 row, so 23 and 24 is pathway 2 is B
+		// còn lại là pathway 2 là A
+		if (!pathway2 && (this.getLengthData() === 24 && row > 12)) return 'B';
+		return 'A';
+	}
 }
