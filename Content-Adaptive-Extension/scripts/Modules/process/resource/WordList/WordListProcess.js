@@ -127,10 +127,12 @@ class WordListProcess {
         multiMeaning.checked = wordListObject.multiMeaning;
 
         // get value from themeDataWithWordId
-        const themeData = this.themeDataWithWordId.find((themeData) => themeData.wordIds.includes(wordListObject.wordId)) ;
+        const themeData = this.themeDataWithWordId.find((themeData) => themeData.wordIds.includes(wordListObject.wordId));
+        const regex = /<(\/|)i>|<(\/|)b>/g;
+        const themeCode = themeData.header.replaceAll(regex, "") ;
         // get value of theme select
         const themeOptions = themeSelect.element.options;
-        const themeOption = Array.from(themeOptions).find((option) => option.text === themeData.header) || themeOptions[0];
+        const themeOption = Array.from(themeOptions).find((option) => option.text === themeCode) || themeOptions[0];
 
         themeSelect.setValue(themeOption.value);
         const displayThemeSelect = document.getElementById("select2-chosen-3");
@@ -349,17 +351,17 @@ class WordListProcess {
 
     getPrefix(row) {
         const prefix = Utility.getFieldOfRow("Prefix", row);
-        return this.processSplit(prefix, (value) => ``);
+        return this.processSplit(prefix);
     }
 
     getRootOrBase(row) {
         const rootOrBase = Utility.getFieldOfRow("Root or Base", row);
-        return this.processSplit(rootOrBase, (value) => ``);
+        return this.processSplit(rootOrBase);
     }
 
     getSuffix(row) {
         const suffix = Utility.getFieldOfRow("Suffix", row);
-        return this.processSplit(suffix, (value) => ``);
+        return this.processSplit(suffix);
     }
 
     getInflectedForm(row) {
@@ -368,7 +370,7 @@ class WordListProcess {
 
     // ------------------ process ------------------ //
     processSplit(content, stringStyle) {
-        if (!Utility.isNotNull(content)) return "";
+        if (!Utility.isNotNull(content) || content.toLowerCase().trim().includes("n/a")) return "";
 
         const split = content.split("\n").filter(value => Utility.isNotNull(value));
         const newSplit = split.map((value, index) => {
@@ -381,6 +383,7 @@ class WordListProcess {
             return _value;
         })
         const step2 = newSplit.join("<br/>").split("<br/><b>");
+        if (!stringStyle) return step2.join("\n");
         return step2.map((value, index) => {
             if (index % 2 === 1) return stringStyle(`<b>${value}`);
             return stringStyle(value);
