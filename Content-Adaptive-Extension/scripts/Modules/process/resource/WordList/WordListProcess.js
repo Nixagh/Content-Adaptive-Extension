@@ -285,7 +285,7 @@ class WordListProcess {
     }
 
     getWord(row) {
-        return Utility.getFieldOfRow("Word", row);
+        return Utility.getExactlyFieldOfRow("Word", row);
     }
 
     getMultiMeaning(row) {
@@ -322,7 +322,7 @@ class WordListProcess {
     }
 
     getRolloverDefinition(row) {
-        return Utility.getFieldOfRow("Rollover Definition", row);
+        return Utility.getFieldOfRow("Rollover Definition", row) || Utility.getFieldOfRow("Definition", row);
     }
 
     getSynonyms(row) {
