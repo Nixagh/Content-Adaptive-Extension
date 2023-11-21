@@ -202,8 +202,7 @@ class WordListProcess {
 
             const header = Utility.getFieldOfRow("Head", data);
             const bodyText = Utility.getFieldOfRow("Body Text", data);
-            const wordIDs = Utility.getFieldOfRow("Word List", data);
-            const wordIds = getWordIdsInWordList(wordIDs);
+            const wordIds = [] /*|| getWordIdsInWordList(wordIDs)*/;
 
             themeData.push({
                 header,
@@ -212,13 +211,11 @@ class WordListProcess {
             });
         });
 
-        // set Challenge Words
-        themeData.push(...this.getChallengeWords());
-
-        return themeData;
+        // set Theme
+        return this.getTheme(themeData);
     }
 
-    getChallengeWords() {
+    getTheme(themeData) {
         const wordLists = this.getWordLists();
         const length = wordLists.length;
 
@@ -243,12 +240,23 @@ class WordListProcess {
             const wordList = wordLists[i];
             const wordId = this.getWordId(wordList);
             const wordType = this.getWordType(wordList);
+            const _theme = this.getThemeResult(wordList);
             if (wordType.includes(ChallengeWord)) {
                 challengeWords[index]['wordIds'].push(wordId);
                 if (this.getWordType(wordLists[i + 1]) !== ChallengeWord) index++;
             }
+            else {
+                // find theme in themeData with header
+                for (const theme of themeData) {
+                    if (_theme === theme.header) {
+                        theme.wordIds.push(wordId);
+                        break;
+                    }
+                }
+            }
         }
-        return challengeWords;
+        themeData.push(...challengeWords);
+        return themeData;
     }
 
     getWordLists() {
@@ -284,7 +292,7 @@ class WordListProcess {
     }
 
     getThemeResult(row) {
-        return Utility.getFieldOfRow("Theme Result", row);
+        return Utility.getFieldOfRow("Themes", row);
     }
 
     getThemeSelect(row) {
@@ -341,17 +349,17 @@ class WordListProcess {
 
     getPrefix(row) {
         const prefix = Utility.getFieldOfRow("Prefix", row);
-        return this.processSplit(prefix, (value) => `<span class="prefix">${value}</span>`);
+        return this.processSplit(prefix, (value) => ``);
     }
 
     getRootOrBase(row) {
         const rootOrBase = Utility.getFieldOfRow("Root or Base", row);
-        return this.processSplit(rootOrBase, (value) => `<span class="root-or-base">${value}</span>`);
+        return this.processSplit(rootOrBase, (value) => ``);
     }
 
     getSuffix(row) {
         const suffix = Utility.getFieldOfRow("Suffix", row);
-        return this.processSplit(suffix, (value) => `<span class="suffix">${value}</span>`);
+        return this.processSplit(suffix, (value) => ``);
     }
 
     getInflectedForm(row) {
