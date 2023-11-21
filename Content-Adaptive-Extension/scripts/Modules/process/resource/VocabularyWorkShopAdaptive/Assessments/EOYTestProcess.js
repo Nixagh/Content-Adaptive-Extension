@@ -124,7 +124,7 @@ class EOYTestProcess extends VWAProcess {
     }
 
     getItem(row, content) {
-        return this.getExactlyFieldOfRow("Item", content[row % 15]);
+        return this.getExactlyFieldOfRow("Item", content[row % 15]).replace(/\[WOL]/, "______");
     }
 
     getOptionHTML(row, content) {
@@ -133,7 +133,7 @@ class EOYTestProcess extends VWAProcess {
     }
 
     getOptions(row, content) {
-        return this.getAnswerChoices(row, content).map((option) => option.split(".")[1].trim());
+        return this.getAnswerChoices(row, content).map((option) => option.split(/[abcd]\. /)[1].trim());
     }
 
     getAnswerChoices(row, content) {
