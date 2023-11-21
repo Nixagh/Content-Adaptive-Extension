@@ -133,3 +133,32 @@ const download = async () => {
 }
 
 document.getElementById('download-popup').addEventListener('click', download);
+
+
+// auto insert
+;(function autoInsert() {
+    const autoInsertButton = document.getElementById('isAuto');
+    const numberQuestion = document.getElementById('number-question');
+    const startButton = document.getElementById('start');
+    chrome.storage.local.get(['isAuto'], (result) => {
+        autoInsertButton.checked = result.isAuto;
+    });
+    chrome.storage.local.get(['numberQuestion'], (result) => {
+        numberQuestion.value = result.numberQuestion;
+    });
+
+
+    autoInsertButton.addEventListener('click', (e) => {
+        chrome.storage.local.set({isAuto: e.target.checked});
+    });
+
+    startButton.addEventListener('click', (e) => {
+        chrome.storage.local.set({numberQuestion: numberQuestion.value});
+        chrome.storage.local.set({currentQuestion: 1});
+        window.close();
+        // reload main page
+        chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+            chrome.tabs.update(tabs[0].id, {url: tabs[0].url});
+        });
+    });
+})();

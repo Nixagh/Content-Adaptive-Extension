@@ -16,14 +16,16 @@ const Ids = {
 	totalLine: "total-line",
 	currentFile: "current-file",
 	currentDesc: "current-desc",
-	program: "program",
+	program: "cms-program",
 	insertWordList: "insert-word-list",
+	addQuestion: "add-question",
 
 	openInsertQuestion: "open-insert-question",
 	openInsertType: "open-insert-word-list",
 
 	type: "type-select",
 	insertSettings: "insert-settings",
+
 }
 
 const ListModalIds = {

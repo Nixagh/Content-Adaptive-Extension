@@ -17,10 +17,6 @@
     },
     "default_title": "Extension help typing"
   },
-  "background": {
-    "service_worker": "scripts/Modules/Background.js",
-    "type": "module"
-  },
   "permissions": [
     "storage",
     "activeTab",
@@ -95,6 +91,7 @@
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/StartingPoint/VisualProcess.js",
 
         "scripts/Modules/process/resource/WordList/WordListProcess.js",
+        "scripts/Modules/process/resource/WordList/WordContinuumProcess.js",
 
         "scripts/Modules/process/settings/ResourceSetting.js",
         "scripts/Libs/data/programs/resource/VWAResourceSetting.js",

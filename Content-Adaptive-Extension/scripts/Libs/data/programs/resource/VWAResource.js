@@ -26,6 +26,7 @@ const VWAResource = {
 
 const WordListResource = {
 	"WordList": {value: "Word List", new: () => new WordListProcess()},
+	"WordContinuum": {value: "Word Continuum", new: () => new WordContinuumProcess()},
 }
 
 const Resource = {
