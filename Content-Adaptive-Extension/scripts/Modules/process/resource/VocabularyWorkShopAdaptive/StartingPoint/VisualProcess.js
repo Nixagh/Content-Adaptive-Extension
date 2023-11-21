@@ -53,7 +53,7 @@ class VisualProcess extends VWAProcess {
 		const word = this.getWord(row).replace("*", "").trim();
 		let videoNumber = this.getField("Instructional Video Pickup Code", row);
 
-		if (!isNaN(videoNumber)) {
+		if (isNaN(videoNumber)) {
 			return "/content/802906/007744939/VW_unavailablevideo.mp4";
 		}
 		return `/content/${productId}/resourcecode/${word}.mp4`;
