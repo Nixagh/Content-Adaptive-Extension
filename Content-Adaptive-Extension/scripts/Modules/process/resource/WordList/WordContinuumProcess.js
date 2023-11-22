@@ -1,3 +1,22 @@
+const wordContinuumIds = {
+    wordId: "pojo.wordId",
+    word: "pojo.word",
+    directionLine: "cke_directionLine",
+    leftAnchor: "pojo.leftAnchor",
+    rightAnchor: "pojo.rightAnchor",
+    tile: "tile",
+    tileAnswer: "tilesAnswer"
+}
+const wordContinuumObject = {
+    wordId: "",
+    word: "",
+    directionLine: "",
+    leftAnchor: "",
+    rightAnchor: "",
+    tile: "",
+    tileAnswer: "",
+    partOfSpeech: "" //
+}
 class WordContinuumProcess {
     fileName;
     type = "WordContinuum";
@@ -15,11 +34,17 @@ class WordContinuumProcess {
         const rowNumber = this.getRow();
         const data = this.getDataObject(rowNumber);
         this.setHtml(data);
-        console.log(`insert word list row ${rowNumber} success`);
+        console.log(`insert word continuum row ${rowNumber} success`);
     }
 
     getData() {
         return this.getContinuumData();
+    }
+
+    getSheetData(sheetName) {
+        const sheet = ExcelUtil.getSheet(sheetName, this.allSheets);
+        const header = ExcelUtil.getHeader(sheet);
+        return ExcelUtil.getContent(sheet, header);
     }
 
     getContinuumData() {
@@ -33,7 +58,45 @@ class WordContinuumProcess {
     }
 
     getDataObject(rowNumber) {
+        return {
+            wordId: this.getWordId(this.data[rowNumber]),
+            word: this.getWord(this.data[rowNumber]),
+            directionLine: this.getDirectionLine(this.data[rowNumber]),
+            leftAnchor: this.getLeftAnchor(this.data[rowNumber]),
+            rightAnchor: this.getRightAnchor(this.data[rowNumber]),
+            tile_1: this.getTile1(this.data[rowNumber]),
+            tile_1_definition: this.getTile1Definition(this.data[rowNumber]),
+            tile_2: this.getTile2(this.data[rowNumber]),
+            tile_2_definition: this.getTile2Definition(this.data[rowNumber]),
+            tile_3: this.getTile3(this.data[rowNumber]),
+            tile_3_definition: this.getTile3Definition(this.data[rowNumber]),
+            tile_4: this.getTile4(this.data[rowNumber]),
+            tile_4_definition: this.getTile4Definition(this.data[rowNumber]),
+            tile_5: this.getTile5(this.data[rowNumber]),
+            tile_5_definition: this.getTile5Definition(this.data[rowNumber]),
+            tile_6: this.getTile6(this.data[rowNumber]),
+            tile_6_definition: this.getTile6Definition(this.data[rowNumber]),
+            tileAnswer: this.getTileAnswer(this.data[rowNumber]),
+            partOfSpeech: this.getPartOfSpeech(this.data[rowNumber])
+        }
+    }
 
+    setHtml(wordContinuumObject) {
+        const wordId = new BasicInput(wordContinuumIds.wordId);
+        const word = new BasicInput(wordContinuumIds.word);
+        const directionLine = new Cke(wordContinuumIds.directionLine);
+        const leftAnchor = new BasicInput(wordContinuumIds.leftAnchor);
+        const rightAnchor = new BasicInput(wordContinuumIds.rightAnchor);
+        const tile = new BasicInput(wordContinuumIds.tile);
+        const tileAnswer = new BasicInput(wordContinuumIds.tileAnswer);
+
+        wordId.setValue(wordContinuumObject.wordId);
+        word.setValue(wordContinuumObject.word);
+        directionLine.setHtml(wordContinuumObject.directionLine);
+        leftAnchor.setValue(wordContinuumObject.leftAnchor);
+        rightAnchor.setValue(wordContinuumObject.rightAnchor);
+        tile.setValue(this.convertTile(wordContinuumObject));
+        tileAnswer.setValue(wordContinuumObject.tileAnswer);
     }
 
     titleObject() {
@@ -44,4 +107,125 @@ class WordContinuumProcess {
             definition: ""
         }
     }
+    
+    getWordId(row) {
+        return Utility.getFieldOfRow("WordID", row);
+    }
+
+    getWord(row){
+        return Utility.getFieldOfRow("Word", row);
+    }
+
+    getDirectionLine(row){
+        return Utility.getFieldOfRow("Direction Line ", row);
+    }
+
+    getLeftAnchor(row){
+        return Utility.getFieldOfRow("Left Anchor", row);
+    }
+
+    getRightAnchor(row){
+        return Utility.getFieldOfRow("Right Anchor", row);
+    }
+
+    getTile1(row){
+        return Utility.getFieldOfRow("Tile 1 [set random order]", row);
+    }
+
+    getTile1Definition(row){
+        return Utility.getFieldOfRow("Tile 1 popup definition", row);
+    }
+
+    getTile2(row){
+        return Utility.getFieldOfRow("Tile 2 [set random order]", row);
+    }
+
+    getTile2Definition(row){
+        return Utility.getFieldOfRow("Tile 2 popup definition", row);
+    }
+
+    getTile3(row){
+        return Utility.getFieldOfRow("Tile 3 [set random order]", row);
+    }
+
+    getTile3Definition(row){
+        return Utility.getFieldOfRow("Tile 3 popup definition", row);
+    }
+
+    getTile4(row){
+        return Utility.getFieldOfRow("Tile 4 [set random order]", row);
+    }
+
+    getTile4Definition(row){
+        return Utility.getFieldOfRow("Tile 4 popup definition", row);
+    }
+
+    getTile5(row){
+        return Utility.getFieldOfRow("Tile 5 [set random order]", row);
+    }
+
+    getTile5Definition(row){
+        return Utility.getFieldOfRow("Tile 5 popup definition", row);
+    }
+
+    getTile6(row){
+        return Utility.getFieldOfRow("Tile 6 [set random order]", row);
+    }
+
+    getTile6Definition(row){
+        return Utility.getFieldOfRow("Tile 6 popup definition", row);
+    }
+
+    getTileAnswer(row){
+        return Utility.getFieldOfRow("Tiles (correct order)", row).replaceAll(",", ";");
+    }
+
+    getPartOfSpeech(row){
+        return Utility.getFieldOfRow("Part of Speech", row);
+    }
+
+    generatePartOfJson(tile, partOfSpeech, color, definition) {
+        if (definition.includes("\"")) {
+            definition = definition.replace("\"", "\\\"");
+        }
+        return `{"tile":"${tile}","partOfSpeech":"${partOfSpeech}","color":"${color}","definition":"${definition}"}`;
+    }
+
+    convertTile(wordContinuumObject){
+        const list = [];
+        const color = "#F1F2FD";
+        const partOfSpeech = wordContinuumObject.partOfSpeech;
+
+        if(wordContinuumObject.tile_1!=null){
+            list.push(this.generatePartOfJson(wordContinuumObject.tile_1, partOfSpeech, color, wordContinuumObject.tile_1_definition));
+        }
+        if(wordContinuumObject.tile_2!=null){
+            list.push(this.generatePartOfJson(wordContinuumObject.tile_2, partOfSpeech, color, wordContinuumObject.tile_2_definition));
+        }
+        if(wordContinuumObject.tile_3!=null){
+            list.push(this.generatePartOfJson(wordContinuumObject.tile_3, partOfSpeech, color, wordContinuumObject.tile_3_definition));
+        }
+        if(wordContinuumObject.tile_4!=null){
+            list.push(this.generatePartOfJson(wordContinuumObject.tile_4, partOfSpeech, color, wordContinuumObject.tile_4_definition));
+        }
+        if(wordContinuumObject.tile_5!=null){
+            list.push(this.generatePartOfJson(wordContinuumObject.tile_5, partOfSpeech, color, wordContinuumObject.tile_5_definition));
+        }
+        if(wordContinuumObject.tile_6!=null){
+            list.push(this.generatePartOfJson(wordContinuumObject.tile_6, partOfSpeech, color, wordContinuumObject.tile_6_definition));
+        }
+
+        let result = "["; 
+        const size = list.length;
+        for (let i = 0; i < size; i++) {
+            const tile = list[i];
+            result += tile;
+            if (i < size - 1) {
+                result += ",";
+            }
+        }
+        result += "]";
+        return result;
+    }
+
 }
