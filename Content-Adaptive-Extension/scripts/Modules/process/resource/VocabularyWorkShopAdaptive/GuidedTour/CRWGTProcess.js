@@ -50,7 +50,7 @@ class CRWGTProcess extends VWAProcess {
 		const item = this.getItem(row);
 		const option = `<div cid="${this.getCID(row)}" ctype="Drop_Down" qname="a${row + 1}">${this.getOption(row)}</div>`;
 
-		const regex = /\[FIB: anno: (.*)]/;
+		const regex = /\(FIB: anno: (.*)\)/;
 
 		const question = item.replace(regex, option);
 
@@ -186,7 +186,39 @@ class CRWGTProcess extends VWAProcess {
 	}
 
 	getWordIdFromWordList(word) {
-		const wordObj = this.data.filter(wordObj => wordObj["Word"].trim().toLowerCase() === word.trim().toLowerCase());
+		let wordObj = this.data.filter(wordObj =>    wordObj["Word"].trim().toLowerCase() === word.trim().toLowerCase()  
+		|| wordObj["Correct Answer"].trim().toLowerCase() === word.trim().toLowerCase() 
+		);
+		if(wordObj.length === 0 ){
+			wordObj = this.ConvertV(word);
+		}
 		return wordObj.length ? wordObj[0]["Word ID"] : "";
 	}
+
+	ConvertV(word){
+		let wordConvert = word;
+		let check = true;
+
+		while(check){
+			if(wordConvert.length === 0 ) return false;
+			wordConvert = wordConvert.substr(0 , wordConvert.length - 1);
+			let wordObj = this.data.filter((e) => {
+ 				return e['Word'].trim().toLowerCase().includes(wordConvert.trim().toLowerCase());
+				
+			});
+
+			if(wordObj.length > 0){
+				check = false;
+				return wordObj;
+			}
+
+		}
+		return false;
+
+	}
+
+
+
+
+	
 }

@@ -12,7 +12,7 @@ class Main {
 
 	async autoRun() {
 		const url = window.location.href;
-		await new Promise(resolve => setTimeout(resolve, 1000));
+
 
 		const editURL = (productId, resourceId) => `/cms/question/edit.html?pojo.product.productId=${productId}&pojo.resource.resourceId=${resourceId}`;
 		const urlOfPageCreateQuestion = "http://192.168.200.26:8090/cms/question/resourceView.html";
@@ -44,11 +44,21 @@ class Main {
 			const resourceId = executeR.groups.resourceId;
 			//update url
 			window.location.href = editURL(productId, resourceId);
+
 		}
 		if (url.includes(urlOfPageInputContent)) {
-			// click button insert and save
-			$(`#${Ids.insertAndSave}`).click();
+			$(document).ready(function() { 
+				setTimeout(function(){
+					console.log('Ready!')
+						// click button insert and save
+					$(`#${Ids.insertAndSave}`).click();
+				} , 2000);
+	
+			});
 		}
+
+
+
 	}
 }
 
