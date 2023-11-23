@@ -7,16 +7,6 @@ const wordContinuumIds = {
     tile: "tile",
     tileAnswer: "tilesAnswer"
 }
-const wordContinuumObject = {
-    wordId: "",
-    word: "",
-    directionLine: "",
-    leftAnchor: "",
-    rightAnchor: "",
-    tile: "",
-    tileAnswer: "",
-    partOfSpeech: "" //
-}
 class WordContinuumProcess {
     fileName;
     type = "WordContinuum";
@@ -41,10 +31,8 @@ class WordContinuumProcess {
         return this.getContinuumData();
     }
 
-    getSheetData(sheetName) {
-        const sheet = ExcelUtil.getSheet(sheetName, this.allSheets);
-        const header = ExcelUtil.getHeader(sheet);
-        return ExcelUtil.getContent(sheet, header);
+    getLengthData() {
+        return this.data.length;
     }
 
     getContinuumData() {
@@ -99,15 +87,6 @@ class WordContinuumProcess {
         tileAnswer.setValue(wordContinuumObject.tileAnswer);
     }
 
-    titleObject() {
-        return {
-            tile: "",
-            partOfSpeech: "",
-            color: "#F1F2FD",
-            definition: ""
-        }
-    }
-    
     getWordId(row) {
         return Utility.getFieldOfRow("WordID", row);
     }
@@ -188,7 +167,13 @@ class WordContinuumProcess {
         if (definition.includes("\"")) {
             definition = definition.replace("\"", "\\\"");
         }
-        return `{"tile":"${tile}","partOfSpeech":"${partOfSpeech}","color":"${color}","definition":"${definition}"}`;
+        const obj = {
+            tile: tile,
+            partOfSpeech: partOfSpeech,
+            color: color,
+            definition: definition
+        };
+        return JSON.stringify(obj);
     }
 
     convertTile(wordContinuumObject){
@@ -196,36 +181,18 @@ class WordContinuumProcess {
         const color = "#F1F2FD";
         const partOfSpeech = wordContinuumObject.partOfSpeech;
 
-        if(wordContinuumObject.tile_1!=null){
-            list.push(this.generatePartOfJson(wordContinuumObject.tile_1, partOfSpeech, color, wordContinuumObject.tile_1_definition));
-        }
-        if(wordContinuumObject.tile_2!=null){
-            list.push(this.generatePartOfJson(wordContinuumObject.tile_2, partOfSpeech, color, wordContinuumObject.tile_2_definition));
-        }
-        if(wordContinuumObject.tile_3!=null){
-            list.push(this.generatePartOfJson(wordContinuumObject.tile_3, partOfSpeech, color, wordContinuumObject.tile_3_definition));
-        }
-        if(wordContinuumObject.tile_4!=null){
-            list.push(this.generatePartOfJson(wordContinuumObject.tile_4, partOfSpeech, color, wordContinuumObject.tile_4_definition));
-        }
-        if(wordContinuumObject.tile_5!=null){
-            list.push(this.generatePartOfJson(wordContinuumObject.tile_5, partOfSpeech, color, wordContinuumObject.tile_5_definition));
-        }
-        if(wordContinuumObject.tile_6!=null){
-            list.push(this.generatePartOfJson(wordContinuumObject.tile_6, partOfSpeech, color, wordContinuumObject.tile_6_definition));
+        for(let i = 1; i <= 6; i++) {
+            const title = wordContinuumObject[`tile_${i}`];
+            const definition = wordContinuumObject[`tile_${i}_definition`]
+            if (title && definition) list.push({
+                title: title,
+                partOfSpeech: partOfSpeech,
+                color: color,
+                definition: document
+            })
         }
 
-        let result = "["; 
-        const size = list.length;
-        for (let i = 0; i < size; i++) {
-            const tile = list[i];
-            result += tile;
-            if (i < size - 1) {
-                result += ",";
-            }
-        }
-        result += "]";
-        return result;
+        return JSON.stringify(list);
     }
 
 }
