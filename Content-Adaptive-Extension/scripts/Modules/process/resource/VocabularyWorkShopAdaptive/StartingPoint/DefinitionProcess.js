@@ -45,7 +45,7 @@ class DefinitionProcess extends VWAProcess {
 		const exampleSentence = this.getExampleSentence(row);
 
 		// replace template [FIB: anno: manual] in question by inputReplace
-		const inputReplace = `<input autocapitalize="off" autocomplete="off" autocorrect="off" cid="${this.getCID(row)}" ctype="Fill_in_Blank" qname="q${row + 1}" spellcheck="false" subtype="word" type="text" />`;
+		const inputReplace = `<input autocapitalize="off" autocomplete="off" autocorrect="off" cid="${this.getCID(row)}" ctype="Fill_in_Blank" qname="a${row + 1}" spellcheck="false" subtype="word" type="text" />`;
 		const replace = `[${this.getItemType(row)}: anno: ${this.getCorrectWord(row)}]`;
 		const _question = this.beautifulQuestion(exampleSentence).replace(replace, inputReplace);
 
