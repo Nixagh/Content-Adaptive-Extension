@@ -25,8 +25,11 @@ const VWAResource = {
 }
 
 const WordListResource = {
-	"WordList": {value: "Word List", new: () => new WordListProcess()},
-	"WordContinuum": {value: "Word Continuum", new: () => new WordContinuumProcess()},
+	"WordList": {value: "Word List", new: () => new WordListProcess()}
+}
+
+const WordContinuumResource = {
+	"WordContinuum": {value: "Word Continuum", new: () => new WordContinuumProcess()}
 }
 
 const Resource = {
@@ -34,7 +37,7 @@ const Resource = {
 		resource: WordListResource,
 		insertButton: {
 			show: [Ids.insertWordList],
-			hide: [Ids.insertButton, Ids.insertAndSave]
+			hide: [Ids.insertButton, Ids.insertAndSave, Ids.insertWordContinuum]
 		},
 
 	},
@@ -42,8 +45,16 @@ const Resource = {
 		resource: VWAResource,
 		insertButton: {
 			show: [Ids.insertButton, Ids.insertAndSave],
-			hide: [Ids.insertWordList]
+			hide: [Ids.insertWordList, Ids.insertWordContinuum]
 		}
+	},
+	"WC": {
+		resource: WordContinuumResource,
+		insertButton: {
+			show: [Ids.insertWordContinuum],
+			hide: [Ids.insertButton, Ids.insertAndSave, Ids.insertWordList]
+		},
+
 	}
 }
 
