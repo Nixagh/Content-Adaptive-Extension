@@ -1,7 +1,6 @@
 const url = window.location.href;
 
 class Main {
-
     Initialize() {
         const prepare = new Prepare();
         prepare.init();
@@ -79,11 +78,15 @@ class Main {
         const message_alert = document.getElementsByClassName('alert-message');
         if (message_alert.length > 0) return;
 
-        $(`#${Ids.insertWordList}`).click();
+        $(document).ready(function() { 
+				setTimeout(function(){
+					console.log('Ready!')
+						// click button insert and save
+					$(`#${Ids.insertAndSave}`).click();
+				} , 2000);
+	
+			});
     }
-}
 
 const main = new Main();
 main.Initialize();
-
-
