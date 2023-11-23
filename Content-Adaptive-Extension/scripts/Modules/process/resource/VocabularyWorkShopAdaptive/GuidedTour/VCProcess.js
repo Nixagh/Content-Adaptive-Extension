@@ -22,7 +22,7 @@ class VCProcess extends VWAProcess {
     }
 
     getFullRowData(set, wordList) {
-        const directionLine = this.getFieldOfRow("Direction Line", set);
+        const directionLine = this.getDirectionLineHTML(1);
         const passageBody = this.getFieldOfRow("Passage Body", set);
         const pathway1 = this.getFieldOfRow("Pathway 1 Set", set);
         const pathway2 = this.getFieldOfRow("Pathway 2", set);

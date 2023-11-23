@@ -92,7 +92,7 @@ class WordContinuumProcess {
     }
 
     getWord(row){
-        return Utility.getFieldOfRow("Word", row);
+        return Utility.getExactlyFieldOfRow("Word", row);
     }
 
     getDirectionLine(row){

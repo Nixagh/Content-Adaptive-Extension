@@ -208,7 +208,7 @@ class Utility {
     static removeExtraSpace(string) {
         // i want make function for template
         // template "  dsad a  sada dsad a " => "dsad a sada dsad a"
-        return string.replaceAll(/\s+/g,' ').trim();
+        return string.replaceAll(/\s+/g, ' ').trim();
     }
 
     static splitStringBySemi(string) {
@@ -239,6 +239,15 @@ class Utility {
             if (simplifyHeader === simplifyKey) return row[key];
         }
         // this.addError("Field", `Can't find field ${header} in row ${row + 1} please check your data`);
+        return "";
+    }
+
+    static getFieldIncludeOfRow(headers, row) {
+        const simplifyHeaders = headers.map((value) => Utility.simplifyString(value));
+        for (let key in row) {
+            const simplifyKey = Utility.simplifyString(Utility.beautifullyHeader(key));
+            if (simplifyHeaders.includes(simplifyKey)) return row[key];
+        }
         return "";
     }
 

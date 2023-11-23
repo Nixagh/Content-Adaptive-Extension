@@ -7,13 +7,18 @@ class CumulativeTestProcess extends VWAProcess {
         // const globalResourceId = this.getGlobalResourceId();
         // return globalResourceId[globalResourceId.length - 1];
         // todo: get grade from file name
-        return 10;
+        return 7;
     }
 
     getUnit() {
         // todo:
         const number = this.fileName.match(/\d+/g);
-        return number ? number[0] : 1;
+        // return number ? number[0] : 1;
+        return 2;
+    }
+
+    getLengthData() {
+        return 45;
     }
 
     getCID(row) {
@@ -132,7 +137,7 @@ class CumulativeTestProcess extends VWAProcess {
 
     getItems(row) {
         const searchValue = "[WOL]";
-        const replaceValue = "______"; // "_" x6
+        const replaceValue = "__________"; // "_" x6
         return this._getField("Item", row).replace(searchValue, replaceValue);
     }
 

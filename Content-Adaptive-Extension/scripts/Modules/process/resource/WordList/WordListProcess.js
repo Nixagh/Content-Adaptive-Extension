@@ -71,6 +71,9 @@ class WordListProcess {
         return parseInt(document.getElementById(Ids.questionNumber).value) - this.rowMinus;
     }
 
+    getLengthData() {
+        return this.data.length;
+    }
 
     getDataObject(rowNumber) {
         return {
@@ -312,7 +315,9 @@ class WordListProcess {
     getPartOfSpeechShort(row) {
         const rollover = this.getRolloverDefinition(row);
         const regex = /(?<short>\(.*?\))/g;
-        return regex.exec(rollover).groups.short.replace(/[()]/, "");
+        return regex.exec(rollover).groups.short
+            .replaceAll("(", "")
+            .replaceAll(")", "");
     }
 
     getDefinition(row) {
@@ -367,7 +372,7 @@ class WordListProcess {
     }
 
     getInflectedForm(row) {
-        return Utility.getExactlyFieldOfRow("Inflected Form", row);
+        return Utility.getExactlyFieldOfRow("Inflected Form", row) || Utility.getExactlyFieldOfRow("Inflected Forms", row);
     }
 
     // ------------------ process ------------------ //

@@ -22,7 +22,7 @@ class ExcelUtil {
             const newRow = {};
             for (const key in row) {
                 // remove space in key
-                newRow[Utility.beautifullyHeader(key)] = row[key];
+                newRow[Utility.beautifullyHeader(key).trim()] = row[key];
                 delete row[key];
             }
             return {...newRow};

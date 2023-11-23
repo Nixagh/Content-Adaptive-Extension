@@ -50,7 +50,7 @@ class CRWGTProcess extends VWAProcess {
 		const item = this.getItem(row);
 		const option = `<div cid="${this.getCID(row)}" ctype="Drop_Down" qname="a${row + 1}">${this.getOption(row)}</div>`;
 
-		const regex = /\(FIB: anno: (.*)\)/;
+		const regex = /[\[(]FIB: anno: (.*)[\])]/;
 
 		const question = item.replace(regex, option);
 
@@ -108,7 +108,7 @@ class CRWGTProcess extends VWAProcess {
 	}
 	getAnswerChoices(row) {
 		const answerChoices = this.getField("Answer Choices", row);
-		return answerChoices ? answerChoices.split(",").map(word => Utility.removeExtraSpace(word)).filter(value => Utility.isNotNull(value)) : [];
+		return answerChoices ? answerChoices.split(/[;|,]/).map(word => Utility.removeExtraSpace(word)).filter(value => Utility.isNotNull(value)) : [];
 	}
 
 	getCorrectFeedback(row) {

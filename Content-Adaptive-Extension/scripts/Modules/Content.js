@@ -47,6 +47,7 @@ class OptionContent {
         await Modal.Create(data, {html: innerHtml}, false);
         this.showAndHideInsertButton(Storage.Get("CurrentProgram") || "WL" || "WC");
         this.showAndHideModal(Storage.Get("CurrentShowModal") || ListModalIds.questionModal);
+        // this.showCurrentQuestionNumber();
 
         UI.Delegate(`.emptyWindow`, "click", `#${Ids.openInsertQuestion}`, () => {
             this.showAndHideModal(ListModalIds.questionModal);
@@ -70,7 +71,7 @@ class OptionContent {
             // set current file
             $(`#${Ids.currentFile}`).text(GProcess.fileName);
             $(`#${Ids.currentDesc}`).text(Resource[program].resource[GProcess.type].value);
-            $(`#${Ids.totalLine}`).text(GProcess.data.length);
+            $(`#${Ids.totalLine}`).text(GProcess.getLengthData());
 
         });
 
@@ -89,6 +90,7 @@ class OptionContent {
         UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.insertWordList}`, async () => {
             if (!GProcess) return alert("No file loaded");
             await OptionContent.insert();
+            document.getElementById(Ids.saveBtn).click()
         });
 
         UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.insertWordContinuum}`, async () => {
@@ -125,6 +127,12 @@ class OptionContent {
             Screen.insert(type);
             console.log("insertSettings" + type);
         });
+
+
+        //
+        UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "change", `#${Ids.questionNumber}`, async () => {
+            Storage.Set("CurrentQuestionNumber", $(`#${Ids.questionNumber}`).val());
+        });
     }
 
     static showAndHideInsertButton(program) {
@@ -150,6 +158,11 @@ class OptionContent {
             }
         });
         Storage.Set("CurrentShowModal", show);
+    }
+
+    static showCurrentQuestionNumber() {
+        const currentQuestionNumber = Storage.Get("CurrentQuestionNumber");
+        $(`#${Ids.questionNumber}`).val(currentQuestionNumber);
     }
 
     static initCurrentCode() {
@@ -215,7 +228,7 @@ class OptionContent {
                         <div>
                             <span>Current File: </span><span id="${Ids.currentFile}" style="color: #5be8e8">${GProcess ? GProcess.fileName : ""}</span><br/>
                             <span>Current Description: </span><span id="${Ids.currentDesc}" style="color: #5be8e8">${GProcess ? Resource[currentProgram].resource[GProcess.type].value : ""}</span><br/>
-                            <span>Total Line: </span><span id="${Ids.totalLine}" style="color: #5be8e8">${GProcess ? GProcess.data.length : ""}</span><br/>
+                            <span>Total Line: </span><span id="${Ids.totalLine}" style="color: #5be8e8">${GProcess ? GProcess.getLengthData() : ""}</span><br/>
                         </div>
                     </div>
                     <div class="insert-data">

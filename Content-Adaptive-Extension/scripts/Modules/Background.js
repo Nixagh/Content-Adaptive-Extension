@@ -147,6 +147,9 @@ document.getElementById('download-popup').addEventListener('click', download);
         numberQuestion.value = result.numberQuestion;
     });
 
+    numberQuestion.addEventListener('change', (e) => {
+        chrome.storage.local.set({totalQuestion: e.target.value});
+    });
 
     autoInsertButton.addEventListener('click', (e) => {
         chrome.storage.local.set({isAuto: e.target.checked});
@@ -160,5 +163,18 @@ document.getElementById('download-popup').addEventListener('click', download);
         chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
             chrome.tabs.update(tabs[0].id, {url: tabs[0].url});
         });
+    });
+})();
+
+// insert word list
+(function insertWordList() {
+    const insertWordListButton = document.getElementById('isAutoWordList');
+
+    chrome.storage.local.get(['isAutoWordList'], (result) => {
+        insertWordListButton.checked = result.isAutoWordList;
+    });
+
+    insertWordListButton.addEventListener('click', (e) => {
+        chrome.storage.local.set({isAutoWordList: e.target.checked});
     });
 })();
