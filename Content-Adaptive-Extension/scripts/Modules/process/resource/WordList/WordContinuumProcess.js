@@ -182,13 +182,13 @@ class WordContinuumProcess {
         const partOfSpeech = wordContinuumObject.partOfSpeech;
 
         for(let i = 1; i <= 6; i++) {
-            const title = wordContinuumObject[`tile_${i}`];
+            const tile = wordContinuumObject[`tile_${i}`];
             const definition = wordContinuumObject[`tile_${i}_definition`]
-            if (title && definition) list.push({
-                title: title,
+            if (tile && definition) list.push({
+                tile: tile,
                 partOfSpeech: partOfSpeech,
                 color: color,
-                definition: document
+                definition: definition
             })
         }
 
