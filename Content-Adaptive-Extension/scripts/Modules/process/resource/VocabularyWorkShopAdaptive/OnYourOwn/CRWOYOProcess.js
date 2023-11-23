@@ -86,7 +86,7 @@ class CRWOYOProcess extends VWAProcess {
 
 	getAnswerChoices(row) {
 		const string = this.getField("Answer Choices", row);
-		const split = string.split(";").map((item) => item.trim());
+		const split = string.split(/[;,]/).map((item) => item.trim());
 		if (split.length !== 3) alert("Answer Choices must have 3 items");
 		return split;
 	}

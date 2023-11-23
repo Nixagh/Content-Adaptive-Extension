@@ -45,7 +45,7 @@ class OptionContent {
         const data = OptionContent.getOptionsModalData();
         const innerHtml = OptionContent.getOptionsModalInnerHtml();
         await Modal.Create(data, {html: innerHtml}, false);
-        this.showAndHideInsertButton(Storage.Get("CurrentProgram") || "WL");
+        this.showAndHideInsertButton(Storage.Get("CurrentProgram") || "WL" || "WC");
         this.showAndHideModal(Storage.Get("CurrentShowModal") || ListModalIds.questionModal);
 
         UI.Delegate(`.emptyWindow`, "click", `#${Ids.openInsertQuestion}`, () => {
@@ -87,6 +87,11 @@ class OptionContent {
         })
 
         UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.insertWordList}`, async () => {
+            if (!GProcess) return alert("No file loaded");
+            await OptionContent.insert();
+        });
+
+        UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.insertWordContinuum}`, async () => {
             if (!GProcess) return alert("No file loaded");
             await OptionContent.insert();
         });
@@ -222,6 +227,7 @@ class OptionContent {
                         <button id="${Ids.insertButton}">Insert</button>
                         <button id="${Ids.insertAndSave}" style="color: #181d24">Insert And Save</button>
                         <button id="${Ids.insertWordList}" style="color: #181d24">Insert Word List</button>
+                        <button id="${Ids.insertWordContinuum}" style="color: #181d24">Insert Word Continnuum</button>
                     </div>
                 </div>
             </div>
@@ -251,6 +257,7 @@ class OptionContent {
         // });
         return `
         <option value="WL">Insert Word List</option>
+        <option value="WC">Insert WordContinuum</option>
         <option value="VWA">Insert Resource</option>
 		`;
 
