@@ -1,10 +1,15 @@
 class PreTestProcess extends VWAProcess {
+
     getDescription() {
         return "pretest";
     }
 
     getFullContent() {
         return {first: this.getPretestSheet(), second: []};
+    }
+
+    getScramble() {
+        return true;
     }
 
     mapping({first, second}) {

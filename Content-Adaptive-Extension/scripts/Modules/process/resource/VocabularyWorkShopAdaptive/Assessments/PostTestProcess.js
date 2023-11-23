@@ -6,6 +6,10 @@ class PostTestProcess extends VWAProcess {
     getFullContent() {
         return {first: this.getPretestSheet(), second: []};
     }
+
+    getScramble() {
+        return true;
+    }
     mapping({first, second}) {
         return first;
     }

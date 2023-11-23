@@ -7,6 +7,7 @@ class VWAProcess {
     rowMinus;
     setTab = [1, 1, 1, 1];
     errors;
+    scramble = false;
 
     constructor(type, rowMinus = 1, setTab = [1, 1, 1, 1]) {
         this.type = type;
@@ -17,11 +18,19 @@ class VWAProcess {
         this.errors = [];
     }
 
+    getScramble() {
+        return this.scramble;
+    }
+
     process() {
         this.data = this.mapping(this.getFullContent());
         // this.data = this.getFullContent();
         this.showErrors();
         Storage.Set("GProcess", JSON.stringify(this));
+    }
+
+    getLengthData() {
+        return this.data.length;
     }
 
     mapping({first, second}) {
@@ -77,6 +86,7 @@ class VWAProcess {
             questionTypeSelect: `questionTypeSelection`,
             questionTypeValue: `questionTypeValue`,
             autoScore: `pojo.autoScoreTE1`,
+            scrambleOption: `pojo.scrambleOption1`,
             componentGradingRules: `pojo.componentGradingRules`,
             wordId: `wordId`,
             pathway1: "pathwaySet1",
@@ -102,6 +112,15 @@ class VWAProcess {
             const autoScoreParentElement = autoScoreElement.parentElement;
             autoScoreParentElement.classList.add("checked");
         }
+
+        if(this.getScramble()) {
+            const scramble = document.getElementById(ids.scrambleOption);
+            scramble.checked = true;
+
+            const scrambleParentElement = scramble.parentElement;
+            scrambleParentElement.classList.add("checked");
+        }
+
         const linkToQuestionElement = new BasicInput(ids.linkToQuestion);
         const componentGradingRulesElement = new BasicInput(ids.componentGradingRules);
 
@@ -496,5 +515,19 @@ class VWAProcess {
         return passageBodyWithUlAndLi.replaceAll(f_regex, replaceDiv) // replace <paragraph id=0> to <div class="paragraph" id="0">
             .replaceAll(l_regex, "</div>")  // replace </paragraph> tag to </div> tag
             .replaceAll(word_regex, replaceWord); // replace <word3186>inanimate</word3186> to <word3186>word3186:inanimate</word3186>
+    }
+
+    wordIdConverter(content) {
+        const word_regex = /<word(\d+)>.+?<(\/|)word(\d+)>/g;
+
+        const replaceWord = (match) => {
+            const regexNumber = /\d+/;
+            const matchNumber = match.match(regexNumber);
+            const wordId = matchNumber ? matchNumber[0] : '';
+            const word = match.replaceAll(/<(\/|)word\d+>/g, '').trim();
+            return `<word${wordId}>word${wordId}:${word}</word${wordId}>`;
+        }
+
+        return content.replaceAll(word_regex, replaceWord);
     }
 }
