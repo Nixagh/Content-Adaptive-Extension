@@ -36,7 +36,31 @@ class Main {
 
 			Storage.Set(currentQuestionKey, 1);
 			Storage.Set("CurrentQuestionNumber", 1);
-			return alert("All question has been done");
+
+			// add log
+			const _errors = GProcess._errors;
+			const type = GProcess.type;
+			const logStorage = new LogStorage();
+			const data = [];
+			Object.entries(_errors).forEach(([key, value]) => {
+				value.forEach((error) => {
+					data.push({
+						index: key,
+						questionNumber: key,
+						error: {
+							type: error.tab,
+							message: error.message
+						},
+					})
+				});
+			});
+
+			const log = logStorage.createLog(type, numberQuestion, data);
+			await logStorage.addLog(log, log.name);
+
+			if (confirm('All question has been done, You want to open log page?')) {
+				window.open(chrome.runtime.getURL("UI/log.html"));
+			}
 		}
 
 		if (url.includes(urlOfPageCreateQuestion)) {

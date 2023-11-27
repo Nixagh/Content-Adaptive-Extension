@@ -8,6 +8,7 @@ class VWAProcess {
     setTab = [1, 1, 1, 1];
     errors;
     scramble = false;
+    _errors = [];
 
     constructor(type, rowMinus = 1, setTab = [1, 1, 1, 1]) {
         this.type = type;
@@ -196,11 +197,18 @@ class VWAProcess {
         const correctAnswer = new Area("pojo.correctAnswer");
         const correctAnswerHTML = new Cke("cke_38_contents");
 
-        question.setHtml(this.getQuestionHTML(row));
+        const questionContent = this.getQuestionHTML(row);
+        const correctText = this.getCorrectTextHTML(row);
+        const correctAnswerText = this.getCorrectAnswer(row);
+
+        question.setHtml(questionContent);
         correctAnswer.show();
         correctAnswer.parentShow();
-        correctAnswer.setValue(this.getCorrectAnswer(row));
-        correctAnswerHTML.setHtml(this.getCorrectTextHTML(row));
+        correctAnswer.setValue(correctAnswerText);
+        correctAnswerHTML.setHtml(correctText);
+
+        this.checkQuestionContent(questionContent, correctAnswerText, correctText, row);
+
         console.log("Set question content")
     }
 
@@ -208,6 +216,10 @@ class VWAProcess {
         const feedback = new Area("feedback_data");
         feedback.setValue(this.getFeedback(row));
         console.log("Set feedback");
+    }
+
+    checkQuestionContent(questionContent, correctAnswerText, correctText, row) {
+
     }
 
     // ------------------ get data for question ------------------ //
@@ -396,6 +408,16 @@ class VWAProcess {
             tab: tab,
             message: message
         });
+    }
+
+    createError(tab, message, row) {
+        if(row) {
+            this._errors[row] = this._errors[row] ? this._errors[row] : [];
+            this._errors[row].push({
+                tab: tab,
+                message: message
+            });
+        }
     }
 
     showErrors() {
