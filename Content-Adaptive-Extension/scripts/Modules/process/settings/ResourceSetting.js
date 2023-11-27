@@ -189,7 +189,7 @@ const ResourceSetting = {
         null, false, "", false, true, false),
 
     "WWiA": new setting("LS", "WWIA", true, "resources.png","HTML",
-        "", "WWIA", "ADAP", "", "1,2", "",
+        "", "WWIA", "ADAP", "Adaptive ISE Assessment 2023", "1,2", "",
         "", "", "",
         null, false, "", false, true, false),
 
