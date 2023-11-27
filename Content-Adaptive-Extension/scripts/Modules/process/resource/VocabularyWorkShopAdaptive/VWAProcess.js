@@ -461,16 +461,18 @@ class VWAProcess {
         // <i>-dub</i> => <i style="white-space:nowrap;display:inline;">-dub</i>
         // <i>dub-</i> => <i style="white-space:nowrap;display:inline;">dub-</i>
 
-        const regex = /<i>(\s*-\w+-\s*)<\/i>/g;
-        const match = item.match(regex);
-        if (match) {
-            match.forEach((m) => {
-                const replace = m.replaceAll('<i>', '<i style="white-space:nowrap;display:inline;">');
-                item = item.replace(m, replace);
-            })
+        let regex = /<i>(\s*-\w+)<(\/|)i>/g;
+        if(item.match(regex)) {
+            item = item.replaceAll(regex, '<i style="white-space:nowrap;display:inline;">$1</i>');
         }
+
+        regex = /<b>(.+?)<b>/;
+        if (item.match(regex)) {
+            item = item.replaceAll(regex, '<b>$1</b>');
+        }
+
         // remove <label></label>
-        const regex_ = /<label>(.*?)<\/label>/;
+        const regex_ = /<label>(.*?)<(\/|)label>/;
         return item.match(regex_) ? item.replaceAll(item.match(regex_)[0], '').trim() : item.trim();
     }
 

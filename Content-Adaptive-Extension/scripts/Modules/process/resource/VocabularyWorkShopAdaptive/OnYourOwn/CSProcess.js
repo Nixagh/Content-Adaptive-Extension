@@ -31,7 +31,7 @@ class CSProcess extends VWAProcess {
 	}
 
 	getDirectionLineHTML(row) {
-		return this.getField("Direction Line", row);
+		return `<i>Select the word that <b>best</b> completes the sentence. You will use each word only one time.</i>`;
 	}
 
 	getQuestionHTML(row) {
