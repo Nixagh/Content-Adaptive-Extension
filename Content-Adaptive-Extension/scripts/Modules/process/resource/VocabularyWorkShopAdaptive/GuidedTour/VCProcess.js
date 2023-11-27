@@ -139,7 +139,7 @@ class VCProcess extends VWAProcess {
 
         const passageTitle = `<div class="title">${title}</div>`;
 
-        const passageContent = this.passageConverter(content);
+        const passageContent = this.passageConverterV02(content);
         return `<div class="direction_section">
 					<div audio-source="" class="audio-inline" style="display: inline-flex; width: auto;"></div>
 					${passageTitle}
@@ -148,9 +148,7 @@ class VCProcess extends VWAProcess {
     }
 
     getPassageBody(row) {
-        const passageBody = this.getField("Passage Body", row);
-        const splitPassageBody = passageBody.split("\n");
-        return splitPassageBody.slice(1).join("\n");
+        return this.getField("Passage Body", row);
     }
 
     getPassageTitle(row) {
