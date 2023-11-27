@@ -104,7 +104,9 @@ class WordTieProcess extends VWAProcess {
 
         const index = [];
         correctAnswerArray.forEach((value) => {
-            const indexOf = answerChoices.indexOf(value);
+            value = value.trim().toLowerCase();
+            // find index of answer choice with ignore case
+            const indexOf = answerChoices.findIndex((choice) => choice.toLowerCase() === value);
             if (indexOf !== -1) {
                 index.push(String.fromCharCode(indexOf + 97));
             }
