@@ -178,3 +178,11 @@ document.getElementById('download-popup').addEventListener('click', download);
         chrome.storage.local.set({isAutoWordList: e.target.checked});
     });
 })();
+
+// open log
+(function openLog() {
+    const openLogButton = document.getElementById('open-log');
+    openLogButton.addEventListener('click', (e) => {
+        chrome.tabs.create({url: "UI/log.html"});
+    });
+})();

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log</title>
+    <link rel="stylesheet" href="../styles/log.css">
+</head>
+<body>
+    <h1>This is Log</h1>
+
+    <label for="resource-select">Select Resource</label>
+    <select id="resource-select" style="min-width: 100px"></select>
+    <br/>
+    <label for="timestamp-select">Select Timestamp</label>
+    <select id="timestamp-select" style="min-width: 100px"></select>
+    <br/>
+    <button id="btn-show-log">Show Log</button>
+    <br/>
+    <br/>
+    <div id="log-container"></div>
+    <script src="../scripts/Modules/log/LogStorage.js"></script>
+    <script type="module" src="../scripts/Modules/log/logScript.js"></script>
+</body>
+</html>
