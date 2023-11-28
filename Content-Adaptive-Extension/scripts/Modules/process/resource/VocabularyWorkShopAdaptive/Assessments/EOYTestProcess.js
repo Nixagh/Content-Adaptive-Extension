@@ -1,6 +1,6 @@
 class EOYTestProcess extends VWAProcess {
     getDescription() {
-        return `g${this.getGrade()}`;
+        return `EOY_g${this.getGrade()}`;
     }
 
     // getRow() {
