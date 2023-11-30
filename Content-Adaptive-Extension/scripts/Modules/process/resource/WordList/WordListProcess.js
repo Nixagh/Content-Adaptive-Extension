@@ -288,7 +288,7 @@ class WordListProcess {
     }
 
     getWord(row) {
-        return Utility.getExactlyFieldOfRow("Word", row);
+        return Utility.getExactlyFieldOfRow("Word", row).replaceAll("*", "");
     }
 
     getMultiMeaning(row) {
