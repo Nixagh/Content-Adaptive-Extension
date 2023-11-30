@@ -96,6 +96,8 @@
         "scripts/Modules/process/settings/ResourceSetting.js",
         "scripts/Libs/data/programs/resource/VWAResourceSetting.js",
 
+        "scripts/Modules/log/LogStorage.js",
+
         "scripts/Modules/Prepare.js",
         "scripts/Modules/Content.js",
         "scripts/Main.js"

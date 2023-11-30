@@ -101,7 +101,7 @@ const ResourceSetting = {
         1, false, null, true, true, false),
 
     "CS": new setting("", "", true, "ASSESSMENT.png","ASSESSMENT",
-        "", "ADAPTIVE", "ISE", null, "1,2", "",
+        "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "",
         "", "", "",
         1, false, "", true, true, false),
 

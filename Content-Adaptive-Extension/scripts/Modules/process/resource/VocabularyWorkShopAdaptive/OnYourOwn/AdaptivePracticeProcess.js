@@ -105,7 +105,7 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getDirectionLineHTML(row) {
-        return `<i>Select the word that is closest in meaning to the boldface word in the sentence. You will use each word only one time.</i>`;
+        return `<i>Select the word that is closest in meaning the the boldface word(s) in the sentence. You will use each word only one time.</i>`;
     }
 
     setPassage(row) {

@@ -83,6 +83,23 @@ class DefinitionProcess extends VWAProcess {
         return this.getCorrectWord(row);
     }
 
+	checkQuestionContent(questionContent, correctAnswerText, correctText, row) {
+		const inputRex = /<input.*?\/>/g;
+
+		const input = questionContent.match(inputRex);
+		if (input === null) this.createError("questionContent", "Question content does not have input tag", row);
+
+		const inputCID = input[0].match(/cid="(?<cid>\d+)"/);
+		if (inputCID === null) this.createError("questionContent", "Question content does not have cid attribute", row);
+
+		const inputQName = input[0].match(/qname="(?<qname>.*?)"/);
+		if (inputQName === null) this.createError("questionContent", "Question content does not have qname attribute", row);
+
+		// check correct answer text
+		if (correctAnswerText !== this.getCorrectAnswerValue(row)) this.createError("correctAnswerText", "Correct answer text is not correct", row);
+		if(!correctText) this.createError("correctText", "Correct text is empty", row);
+	}
+
 	// ----------------- get field ----------------- //
 	getInflectedForm(row) {
 		return this.getExactlyField("Inflected Forms", row);
