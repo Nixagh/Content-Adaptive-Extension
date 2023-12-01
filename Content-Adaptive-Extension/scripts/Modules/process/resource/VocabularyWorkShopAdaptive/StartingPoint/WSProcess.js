@@ -112,7 +112,10 @@ class WSProcess extends VWAProcess {
 	getCharacterImage(row) {
 		const characterImage = this.getField("Characteristic Image", row);
 		// if characterImage is Multiple Meaning, convert to Multiple-meaning
-		return characterImage.includes("Multiple") || characterImage.includes("Meaning") ? "Multiple-meaning Word" : characterImage;
+
+		return characterImage.includes("Multiple") || characterImage.includes("Meaning")
+			? "Multiple-meaning Word"
+			: characterImage.replaceAll("Parts of Speech", "Part of Speech").trim();
 	}
 
 	getPrefix(row) {

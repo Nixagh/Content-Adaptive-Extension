@@ -122,14 +122,17 @@ class Main {
                 // if total word list = current word list
                 const totalWordList = parseInt($(`#totalWordList`).text());
                 const currentWordList = parseInt($(`#currentWordList`).text());
-                if (totalWordList >= currentWordList) {
+                if (currentWordList >= totalWordList) {
                     chrome.storage.local.set({isAutoWordList: false});
-                    return window.close();
+                    return;
                 }
 
                 // update url
                 const programTocId = Storage.Get("programTocId");
-                window.location.href = editWordListPage + `?programTocId=${programTocId}`;
+                // open new tab
+                window.open(editWordListPage + `?programTocId=${programTocId}`);
+                // close current tab
+                window.close();
             }
         }
 

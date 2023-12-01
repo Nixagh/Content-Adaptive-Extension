@@ -317,7 +317,9 @@ class WordListProcess {
         const rollover = this.getRolloverDefinition(row);
         const regex = /(?<short>\(.*?\))/g;
 
-        if (!regex.exec(rollover)) {
+        const exec = regex.exec(rollover);
+
+        if (!exec) {
             const partOfSpeech = this.getPartOfSpeech(row);
 
             const _get = (partOfSpeech) => {
@@ -347,10 +349,10 @@ class WordListProcess {
             const newSplit = split.map((value) => {
                 return _get(value.trim());
             });
-            return `(${newSplit.join(", ")})`;
+            return newSplit.join(", ");
         }
 
-        return regex.exec(rollover).groups.short
+        return exec.groups.short
             .replaceAll("(", "")
             .replaceAll(")", "");
     }
@@ -359,7 +361,10 @@ class WordListProcess {
     getDefinition(row) {
         const rollover = this.getRolloverDefinition(row);
         const regex = /(?<short>\(.*?\))(?<definiton>.*)/g
-        return regex.exec(rollover) ? regex.exec(rollover).groups.definiton : rollover;
+
+        const exec = regex.exec(rollover);
+
+        return exec ? exec.groups.definiton : rollover;
     }
 
     getRolloverDefinition(row) {
