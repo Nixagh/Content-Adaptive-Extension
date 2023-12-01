@@ -132,7 +132,7 @@ class WordListProcess {
         // get value from themeDataWithWordId
         const themeData = this.themeDataWithWordId.find((themeData) => themeData.wordIds.includes(wordListObject.wordId));
         const regex = /<(\/|)i>|<(\/|)b>/g;
-        const themeCode = themeData.header.replaceAll(regex, "") ;
+        const themeCode = themeData.header.replaceAll(regex, "");
         // get value of theme select
         const themeOptions = themeSelect.element.options;
         const themeOption = Array.from(themeOptions).find((option) => option.text === themeCode) || themeOptions[0];
@@ -178,6 +178,8 @@ class WordListProcess {
             const word = Utility.getFieldOfRow("Word ID", wordList);
             const definitionRow = definitions.find((definition) => Utility.equalsWordId(Utility.getFieldOfRow("Word ID", definition), word));
             const wordStudyRow = wordStudy.find((wordStudy) => Utility.equalsWordId(Utility.getFieldOfRow("Word ID", wordStudy), word));
+
+            definitionRow["D_Definition"] = Utility.getFieldOfRow("Definition", definitionRow);
 
             return {
                 ...wordList,
@@ -249,8 +251,7 @@ class WordListProcess {
             if (wordType.includes(ChallengeWord)) {
                 challengeWords[index]['wordIds'].push(wordId);
                 if (this.getWordType(wordLists[i + 1]) !== ChallengeWord) index++;
-            }
-            else {
+            } else {
                 // find theme in themeData with header
                 for (const theme of themeData) {
                     if (_theme === theme.header) {
@@ -315,19 +316,54 @@ class WordListProcess {
     getPartOfSpeechShort(row) {
         const rollover = this.getRolloverDefinition(row);
         const regex = /(?<short>\(.*?\))/g;
+
+        if (!regex.exec(rollover)) {
+            const partOfSpeech = this.getPartOfSpeech(row);
+
+            const _get = (partOfSpeech) => {
+                switch (partOfSpeech) {
+                    case "noun":
+                        return "n.";
+                    case "verb":
+                        return "v.";
+                    case "adjective":
+                        return "adj.";
+                    case "adverb":
+                        return "adv.";
+                    case "pronoun":
+                        return "pron.";
+                    case "preposition":
+                        return "prep.";
+                    case "conjunction":
+                        return "conj.";
+                    case "interjection":
+                        return "interj.";
+                    default:
+                        return "";
+                }
+            }
+
+            const split = partOfSpeech.split("[;,]");
+            const newSplit = split.map((value) => {
+                return _get(value.trim());
+            });
+            return `(${newSplit.join(", ")})`;
+        }
+
         return regex.exec(rollover).groups.short
             .replaceAll("(", "")
             .replaceAll(")", "");
     }
 
+
     getDefinition(row) {
         const rollover = this.getRolloverDefinition(row);
         const regex = /(?<short>\(.*?\))(?<definiton>.*)/g
-        return regex.exec(rollover).groups.definiton;
+        return regex.exec(rollover) ? regex.exec(rollover).groups.definiton : rollover;
     }
 
     getRolloverDefinition(row) {
-        return Utility.getFieldOfRow("Rollover Definition", row) || Utility.getExactlyFieldOfRow("Definition", row);
+        return Utility.getFieldOfRow("Rollover Definition", row) || Utility.getExactlyFieldOfRow("D_Definition", row);
     }
 
     getSynonyms(row) {
