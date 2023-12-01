@@ -343,7 +343,7 @@ class WordListProcess {
                 }
             }
 
-            const split = partOfSpeech.split("[;,]");
+            const split = partOfSpeech.split("[;,/|]");
             const newSplit = split.map((value) => {
                 return _get(value.trim());
             });
