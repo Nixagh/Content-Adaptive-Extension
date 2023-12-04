@@ -169,7 +169,7 @@ class VWAProcess {
             passageSummary.setHtml(this.getPassageSummaryText(row));
         }
 
-        const listType = ["DP1", "DP2", "OLV-P1", "OLV-P2"];
+        const listType = ["DP1", "DP2", "OLV-P1", "OLV-P2" , "WWiAC"];
         if (listType.includes(this.type)) {
             choicePassageCheckBox.element.checked = true;
             choicePassageCheckBox.element.parentElement.classList.add("checked");

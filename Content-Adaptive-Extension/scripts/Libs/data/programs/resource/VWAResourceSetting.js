@@ -12,6 +12,7 @@ const VWAResourceSetting = {
   "OLV-P": {value: "On-level Passage"},
   "D-P": {value: "Differentiated Passage"},
   "CS": {value: "Completing the Sentence"},
+  "WWiA" :{value: "Writing Words in Action"},
 
   //Assessment
   "EOY": {value: "End of Year Test"},

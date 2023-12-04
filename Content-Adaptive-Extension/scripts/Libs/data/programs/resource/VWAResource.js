@@ -22,6 +22,7 @@ const VWAResource = {
 	"PreTest": {value: "Pre Test", new: () => new PreTestProcess("PreTest", 1, [1, 0, 1, 0])},
 	"PostTest": {value: "Post Test", new: () => new PostTestProcess("PostTest", 1, [1, 0, 1, 0])},
 	"CumTest": {value: "Cumulative Test", new: () => new CumulativeTestProcess("CumTest", 1, [1, 0, 1, 0])},
+	"WWiAC": {value: "Writing Words in Action" , new : () => new WWiAProcess("WWiAC" , 1 , [1, 1, 1, 0])}
 }
 
 const WordListResource = {
