@@ -65,6 +65,7 @@ class Main {
 			if (confirm('All question has been done, You want to open log page?')) {
 				window.open(chrome.runtime.getURL("UI/log.html"));
 			}
+            return;
 		}
 
         if (url.includes(urlOfPageCreateQuestion)) {
