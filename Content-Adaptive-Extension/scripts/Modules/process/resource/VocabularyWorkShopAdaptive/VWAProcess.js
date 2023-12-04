@@ -488,7 +488,7 @@ class VWAProcess {
             item = item.replaceAll(regex, '<i style="white-space:nowrap;display:inline;">$1</i>');
         }
 
-        regex = /<b>(.+?)<b>/;
+        regex = /<b>(.+?)<b>/g;
         if (item.match(regex)) {
             item = item.replaceAll(regex, '<b>$1</b>');
         }
