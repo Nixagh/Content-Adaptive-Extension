@@ -49,54 +49,54 @@ class setting {
 const ResourceSetting = {
     // SP
     "Definitions": new setting("Definition", "DF", false, "rs_practice_quiz.png","ASSESSMENT",
-        "", "ADAPTIVE", "ISE", "", "1,2", "Restate the definition(s) in your own words.",
+        "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "Restate the definition(s) in your own words.",
         "", "", "",
         null, false, "", true, true, false ),
 
     "Visuals": new setting("Visual", "", false, "video.png","ASSESSMENT",
-        "", "ADAPTIVE", "ISE", "", "1,2", "",
+        "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "",
         "", "", "",
         null, false, "", true, true, false),
 
     "WordStudy": new setting("", "", false, "rs_practice_quiz.png","ASSESSMENT",
-        "", "ADAPTIVE", "ISE", "", "1,2", "",
+        "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "",
         "", "", "",
         null, false, "", true, true, false),
 
     // GT
     "CRW-GT": new setting("", "", true, "ASSESSMENT.png","ASSESSMENT",
-        "", "ADAPTIVE", "ISE", "", "1,2", "",
+        "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "",
         "Student Choice Activity 1", "", "",
         null, false, "", true, true, false),
 
     "E/N": new setting("", "", true, "ASSESSMENT.png","ASSESSMENT",
-        "", "ADAPTIVE", "ISE", "", "1,2", "",
+        "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "",
         "Student Choice Activity 2", "", "",
         null, false, "", true, true, false),
 
     "VC-OLV": new setting("Vocabulary in Context", "", 	false, "ASSESSMENT.png","ASSESSMENT",
-        "", "ADAPTIVE", "ISE", "", "1,2", "",
+        "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "",
         "Student Choice Activity 1", "Vocabulary in Context", "On Level Passage",
         null, false, "", true, true, false),
 
     "VC-D": new setting("Vocabulary in Context", "", 	false, "ASSESSMENT.png","ASSESSMENT",
-        "", "ADAPTIVE", "ISE", "", "2", "",
+        "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "2", "",
         "Student Choice Activity 1", "Vocabulary in Context", "Differentiated Passage",
         null, false, "", true, true, false),
 
     "WT": new setting("", "", true, "ASSESSMENT.png","ASSESSMENT",
-        "", "ADAPTIVE", "ISE", "", "1,2", "",
+        "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "",
         "Student Choice Activity 2", "", "",
         null, false, "", true, true, false),
 
     // OYO
     "AP": new setting("", "", true, "ASSESSMENT.png","ASSESSMENT",
-        "", "ADAPTIVE", "ISE", "", "1,2", "",
+        "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "",
         "", "", "",
         null, false, "", true, true, false),
 
     "CRW-OYO": new setting("", "", true, "ASSESSMENT.png","ASSESSMENT",
-        "", "ADAPTIVE", "ISE", "", "1,2", "",
+        "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "",
         "", "", "",
         1, false, null, true, true, false),
 
@@ -106,12 +106,12 @@ const ResourceSetting = {
         1, false, "", true, true, false),
 
     "D-P": new setting("Passage", "", false, "ASSESSMENT.png","ASSESSMENT",
-        "", "ADAPTIVE", "ISE", "", "2", "",
+        "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "2", "",
         "Student Choice Activity", "Passage", "Differentiated Passage",
         1, false, "", true, true, false),
 
     "OLV-P": new setting("Passage", "", false, "ASSESSMENT.png","ASSESSMENT",
-        "", "ADAPTIVE", "ISE", "", "1,2", "",
+        "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "",
         "Student Choice Activity", "Passage", "On Level Passage",
         1, false, "", true, true, false),
 
