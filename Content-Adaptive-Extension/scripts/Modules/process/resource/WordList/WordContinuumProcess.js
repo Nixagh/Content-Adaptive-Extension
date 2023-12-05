@@ -36,7 +36,7 @@ class WordContinuumProcess {
     }
 
     getContinuumData() {
-        const sheet = ExcelUtil.getSheet("Continuum", this.allSheets);
+        const sheet = ExcelUtil.getFirstSheet(this.allSheets);
         const header = ExcelUtil.getHeader(sheet);
         return ExcelUtil.getContent(sheet, header);
     }
