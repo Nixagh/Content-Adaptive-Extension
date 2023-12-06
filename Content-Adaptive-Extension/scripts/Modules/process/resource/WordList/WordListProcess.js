@@ -321,35 +321,7 @@ class WordListProcess {
 
         if (!exec) {
             const partOfSpeech = this.getPartOfSpeech(row);
-
-            const _get = (partOfSpeech) => {
-                switch (partOfSpeech) {
-                    case "noun":
-                        return "n.";
-                    case "verb":
-                        return "v.";
-                    case "adjective":
-                        return "adj.";
-                    case "adverb":
-                        return "adv.";
-                    case "pronoun":
-                        return "pron.";
-                    case "preposition":
-                        return "prep.";
-                    case "conjunction":
-                        return "conj.";
-                    case "interjection":
-                        return "interj.";
-                    default:
-                        return "";
-                }
-            }
-
-            const split = partOfSpeech.split("[;,/|]");
-            const newSplit = split.map((value) => {
-                return _get(value.trim());
-            });
-            return newSplit.join(", ");
+            return this.covertPartOfSpeech(partOfSpeech);
         }
 
         return exec.groups.short
@@ -357,6 +329,36 @@ class WordListProcess {
             .replaceAll(")", "");
     }
 
+    covertPartOfSpeech(partOfSpeech) {
+        const _get = (partOfSpeech) => {
+            switch (partOfSpeech) {
+                case "noun":
+                    return "n.";
+                case "verb":
+                    return "v.";
+                case "adjective":
+                    return "adj.";
+                case "adverb":
+                    return "adv.";
+                case "pronoun":
+                    return "pron.";
+                case "preposition":
+                    return "prep.";
+                case "conjunction":
+                    return "conj.";
+                case "interjection":
+                    return "interj.";
+                default:
+                    return "";
+            }
+        }
+
+        const split = partOfSpeech.split("[;,/|]");
+        const newSplit = split.map((value) => {
+            return _get(value.trim());
+        });
+        return newSplit.join(", ");
+    }
 
     getDefinition(row) {
         const rollover = this.getRolloverDefinition(row);
@@ -368,7 +370,14 @@ class WordListProcess {
     }
 
     getRolloverDefinition(row) {
-        return Utility.getFieldOfRow("Rollover Definition", row) || Utility.getExactlyFieldOfRow("D_Definition", row);
+        const rollover = Utility.getFieldOfRow("Rollover Definition", row);
+        if (Utility.isNotNull(rollover)) return rollover;
+
+        const definition = Utility.getExactlyFieldOfRow("D_Definition", row);
+        const partOfSpeech = this.covertPartOfSpeech(this.getPartOfSpeech(row));
+        // add ( ) to part of speech
+
+        return `(${partOfSpeech}) ${definition}`;
     }
 
     getSynonyms(row) {
