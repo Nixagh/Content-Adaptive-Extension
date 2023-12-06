@@ -102,7 +102,7 @@ const ResourceSetting = {
 
     "CS": new setting("", "", true, "ASSESSMENT.png","ASSESSMENT",
         "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "",
-        "", "", "",
+        "Student Choice Activity", "", "",
         1, false, "", true, true, false),
 
     "D-P": new setting("Passage", "", false, "ASSESSMENT.png","ASSESSMENT",
