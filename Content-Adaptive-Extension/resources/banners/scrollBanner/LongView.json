@@ -35,19 +35,19 @@
   },
   "mobile": {
     "sp": {
-      "width": "414px",
-      "top": "48px",
-      "left": "1px"
+      "width": "1696px",
+      "top": "-196px",
+      "left": "-1021px"
     },
     "gt": {
-      "width": "414px",
-      "top": "48px",
-      "left": "1px"
+      "width": "1696px",
+      "top": "-71px",
+      "left": "-337px"
     },
     "oyo": {
-      "width": "414px",
-      "top": "48px",
-      "left": "1px"
+      "width": "2192px",
+      "top": "0px",
+      "left": "-516px"
     }
   }
 }
