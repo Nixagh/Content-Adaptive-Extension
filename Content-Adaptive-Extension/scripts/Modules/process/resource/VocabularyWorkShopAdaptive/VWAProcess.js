@@ -411,13 +411,16 @@ class VWAProcess {
     }
 
     createError(tab, message, row) {
+        const _errors = this._errors;
+        const arrays = [];
         if(row) {
-            this._errors[row] = this._errors[row] ? this._errors[row] : [];
-            this._errors[row].push({
+            arrays.push({
                 tab: tab,
                 message: message
             });
+            _errors[row] = arrays;
         }
+        this._errors = _errors;
     }
 
     showErrors() {
@@ -428,74 +431,78 @@ class VWAProcess {
         return true;
     }
 
-    passageConverter(content) {
-        // find the first <bullet> tag and add <ul> tag before it
-        const firstBulletIndex = content.indexOf("<bullet>");
-        const passageBodyWithUl = firstBulletIndex !== -1 ? content.slice(0, firstBulletIndex) + "<ul>" + content.slice(firstBulletIndex) : content;
-        // find the last </bullet> tag and add </ul> tag after it
-        const lastBulletIndex = passageBodyWithUl.lastIndexOf("</bullet>");
-        const passageBodyWithUlAndLi = lastBulletIndex !== -1 ? passageBodyWithUl.slice(0, lastBulletIndex) + "</ul>" + passageBodyWithUl.slice(lastBulletIndex) : passageBodyWithUl;
-
-        // some time
-
-        return passageBodyWithUlAndLi.split("\n").map(value => {
-            // template : <paragraph id=0>The <b>aspiring</b> young actor was excited to be cast in his first play.</paragraph>
-            // index = 0;
-            // result : <div class="paragraph" id="1">The <b>aspiring</b> young actor was excited to be cast in his first play.</div>
-            // but some time not close by </paragraph> , is close by <paragraph>
-
-            // and if paragraph have word like <word3186>inanimate</word3186> replace to <word3186>word3186:inanimate</word3186>
-            // but some time not close by </word3186> , is close by <word3186>
-            // <word3186>inanimate</word3186> -> <word3186>word3186:inanimate</word3186>
-            //todo: <word3186>inanimate<word3186> -> <word3186>word3186:inanimate</word3186>
-            const regex = / <word\d+>/g;
-
-            const regexNumber = /\d+/;
-            const matchNumber = value.match(regexNumber);
-            const paragraphId = matchNumber ? matchNumber[0] : '';
-
-            return value
-                .replaceAll(`<paragraph = ${paragraphId}>`, `<div class="paragraph" id = "${paragraphId}">`)
-                .replaceAll(`<paragraph id = ${paragraphId}>`, `<div class="paragraph" id = "${paragraphId}">`)
-                .replaceAll("</paragraph>", "</div>")
-                .replaceAll(`</paragraph`, '</div>')
-                .replaceAll("<paragraph>", `</div>`)
-                .replaceAll(`</div> id = ${paragraphId}>`, `</div>`)
-                .replaceAll(`</div> = ${paragraphId}>`, `</div>`)
-                .replaceAll(`</paragraph id = ${paragraphId}>`, "")
-                .replaceAll(`</paragraph = ${paragraphId}>`, "")
-                .replaceAll(`<bullet>`, '<li>')
-                .replaceAll(`</bullet>`, '</li>')
-                .replaceAll(`“`, `"`)
-                .replaceAll(`”`, `"`)
-                .replaceAll(regex, (match) => `${match}word${match.split("word")[1].split(">")[0]}:`)
-                // remove /id = \d+/g if have
-                .replaceAll(/id = \d+/g, '')
-                .trim();
-        }).join("\n").trim();
-        // todo: still wrong if first data wrong format T.T ....
-    }
-
-    replaceItalicOfItem(item) {
+    replaceItem(item) {
         // template : <i>-dub-</i> => <i style="white-space:nowrap;display:inline;">-dub-</i>
         // <i>dub</i> => <i>dub</i>
         // <i> -dub- </i> => <i style="white-space:nowrap;display:inline;">-dub-</i>
         // <i>-dub</i> => <i style="white-space:nowrap;display:inline;">-dub</i>
         // <i>dub-</i> => <i style="white-space:nowrap;display:inline;">dub-</i>
+        item = this.replaceItalicOfItem(item);
 
-        let regex = /<i>(\s*-\w+)<(\/|)i>/g;
+        // bold tag and replace item in bold tag
+        item = this.replaceBoldOfItemAndAddBoldTag(item);
+
+        // if character before <b> or <i> or <word\d+> is not space, add space before <b> or <i> or <word\d+>
+        item = this.addSpaceBeforeTag(item);
+
+        // if character after </b> or </i> or </word\d+> is not space, add space after </b> or </i> or </word\d+>
+        item = this.addSpaceAfterTag(item);
+
+        // remove <label></label>
+        item = this.removeLabel(item);
+
+        return item;
+    }
+
+    removeLabel(item) {
+        const regex_ = /<label>(.*?)<(\/|)label>/;
+        return item.match(regex_) ? item.replaceAll(item.match(regex_)[0], '').trim() : item.trim();
+    }
+
+    replaceItalicOfItem(item, regex) {
+        regex = regex || /<i>(.+?)<(\/|)i>/g;
         if(item.match(regex)) {
             item = item.replaceAll(regex, '<i style="white-space:nowrap;display:inline;">$1</i>');
         }
+        return item;
+    }
 
-        regex = /<b>(.+?)<b>/g;
+    replaceBoldOfItemAndAddBoldTag(item) {
+        let regex = /<b>(.+?)<b>/g;
         if (item.match(regex)) {
             item = item.replaceAll(regex, '<b>$1</b>');
         }
+        regex = /<b>(?<word>.+?)<(\/|)b>/g;
+        if (item.match(regex)) {
+            const word = regex.exec(item).groups.word;
+            const _regex_ = new RegExp(`([^<b>])${word}([^</b>])`, 'g');
+            item = item.replaceAll(_regex_, `<b>${word}</b>`);
+        }
+        return item;
+    }
 
-        // remove <label></label>
-        const regex_ = /<label>(.*?)<(\/|)label>/;
-        return item.match(regex_) ? item.replaceAll(item.match(regex_)[0], '').trim() : item.trim();
+    addSpaceBeforeTag(item, regex) {
+        regex = regex || /<([bi]|word\d+)>/g;
+        return this.addSpaceBeforeAndAfterTag(item, regex, true);
+    }
+
+    addSpaceAfterTag(item, regex) {
+        regex = regex || /<(\/)([bi]|word\d+)>/g;
+        return this.addSpaceBeforeAndAfterTag(item, regex, false);
+    }
+
+    addSpaceBeforeAndAfterTag(item, regex, before = true) {
+        const replace = (match) => before ? `$1 ${match}` : `${match} $1`;
+        const _regex = (match) => before ? new RegExp(`([^ ])${match}`, 'g') : new RegExp(`${match}([^ ])`, 'g');
+
+        const match = item.match(regex);
+
+        if(match) {
+            match.forEach(match => {
+                item = item.replaceAll(_regex(match), replace(match));
+            });
+        }
+        return item;
     }
 
     passageConverterV02(content) {
