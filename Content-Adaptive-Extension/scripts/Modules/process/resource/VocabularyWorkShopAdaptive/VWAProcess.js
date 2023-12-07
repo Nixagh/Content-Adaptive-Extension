@@ -417,7 +417,9 @@ class VWAProcess {
                 tab: tab,
                 message: message
             });
+            _errors[row] = arrays;
         }
+        this._errors = _errors;
     }
 
     showErrors() {
@@ -476,26 +478,78 @@ class VWAProcess {
         // todo: still wrong if first data wrong format T.T ....
     }
 
-    replaceItalicOfItem(item) {
+    replaceItem(item) {
         // template : <i>-dub-</i> => <i style="white-space:nowrap;display:inline;">-dub-</i>
         // <i>dub</i> => <i>dub</i>
         // <i> -dub- </i> => <i style="white-space:nowrap;display:inline;">-dub-</i>
         // <i>-dub</i> => <i style="white-space:nowrap;display:inline;">-dub</i>
         // <i>dub-</i> => <i style="white-space:nowrap;display:inline;">dub-</i>
+        item = this.replaceItalicOfItem(item);
 
-        let regex = /<i>(\s*-\w+)<(\/|)i>/g;
+        // bold tag and replace item in bold tag
+        item = this.replaceBoldOfItemAndAddBoldTag(item);
+
+        // if character before <b> or <i> or <word\d+> is not space, add space before <b> or <i> or <word\d+>
+        item = this.addSpaceBeforeTag(item);
+
+        // if character after </b> or </i> or </word\d+> is not space, add space after </b> or </i> or </word\d+>
+        item = this.addSpaceAfterTag(item);
+
+        // remove <label></label>
+        item = this.removeLabel(item);
+
+        return item;
+    }
+
+    removeLabel(item) {
+        const regex_ = /<label>(.*?)<(\/|)label>/;
+        return item.match(regex_) ? item.replaceAll(item.match(regex_)[0], '').trim() : item.trim();
+    }
+
+    replaceItalicOfItem(item, regex) {
+        regex = regex || /<i>(.+?)<(\/|)i>/g;
         if(item.match(regex)) {
             item = item.replaceAll(regex, '<i style="white-space:nowrap;display:inline;">$1</i>');
         }
+        return item;
+    }
 
-        regex = /<b>(.+?)<b>/g;
+    replaceBoldOfItemAndAddBoldTag(item) {
+        let regex = /<b>(.+?)<b>/g;
         if (item.match(regex)) {
             item = item.replaceAll(regex, '<b>$1</b>');
         }
+        regex = /<b>(?<word>.+?)<(\/|)b>/g;
+        if (item.match(regex)) {
+            const word = regex.exec(item).groups.word;
+            const _regex_ = new RegExp(`([^<b>])${word}([^</b>])`, 'g');
+            item = item.replaceAll(_regex_, `<b>${word}</b>`);
+        }
+        return item;
+    }
 
-        // remove <label></label>
-        const regex_ = /<label>(.*?)<(\/|)label>/;
-        return item.match(regex_) ? item.replaceAll(item.match(regex_)[0], '').trim() : item.trim();
+    addSpaceBeforeTag(item, regex) {
+        regex = regex || /<([bi]|word\d+)>/g;
+        return this.addSpaceBeforeAndAfterTag(item, regex, true);
+    }
+
+    addSpaceAfterTag(item, regex) {
+        regex = regex || /<(\/)([bi]|word\d+)>/g;
+        return this.addSpaceBeforeAndAfterTag(item, regex, false);
+    }
+
+    addSpaceBeforeAndAfterTag(item, regex, before = true) {
+        const replace = (match) => before ? `$1 ${match}` : `${match} $1`;
+        const _regex = (match) => before ? new RegExp(`([^ ])${match}`, 'g') : new RegExp(`${match}([^ ])`, 'g');
+
+        const match = item.match(regex);
+
+        if(match) {
+            match.forEach(match => {
+                item = item.replaceAll(_regex(match), replace(match));
+            });
+        }
+        return item;
     }
 
     passageConverterV02(content) {
