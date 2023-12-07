@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wmap>
+    <globalAudio src=""/>
+    <word type="adjective" wordID="word3319">
+        <term audio=""><![CDATA[incredulous]]></term>
+        <definition image="">
+            <meaning><![CDATA[disbelieving, skeptical]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3320">
+        <term audio=""><![CDATA[pensive]]></term>
+        <definition image="">
+            <meaning><![CDATA[thoughtful; melancholy]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3321">
+        <term audio=""><![CDATA[skeptical]]></term>
+        <definition image="">
+            <meaning><![CDATA[inclined to doubt; slow to accept something as true]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3322">
+        <term audio=""><![CDATA[candid]]></term>
+        <definition image="">
+            <meaning><![CDATA[frank, sincere, impartial; unposed]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3323">
+        <term audio=""><![CDATA[irreverent]]></term>
+        <definition image="">
+            <meaning><![CDATA[disrespectful]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3324">
+        <term audio=""><![CDATA[lucid]]></term>
+        <definition image="">
+            <meaning><![CDATA[easy to understand, clear; rational, sane]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="verb" wordID="word3325">
+        <term audio=""><![CDATA[embroil]]></term>
+        <definition image="">
+            <meaning><![CDATA[to involve in a conflict or difficulty; to throw into confusion]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="noun" wordID="word3326">
+        <term audio=""><![CDATA[feint]]></term>
+        <definition image="">
+            <meaning><![CDATA[a deliberately deceptive movement; a pretense]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="verb" wordID="word3327">
+        <term audio=""><![CDATA[feint]]></term>
+        <definition image="">
+            <meaning><![CDATA[to make a deceptive movement; to make a pretense of]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="verb" wordID="word3328">
+        <term audio=""><![CDATA[harry]]></term>
+        <definition image="">
+            <meaning><![CDATA[to make a destructive raid on; to torment, harass]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3329">
+        <term audio=""><![CDATA[slipshod]]></term>
+        <definition image="">
+            <meaning><![CDATA[untidy in dress, personal habits, etc.; careless, sloppy]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3330">
+        <term audio=""><![CDATA[beneficial]]></term>
+        <definition image="">
+            <meaning><![CDATA[providing some advantage or contributing to a positive result]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3331">
+        <term audio=""><![CDATA[credible]]></term>
+        <definition image="">
+            <meaning><![CDATA[believable]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3332">
+        <term audio=""><![CDATA[humane]]></term>
+        <definition image="">
+            <meaning><![CDATA[kind, merciful]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3333">
+        <term audio=""><![CDATA[intricate]]></term>
+        <definition image="">
+            <meaning><![CDATA[complicated; difficult to understand]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3334">
+        <term audio=""><![CDATA[lucrative]]></term>
+        <definition image="">
+            <meaning><![CDATA[bringing in money; profitable]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3335">
+        <term audio=""><![CDATA[synthetic]]></term>
+        <definition image="">
+            <meaning><![CDATA[made or put together by people]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="noun" wordID="word3336">
+        <term audio=""><![CDATA[synthetic]]></term>
+        <definition image="">
+            <meaning><![CDATA[something artificial]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3337">
+        <term audio=""><![CDATA[ghastly]]></term>
+        <definition image="">
+            <meaning><![CDATA[frightful, horrible; deathly pale]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="noun" wordID="word3338">
+        <term audio=""><![CDATA[gluttony]]></term>
+        <definition image="">
+            <meaning><![CDATA[engaging in extreme eating or drinking; greedy overindulgence]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="noun" wordID="word3339">
+        <term audio=""><![CDATA[liberality]]></term>
+        <definition image="">
+            <meaning><![CDATA[generosity, generous act; breadth of mind or outlook]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3340">
+        <term audio=""><![CDATA[precipitous]]></term>
+        <definition image="">
+            <meaning><![CDATA[very steep]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+</wmap>

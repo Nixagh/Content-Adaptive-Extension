@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings >
+	
+	<images>
+	<img id ="0" image="assets/logo.png"   xposition="269.2" yposition ="231"/>
+	<img id ="1" image="assets/mainBg.png"  xposition="269.2" yposition ="231"/>
+	</images>
+	<instructons>
+	<instruction><![CDATA[Click on the card to flip.]]></instruction>
+	<currentcard><![CDATA[Card 1 of 20]]></currentcard>
+	<rightinstruction><![CDATA[Level B, Unit 3]]></rightinstruction>
+	<close><![CDATA[Close]]></close>
+	</instructons>
+	
+</settings>

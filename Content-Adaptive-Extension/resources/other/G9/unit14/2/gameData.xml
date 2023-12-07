@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wmap>
+    <globalAudio src=""/>
+    <word type="adjective" wordID="word3297">
+        <term audio=""><![CDATA[comprehensive]]></term>
+        <definition image="">
+            <meaning><![CDATA[covering completely, broad in scope; having or showing broad understanding]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="noun" wordID="word3298">
+        <term audio=""><![CDATA[deficit]]></term>
+        <definition image="">
+            <meaning>
+                <![CDATA[a deficiency or disadvantage; the amount by which a sum falls short of a requirement]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="verb" wordID="word3299">
+        <term audio=""><![CDATA[diffuse]]></term>
+        <definition image="">
+            <meaning><![CDATA[to spread or scatter freely or widely]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3300">
+        <term audio=""><![CDATA[diffuse]]></term>
+        <definition image="">
+            <meaning><![CDATA[wordy, longwinded, or unfocused; scattered or widely spread]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3301">
+        <term audio=""><![CDATA[minimal]]></term>
+        <definition image="">
+            <meaning><![CDATA[smallest in amount; very small in amount]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3302">
+        <term audio=""><![CDATA[monumental]]></term>
+        <definition image="">
+            <meaning><![CDATA[of historical significance, serving as a remembrance; large and imposing]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3303">
+        <term audio=""><![CDATA[sparse]]></term>
+        <definition image="">
+            <meaning><![CDATA[meager, scant; scattered]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="verb" wordID="word3304">
+        <term audio=""><![CDATA[daunt]]></term>
+        <definition image="">
+            <meaning><![CDATA[to overcome with fear, intimidate]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3305">
+        <term audio=""><![CDATA[pliant]]></term>
+        <definition image="">
+            <meaning><![CDATA[bending readily; easily influenced]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3306">
+        <term audio=""><![CDATA[temperate]]></term>
+        <definition image="">
+            <meaning><![CDATA[mild, moderate]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3307">
+        <term audio=""><![CDATA[unflinching]]></term>
+        <definition image="">
+            <meaning><![CDATA[firm, showing no signs of fear, not drawing back]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3308">
+        <term audio=""><![CDATA[brazen]]></term>
+        <definition image="">
+            <meaning><![CDATA[shameless, impudent; made of brass]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="adjective" wordID="word3309">
+        <term audio=""><![CDATA[erratic]]></term>
+        <definition image="">
+            <meaning>
+                <![CDATA[not regular or consistent; different from what is ordinarily expected, undependable]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="adjective" wordID="word3310">
+        <term audio=""><![CDATA[haphazard]]></term>
+        <definition image="">
+            <meaning><![CDATA[by chance, not planned; lacking order]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="adjective" wordID="word3311">
+        <term audio=""><![CDATA[rabid]]></term>
+        <definition image="">
+            <meaning><![CDATA[furious, violently intense, unreasonably extreme, mad; infected with rabies]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="adjective" wordID="word3312">
+        <term audio=""><![CDATA[subversive]]></term>
+        <definition image="">
+            <meaning><![CDATA[intended to undermine or overthrow]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="noun" wordID="word3313">
+        <term audio=""><![CDATA[subversive]]></term>
+        <definition image="">
+            <meaning><![CDATA[one who advocates or attempts to undermine a political system]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="adjective" wordID="word3314">
+        <term audio=""><![CDATA[unbridled]]></term>
+        <definition image="">
+            <meaning><![CDATA[lacking in restraint]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="verb" wordID="word3315">
+        <term audio=""><![CDATA[dwindle]]></term>
+        <definition image="">
+            <meaning><![CDATA[to lessen, diminish]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="verb" wordID="word3316">
+        <term audio=""><![CDATA[predispose]]></term>
+        <definition image="">
+            <meaning><![CDATA[to incline to beforehand]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="verb" wordID="word3317">
+        <term audio=""><![CDATA[revitalize]]></term>
+        <definition image="">
+            <meaning><![CDATA[to give new life or energy to]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="verb" wordID="word3318">
+        <term audio=""><![CDATA[surmount]]></term>
+        <definition image="">
+            <meaning><![CDATA[to overcome, rise above]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+</wmap>

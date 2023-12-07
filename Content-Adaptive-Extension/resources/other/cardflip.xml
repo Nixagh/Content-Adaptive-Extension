@@ -1,0 +1,279 @@
+<cardflip folderLocation="interfaceAssets" front="cardFront.png" back="cardBack.png" frontWithAudio="cardFrontA.png"
+          backWithAudio="cardBackA.png" width="324.6" height="204.1" xposition="268.4" yposition="217.3" speed="1.5"
+          blur="30" maxTerms="70" maxDef="210" maxTermsSize="30" maxDefSize="18">
+    <instruction>
+        <![CDATA[ Flip Card ]]>
+    </instruction>
+    <currentcardPart1>
+        <![CDATA[ Card ]]>
+    </currentcardPart1>
+    <currentcardPart2>
+        <![CDATA[ of ]]>
+    </currentcardPart2>
+    <rightinstruction>
+        <![CDATA[ Level A, Unit 14 ]]>
+    </rightinstruction>
+    <close>
+        <![CDATA[ Close ]]>
+    </close>
+    <printLeftTop>
+        <![CDATA[ Fold down the middle ]]>
+    </printLeftTop>
+    <printRightTop>
+        <![CDATA[ Glue or tape sides together ]]>
+    </printRightTop>
+    <printLeft>
+        <![CDATA[ Cut along dashed rules to create separate cards. ]]>
+    </printLeft>
+    <printRight>
+        <![CDATA[ Copyright © by William H. Sadlier, Inc. Permission to duplicate classroom quantities granted to users of <i>Vocabulary Workshop</i>. ]]>
+    </printRight>
+    <text>
+        <maxChar>70</maxChar>
+        <minChar>210</minChar>
+    </text>
+    <image>
+        <maxWidth>294.6</maxWidth>
+        <maxHeight>174.1</maxHeight>
+        <folderLocation>cardAssets</folderLocation>
+    </image>
+    <audio>
+        <folderLocation>audios</folderLocation>
+    </audio>
+    <cardContent>
+        <card id="1" wordID="word0325">
+            <terms audio="" contenttype="text">
+                <![CDATA[ append (v.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ to attach, add, or tack on as a supplement or extra item ]]>
+            </def>
+            <set>A</set>
+        </card>
+        <card id="2" wordID="word0326">
+            <terms audio="" contenttype="text">
+                <![CDATA[ implement (n.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ an instrument, tool ]]>
+            </def>
+            <set>A</set>
+        </card>
+        <card id="3" wordID="word0327">
+            <terms audio="" contenttype="text">
+                <![CDATA[ implement (v.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ to put into effect ]]>
+            </def>
+            <set>A</set>
+        </card>
+        <card id="4" wordID="word0328">
+            <terms audio="" contenttype="text">
+                <![CDATA[ maneuver (n.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ a planned movement; a skillful plan, scheme ]]>
+            </def>
+            <set>A</set>
+        </card>
+        <card id="5" wordID="word0329">
+            <terms audio="" contenttype="text">
+                <![CDATA[ maneuver (v.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ to perform or carry out a planned movement ]]>
+            </def>
+            <set>A</set>
+        </card>
+        <card id="6" wordID="word0330">
+            <terms audio="" contenttype="text">
+                <![CDATA[ scan (v.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ to examine closely; to look over quickly but thoroughly ]]>
+            </def>
+            <set>A</set>
+        </card>
+        <card id="7" wordID="word0331">
+            <terms audio="" contenttype="text">
+                <![CDATA[ scan (n.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ an examination ]]>
+            </def>
+            <set>A</set>
+        </card>
+        <card id="8" wordID="word0332">
+            <terms audio="" contenttype="text">
+                <![CDATA[ cringe (v.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ to shrink back or hide in fear or submissiveness ]]>
+            </def>
+            <set>A</set>
+        </card>
+        <card id="9" wordID="word0333">
+            <terms audio="" contenttype="text">
+                <![CDATA[ lag (v.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ to move slowly or fall behind; to bring up the rear ]]>
+            </def>
+            <set>A</set>
+        </card>
+        <card id="10" wordID="word0334">
+            <terms audio="" contenttype="text">
+                <![CDATA[ lag (n.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ a falling behind, the amount by which someone or something is behind; an interval ]]>
+            </def>
+            <set>A</set>
+        </card>
+        <card id="11" wordID="word0335">
+            <terms audio="" contenttype="text">
+                <![CDATA[ chasten (v.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ to punish (in order to bring about improvement in behavior, attitude, etc.); to restrain, moderate ]]>
+            </def>
+            <set>A</set>
+        </card>
+        <card id="12" wordID="word0336">
+            <terms audio="" contenttype="text">
+                <![CDATA[ dole (v.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ to give out in small amounts ]]>
+            </def>
+            <set>A</set>
+        </card>
+        <card id="13" wordID="word0337">
+            <terms audio="" contenttype="text">
+                <![CDATA[ pacify (v.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ to make peaceful or calm; to soothe ]]>
+            </def>
+            <set>A</set>
+        </card>
+        <card id="14" wordID="word0338">
+            <terms audio="" contenttype="text">
+                <![CDATA[ testimonial (n.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ a statement that speaks to a person’s character or to the benefits of a product ]]>
+            </def>
+            <set>A</set>
+        </card>
+        <card id="15" wordID="word0339">
+            <terms audio="" contenttype="text">
+                <![CDATA[ testimonial (adj.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ expressing the value and worth of someone or something ]]>
+            </def>
+            <set>A</set>
+        </card>
+        <card id="16" wordID="word0340">
+            <terms audio="" contenttype="text">
+                <![CDATA[ depict (v.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ to portray; to represent or show in the form of a picture ]]>
+            </def>
+            <set>B</set>
+        </card>
+        <card id="17" wordID="word0341">
+            <terms audio="" contenttype="text">
+                <![CDATA[ elaborate (adj.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ planned or executed with great care; characterized by intricacy, richness of detail, or ornateness ]]>
+            </def>
+            <set>B</set>
+        </card>
+        <card id="18" wordID="word0342">
+            <terms audio="" contenttype="text">
+                <![CDATA[ elaborate (v.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ to explain something in great length or in great detail; to work out in detail, develop thoroughly ]]>
+            </def>
+            <set>B</set>
+        </card>
+        <card id="19" wordID="word0343">
+            <terms audio="" contenttype="text">
+                <![CDATA[ expression (n.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ the act of conveying or representing in some medium, such as words, visual art, or music; a particular word or phrase ]]>
+            </def>
+            <set>B</set>
+        </card>
+        <card id="20" wordID="word0344">
+            <terms audio="" contenttype="text">
+                <![CDATA[ formulate (v.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ to express definitely or systematically; to devise, invent ]]>
+            </def>
+            <set>B</set>
+        </card>
+        <card id="21" wordID="word0345">
+            <terms audio="" contenttype="text">
+                <![CDATA[ generate (v.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ to bring into existence; to be the cause of ]]>
+            </def>
+            <set>B</set>
+        </card>
+        <card id="22" wordID="word0346">
+            <terms audio="" contenttype="text">
+                <![CDATA[ memorandum (n.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ a note to aid one’s memory; an informal note or report ]]>
+            </def>
+            <set>B</set>
+        </card>
+        <card id="23" wordID="word0347">
+            <terms audio="" contenttype="text">
+                <![CDATA[ besiege (v.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ to attack by surrounding with military forces; to cause worry or trouble ]]>
+            </def>
+            <set>B</set>
+        </card>
+        <card id="24" wordID="word0348">
+            <terms audio="" contenttype="text">
+                <![CDATA[ forsake (v.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ to give up, renounce; to leave, abandon ]]>
+            </def>
+            <set>B</set>
+        </card>
+        <card id="25" wordID="word0349">
+            <terms audio="" contenttype="text">
+                <![CDATA[ quash (v.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ to crush, put down completely ]]>
+            </def>
+            <set>B</set>
+        </card>
+        <card id="26" wordID="word0350">
+            <terms audio="" contenttype="text">
+                <![CDATA[ retaliate (v.) ]]>
+            </terms>
+            <def audio="" contenttype="text">
+                <![CDATA[ to get revenge; to strike back for an injury ]]>
+            </def>
+            <set>B</set>
+        </card>
+    </cardContent>
+</cardflip>

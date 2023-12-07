@@ -163,6 +163,11 @@ class VWAProcess {
             directionLine.setHtml(result.directionLineHTML);
             passageContent.setHtml(result.passageContentHTML);
             passageSummary.setHtml(result.passageSummaryHTML);
+
+            if (!result.directionLineHTML) {
+                console.log("Passage not found, try again");
+                await this.setPassage(row);
+            }
         } else {
             directionLine.setHtml(this.getDirectionLineHTML(row));
             passageContent.setHtml(this.getPassageContent(row));
@@ -180,7 +185,8 @@ class VWAProcess {
 
     async getAjaxPassage(passageId) {
         const url = `http://192.168.200.26:8090/cms/ajax/question/loadPassage.html?passageId=${passageId}`;
-        const result = await $.ajax({url: url});
+        let result = await fetch(url);
+        result = await result.json();
         return {
             directionLineHTML: result["directionLine"],
             passageContentHTML: result["content"],
@@ -411,13 +417,16 @@ class VWAProcess {
     }
 
     createError(tab, message, row) {
-        if(row) {
-            this._errors[row] = this._errors[row] ? this._errors[row] : [];
-            this._errors[row].push({
+        const _errors = this._errors;
+        if(row !== undefined && row !== null) {
+            const arrays = _errors[row] || [];
+            arrays.push({
                 tab: tab,
                 message: message
             });
+            _errors[row] = arrays;
         }
+        this._errors = _errors;
     }
 
     showErrors() {
@@ -483,7 +492,7 @@ class VWAProcess {
         // <i>-dub</i> => <i style="white-space:nowrap;display:inline;">-dub</i>
         // <i>dub-</i> => <i style="white-space:nowrap;display:inline;">dub-</i>
 
-        let regex = /<i>(\s*-\w+)<(\/|)i>/g;
+        let regex = /<i>(.+?)<(\/|)i>/g;
         if(item.match(regex)) {
             item = item.replaceAll(regex, '<i style="white-space:nowrap;display:inline;">$1</i>');
         }

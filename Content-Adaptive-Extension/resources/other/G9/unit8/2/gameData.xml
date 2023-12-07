@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wmap>
+    <globalAudio src=""/>
+    <word type="verb" wordID="word3160">
+        <term audio=""><![CDATA[aspire]]></term>
+        <definition image="">
+            <meaning>
+                <![CDATA[to have ambitious hopes or plans, strive toward a higher goal, desire earnestly; to ascend]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="noun" wordID="word3161">
+        <term audio=""><![CDATA[brunt]]></term>
+        <definition image="">
+            <meaning><![CDATA[the main impact, force, or burden]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3162">
+        <term audio=""><![CDATA[manual]]></term>
+        <definition image="">
+            <meaning><![CDATA[done using the hands; requiring physical effort]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="noun" wordID="word3163">
+        <term audio=""><![CDATA[manual]]></term>
+        <definition image="">
+            <meaning><![CDATA[a small book providing information or instructions]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="noun" wordID="word3164">
+        <term audio=""><![CDATA[metropolis]]></term>
+        <definition image="">
+            <meaning><![CDATA[a large city; the chief city of an area]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3165">
+        <term audio=""><![CDATA[metropolitan]]></term>
+        <definition image="">
+            <meaning><![CDATA[relating to a major city and neighboring towns]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="noun" wordID="word3166">
+        <term audio=""><![CDATA[realm]]></term>
+        <definition image="">
+            <meaning><![CDATA[a kingdom; a region or field of study]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="verb" wordID="word3167">
+        <term audio=""><![CDATA[apportion]]></term>
+        <definition image="">
+            <meaning><![CDATA[to divide and give out in shares]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="verb" wordID="word3168">
+        <term audio=""><![CDATA[disentangle]]></term>
+        <definition image="">
+            <meaning><![CDATA[to free from tangles or complications]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="verb" wordID="word3169">
+        <term audio=""><![CDATA[muddle]]></term>
+        <definition image="">
+            <meaning><![CDATA[to make a mess of; muddle through: to get by]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="noun" wordID="word3170">
+        <term audio=""><![CDATA[muddle]]></term>
+        <definition image="">
+            <meaning><![CDATA[a hopeless mess]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3171">
+        <term audio=""><![CDATA[pugnacious]]></term>
+        <definition image="">
+            <meaning><![CDATA[quarrelsome, fond of fighting]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3172">
+        <term audio=""><![CDATA[concerted]]></term>
+        <definition image="">
+            <meaning><![CDATA[planned or performed in cooperation with others]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="verb" wordID="word3173">
+        <term audio=""><![CDATA[improvise]]></term>
+        <definition image="">
+            <meaning>
+                <![CDATA[to compose or perform without preparation; to construct from available materials]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="verb" wordID="word3174">
+        <term audio=""><![CDATA[ponder]]></term>
+        <definition image="">
+            <meaning><![CDATA[to consider carefully, reflect on]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="verb" wordID="word3175">
+        <term audio=""><![CDATA[unify]]></term>
+        <definition image="">
+            <meaning><![CDATA[to make into or become a coherent whole]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="verb" wordID="word3176">
+        <term audio=""><![CDATA[alleviate]]></term>
+        <definition image="">
+            <meaning><![CDATA[to reduce the intensity of some pain or difficulty]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="verb" wordID="word3177">
+        <term audio=""><![CDATA[escalate]]></term>
+        <definition image="">
+            <meaning><![CDATA[to elevate; to increase in intensity]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="adjective" wordID="word3178">
+        <term audio=""><![CDATA[brawny]]></term>
+        <definition image="">
+            <meaning><![CDATA[strong, muscular]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="verb" wordID="word3179">
+        <term audio=""><![CDATA[harangue]]></term>
+        <definition image="">
+            <meaning><![CDATA[to deliver a loud, ranting speech]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="noun" wordID="word3180">
+        <term audio=""><![CDATA[harangue]]></term>
+        <definition image="">
+            <meaning><![CDATA[a loud speech]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="verb" wordID="word3181">
+        <term audio=""><![CDATA[spurn]]></term>
+        <definition image="">
+            <meaning><![CDATA[to refuse with scorn, disdain]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="verb" wordID="word3182">
+        <term audio=""><![CDATA[taunt]]></term>
+        <definition image="">
+            <meaning><![CDATA[to jeer at, mock]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="noun" wordID="word3183">
+        <term audio=""><![CDATA[taunt]]></term>
+        <definition image="">
+            <meaning><![CDATA[an insulting or mocking remark]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+</wmap>

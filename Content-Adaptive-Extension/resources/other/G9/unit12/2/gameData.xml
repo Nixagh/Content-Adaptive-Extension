@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wmap>
+    <globalAudio src=""/>
+    <word type="adjective" wordID="word3252">
+        <term audio=""><![CDATA[exorbitant]]></term>
+        <definition image="">
+            <meaning><![CDATA[unreasonably high; excessive]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3253">
+        <term audio=""><![CDATA[superfluous]]></term>
+        <definition image="">
+            <meaning><![CDATA[exceeding what is sufficient or required, excess]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3254">
+        <term audio=""><![CDATA[bogus]]></term>
+        <definition image="">
+            <meaning><![CDATA[false, counterfeit]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3255">
+        <term audio=""><![CDATA[mediocre]]></term>
+        <definition image="">
+            <meaning><![CDATA[average, ordinary, undistinguished]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3256">
+        <term audio=""><![CDATA[rancid]]></term>
+        <definition image="">
+            <meaning><![CDATA[stale, spoiled]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3257">
+        <term audio=""><![CDATA[threadbare]]></term>
+        <definition image="">
+            <meaning><![CDATA[shabby, old and worn]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="verb" wordID="word3258">
+        <term audio=""><![CDATA[blanch]]></term>
+        <definition image="">
+            <meaning><![CDATA[to remove the color from, make or turn pale; to parboil]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="verb" wordID="word3259">
+        <term audio=""><![CDATA[meander]]></term>
+        <definition image="">
+            <meaning><![CDATA[to wander about, wind about]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="noun" wordID="word3260">
+        <term audio=""><![CDATA[meander]]></term>
+        <definition image="">
+            <meaning><![CDATA[a sharp turn or twist]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="verb" wordID="word3261">
+        <term audio=""><![CDATA[squander]]></term>
+        <definition image="">
+            <meaning><![CDATA[to spend foolishly, waste]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="verb" wordID="word3262">
+        <term audio=""><![CDATA[sully]]></term>
+        <definition image="">
+            <meaning><![CDATA[to soil, stain, tarnish, defile, besmirch]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>A</set>
+    </word>
+    <word type="adjective" wordID="word3263">
+        <term audio=""><![CDATA[lithe]]></term>
+        <definition image="">
+            <meaning><![CDATA[bending easily, limber]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="adjective" wordID="word3264">
+        <term audio=""><![CDATA[rugged]]></term>
+        <definition image="">
+            <meaning><![CDATA[rough, irregular; severe, stern, strong, stormy]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="adjective" wordID="word3265">
+        <term audio=""><![CDATA[spry]]></term>
+        <definition image="">
+            <meaning><![CDATA[active, full of life; capable of quick and easy movement]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="noun" wordID="word3266">
+        <term audio=""><![CDATA[stature]]></term>
+        <definition image="">
+            <meaning>
+                <![CDATA[the height of a human or animal in an upright position; admiration gained from achievement]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="noun" wordID="word3267">
+        <term audio=""><![CDATA[cornerstone]]></term>
+        <definition image="">
+            <meaning><![CDATA[the starting point of a building; a fundamental principle or element]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="adjective" wordID="word3268">
+        <term audio=""><![CDATA[paramount]]></term>
+        <definition image="">
+            <meaning><![CDATA[chief in importance, above all others]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="noun" wordID="word3269">
+        <term audio=""><![CDATA[mire]]></term>
+        <definition image="">
+            <meaning><![CDATA[mud, wet, swampy ground; a tough situation]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="verb" wordID="word3270">
+        <term audio=""><![CDATA[mire]]></term>
+        <definition image="">
+            <meaning><![CDATA[to get stuck]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="noun" wordID="word3271">
+        <term audio=""><![CDATA[precipice]]></term>
+        <definition image="">
+            <meaning><![CDATA[a very steep cliff; the brink or edge of disaster]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="noun" wordID="word3272">
+        <term audio=""><![CDATA[rift]]></term>
+        <definition image="">
+            <meaning><![CDATA[a split, break, breach]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+    <word type="noun" wordID="word3273">
+        <term audio=""><![CDATA[rivulet]]></term>
+        <definition image="">
+            <meaning><![CDATA[a small stream]]></meaning>
+            <example><![CDATA[]]></example>
+        </definition>
+        <set>B</set>
+    </word>
+</wmap>

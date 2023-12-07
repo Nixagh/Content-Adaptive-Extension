@@ -1,0 +1,146 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sadlier - Flash card</title>
+    <link rel="stylesheet"      href="//static.assets.sadlierconnect.com/sc-content/css/avw_v1.0/vw-archieve/styles_v1.4.css">
+    <script type='text/javascript' src="//static.assets.sadlierconnect.com/sc-content/javascript/games/jquery-1.8.3.min.js"></script>
+    <script type='text/javascript' src="//static.assets.sadlierconnect.com/sc-content/javascript/avw_1.0/vw-achieve/flash-card-v1.2.js"></script>
+    <link rel="stylesheet"        href="//static.assets.sadlierconnect.com/sc-content/javascript/jquery-ui/themes/cloud/jquery-ui-1.10.0.custom.css"><script type='text/javascript' src="//static.assets.sadlierconnect.com/sc-content/javascript/jquery-ui/jquery-ui-1.10.0.custom.js"></script><link rel="stylesheet"        href="//static.assets.sadlierconnect.com/sc-content/javascript/jquery-ui/themes/cloud/jquery-ui-1.10.0.custom.css"><script type='text/javascript' src="//static.assets.sadlierconnect.com/sc-content/javascript/jquery-ui/jquery-ui-1.10.0.custom.js"></script>
+    <script type='text/javascript' src="//static.assets.sadlierconnect.com/sc-content/javascript/games/vw-achieve-v1.7/js_v1.2/jquery.mobile.custom.min.js"></script>
+    <script type='text/javascript' src="//static.assets.sadlierconnect.com/sc-content/javascript/games/vw-achieve-v1.7/js_v1.2/main_v1.10.js"></script>
+</head>
+<body>
+
+<div id="wrapper">
+    <header class="clearfix">
+        <div class="main-wrapper clearfix">
+            <div class="icon-wrapper text-center">
+                <div class="page-number">0/0</div>
+                <ul class="menu config-container">
+                    <li class="item logo-tm"><a href="#"></a></li>
+                    <li class="item icon-one instruction"><a href="javascript:;" class="tooltip-infomation" ></a></li>
+                    <li class="item icon-two audio"><a href="#"></a></li>
+                    <li class="item icon-three"><a href="#"></a></li>
+                </ul>
+            </div>
+            <div class="box-menu clearfix">
+                <div class="select-wrapper">
+                    <select class="clearfix"  id="changeProgramTOC">
+                        <option value="Unit 1">Unit 1</option>
+                        <option value="Unit 2">Unit 2</option>
+                        <option value="Unit 3">Unit 3</option>
+                        <option value="Unit 4">Unit 4</option>
+                        <option value="Unit 5">Unit 5</option>
+                        <option value="Unit 6">Unit 6</option>
+                        <option value="Unit 7">Unit 7</option>
+                        <option value="Unit 8">Unit 8</option>
+                        <option value="Unit 9">Unit 9</option>
+                        <option value="Unit 10">Unit 10</option>
+                        <option value="Unit 11">Unit 11</option>
+                        <option value="Unit 12">Unit 12</option>
+                        <option value="Unit 13">Unit 13</option>
+                        <option value="Unit 14">Unit 14</option>
+                        <option value="Unit 15" selected>Unit 15</option>
+                    </select>
+                </div>
+                <div class="menu-wrapper text-center">
+                    <ul class="menu type-set-container">
+                        <li class="item set-type-button" setType="A"><a href="#">Set A</a></li>
+                        <li class="item set-type-button" setType="B"><a href="#">Set B</a></li>
+                        <li class="item set-type-button" setType=""><a href="#">Set A & B</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-box clearfix">
+            <div class="box-prev">
+                <div class="icon-three"></div>
+            </div>
+
+            <div class="box-li">
+                <ul class="menu display-type-container">
+                    <li class="item" displayType="word"><a href="#">Show by word</a></li>
+                    <li class="item" displayType="definition"><a href="javascript:;" >Show by definition</a></li>
+                </ul>
+            </div>
+
+            <div class="box-li">
+                <ul class="menu display-flagged-container">
+                    <li class="item" displayFlagged="1"><a href="#">Show flagged</a></li>
+                    <li class="item" displayFlagged="0"><a href="#">Show all</a></li>
+                </ul>
+            </div>
+
+            <div class="box-li">
+                <ul class="menu">
+                    <li class="item" id="printButton"><a href="#">Print</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="popup-infomation">
+            <div class="table">
+                <div class="td">
+                    <a href="javascript:;" class="cl-popup"></a>
+                    <h3 class="direction-header">Directions</h3>
+                    <div class="direction-content"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="wrap-page vw-achieve-6 vw-achieve-6 flag_cards">
+            <div class="header-page clearfix">
+                <p> <span class="header-sub-title">Flash Cards</span></p>
+            </div>
+            <div class="page-number">0 of 0</div>
+
+            <div class="bg-white">
+                <div class="content">
+                    <div class="flag flagged-flashcard"><a href="javascript:;"></a></div>
+                    <div class="box-content">
+                        <div id="card" class=" ">
+                            <figure class="front">
+                                <div class="tbl">
+                                    <div class="td">
+                                        &nbsp;
+                                    </div>
+                                </div>
+                            </figure>
+                            <figure class="back">
+                                &nbsp; &nbsp;
+                            </figure>
+                        </div>
+                    </div>
+
+                    <div class="box-control">
+                        <ul class ="tool-control">
+                            <li class="control ctrl-prev"><a href="#" id="previousButton"></a></li>
+                            <li class="control ctrl-flip"><a href="javascript:;" id="flip"></a></li>
+                            <li class="control ctrl-next"><a href="#" id="nextButton"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-tool">
+                <ul class ="nav-control">
+                    <li class="control ctrl-next"><a href="#" id="reShuffleButton"></a></li>
+                    <li class="control ctrl-play"><a href="#" id="playButton"></a></li>
+                    <li class="control ctrl-prev"><a href="#" id="reloadButton"></a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer></footer>
+</div>
+</body>
+<script type='text/javascript' src='//static.assets.sadlierconnect.com/sc-content/javascript/games/vw-achieve-v1.7/plugins/jquery.ba-postmessage.min.js'></script>
+<script type='text/javascript' src='//static.assets.sadlierconnect.com/sc-content/javascript/games/vw-achieve-v1.7/plugins/one.js'></script>
+<script type='text/javascript' src="//static.assets.sadlierconnect.com/sc-content/javascript/avw_1.0/vw-achieve/crossdomain_v1.0.js"></script>
+</html>
