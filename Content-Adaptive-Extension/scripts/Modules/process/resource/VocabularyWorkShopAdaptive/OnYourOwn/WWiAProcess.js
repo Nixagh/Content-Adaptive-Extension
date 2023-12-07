@@ -1,15 +1,14 @@
 class WWiAProcess extends VWAProcess {
-    setQuestion(row, autoScore){
+    setQuestion(row, autoScore) {
         super.setQuestion(row, false);
-        
-            // auto score
-//<input id="pojo.hideQuestionLabel1" name="pojo.hideQuestionLabel" class="i-checks" type="checkbox" value="true" style="position: absolute; opacity: 0;">/
-            const hideQuastionLabel = document.getElementById("pojo.hideQuestionLabel1");
 
-            hideQuastionLabel.checked = true;
-            // parent of auto score
-            const autoScoreParentElement = hideQuastionLabel.parentElement;
-            autoScoreParentElement.classList.add("checked");
+        // auto hide question label
+        const hideQuestionLabel = document.getElementById("pojo.hideQuestionLabel1");
+
+        hideQuestionLabel.checked = true;
+        // parent of auto score
+        const autoScoreParentElement = hideQuestionLabel.parentElement;
+        autoScoreParentElement.classList.add("checked");
 
     }
 
@@ -20,15 +19,15 @@ class WWiAProcess extends VWAProcess {
         return this.getContent(olvSheet, olvHeader);
     }
 
-
     //DATA
-    mapping({ first, second }) {
+    mapping({first, second}) {
         return this.replaceItem('On Level');
     }
 
     getSheetValue() {
         return this.getPassageSheet(); // return array[] 2
     }
+
     replaceItem(type) {
         const body = "On-Level Passage Body";
         const olvContent = this.getSheetValue();
@@ -49,7 +48,6 @@ class WWiAProcess extends VWAProcess {
     }
 
     // COMPONENT
-
     getComponentScoreRules(row) {
 
         const componentScoreRules = {
@@ -72,20 +70,13 @@ class WWiAProcess extends VWAProcess {
         return JSON.stringify(componentScoreRules);
     }
 
-
     //  PASSAGE
-
     getPassageContent(row) {
         return `<div class="direction_section">
                     <div audio-source="" class="audio-inline" style="display: inline-flex; width: auto;"></div>
                     ${this.getPassageTitle(row)}
                     ${this.getPassageContentHTML(row)}
                 </div>`;
-    }
-
-
-    getDirectionLineHTML(row) {
-        return this.getField("Direction Line", row);
     }
 
     getPassageTitle(row) {
@@ -105,35 +96,9 @@ class WWiAProcess extends VWAProcess {
         return this.passageConverterV02(passageBody);
     }
 
-    getPassageSummaryText(row) {
-        const passageSummaryText = this.getField("Choice Page Summary Text", row);
-        const image = this.getField("Choice Page Photo", row)
-            .replaceAll("<image>", "")
-            .replaceAll("</image>", "")
-            .replaceAll(".png", "")
-            .replaceAll(".jpg", "")
-            .trim();
-
-        const regex = /<title>(.*)<(\/|)title>/g;
-        const match = passageSummaryText.match(regex);
-        // get group 0
-        const title = match
-            ? match[0].replaceAll(/<title>|<\/title>/g, "").trim()
-            : "";
-
-        const content = passageSummaryText.replaceAll(regex, "").trim();
-
-        return `<div class="select-page" resourcelevel="true">
-                    <div class="sp-cover"><img alt="" src="/cms/repository/cms/images2020/${image}.jpg" /></div>
-                    <div class="sp_title">${title}</div>
-                    <div class="sp-description">${content}</div>
-                </div>`;
-    }
-
     getDirectionLineHTML() {
         return '<i>Read the passage and answer the question.</i>'
     }
-
 
     setPassage(row) {
         const directionLine = new Cke("cke_directionLine");
@@ -148,17 +113,12 @@ class WWiAProcess extends VWAProcess {
 
         choicePassageCheckBox.element.checked = true;
         choicePassageCheckBox.element.parentElement.classList.add("checked");
-        
+
 
         console.log("Set passage");
     }
 
-
-
-
-
     //  GET QUESTION CONTENT
-
     getCorrectAnswer(row) {
         // `{"comps":[{"id":"${this.getCID()}","value":"Answer will vary.","type":"Fill_in_Blank"}]}`;
 
@@ -175,7 +135,6 @@ class WWiAProcess extends VWAProcess {
     getCorrectTextHTML() {
         return `Answer will vary.`;
     }
-
 
     getQuestionHTML(row) {
         return `<div class="question-questionStem question-questionStem-1-column Q000000_Pre_K_03">
@@ -200,16 +159,14 @@ class WWiAProcess extends VWAProcess {
     }
 
 
-
     getGrade() {
         const globalResourceId = this.getGlobalResourceId();
 
-        if (globalResourceId[globalResourceId.length - 2] == 0) {
+        if (globalResourceId[globalResourceId.length - 2] === 0) {
             return globalResourceId[globalResourceId.length - 1]
         }
 
         return '1' + globalResourceId[globalResourceId.length - 1]
-
         // return 10;
     }
 
@@ -232,16 +189,14 @@ class WWiAProcess extends VWAProcess {
     }
 
     getPathway1(row) {
-      return "";
-    }
-
-    getPathway2(row) {
-       return "";
-    }
-
-    getStandard(){
         return "";
     }
 
+    getPathway2(row) {
+        return "";
+    }
 
+    getStandard() {
+        return "";
+    }
 }

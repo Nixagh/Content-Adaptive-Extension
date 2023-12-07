@@ -162,31 +162,6 @@ class PassageProcess extends VWAProcess {
         return this.passageConverterV02(passageBody);
     }
 
-    getPassageSummaryText(row) {
-        const passageSummaryText = this.getField("Choice Page Summary Text", row);
-        const image = this.getField("Choice Page Photo", row)
-            .replaceAll("<image>", "")
-            .replaceAll("</image>", "")
-            .replaceAll(".png", "")
-            .replaceAll(".jpg", "")
-            .trim();
-
-        const regex = /<title>(.*)<(\/|)title>/g;
-        const match = passageSummaryText.match(regex);
-        // get group 0
-        const title = match
-            ? match[0].replaceAll(/<title>|<\/title>/g, "").trim()
-            : "";
-
-        const content = passageSummaryText.replaceAll(regex, "").trim();
-
-        return `<div class="select-page" resourcelevel="true">
-                    <div class="sp-cover"><img alt="" src="/cms/repository/cms/images2020/${image}.jpg" /></div>
-                    <div class="sp_title">${title}</div>
-                    <div class="sp-description">${content}</div>
-                </div>`;
-    }
-
     getQuestionHTML(row) {
         return `<div class="question-questionStem question-questionStem-1-column">
                     <div class="question-stem-content">
