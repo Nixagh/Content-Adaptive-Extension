@@ -25,7 +25,7 @@ const Ids = {
 
 	type: "type-select",
 	insertSettings: "insert-settings",
-
+	insertWordContinuum: "insert-word-continuum",
 }
 
 const ListModalIds = {
