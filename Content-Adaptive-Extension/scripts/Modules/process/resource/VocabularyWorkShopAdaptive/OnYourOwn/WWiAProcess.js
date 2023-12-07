@@ -51,7 +51,7 @@ class WWiAProcess extends VWAProcess {
     // COMPONENT
 
     getComponentScoreRules(row) {
-        //	{"test":null,"scoringGroups":[{"componentGradingRules":[{"componentId":"802930_g10_unit15_action_q01_ans01","componentType":"Fill_in_Blank","componentSubtype":null,"autoScore":false,"rubricRule":null}],"maxScore":4}]}
+
         const componentScoreRules = {
             test: null,
             scoringGroups: [
@@ -134,6 +134,24 @@ class WWiAProcess extends VWAProcess {
         return '<i>Read the passage and answer the question.</i>'
     }
 
+
+    setPassage(row) {
+        const directionLine = new Cke("cke_directionLine");
+        const passageContent = new Cke("cke_2_contents");
+        const passageSummary = new Cke("cke_3_contents");
+        // const scramble = new BasicInput("scrambleCheckbox");
+        const choicePassageCheckBox = new BasicInput("choicePassageCheckbox");
+
+        directionLine.setHtml(this.getDirectionLineHTML(row));
+        passageContent.setHtml(this.getPassageContent(row));
+        passageSummary.setHtml(this.getPassageSummaryText(row));
+
+        choicePassageCheckBox.element.checked = true;
+        choicePassageCheckBox.element.parentElement.classList.add("checked");
+        
+
+        console.log("Set passage");
+    }
 
 
 
