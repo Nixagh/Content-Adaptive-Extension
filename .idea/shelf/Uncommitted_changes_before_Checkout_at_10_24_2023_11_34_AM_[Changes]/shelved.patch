@@ -1,0 +1,57 @@
+Index: Content-Adaptive-Extension/scripts/Libs/Utility.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*\r\n * Utility class for methods that has to be used everywhere\r\n * load with super() if needed\r\n */\r\nclass Utility {\r\n    constructor() {\r\n\r\n    }\r\n\r\n    //Get current time\r\n    static Time() {\r\n        let a = new Date($.now()), b = a.getHours(), c = a.getMinutes();\r\n        10 > b && (b = \"0\" + a.getHours());\r\n        10 > c && (c = \"0\" + a.getMinutes());\r\n        return `${b}:${c}`;\r\n    }\r\n\r\n\r\n    //Delegate on action\r\n    static async FDelegation(element, action, data) {\r\n        $(element).undelegate(`div[data-action='${action}']`, \"click\");\r\n        $(element).delegate(`div[data-action='${action}']`, \"click\", function (event) {\r\n            if (Actions.Has(action)) {\r\n                FActions[action](event, data);\r\n            }\r\n        });\r\n    }\r\n\r\n    //Copy text to clipboard\r\n    static Copy(b) {\r\n        let a = document.createElement(\"input\");\r\n        a.setAttribute(\"value\", b);\r\n        document.body.appendChild(a);\r\n        a.select();\r\n        document.execCommand(\"copy\");\r\n        document.body.removeChild(a);\r\n    }\r\n\r\n    //First letter to uppercase\r\n    static upFirst(word) {\r\n        return \"string\" !== typeof word ? \"\" : word.charAt(0).toUpperCase() + word.slice(1);\r\n    }\r\n\r\n    //All words capitalized\r\n    static ucWords(str) {\r\n        str = str.split(\" \");\r\n        for (let i = 0; i < str.length; i++)\r\n            \"undefined\" !== str[i][0] && \"undefined\" !== typeof str[i][0] && (str[i] = str[i][0].toUpperCase() + str[i].substr(1));\r\n        return str.join(\" \");\r\n    }\r\n\r\n    //Check if all properties of object are true\r\n    static tableIsTrue(table) {\r\n        for (let key in table)\r\n            if (!table[key])\r\n                return !1;\r\n        return !0;\r\n    }\r\n\r\n    //Convert to milliseconds\r\n    static toMilliseconds(hour, minute, seconds) {\r\n        return ((hour * 60 * 60 + minute * 60 + seconds) * 1000);\r\n    }\r\n\r\n    //Convert milliseconds to minutes\r\n    static toMinutes(ms) {\r\n        return Math.floor(ms / 60000);\r\n    }\r\n\r\n    static clone(obj) {\r\n        return JSON.parse(JSON.stringify(obj));\r\n    }\r\n\r\n    //property of object, Case insensitive\r\n    static findPropertyCaseInsensitive(object, key) {\r\n        return object[Object.keys(object).find(k => k.toLowerCase() === key.toLowerCase())];\r\n    }\r\n\r\n    static getTime() {\r\n        return new Date(new Date().toLocaleString('en-US', {\r\n            timeZone: 'Europe/Copenhagen'\r\n        }));\r\n    }\r\n\r\n    static toLocalTime(stamp) {\r\n        return new Date(stamp * 1000);\r\n    }\r\n\r\n    static getTimeRemaining(endtime) {\r\n        let t = endtime - new Date().getTime();\r\n        let seconds = Math.floor((t / 1000) % 60);\r\n        let minutes = Math.floor((t / 1000 / 60) % 60);\r\n        let hours = Math.floor((t / (1000 * 60 * 60)) % 24);\r\n        let days = Math.floor(t / (1000 * 60 * 60 * 24));\r\n        return {\r\n            'total': t,\r\n            'days': days,\r\n            'hours': hours,\r\n            'minutes': minutes,\r\n            'seconds': seconds\r\n        };\r\n    }\r\n\r\n    static GetKeyBinds() {\r\n        if ($.parseJSON(localStorage.getItem(MemKeys.Skillbarsetting)).hasOwnProperty(CharName)) {\r\n            return $.parseJSON(localStorage.getItem(MemKeys.Skillbarsetting))[CharName];\r\n        } else {\r\n            return null;\r\n        }\r\n    }\r\n\r\n    static isEmpty(str) {\r\n        return (!str || str.length === 0);\r\n    }\r\n\r\n    static objectSortByKey(obj) {\r\n        return Object.keys(obj).sort().reduce(function (result, key) {\r\n            result[key] = obj[key];\r\n            return result;\r\n        }, {});\r\n    }\r\n\r\n    static outputAllElements() {\r\n        let out = \"\";\r\n        $.each(ELib, function (key, value) {\r\n            out += \"| `\" + key + \"` | `string` | `\" + value + \"` |  \\n\";\r\n        });\r\n        console.log(out);\r\n    }\r\n\r\n    static outputAllClasses() {\r\n        let out = \"\";\r\n        $.each(Classes, function (key, value) {\r\n            out += \"| `\" + key + \"` | `string` | `\" + value + \"` |  \\n\";\r\n        });\r\n        console.log(out);\r\n    }\r\n\r\n    static genID(table, id = null) {\r\n        if (id == null) {\r\n            id = Math.random().toString(26);\r\n        }\r\n\r\n        $.each(table, (key, value) => {\r\n            if (value.hasOwnProperty(\"id\") && value.id === id) {\r\n                return CustomJs.ScriptIDExist(table);\r\n            }\r\n        });\r\n\r\n        return id;\r\n    }\r\n\r\n    static findIndexGreaterThan(arr, x) {\r\n        for (let i = 0; i < arr.length; i++) {\r\n            if (arr[i] > x) {\r\n                return i;\r\n            }\r\n        }\r\n        return -1;\r\n    }\r\n\r\n    static numberWithCommas(x) {\r\n        return x.toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g, \",\");\r\n    }\r\n\r\n    static replaceLast(str, pattern, replacement) {\r\n        const match =\r\n            typeof pattern === 'string'\r\n                ? pattern\r\n                : (str.match(new RegExp(pattern.source, 'g')) || []).slice(-1)[0];\r\n        if (!match) return str;\r\n        const last = str.lastIndexOf(match);\r\n        return last !== -1\r\n            ? `${str.slice(0, last)}${replacement}${str.slice(last + match.length)}`\r\n            : str;\r\n    };\r\n\r\n    static splitStringAt(str, index) {\r\n        return [str.slice(0, index), str.slice(index)];\r\n    }\r\n\r\n    static isNotNull(value) {\r\n        return value !== null && value !== undefined && value !== \"\" && value !== \"N/A\" && value !== \"\\n\" && value !== \"\\r\\n\" && value !== \"\\r\";\r\n    }\r\n\r\n    static beautifullyHeader(header) {\r\n        const step1 = this.ucWords(header.replaceAll(\"_\", \" \").replaceAll(\"\\r\", \" \").replaceAll(\"\\n\", \" \").trim());\r\n        return step1.split(\" \").filter((value) => this.isNotNull(value)).join(\" \");\r\n    }\r\n\r\n    static equals(a, b) {\r\n        return a.trim().toLowerCase() === b.trim().toLowerCase();\r\n    }\r\n\r\n    static equalsWordId(a, b) {\r\n        return a.trim().toLowerCase() === b.trim().toLowerCase();\r\n    }\r\n\r\n    static simplifyString(str) {\r\n        return this.beautifullyHeader(str).replaceAll(\" \", \"\");\r\n    }\r\n\r\n\r\n    static removeExtraSpace(string) {\r\n        // i want make function for template\r\n        // template \"  dsad a  sada dsad a \" => \"dsad a sada dsad a\"\r\n        return string.replace(/\\s+/g,' ').trim();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Content-Adaptive-Extension/scripts/Libs/Utility.js b/Content-Adaptive-Extension/scripts/Libs/Utility.js
+--- a/Content-Adaptive-Extension/scripts/Libs/Utility.js	
++++ b/Content-Adaptive-Extension/scripts/Libs/Utility.js	
+@@ -204,6 +204,44 @@
+     static removeExtraSpace(string) {
+         // i want make function for template
+         // template "  dsad a  sada dsad a " => "dsad a sada dsad a"
+-        return string.replace(/\s+/g,' ').trim();
++        return string.replace(/\s+/g, ' ').trim();
+     }
++
++    static replaceAllSpecialChar(string) {
++        return string.replaceAll("\r", "")
++            .replaceAll("\t", "");
++    }
++
++    static convertAndBeautifyValueOfField(value) {
++        // if (!this.isNotNull(value)) return null;
++        if (!Number.isNaN(value)) return value;
++
++        value = this.replaceAllSpecialChar(value);
++        value = this.removeExtraSpace(value);
++        return value;
++    }
++
++    static splitStringWithNewLine(string) {
++        return string.split("\n");
++    }
++
++    static splitStringWithComma(string) {
++        return string.split(",");
++    }
++
++    static splitStringWithSpace(string) {
++        return string.split(" ");
++    }
++
++    static splitStringWithTab(string) {
++        return string.split("\t");
++    }
++
++    static splitStringWithColon(string) {
++        return string.split(":");
++    }
++
++    static splitStringWithSemicolon(string) {
++        return string.split(";");
++    }
+ }
+\ No newline at end of file

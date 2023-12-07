@@ -1,0 +1,3 @@
+const ProgramSeries = {
+	VWA: VWAResource
+}

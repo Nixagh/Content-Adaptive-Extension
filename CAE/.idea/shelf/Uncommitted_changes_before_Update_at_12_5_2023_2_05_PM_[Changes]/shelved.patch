@@ -1,0 +1,626 @@
+Index: scripts/Libs/data/programs/resource/VWAResource.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\n\r\n\r\nconst VWAResource = {\r\n\t\"Definitions\": {value: \"Definitions\", new: () => new DefinitionProcess(\"Definitions\", 1, [1, 0, 1, 0])},\r\n\t\"Visuals\": {value: \"Visuals\", new: () => new VisualProcess(\"Visuals\", 1, [1, 0, 1, 0])},\r\n\t\"WS\": {value: \"Word Study\", new: () => new WSProcess(\"WS\", 1, [1, 0, 1, 0])},\r\n\t\"CRW-GT\": {value: \"Choosing the Right Word - Guided Tour\", new: () => new CRWGTProcess(\"CRW-GT\", 1, [1, 1, 1, 1])},\r\n\t\"VC-OLV\": {value: \"Vocabulary in Context (On-level)\", new: () => new VCOLVProcess(\"VC-OLV\", 1, [1, 1, 1, 1])},\r\n\t\"VC-D\": {value: \"Vocabulary in Context (Differentiated)\", new: () => new VCDProcess(\"VC-D\", 1, [1, 1, 1, 1])},\r\n\t\"WT\": {value: \"Word Ties\", new: () => new WordTieProcess(\"WT\", 1, [1, 1, 1, 1])},\r\n\t\"E/N\": {value: \"Example/Nonexample\", new: () => new ENProcess(\"E/N\", 1, [1, 1, 1, 1])},\r\n\t\"AP\": {value: \"Adaptive Practice\", new: () => new AdaptivePracticeProcess(\"AP\", 1, [1, 1, 1, 1])},\r\n\t\"CRW-OYO\": {value: \"Choosing the Right Word - On Your Own\", new: () => new CRWOYOProcess(\"CRW-OYO\", 1, [1, 1, 1, 0])},\r\n\t\"OLV-P1\": {value: \"On-level Passage 1\", new: () => new OLVP1Process(\"OLV-P1\", 1, [1, 1, 1, 1])},\r\n\t\"OLV-P2\": {value: \"On-level Passage 2\", new: () => new OLVP2Process(\"OLV-P2\", 1, [1, 1, 1, 1])},\r\n\t\"DP1\": {value: \"Differentiated Passage 1\", new: () => new DP1Process(\"DP1\", 1, [1, 1, 1, 1])},\r\n\t\"DP2\": {value: \"Differentiated Passage 2\", new: () => new DP2Process(\"DP2\", 1, [1, 1, 1, 1])},\r\n\t\"CS\": {value: \"Completing the Sentence\", new: () => new CSProcess(\"CS\", 1, [1, 0, 1, 0])},\r\n\t\"EOY\": {value: \"End of Year Test\", new: () => new EOYTestProcess(\"EOY\", 1, [1, 1, 1, 0])},\r\n\t\"BOY\": {value: \"Begin of Year Test\", new: () => new BOYTestProcess(\"BOY\", 1, [1, 1, 1, 0])},\r\n\t\"PreTest\": {value: \"Pre Test\", new: () => new PreTestProcess(\"PreTest\", 1, [1, 0, 1, 0])},\r\n\t\"PostTest\": {value: \"Post Test\", new: () => new PostTestProcess(\"PostTest\", 1, [1, 0, 1, 0])},\r\n\t\"CumTest\": {value: \"Cumulative Test\", new: () => new CumulativeTestProcess(\"CumTest\", 1, [1, 0, 1, 0])},\r\n}\r\n\r\nconst WordListResource = {\r\n\t\"WordList\": {value: \"Word List\", new: () => new WordListProcess()}\r\n}\r\n\r\nconst WordContinuumResource = {\r\n\t\"WordContinuum\": {value: \"Word Continuum\", new: () => new WordContinuumProcess()}\r\n}\r\n\r\nconst Resource = {\r\n\t\"WL\": {\r\n\t\tresource: WordListResource,\r\n\t\tinsertButton: {\r\n\t\t\tshow: [Ids.insertWordList],\r\n\t\t\thide: [Ids.insertButton, Ids.insertAndSave, Ids.insertWordContinuum]\r\n\t\t},\r\n\r\n\t},\r\n\t\"VWA\": {\r\n\t\tresource: VWAResource,\r\n\t\tinsertButton: {\r\n\t\t\tshow: [Ids.insertButton, Ids.insertAndSave],\r\n\t\t\thide: [Ids.insertWordList, Ids.insertWordContinuum]\r\n\t\t}\r\n\t},\r\n\t\"WC\": {\r\n\t\tresource: WordContinuumResource,\r\n\t\tinsertButton: {\r\n\t\t\tshow: [Ids.insertWordContinuum],\r\n\t\t\thide: [Ids.insertButton, Ids.insertAndSave, Ids.insertWordList]\r\n\t\t},\r\n\r\n\t}\r\n}\r\n\r\nconst getProcess = () => {\r\n\tconst program = Storage.Get(\"CurrentProgram\");\r\n\r\n\tif(localStorage.getItem(\"GProcess\")) {\r\n\t\tconst parse = JSON.parse(localStorage.getItem(\"GProcess\"));\r\n\t\tconst process = Resource[program].resource[parse.type].new();\r\n\t\tprocess.allSheets = parse.allSheets;\r\n\t\tprocess.fileName = parse.fileName;\r\n\t\tprocess.data = parse.data;\r\n\t\tprocess.type = parse.type;\r\n\t\tif (process.type === \"WordList\") {\r\n\t\t\tprocess.themeDataWithWordId = parse.themeDataWithWordId;\r\n\t\t}\r\n\t\treturn process;\r\n\t}\r\n\treturn null;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/scripts/Libs/data/programs/resource/VWAResource.js b/scripts/Libs/data/programs/resource/VWAResource.js
+--- a/scripts/Libs/data/programs/resource/VWAResource.js	(revision 6ddf587fc870f33138d8e6f7cd43b88ec420d158)
++++ b/scripts/Libs/data/programs/resource/VWAResource.js	(date 1701759928570)
+@@ -16,7 +16,7 @@
+ 	"OLV-P2": {value: "On-level Passage 2", new: () => new OLVP2Process("OLV-P2", 1, [1, 1, 1, 1])},
+ 	"DP1": {value: "Differentiated Passage 1", new: () => new DP1Process("DP1", 1, [1, 1, 1, 1])},
+ 	"DP2": {value: "Differentiated Passage 2", new: () => new DP2Process("DP2", 1, [1, 1, 1, 1])},
+-	"CS": {value: "Completing the Sentence", new: () => new CSProcess("CS", 1, [1, 0, 1, 0])},
++	"CS": {value: "Completing the Sentence", new: () => new CSProcess("CS", 1, [1, 1, 1, 0])},
+ 	"EOY": {value: "End of Year Test", new: () => new EOYTestProcess("EOY", 1, [1, 1, 1, 0])},
+ 	"BOY": {value: "Begin of Year Test", new: () => new BOYTestProcess("BOY", 1, [1, 1, 1, 0])},
+ 	"PreTest": {value: "Pre Test", new: () => new PreTestProcess("PreTest", 1, [1, 0, 1, 0])},
+@@ -32,6 +32,10 @@
+ 	"WordContinuum": {value: "Word Continuum", new: () => new WordContinuumProcess()}
+ }
+ 
++const WWiAResource = {
++	"WWiA": {value: "Writing: Words in Action", new: () => new WWiAProcess()}
++}
++
+ const Resource = {
+ 	"WL": {
+ 		resource: WordListResource,
+Index: manifest.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\r\n  \"manifest_version\": 3,\r\n  \"name\": \"Content Adaptive Extension help typing\",\r\n  \"version\": \"1.0.0\",\r\n  \"description\": \"Welcome to my extension\",\r\n  \"icons\": {\r\n    \"16\": \"assets/16.png\",\r\n    \"48\": \"assets/48.png\",\r\n    \"128\": \"assets/128.png\"\r\n  },\r\n  \"action\": {\r\n    \"default_popup\": \"UI/popup.html\",\r\n    \"default_icon\": {\r\n      \"16\": \"assets/16.png\",\r\n      \"48\": \"assets/48.png\",\r\n      \"128\": \"assets/128.png\"\r\n    },\r\n    \"default_title\": \"Extension help typing\"\r\n  },\r\n  \"permissions\": [\r\n    \"storage\",\r\n    \"activeTab\",\r\n    \"scripting\",\r\n    \"tabs\",\r\n    \"activeTab\"\r\n  ],\r\n  \"host_permissions\": [\"http://192.168.200.26:8090/*\"],\r\n  \"web_accessible_resources\": [\r\n    {\r\n      \"resources\": [\r\n        \"assets/*\",\r\n        \"scripts/*\",\r\n        \"styles/*\",\r\n        \"UI/*\"\r\n      ],\r\n      \"matches\": [\r\n        \"http://192.168.200.26:8090/*\"\r\n      ]\r\n    }\r\n  ],\r\n  \"content_scripts\": [\r\n    {\r\n      \"matches\": [\r\n        \"http://192.168.200.26:8090/*\"\r\n      ],\r\n      \"js\": [\r\n        \"scripts/Libs/external/Jui.js\",\r\n        \"scripts/Libs/external/REF.js\",\r\n        \"scripts/Libs/data/ELib.js\",\r\n        \"scripts/Libs/data/Classes.js\",\r\n        \"scripts/Libs/data/Ids.js\",\r\n        \"scripts/Libs/data/ExcelType.js\",\r\n        \"scripts/Compound.js\",\r\n        \"scripts/Libs/data/programs/resource/VWAResource.js\",\r\n        \"scripts/Libs/data/programs/ProgramSeries.js\",\r\n        \"scripts/Libs/Utility.js\",\r\n        \"scripts/Libs/Elements.js\",\r\n        \"scripts/Libs/Modal.js\",\r\n        \"scripts/Libs/Storage.js\",\r\n        \"scripts/Libs/UI.js\",\r\n        \"scripts/Modules/file/FileReader.js\",\r\n        \"scripts/Modules/_video/videoUtility.js\",\r\n        \"scripts/Modules/process/utility/BasicInput.js\",\r\n        \"scripts/Modules/process/utility/Area.js\",\r\n        \"scripts/Modules/process/utility/Ske.js\",\r\n        \"scripts/Modules/process/utility/ExcelUtil.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/VWAProcess.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/EOYTestProcess.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/BOYTestProcess.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/PreTestProcess.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/PostTestProcess.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/CumulativeTestProcess.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/CRWGTProcess.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/ENProcess.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/VCProcess.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/VCOLVProcess.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/VCDProcess.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/WordTieProcess.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/OnYourOwn/CRWOYOProcess.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/OnYourOwn/PassageProcess.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/OnYourOwn/OLVProcess.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/OnYourOwn/DPProcess.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/OnYourOwn/OLVP1Process.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/OnYourOwn/OLVP2Process.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/OnYourOwn/DP1Process.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/OnYourOwn/DP2Process.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/OnYourOwn/CSProcess.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/OnYourOwn/AdaptivePracticeProcess.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/StartingPoint/DefinitionProcess.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/StartingPoint/WSProcess.js\",\r\n        \"scripts/Modules/process/resource/VocabularyWorkShopAdaptive/StartingPoint/VisualProcess.js\",\r\n\r\n        \"scripts/Modules/process/resource/WordList/WordListProcess.js\",\r\n        \"scripts/Modules/process/resource/WordList/WordContinuumProcess.js\",\r\n\r\n        \"scripts/Modules/process/settings/ResourceSetting.js\",\r\n        \"scripts/Libs/data/programs/resource/VWAResourceSetting.js\",\r\n\r\n        \"scripts/Modules/log/LogStorage.js\",\r\n\r\n        \"scripts/Modules/Prepare.js\",\r\n        \"scripts/Modules/Content.js\",\r\n        \"scripts/Main.js\"\r\n      ],\r\n      \"css\": [\r\n        \"styles/my-style.css\"\r\n      ],\r\n      \"run_at\": \"document_end\",\r\n      \"all_frames\": true,\r\n      \"type\": \"module\"\r\n    }\r\n  ],\r\n  \"author\": \"Nixagh\"\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/manifest.json b/manifest.json
+--- a/manifest.json	(revision 6ddf587fc870f33138d8e6f7cd43b88ec420d158)
++++ b/manifest.json	(date 1701663866012)
+@@ -70,6 +70,8 @@
+         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/PreTestProcess.js",
+         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/PostTestProcess.js",
+         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/CumulativeTestProcess.js",
++        "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/WWiAProcess.js",
++
+         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/CRWGTProcess.js",
+         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/ENProcess.js",
+         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/VCProcess.js",
+@@ -98,8 +100,13 @@
+ 
+         "scripts/Modules/log/LogStorage.js",
+ 
++
++
+         "scripts/Modules/Prepare.js",
+         "scripts/Modules/Content.js",
++
++        "UI/modal.js",
++
+         "scripts/Main.js"
+       ],
+       "css": [
+Index: scripts/Modules/Content.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>class OptionContent {\r\n    init() {\r\n        OptionContent.initButton();\r\n        OptionContent.initOptionsModal().then();\r\n        // Option.initFastInsertButton();\r\n    }\r\n\r\n    static initButton() {\r\n        const optionsButtonKey = \"optionsButton\";\r\n        const optionsButtonData = {\r\n            type: \"optionsButton\",\r\n            action: \"openOptionsModal\",\r\n            value: \"Options\",\r\n        }\r\n        const optionsButton = Elements.optionsButton(optionsButtonKey, optionsButtonData);\r\n\r\n        UI.Append(`.${Classes.mainMenu}`, optionsButton);\r\n\r\n        UI.Delegate(`.${Classes.mainMenu}`, \"click\", `.${Classes.optionsButton}`, () => {\r\n            const optionsModalKey = \"optionsModal\";\r\n            OptionContent.showOptionsModal(optionsModalKey);\r\n        });\r\n    }\r\n\r\n    static initFastInsertButton() {\r\n        const fastInsert = `<button id=\"${Ids.insertButton}\" class=\"btn blue fast-insert-button\">Insert</button>`;\r\n        UI.Append(`.${Classes.mainMenu}`, fastInsert);\r\n\r\n        UI.Delegate(`.${Classes.optionsModalInnerHtml}`, \"click\", `#${Ids.insertButton}`, async () => {\r\n            if (!GProcess) return alert(\"No file loaded\");\r\n            await OptionContent.insert();\r\n        });\r\n    }\r\n\r\n    static showOptionsModal(optionsModalKey) {\r\n        const optionsModal = $(`#${optionsModalKey}`);\r\n        if (optionsModal.is(\":visible\")) {\r\n            optionsModal.hide();\r\n        } else {\r\n            optionsModal.show();\r\n        }\r\n    }\r\n\r\n    static async initOptionsModal() {\r\n        const data = OptionContent.getOptionsModalData();\r\n        const innerHtml = OptionContent.getOptionsModalInnerHtml();\r\n        await Modal.Create(data, {html: innerHtml}, false);\r\n        this.showAndHideInsertButton(Storage.Get(\"CurrentProgram\") || \"WL\" || \"WC\");\r\n        this.showAndHideModal(Storage.Get(\"CurrentShowModal\") || ListModalIds.questionModal);\r\n        // this.showCurrentQuestionNumber();\r\n\r\n        UI.Delegate(`.emptyWindow`, \"click\", `#${Ids.openInsertQuestion}`, () => {\r\n            this.showAndHideModal(ListModalIds.questionModal);\r\n        });\r\n\r\n        UI.Delegate(`.emptyWindow`, \"click\", `#${Ids.openInsertType}`, () => {\r\n            this.showAndHideModal(ListModalIds.typeModal);\r\n        });\r\n\r\n        UI.Delegate(`.${Classes.optionsModalInnerHtml}`, \"click\", `#${Ids.fileInputButton}`, async () => {\r\n            console.log(\"Load file\");\r\n            const fileReader = new FileReader();\r\n            const result = await fileReader.loadFile();\r\n            if (result !== true) alert(result);\r\n            else alert(\"file loaded\");\r\n\r\n            // set current program\r\n            const program = $(`#${Ids.program}`).val();\r\n            Storage.Set(\"CurrentProgram\", program);\r\n\r\n            // set current file\r\n            $(`#${Ids.currentFile}`).text(GProcess.fileName);\r\n            $(`#${Ids.currentDesc}`).text(Resource[program].resource[GProcess.type].value);\r\n            $(`#${Ids.totalLine}`).text(GProcess.getLengthData());\r\n\r\n        });\r\n\r\n        UI.Delegate(`.${Classes.optionsModalInnerHtml}`, \"click\", `#${Ids.insertButton}`, async () => {\r\n            if (!GProcess) return alert(\"No file loaded\");\r\n            await OptionContent.insert();\r\n        });\r\n\r\n        UI.Delegate(`.${Classes.optionsModalInnerHtml}`, \"click\", `#${Ids.insertAndSave}`, async () => {\r\n            if (!GProcess) return alert(\"No file loaded\");\r\n            OptionContent.insert().then((result) => {\r\n                if (result) document.getElementById(Ids.saveBtn).click()\r\n            });\r\n        })\r\n\r\n        UI.Delegate(`.${Classes.optionsModalInnerHtml}`, \"click\", `#${Ids.insertWordList}`, async () => {\r\n            if (!GProcess) return alert(\"No file loaded\");\r\n            await OptionContent.insert();\r\n            document.getElementById(Ids.saveBtn).click()\r\n        });\r\n\r\n        UI.Delegate(`.${Classes.optionsModalInnerHtml}`, \"click\", `#${Ids.insertWordContinuum}`, async () => {\r\n            if (!GProcess) return alert(\"No file loaded\");\r\n            await OptionContent.insert();\r\n        });\r\n\r\n        UI.Delegate(`.${Classes.optionsModalInnerHtml}`, \"onload\", `#${Ids.globalResourceId}`, async () => {\r\n            console.log(\"initCurrentCode\")\r\n            this.initCurrentCode();\r\n        });\r\n\r\n        UI.Delegate(`.${Classes.optionsModalInnerHtml}`, \"onload\", `#${Ids.questionNumber}`, async () => {\r\n            console.log(\"initNextCurrentQuestionNumber\")\r\n            this.initNextCurrentQuestionNumber();\r\n        });\r\n\r\n\t\tUI.Delegate(`.${Classes.optionsModalInnerHtml}`, \"change\", `#${Ids.program}`, async () => {\r\n            console.log(\"change program\")\r\n            const program = $(`#${Ids.program}`).val();\r\n            const getResource = Resource[program].resource;\r\n\r\n            const description = $(`#${Ids.description}`);\r\n            description.empty();\r\n            description.append(this.getDescriptions(getResource));\r\n\r\n            // hide and show insert button\r\n            this.showAndHideInsertButton(program);\r\n        });\r\n\r\n\r\n        UI.Delegate(`#${ListModalIds.typeModal}`, \"click\", `#${Ids.insertSettings}`, async () => {\r\n            const type = $(`#${Ids.type}`).val();\r\n            Screen.insert(type);\r\n            console.log(\"insertSettings\" + type);\r\n        });\r\n\r\n\r\n        //\r\n        UI.Delegate(`.${Classes.optionsModalInnerHtml}`, \"change\", `#${Ids.questionNumber}`, async () => {\r\n            Storage.Set(\"CurrentQuestionNumber\", $(`#${Ids.questionNumber}`).val());\r\n        });\r\n    }\r\n\r\n    static showAndHideInsertButton(program) {\r\n        const buttons = Resource[program].insertButton;\r\n        // show\r\n        buttons.show.forEach((button) => {\r\n            $(`#${button}`).show();\r\n        });\r\n        // hide\r\n        buttons.hide.forEach((button) => {\r\n            $(`#${button}`).hide();\r\n        });\r\n    }\r\n\r\n    static showAndHideModal(show) {\r\n        const modals = ListModalIds;\r\n        // show\r\n        $(`#${show}`).show();\r\n        // hide\r\n        Object.entries(modals).forEach(([key, value]) => {\r\n            if (value !== show) {\r\n                $(`#${value}`).hide();\r\n            }\r\n        });\r\n        Storage.Set(\"CurrentShowModal\", show);\r\n    }\r\n\r\n    static showCurrentQuestionNumber() {\r\n        const currentQuestionNumber = Storage.Get(\"CurrentQuestionNumber\");\r\n        $(`#${Ids.questionNumber}`).val(currentQuestionNumber);\r\n    }\r\n\r\n    static initCurrentCode() {\r\n        currentCode = localStorage.getItem(\"currentCode\");\r\n        if (!currentCode) {\r\n            currentCode = 0;\r\n            Storage.Set(\"currentCode\", currentCode);\r\n        }\r\n        return parseInt(currentCode);\r\n    }\r\n\r\n    static initNextCurrentQuestionNumber() {\r\n        const nextCurrentQuestionNumber = localStorage.getItem(\"CurrentQuestionNumber\");\r\n        // convert to int\r\n        const nextCurrentQuestionNumberInt = parseInt(nextCurrentQuestionNumber);\r\n        if (!nextCurrentQuestionNumber) {\r\n            const currentQuestionNumber = 1;\r\n            Storage.Set(\"CurrentQuestionNumber\", currentQuestionNumber.toString());\r\n        }\r\n        return nextCurrentQuestionNumberInt + 1;\r\n    }\r\n\r\n    static async insert() {\r\n        const questionNumber = $(`#${Ids.questionNumber}`).val();\r\n        const totalLine = $(`#${Ids.totalLine}`).text();\r\n        // if (parseInt(totalLine) < +questionNumber) return alert(\"Đã hết dữ liệu\");\r\n\r\n        const error = await GProcess.insert();\r\n        Storage.Set(\"currentCode\", $(`#${Ids.globalResourceId}`).val());\r\n        Storage.Set(\"CurrentQuestionNumber\", questionNumber);\r\n        return error;\r\n    }\r\n\r\n    static getOptionsModalInnerHtml() {\r\n        return `\r\n            <div style=\"display: flex; justify-content: flex-start\">\r\n                <button id=\"${Ids.openInsertQuestion}\" style=\"color: black\">Insert Question</button>\r\n                <button id=\"${Ids.openInsertType}\" style=\"color: black\">Insert Type</button>\r\n            </div>\r\n            <div id=\"${ListModalIds.questionModal}\">\r\n                <div class=\"${Classes.optionsModalInnerHtml}\">\r\n                    <div class=\"file-content\">\r\n                        <h1>Load file</h1>\r\n                        <input type=\"file\" id=\"${Ids.fileInput}\" />\r\n                    </div>\r\n                    \r\n                    <div class=\"choose-load\">\r\n                        <h1>Program</h1>\r\n                        <select id=\"${Ids.program}\" style=\"color: #181d24\">\r\n                            ${OptionContent.getPrograms()}\r\n                        </select>\r\n                    </div>\r\n                    \r\n                    <div class=\"choose-unit\">\r\n                        <h1>Description</h1>\r\n                        <select id=\"${Ids.description}\" style=\"color: #181d24\">\r\n                            ${OptionContent.getDescriptions(WordListResource)}\r\n                        </select>\r\n                    </div>\r\n                    <div class=\"preview\">\r\n                        <h1>Load Data</h1>\r\n                        <button id=\"${Ids.fileInputButton}\">Load</button>\r\n                        <div>\r\n                            <span>Current File: </span><span id=\"${Ids.currentFile}\" style=\"color: #5be8e8\">${GProcess ? GProcess.fileName : \"\"}</span><br/>\r\n                            <span>Current Description: </span><span id=\"${Ids.currentDesc}\" style=\"color: #5be8e8\">${GProcess ? Resource[currentProgram].resource[GProcess.type].value : \"\"}</span><br/>\r\n                            <span>Total Line: </span><span id=\"${Ids.totalLine}\" style=\"color: #5be8e8\">${GProcess ? GProcess.getLengthData() : \"\"}</span><br/>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"insert-data\">\r\n                        <h1>Insert data</h1>\r\n                        <div style=\"margin-top: 10px\">\r\n                            <input id=\"${Ids.globalResourceId}\" placeholder=\"insert product Code\" style=\"color: #181d24\" value=\"${OptionContent.initCurrentCode()}\">\r\n                            <input id=\"${Ids.questionNumber}\" placeholder=\"insert question number\" style=\"color: #181d24\" value=\"${this.initNextCurrentQuestionNumber()}\">\r\n                        </div>\r\n                        <button id=\"${Ids.insertButton}\">Insert</button>\r\n                        <button id=\"${Ids.insertAndSave}\" style=\"color: #181d24\">Insert And Save</button>\r\n                        <button id=\"${Ids.insertWordList}\" style=\"color: #181d24\">Insert Word List</button>\r\n                        <button id=\"${Ids.insertWordContinuum}\" style=\"color: #181d24\">Insert Word Continnuum</button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div id=\"${ListModalIds.typeModal}\">\r\n                <div class=\"description\">\r\n                    <h1>Insert Type</h1>\r\n                    <select id=\"${Ids.type}\" style=\"color: #181d24\">\r\n                        ${OptionContent.getDescriptions(VWAResourceSetting)}\r\n                    </select>\r\n                    <button id=\"${Ids.insertSettings}\" style=\"color: black\">Insert</button>\r\n                </div>\r\n            </div>`;\r\n    }\r\n\r\n    static getDescriptions(resource) {\r\n        let html = ``;\r\n        Object.entries(resource).forEach(([key, value]) => {\r\n            html += `<option value=\"${key}\">${value.value}</option>`;\r\n        });\r\n        return html;\r\n    }\r\n\r\n    static getPrograms() {\r\n        // let html = ``;\r\n        // Object.entries(ProgramSeries).forEach(([key, value]) => {\r\n        //     html += `<option value=\"${key}\">${value}</option>`;\r\n        // });\r\n        return `\r\n        <option value=\"WL\">Insert Word List</option>\r\n        <option value=\"WC\">Insert WordContinuum</option>\r\n        <option value=\"VWA\">Insert Resource</option>\r\n\t\t`;\r\n\r\n    }\r\n\r\n    static getOptionsModalData() {\r\n        return {\r\n            name: \"Options Modal\",\r\n            element: \"mainMenuButton\",\r\n            id: \"optionsModal\",\r\n            cls: \"optionsModal\",\r\n            base: \"windowPanel\",\r\n            internal: \"emptyWindow\",\r\n            position: {\r\n                top: 150,\r\n                left: 150\r\n            },\r\n            modable: true,\r\n            size: {\r\n                width: 100,\r\n                height: 100\r\n            },\r\n            resize: true\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/scripts/Modules/Content.js b/scripts/Modules/Content.js
+--- a/scripts/Modules/Content.js	(revision 6ddf587fc870f33138d8e6f7cd43b88ec420d158)
++++ b/scripts/Modules/Content.js	(date 1701677220055)
+@@ -1,4 +1,6 @@
+ class OptionContent {
++    fileReader = new FileReader();
++
+     init() {
+         OptionContent.initButton();
+         OptionContent.initOptionsModal().then();
+@@ -46,16 +48,9 @@
+         const innerHtml = OptionContent.getOptionsModalInnerHtml();
+         await Modal.Create(data, {html: innerHtml}, false);
+         this.showAndHideInsertButton(Storage.Get("CurrentProgram") || "WL" || "WC");
+-        this.showAndHideModal(Storage.Get("CurrentShowModal") || ListModalIds.questionModal);
++        this.showAndHideModal(Storage.Get("CurrentShowModal") || ModalIds.InsertQuestion.modalId);
+         // this.showCurrentQuestionNumber();
+-
+-        UI.Delegate(`.emptyWindow`, "click", `#${Ids.openInsertQuestion}`, () => {
+-            this.showAndHideModal(ListModalIds.questionModal);
+-        });
+-
+-        UI.Delegate(`.emptyWindow`, "click", `#${Ids.openInsertType}`, () => {
+-            this.showAndHideModal(ListModalIds.typeModal);
+-        });
++        OptionContent.initEventOpenModal();
+ 
+         UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.fileInputButton}`, async () => {
+             console.log("Load file");
+@@ -108,7 +103,7 @@
+             this.initNextCurrentQuestionNumber();
+         });
+ 
+-		UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "change", `#${Ids.program}`, async () => {
++        UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "change", `#${Ids.program}`, async () => {
+             console.log("change program")
+             const program = $(`#${Ids.program}`).val();
+             const getResource = Resource[program].resource;
+@@ -122,7 +117,7 @@
+         });
+ 
+ 
+-        UI.Delegate(`#${ListModalIds.typeModal}`, "click", `#${Ids.insertSettings}`, async () => {
++        UI.Delegate(`#${ModalIds.InsertType.modalId}`, "click", `#${Ids.insertSettings}`, async () => {
+             const type = $(`#${Ids.type}`).val();
+             Screen.insert(type);
+             console.log("insertSettings" + type);
+@@ -133,6 +128,18 @@
+         UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "change", `#${Ids.questionNumber}`, async () => {
+             Storage.Set("CurrentQuestionNumber", $(`#${Ids.questionNumber}`).val());
+         });
++
++        // event of WWiA
++        OptionContent.eventOfWWiA();
++    }
++
++    static initEventOpenModal() {
++        for (let key in ModalIds) {
++            const value = ModalIds[key];
++            UI.Delegate(`.${Classes.optionsModal}`, "click", `#${value.buttonId}`, () => {
++                OptionContent.showAndHideModal(value.modalId);
++            });
++        }
+     }
+ 
+     static showAndHideInsertButton(program) {
+@@ -148,18 +155,40 @@
+     }
+ 
+     static showAndHideModal(show) {
+-        const modals = ListModalIds;
++        const modals = ModalIds;
+         // show
+         $(`#${show}`).show();
+         // hide
+         Object.entries(modals).forEach(([key, value]) => {
+-            if (value !== show) {
+-                $(`#${value}`).hide();
++            const id = value.modalId;
++            if (id !== show) {
++                $(`#${id}`).hide();
+             }
+         });
+         Storage.Set("CurrentShowModal", show);
+     }
+ 
++    static eventOfWWiA() {
++        const fileReader = new FileReader();
++        let files = [];
++
++        UI.Delegate(`#${ModalIds.InsertWWiA.modalId}`, "change", `#${Ids.fileInputForWWiA}`, async () => {
++            const input = $(`#${Ids.fileInputForWWiA}`);
++            files.push(input[0].files[0]);
++        });
++
++        UI.Delegate(`#${ModalIds.InsertWWiA.modalId}`, "click", `#${Ids.fileInputButtonOfWWiA}`, async () => {
++            console.log("Load file");
++            const response = await fileReader.loadFileFromWWiA(files);
++            console.log(response);
++        });
++
++        UI.Delegate(`#${ModalIds.InsertWWiA.modalId}`, "click", `#${Ids.insertButton}`, async () => {
++            if (!GProcess) return alert("No file loaded");
++            await OptionContent.insert();
++        });
++    }
++
+     static showCurrentQuestionNumber() {
+         const currentQuestionNumber = Storage.Get("CurrentQuestionNumber");
+         $(`#${Ids.questionNumber}`).val(currentQuestionNumber);
+@@ -197,12 +226,8 @@
+     }
+ 
+     static getOptionsModalInnerHtml() {
+-        return `
+-            <div style="display: flex; justify-content: flex-start">
+-                <button id="${Ids.openInsertQuestion}" style="color: black">Insert Question</button>
+-                <button id="${Ids.openInsertType}" style="color: black">Insert Type</button>
+-            </div>
+-            <div id="${ListModalIds.questionModal}">
++        return `${this.getOpenButtonModalInnerHtml()}<br/>
++            <div id="${ModalIds.InsertQuestion.modalId}">
+                 <div class="${Classes.optionsModalInnerHtml}">
+                     <div class="file-content">
+                         <h1>Load file</h1>
+@@ -222,7 +247,7 @@
+                             ${OptionContent.getDescriptions(WordListResource)}
+                         </select>
+                     </div>
+-                    <div class="preview">
++                   <div class="preview">
+                         <h1>Load Data</h1>
+                         <button id="${Ids.fileInputButton}">Load</button>
+                         <div>
+@@ -230,12 +255,12 @@
+                             <span>Current Description: </span><span id="${Ids.currentDesc}" style="color: #5be8e8">${GProcess ? Resource[currentProgram].resource[GProcess.type].value : ""}</span><br/>
+                             <span>Total Line: </span><span id="${Ids.totalLine}" style="color: #5be8e8">${GProcess ? GProcess.getLengthData() : ""}</span><br/>
+                         </div>
+-                    </div>
++                     </div>
+                     <div class="insert-data">
+                         <h1>Insert data</h1>
+                         <div style="margin-top: 10px">
+                             <input id="${Ids.globalResourceId}" placeholder="insert product Code" style="color: #181d24" value="${OptionContent.initCurrentCode()}">
+-                            <input id="${Ids.questionNumber}" placeholder="insert question number" style="color: #181d24" value="${this.initNextCurrentQuestionNumber()}">
++                            <input id="${Ids.questionNumber}" placeholder="insert question number" style="color: #181d24" value="${OptionContent.initNextCurrentQuestionNumber()}">
+                         </div>
+                         <button id="${Ids.insertButton}">Insert</button>
+                         <button id="${Ids.insertAndSave}" style="color: #181d24">Insert And Save</button>
+@@ -244,7 +269,7 @@
+                     </div>
+                 </div>
+             </div>
+-            <div id="${ListModalIds.typeModal}">
++            <div id="${ModalIds.InsertType.modalId}">
+                 <div class="description">
+                     <h1>Insert Type</h1>
+                     <select id="${Ids.type}" style="color: #181d24">
+@@ -252,9 +277,46 @@
+                     </select>
+                     <button id="${Ids.insertSettings}" style="color: black">Insert</button>
+                 </div>
++            </div>
++            <div id="${ModalIds.InsertWWiA.modalId}">
++                <div class="description">
++                    <div class="file-content">
++                        <h1>Load file</h1>
++                        <h3>WWIA file </h3>
++                        <input type="file" id="${Ids.fileInputForWWiA}" />
++                    </div>
++                    <h1>Insert Type</h1>
++                    <select id="${Ids.type}" style="color: #181d24">
++                        ${OptionContent.getDescriptions(WWiAResource)}
++                    </select>
++                    <div class="preview">
++                        <h1>Load Data</h1>
++                        <button id="${Ids.fileInputButton}">Load</button>
++                        <div>
++                            <span>Current File: </span><span id="${Ids.currentFile}" style="color: #5be8e8">${GProcess ? GProcess.fileName : ""}</span><br/>
++                            <span>Current Description: </span><span id="${Ids.currentDesc}" style="color: #5be8e8">${GProcess ? Resource[currentProgram].resource[GProcess.type].value : ""}</span><br/>
++                            <span>Total Line: </span><span id="${Ids.totalLine}" style="color: #5be8e8">${GProcess ? GProcess.getLengthData() : ""}</span><br/>
++                        </div>
++                     </div>
++                    <button id="${Ids.insertSettings}" style="color: black">Insert</button>
++                </div> 
+             </div>`;
+     }
+ 
++    static getOpenButtonModalInnerHtml() {
++        return `
++            <div style="display: flex; justify-content: flex-start">
++            ${Object.entries(ModalIds).map(([key, value]) => {
++            return `<button id="${value.buttonId}" style="color: black">${value.text}</button>`
++        }).join("")}
++            </div>
++        `;
++    }
++
++    static getModalInnerHtml() {
++        return Object.entries(modals()).map(([key, value]) => value).join("");
++    }
++
+     static getDescriptions(resource) {
+         let html = ``;
+         Object.entries(resource).forEach(([key, value]) => {
+@@ -263,6 +325,19 @@
+         return html;
+     }
+ 
++    static getPreviews(GProcess) {
++        return `
++         <div class="preview">
++            <h1>Load Data</h1>
++            <button id="${Ids.fileInputButton}">Load</button>
++            <div>
++                <span>Current File: </span><span id="${Ids.currentFile}" style="color: #5be8e8">${GProcess ? GProcess.fileName : ""}</span><br/>
++                <span>Current Description: </span><span id="${Ids.currentDesc}" style="color: #5be8e8">${GProcess ? Resource[currentProgram].resource[GProcess.type].value : ""}</span><br/>
++                <span>Total Line: </span><span id="${Ids.totalLine}" style="color: #5be8e8">${GProcess ? GProcess.getLengthData() : ""}</span><br/>
++            </div>
++         </div>`;
++    }
++
+     static getPrograms() {
+         // let html = ``;
+         // Object.entries(ProgramSeries).forEach(([key, value]) => {
+@@ -296,4 +371,4 @@
+             resize: true
+         }
+     }
+-}
++}
+\ No newline at end of file
+Index: scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/CRWGTProcess.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>class CRWGTProcess extends VWAProcess {\r\n\tgetDescription() {\r\n\t\treturn \"GT_CTRW\";\r\n\t}\r\n\r\n\tgetFullContent() {\r\n\t\tconst wordListContent = this.getWordListSheet();\r\n\t\tconst crwContent = this.getCRWGTSheet();\r\n\t\treturn {first: crwContent, second: wordListContent};\r\n\t}\r\n\r\n\tgetCRWGTSheet() {\r\n\t\tconst crwSheetName = `CtheRW`;\r\n\t\tconst crwSheet = this.getSheet(crwSheetName);\r\n\t\tconst crwHeader = this.getHeader(crwSheet);\r\n\t\treturn this.getContent(crwSheet, crwHeader);\r\n\t}\r\n\r\n\tgetComponentScoreRules(row) {\r\n\t\t//{\"test\":null,\"scoringGroups\":[{\"componentGradingRules\":[{\"\": \"802906_GT_CTRW_u01_q01_ans01,\"componentType\":\"Drop_Down\",\"componentSubtype\":null,\"autoScore\":true,\"rubricRule\":null}],\"maxScore\":1}]}\r\n\t\tconst componentScoreRules = {\r\n\t\t\ttest: null,\r\n\t\t\tscoringGroups: [\r\n\t\t\t\t{\r\n\t\t\t\t\tcomponentGradingRules: [\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\tcomponentId: `${this.getCID(row)}`,\r\n\t\t\t\t\t\t\tcomponentType: \"Drop_Down\",\r\n\t\t\t\t\t\t\tcomponentSubtype: null,\r\n\t\t\t\t\t\t\tautoScore: true,\r\n\t\t\t\t\t\t\trubricRule: null\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t],\r\n\t\t\t\t\tmaxScore: this.getMaxScore()\r\n\t\t\t\t}\r\n\t\t\t]\r\n\t\t}\r\n\t\treturn JSON.stringify(componentScoreRules);\r\n\t}\r\n\r\n\tgetDirectionLineHTML(row) {\r\n\t\treturn '<i>Choose the word that <b>best</b> completes the sentence.</i>';\r\n\t}\r\n\r\n\tgetAdaptiveAnswerCount() {\r\n\t\treturn 2;\r\n\t}\r\n\r\n\tgetQuestionHTML(row) {\r\n\t\tconst item = this.getItem(row);\r\n\t\tconst option = `<div cid=\"${this.getCID(row)}\" ctype=\"Drop_Down\" qname=\"a${row + 1}\">${this.getOption(row)}</div>`;\r\n\r\n\t\tconst regex = /[\\[(]FIB: anno: (.*)[\\])]/;\r\n\r\n\t\tconst question = item.replace(regex, option);\r\n\r\n\t\treturn `<div class=\"question-questionStem question-questionStem-1-column\">\r\n\t\t\t\t\t<div class=\"question-stem-content\">\r\n\t\t\t\t\t\t<div class=\"question\">${question}</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>`;\r\n\t}\r\n\r\n\tgetCorrectAnswer(row) {\r\n\t\t// {\"comps\":[{\"id\":\"802906_GT_CTRW_u05_q01_ans01\",\"value\":\"a\",\"type\":\"Drop_Down\",\"subtype\":null}]}\r\n\t\tconst correctAnswer = {\r\n\t\t\tcomps: [\r\n\t\t\t\t{\r\n\t\t\t\t\tid: `${this.getCID(row)}`,\r\n\t\t\t\t\tvalue: `${this.getCorrectAnswerValue(row)}`,\r\n\t\t\t\t\ttype: \"Drop_Down\"\r\n\t\t\t\t}]\r\n\t\t}\r\n\t\treturn JSON.stringify(correctAnswer);\r\n\t}\r\n\r\n\tgetCorrectAnswerValue(row) {\r\n\t\tconst answerChoices = this.getAnswerChoices(row);\r\n\t\tconst correctAnswer = this.getCorrectAnswerText(row);\r\n\t\tconst correctAnswerIndex = answerChoices.findIndex(answerChoice => answerChoice.trim() === correctAnswer.trim());\r\n\t\treturn String.fromCharCode(97 + correctAnswerIndex);\r\n\t}\r\n\r\n\tgetCorrectTextHTML(row) {\r\n\t\treturn this.getCorrectAnswerValue(row);\r\n\t}\r\n\r\n\tgetCorrectAnswerText(row) {\r\n\t\treturn this.getField(\"Correct Answer\", row);\r\n\t}\r\n\r\n\tgetFeedback(row) {\r\n\t\tconst feedback = {\r\n\t\t\t\"correctFeedback\": this.getCorrectFeedback(row),\r\n\t\t\t\"incorrectFeedback1\": this.getIncorrectFeedback1(row),\r\n\t\t\t\"incorrectFeedback2\": this.getIncorrectFeedback2(row),\r\n\t\t\t\"correctEmoji\": this.getCorrectEmoji(),\r\n\t\t\t\"incorrectEmojiFB1\": this.getIncorrectEmoji1(),\r\n\t\t\t\"incorrectEmojiFB2\": this.getIncorrectEmoji2(),\r\n\t\t\t\"visualClue\": this.getVisualClue(row)\r\n\t\t}\r\n\t\treturn JSON.stringify(feedback);\r\n\t}\r\n\r\n\t// ------------------ get field ------------------ //\r\n\tgetItem(row) {\r\n\t\treturn this.getExactlyField(\"Item\", row);\r\n\t}\r\n\tgetAnswerChoices(row) {\r\n\t\tconst answerChoices = this.getField(\"Answer Choices\", row);\r\n\t\treturn answerChoices ? answerChoices.split(/[;|,]/).map(word => Utility.removeExtraSpace(word)).filter(value => Utility.isNotNull(value)) : [];\r\n\t}\r\n\r\n\tgetCorrectFeedback(row) {\r\n\t\tconst correctFeedback = this.getField(\"Correct Feedback\", row);\r\n\t\tconst correctAnswer = this.getCorrectAnswerText(row);\r\n\r\n\t\treturn this.toArray(correctFeedback).map(item => this.replaceCorrectFeedback(item));\r\n\t}\r\n\r\n\treplaceCorrectFeedback(correctFeedback) {\r\n\t\tcorrectFeedback = correctFeedback.replaceAll(\"[\", \"\").replaceAll(\"]\", \"\");\r\n\r\n\t\tconst regex = /<(\\/|)b>(.*)<(\\/|)b>/g;\r\n\r\n\t\tconst match = correctFeedback.match(regex);\r\n\t\tconst word = match ? match[0].replaceAll(/<b>|<\\/b>/g, \"\").trim() : \"\";\r\n\r\n\t\tconst wordId = this.getWordIdFromWordList(word).trim();\r\n\t\tif (!wordId) this.addError(`FeedBack`, `Correct Feed Back wrong \"${word}\" can't find wordID in word list`);\r\n\r\n\t\tconst replaceValue = `<${wordId}>${wordId}:${word}</${wordId}>`;\r\n\t\treturn correctFeedback.replace(regex, replaceValue);\r\n\t}\r\n\r\n\tgetIncorrectFeedback1(row) {\r\n\t\tconst incorrectFeedback = this.getField(\"Incorrect Feedback 1\", row);\r\n\t\treturn this.toArray(incorrectFeedback).map(item => this.replaceIncorrectFeedback(item));\r\n\t}\r\n\r\n\tgetIncorrectFeedback2(row) {\r\n\t\tconst incorrectFeedback = this.getField(\"Incorrect Feedback 2\", row);\r\n\t\treturn this.toArray(incorrectFeedback).map(item => this.replaceIncorrectFeedback(item));\r\n\t}\r\n\r\n\treplaceIncorrectFeedback(incorrectFeedback) {\r\n\t\tconst regex = /(\\[|)<(\\/|)b>(.*)<(\\/|)b>(\\[|)/g;\r\n\t\tconst replaceBy = `<b>{0}</b>`;\r\n\t\treturn incorrectFeedback.replace(regex, replaceBy).trim();\r\n\t}\r\n\r\n\tgetCorrectEmoji() {\r\n\t\tconst correctEmoji = this.getExactlyField(\"Correct emoji and growth mindset phrases randomly shown:\", 0);\r\n\t\treturn this.toArray(correctEmoji);\r\n\t}\r\n\r\n\tgetIncorrectEmoji1() {\r\n\t\tconst incorrectEmoji = this.getField(\"Incorrect emoji for feedback 1 and growth mindset phrases randomly shown:\", 0);\r\n\t\treturn this.toArray(incorrectEmoji);\r\n\t}\r\n\r\n\tgetIncorrectEmoji2() {\r\n\t\tconst incorrectEmoji = this.getField(\"Incorrect emoji with Growth Mindset Phrase and \\\"Show Me\\\" button\", 0);\r\n\t\treturn this.toArray(incorrectEmoji);\r\n\t}\r\n\r\n\tgetVisualClue(row) {\r\n\t\treturn this.getField(\"Visual Clue\", row).replaceAll(\"\\\"\", \"\").trim();\r\n\t}\r\n\r\n\t// ------------------ other ------------------ //\r\n\ttoArray(text) {\r\n\t\treturn text ? text.split(\"\\n\").map(item => Utility.removeExtraSpace(item).replaceAll(\"\\r\", \"\").trim()).filter(value => Utility.isNotNull(value)) : [];\r\n\t}\r\n\r\n\tgetOption(row) {\r\n\t\tconst answerChoices = this.getAnswerChoices(row);\r\n\t\tlet option = '';\r\n\t\t// <div idx=\"a\" word=\"802906_GT_CTRW_u05_q01_ans01\">debits</div>\r\n\t\tanswerChoices.forEach((answerChoice, index) => {\r\n\t\t\tconst wordId = this.getWordIdFromWordList(answerChoice.trim()).trim();\r\n\t\t\tif (!wordId) this.addError(`Question Content`, `Answer Choices wrong \"${answerChoice}\" can't find WordID in word list`);\r\n\t\t\toption += `<div idx=\"${String.fromCharCode(97 + index)}\" word=\"${wordId}\">${answerChoice}</div>`;\r\n\t\t});\r\n\t\treturn `<div subid=\"options\">${option}</div>`;\r\n\t}\r\n\r\n\tgetWordIdFromWordList(word) {\r\n\t\tlet wordObj = this.data.filter(wordObj =>    wordObj[\"Word\"].trim().toLowerCase() === word.trim().toLowerCase()  \r\n\t\t|| wordObj[\"Correct Answer\"].trim().toLowerCase() === word.trim().toLowerCase() \r\n\t\t);\r\n\t\tif(wordObj.length === 0 ){\r\n\t\t\twordObj = this.ConvertV(word);\r\n\t\t}\r\n\t\treturn wordObj.length ? wordObj[0][\"Word ID\"] : \"\";\r\n\t}\r\n\r\n\tConvertV(word){\r\n\t\tlet wordConvert = word;\r\n\t\tlet check = true;\r\n\r\n\t\twhile(check){\r\n\t\t\tif(wordConvert.length === 0 ) return false;\r\n\t\t\twordConvert = wordConvert.substr(0 , wordConvert.length - 1);\r\n\t\t\tlet wordObj = this.data.filter((e) => {\r\n \t\t\t\treturn e['Word'].trim().toLowerCase().includes(wordConvert.trim().toLowerCase());\r\n\t\t\t\t\r\n\t\t\t});\r\n\r\n\t\t\tif(wordObj.length > 0){\r\n\t\t\t\tcheck = false;\r\n\t\t\t\treturn wordObj;\r\n\t\t\t}\r\n\r\n\t\t}\r\n\t\treturn false;\r\n\r\n\t}\r\n\r\n\r\n\r\n\r\n\t\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/CRWGTProcess.js b/scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/CRWGTProcess.js
+--- a/scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/CRWGTProcess.js	(revision 6ddf587fc870f33138d8e6f7cd43b88ec420d158)
++++ b/scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/CRWGTProcess.js	(date 1701757423425)
+@@ -102,6 +102,15 @@
+ 		return JSON.stringify(feedback);
+ 	}
+ 
++	checkQuestionContent(questionContent, correctAnswerText, correctText, row) {
++		super.checkQuestionContent(questionContent, correctAnswerText, correctText, row);
++
++		const incorrectFeedback1 = this.getIncorrectFeedback1(row);
++		const visualClue = this.getVisualClue(row);
++
++		if (!incorrectFeedback1.includes(visualClue)) this.createError(`Feedback`, `Incorrect Feedback 1 wrong "${incorrectFeedback1}" can't find Visual Clue "${visualClue}"`);
++	}
++
+ 	// ------------------ get field ------------------ //
+ 	getItem(row) {
+ 		return this.getExactlyField("Item", row);
+Index: UI/modal.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/UI/modal.js b/UI/modal.js
+new file mode 100644
+--- /dev/null	(date 1701677116069)
++++ b/UI/modal.js	(date 1701677116069)
+@@ -0,0 +1,68 @@
++const questionModal = `<div id="${ModalIds.InsertQuestion.modalId}">
++                <div class="${Classes.optionsModalInnerHtml}">
++                    <div class="file-content">
++                        <h1>Load file</h1>
++                        <input type="file" id="${Ids.fileInput}" />
++                    </div>
++                    
++                    <div class="choose-load">
++                        <h1>Program</h1>
++                        <select id="${Ids.program}" style="color: #181d24">
++                            ${OptionContent.getPrograms()}
++                        </select>
++                    </div>
++                    
++                    <div class="choose-unit">
++                        <h1>Description</h1>
++                        <select id="${Ids.description}" style="color: #181d24">
++                            ${OptionContent.getDescriptions(WordListResource)}
++                        </select>
++                    </div>
++                   ${OptionContent.getPreviews()}
++                    <div class="insert-data">
++                        <h1>Insert data</h1>
++                        <div style="margin-top: 10px">
++                            <input id="${Ids.globalResourceId}" placeholder="insert product Code" style="color: #181d24" value="${OptionContent.initCurrentCode()}">
++                            <input id="${Ids.questionNumber}" placeholder="insert question number" style="color: #181d24" value="${OptionContent.initNextCurrentQuestionNumber()}">
++                        </div>
++                        <button id="${Ids.insertButton}">Insert</button>
++                        <button id="${Ids.insertAndSave}" style="color: #181d24">Insert And Save</button>
++                        <button id="${Ids.insertWordList}" style="color: #181d24">Insert Word List</button>
++                        <button id="${Ids.insertWordContinuum}" style="color: #181d24">Insert Word Continnuum</button>
++                    </div>
++                </div>
++            </div>`;
++
++const typeModal = `<div id="${ModalIds.InsertType.modalId}">
++                <div class="description">
++                    <h1>Insert Type</h1>
++                    <select id="${Ids.type}" style="color: #181d24">
++                        ${OptionContent.getDescriptions(VWAResourceSetting)}
++                    </select>
++                    <button id="${Ids.insertSettings}" style="color: black">Insert</button>
++                </div>
++            </div>`;
++
++const wwiaModal = `<div id="${ModalIds.InsertWWiA.modalId}">
++                <div class="description">
++                    <div class="file-content">
++                        <h1>Load file</h1>
++                        <h3>WWIA file </h3>
++                        <input type="file" id="${Ids.fileInputForWWiA}" />
++                    </div>
++                    <h1>Insert Type</h1>
++                    <select id="${Ids.type}" style="color: #181d24">
++                        ${OptionContent.getDescriptions(WWiAResource)}
++                    </select>
++                    ${OptionContent.getPreviews()}
++                    <button id="${Ids.insertSettings}" style="color: black">Insert</button>
++                </div> 
++            </div>`;
++
++const modals = () => {
++    return {
++        questionModal,
++        typeModal,
++        wwiaModal
++    }
++}
+\ No newline at end of file
+Index: scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/WWiAProcess.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/WWiAProcess.js b/scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/WWiAProcess.js
+new file mode 100644
+--- /dev/null	(date 1701663683974)
++++ b/scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/WWiAProcess.js	(date 1701663683974)
+@@ -0,0 +1,3 @@
++class WWiAProcess {
++
++}
+\ No newline at end of file
+Index: scripts/Libs/data/Classes.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>const Classes = {\r\n\tuiBase: \".nixagh-container\",\r\n\tlayout: \"layout\",\r\n\tmainMenu: \"mainMenu\",\r\n\toptionsButton: \"optionsButton\",\r\n\tcloseFeature: \"closeFeature\",\r\n\toptionsModalInnerHtml: \"optionsModalInnerHtml\",\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/scripts/Libs/data/Classes.js b/scripts/Libs/data/Classes.js
+--- a/scripts/Libs/data/Classes.js	(revision 6ddf587fc870f33138d8e6f7cd43b88ec420d158)
++++ b/scripts/Libs/data/Classes.js	(date 1701665695583)
+@@ -5,4 +5,5 @@
+ 	optionsButton: "optionsButton",
+ 	closeFeature: "closeFeature",
+ 	optionsModalInnerHtml: "optionsModalInnerHtml",
++	optionsModal: "optionsModal",
+ }
+Index: scripts/Libs/data/Ids.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>const Ids = {\r\n\tfileInput: \"file-input\",\r\n\tfileInputButton: \"file-input-button\",\r\n\tunitSelect: \"unit-select\",\r\n\tinsertButton: \"insert-button\",\r\n\tinsertButtonWith4Tier: \"insert-button-with-4-tier\",\r\n\tpreviewButton: \"preview-button\",\r\n\tprogramSelect: \"program-select\",\r\n\tinsertDefinitions: \"insert-definitions\",\r\n\tglobalResourceId: \"programs-id\",\r\n\tquestionNumber: \"question-number\",\r\n\tdescription: \"description\",\r\n\tinsertAndSave: \"insert-and-save\",\r\n\tsaveBtn: \"btnSave\",\r\n\tquestionNumberInPage: \"pojo.questionNumber\",\r\n\ttotalLine: \"total-line\",\r\n\tcurrentFile: \"current-file\",\r\n\tcurrentDesc: \"current-desc\",\r\n\tprogram: \"cms-program\",\r\n\tinsertWordList: \"insert-word-list\",\r\n\taddQuestion: \"add-question\",\r\n\r\n\topenInsertQuestion: \"open-insert-question\",\r\n\topenInsertType: \"open-insert-word-list\",\r\n\r\n\ttype: \"type-select\",\r\n\tinsertSettings: \"insert-settings\",\r\n\r\n}\r\n\r\nconst ListModalIds = {\r\n\tquestionModal: \"question-modal\",\r\n\ttypeModal: \"type-modal\",\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/scripts/Libs/data/Ids.js b/scripts/Libs/data/Ids.js
+--- a/scripts/Libs/data/Ids.js	(revision 6ddf587fc870f33138d8e6f7cd43b88ec420d158)
++++ b/scripts/Libs/data/Ids.js	(date 1701670432805)
+@@ -1,6 +1,9 @@
+ const Ids = {
+ 	fileInput: "file-input",
++	fileInputForWWiA: "file-input-for-wwia",
+ 	fileInputButton: "file-input-button",
++	fileInputButtonOfWWiA: "file-input-button-of-wwia",
++
+ 	unitSelect: "unit-select",
+ 	insertButton: "insert-button",
+ 	insertButtonWith4Tier: "insert-button-with-4-tier",
+@@ -20,15 +23,30 @@
+ 	insertWordList: "insert-word-list",
+ 	addQuestion: "add-question",
+ 
+-	openInsertQuestion: "open-insert-question",
+-	openInsertType: "open-insert-word-list",
+-
+ 	type: "type-select",
+ 	insertSettings: "insert-settings",
+-
++	insertWordContinuum: "insert-word-continuum",
+ }
+ 
+-const ListModalIds = {
+-	questionModal: "question-modal",
+-	typeModal: "type-modal",
+-}
+\ No newline at end of file
++const ModalIds = {
++	InsertQuestion: {
++		text: "Insert Question",
++		buttonId: "open-insert-question",
++		modalId: "question-modal"
++	},
++	InsertType: {
++		text: "Insert Type",
++		buttonId:"open-insert-word-list",
++		modalId: "type-modal"
++	},
++	// openInsertSettings: {
++	// 	text: "Insert Settings",
++	// 	buttonId: "open-insert-settings",
++	// 	modalId: "type-modal"
++	// },
++	InsertWWiA: {
++		text: "Insert WWiA",
++		buttonId: "open-insert-wwia",
++		modalId: "wwia-modal"
++	},
++}
+Index: scripts/Modules/file/FileReader.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>class FileReader {\r\n\tprocessFile(arrayBuffer) {\r\n\t\tGProcess.allSheets = XLSX.read(arrayBuffer);\r\n\t\tGProcess.process();\r\n\t}\r\n\r\n\tasync loadFile() {\r\n\t\tconst file = await FileReader.getFile();\r\n\t\tif (!file) return \"No file selected\";\r\n\t\tif (!ExcelType[file.type]) return \"Invalid file type\";\r\n\r\n\t\tconst program = this.getProgram();\r\n\t\tif (!program) return \"No program selected\";\r\n\r\n\t\tconst desc = await FileReader.getDesc();\r\n\t\tif (!desc) return \"No description selected\";\r\n\r\n\t\tconst arrayBuffer = await FileReader.getArrayBuffer(file);\r\n\r\n\t\tGProcess = Resource[program].resource[desc].new();\r\n\t\tif (!GProcess) return \"Invalid description\";\r\n\r\n\t\tGProcess.fileName = file.name;\r\n\t\tthis.processFile(arrayBuffer);\r\n\t\treturn true;\r\n\t}\r\n\r\n\tstatic async getFile() {\r\n\t\tconst input = $(`#${Ids.fileInput}`);\r\n\t\t// get path of file in input\r\n\t\tconst filePath = input;\r\n\r\n\t\tthis.file = input[0].files[0];\r\n\t\treturn this.file;\r\n\t}\r\n\r\n\tgetProgram() {\r\n\t\treturn $(`#${Ids.program}`).val();\r\n\t}\r\n\r\n\tstatic async getDesc() {\r\n\t\treturn $(`#${Ids.description}`).val();\r\n\t}\r\n\r\n\tstatic async getArrayBuffer(file) {\r\n\t\treturn file.arrayBuffer();\r\n\t}\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/scripts/Modules/file/FileReader.js b/scripts/Modules/file/FileReader.js
+--- a/scripts/Modules/file/FileReader.js	(revision 6ddf587fc870f33138d8e6f7cd43b88ec420d158)
++++ b/scripts/Modules/file/FileReader.js	(date 1701670987639)
+@@ -25,11 +25,27 @@
+ 		return true;
+ 	}
+ 
+-	static async getFile() {
++	async loadFileFromWWiA(files) {
++		console.log(files)
++		const arrayBuffers = [];
++		for (let file of files) {
++			arrayBuffers.push(await FileReader.getArrayBuffer(file));
++		}
++
++		console.log(arrayBuffers);
++	}
++
++
++	static async getFile(multiple = false) {
+ 		const input = $(`#${Ids.fileInput}`);
+-		// get path of file in input
+-		const filePath = input;
++
++		if (multiple) {
++			// get path of file in input
++			this.file = Array.from(input).map(input => input.files[0]);
++			return this.file;
++		}
+ 
++		// get path of file in input
+ 		this.file = input[0].files[0];
+ 		return this.file;
+ 	}
+Index: scripts/Modules/Prepare.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>class Prepare {\r\n\tinit() {\r\n\t\tPrepare.initUIBase();\r\n\t\tPrepare.initLayout();\r\n\t\tPrepare.initMainMenu();\r\n\t\t// Prepare.initScript();\r\n\t\t// Prepare.getCodeAction();\r\n\t\tPrepare.initProcess();\r\n\t}\r\n\r\n\tstatic initUIBase() {\r\n\t\tconst uiBaseKey = \"uiBase\";\r\n\t\tconst uiBaseData = {\r\n\t\t\ttype: \"uiBase\",\r\n\t\t\tcls: \"uiBase\",\r\n\t\t\tvalue: \"UI Base\",\r\n\t\t\tinnerHTML: ``,\r\n\t\t}\r\n\t\tconst uiBase = Elements.Build(uiBaseKey, uiBaseData);\r\n\t\tUI.Append($(`body`), uiBase);\r\n\t}\r\n\r\n\tstatic initLayout() {\r\n\t\tconst layoutKey = \"layout\";\r\n\t\tconst layout = Elements.Build(layoutKey, null);\r\n\t\tUI.Append(`${Classes.uiBase}`, layout);\r\n\t}\r\n\r\n\tstatic initMainMenu() {\r\n\t\tconst mainMenuKey = \"mainMenu\";\r\n\t\tconst mainMenuData = {\r\n\t\t\ttype: \"mainMenu\",\r\n\t\t\tcls: \"mainMenu\",\r\n\t\t\tvalue: \"Main Menu\",\r\n\t\t\tinnerHTML: ``,\r\n\t\t}\r\n\t\tconst mainMenu = Elements.Build(mainMenuKey, mainMenuData);\r\n\t\tUI.Append(`.${Classes.layout}`, mainMenu);\r\n\t}\r\n\r\n\tstatic initScript() {\r\n\t\tconst src = 'https://unpkg.com/read-excel-file@4.1.0/bundle/read-excel-file.min.js';\r\n\t\tconst script = `<script src=\"${src}\"></script>`;\r\n\t\tUI.Append(`${Classes.uiBase}`, script);\r\n\t}\r\n\r\n\tstatic initProcess() {\r\n\t\tcurrentProgram = Storage.Get(\"CurrentProgram\");\r\n\t\tGProcess = getProcess();\r\n\t}\r\n\r\n\tstatic getCodeAction() {\r\n\t\tconst parent = `#tableList`;\r\n\t\tUI.Delegate(parent, \"click\", `.tip-top`, Prepare.getCode, this);\r\n\r\n\t\t// const explores = $(`.tip-top`);\r\n\t\t// // when click on explore\r\n\t\t// explores.forEach((explore) => {\r\n\t\t// \texplore.addEventListener(\"click\", () => {\r\n\t\t// \t\t// get parent of parent\r\n\t\t// \t\tconst parent = explore.parentElement.parentElement;\r\n\t\t// \t\t// get second td child\r\n\t\t// \t\tconst td = parent.children[1];\r\n\t\t// \t\t// get code\r\n\t\t// \t\tconst code = td.innerText;\r\n\t\t// \t\tconsole.log(code);\r\n\t\t// \t});\r\n\t\t// });\r\n\t}\r\n\r\n\tstatic getCode(element) {\r\n\t\tconst parent = element.parentElement.parentElement;\r\n\t\t// get second td child\r\n\t\tconst td = parent.children[1];\r\n\t\t// get code\r\n\t\tconst code = td.innerText;\r\n\t\tconsole.log(code);\r\n\t}\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/scripts/Modules/Prepare.js b/scripts/Modules/Prepare.js
+--- a/scripts/Modules/Prepare.js	(revision 6ddf587fc870f33138d8e6f7cd43b88ec420d158)
++++ b/scripts/Modules/Prepare.js	(date 1701674824878)
+@@ -3,7 +3,7 @@
+ 		Prepare.initUIBase();
+ 		Prepare.initLayout();
+ 		Prepare.initMainMenu();
+-		// Prepare.initScript();
++		Prepare.initScript();
+ 		// Prepare.getCodeAction();
+ 		Prepare.initProcess();
+ 	}
+@@ -39,9 +39,13 @@
+ 	}
+ 
+ 	static initScript() {
+-		const src = 'https://unpkg.com/read-excel-file@4.1.0/bundle/read-excel-file.min.js';
+-		const script = `<script src="${src}"></script>`;
+-		UI.Append(`${Classes.uiBase}`, script);
++		const src = ['https://unpkg.com/read-excel-file@4.1.0/bundle/read-excel-file.min.js', 'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'];
++		src.forEach((s) => {
++			const script = document.createElement("script");
++			script.src = s;
++			script.type = "text/javascript";
++			UI.Append(`${Classes.uiBase}`, script);
++		});
+ 	}
+ 
+ 	static initProcess() {
+Index: scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/EOYTestProcess.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>class EOYTestProcess extends VWAProcess {\r\n    getDescription() {\r\n        return `EOY_g${this.getGrade()}`;\r\n    }\r\n\r\n    // getRow() {\r\n    //     const row = parseInt(document.getElementById(Ids.questionNumber).value) - this.rowMinus;\r\n    //     const limit = 15;\r\n    //     return row % limit;\r\n    // }\r\n\r\n    getCID(row) {\r\n        return `${this.getGlobalResourceId()}_${this.getDescription()}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;\r\n    }\r\n\r\n    getGrade() {\r\n        const globalResourceId = this.getGlobalResourceId();\r\n        return globalResourceId[globalResourceId.length - 1];\r\n    }\r\n\r\n    getFullContent() {\r\n        const synonymSheet = this.getSynonymSheet();\r\n        const chTheRWSSheet = this.getChTheRWSSheet();\r\n        const wordAssociationSheet = this.getWordAssociationSheet();\r\n        return {\r\n            first: [{\r\n                \"syn\": synonymSheet,\r\n                \"chTheRWS\": chTheRWSSheet,\r\n                \"wordAssoc\": wordAssociationSheet\r\n            }],\r\n            second: []\r\n        }\r\n    }\r\n\r\n    mapping({first, second}) {\r\n        return first;\r\n    }\r\n\r\n    getSynonymSheet() {\r\n        const synonymSheetName = `Synonyms`;\r\n        const synonymSheet = this.getSheet(synonymSheetName);\r\n        const synonymHeader = this.getHeader(synonymSheet);\r\n        return this.getContent(synonymSheet, synonymHeader);\r\n    }\r\n\r\n    getChTheRWSSheet() {\r\n        const chTheRWSSheetName = `ChtheRW2`;\r\n        const chTheRWSSheet = this.getSheet(chTheRWSSheetName);\r\n        const chTheRWSHeader = this.getHeader(chTheRWSSheet);\r\n        return this.getContent(chTheRWSSheet, chTheRWSHeader);\r\n    }\r\n\r\n    getWordAssociationSheet() {\r\n        const wordAssociationSheetName = `WordAssoc`;\r\n        const wordAssociationSheet = this.getSheet(wordAssociationSheetName);\r\n        const wordAssociationHeader = this.getHeader(wordAssociationSheet);\r\n        return this.getContent(wordAssociationSheet, wordAssociationHeader);\r\n    }\r\n\r\n    getSyn() {\r\n        return this.data[0][\"syn\"];\r\n    }\r\n\r\n    getChTheRWS() {\r\n        return this.data[0][\"chTheRWS\"];\r\n    }\r\n\r\n    getWordAssoc() {\r\n        return this.data[0][\"wordAssoc\"];\r\n    }\r\n\r\n    getComponentScoreRules(row) {\r\n        //{\"test\":null,\"scoringGroups\":[{\"componentGradingRules\":[{\"componentId\":\"802916_g6_q1_ans01\",\"componentType\":\"MultipleChoice\",\"componentSubtype\":null,\"autoScore\":true,\"rubricRule\":null}],\"maxScore\":1}]}\r\n        const componentScoreRules = {\r\n            test: null,\r\n            scoringGroups: [\r\n                {\r\n                    componentGradingRules: [\r\n                        {\r\n                            componentId: this.getCID(row),\r\n                            componentType: \"MultipleChoice\",\r\n                            componentSubtype: null,\r\n                            autoScore: true,\r\n                            rubricRule: null\r\n                        }\r\n                    ],\r\n                    maxScore: this.getMaxScore()\r\n                }\r\n            ],\r\n        }\r\n        return JSON.stringify(componentScoreRules);\r\n    }\r\n\r\n    getPassageContent(row) {\r\n        // if (row >= 0 && row <= 14) {\r\n        //     return \"<I>Choose the word or phrase that most nearly expresses the meaning of the word in boldface type in each phrase.</I>\"\r\n        // }\r\n        // if (row >= 15 && row <= 29) {\r\n        //     return \"<i>Choose the word that best completes the sentence.</i>\"\r\n        // }\r\n        // return \"<i>Select the word or phrase that best completes the sentence or answers the question.</i>\";\r\n        return '';\r\n    }\r\n\r\n    getQuestionHTML(row) {\r\n        let content = this.getWordAssoc();\r\n        if (row >= 0 && row <= 14) {\r\n            content = this.getSyn();\r\n        }\r\n        if (row >= 15 && row <= 29) {\r\n            content = this.getChTheRWS();\r\n        }\r\n        const newRow = row % 15;\r\n        let item = this.getItem(newRow, content);\r\n        let option = this.getOptionHTML(newRow, content);\r\n\r\n        return `<div class=\"question-questionStem question-questionStem-1-column\">\r\n                    <div class=\"question-stem-content\">${item}\r\n                        <div cid=\"${this.getCID(row)}\" ctype=\"MultipleChoice\" layout=\"Vertical\" qname=\"a${row + 1}\" subtype=\"MC\">\r\n                            ${option}\r\n                        </div>\r\n                    </div>\r\n                </div>`;\r\n    }\r\n\r\n    getItem(row, content) {\r\n        return this.getExactlyFieldOfRow(\"Item\", content[row % 15]).replace(/\\[WOL]/, \"______\");\r\n    }\r\n\r\n    getOptionHTML(row, content) {\r\n        const options = this.getOptions(row, content);\r\n        return options.map((option, index) => `<div itemid=\"${String.fromCharCode(index + 97)}\" itemlabel=\"\">${option}</div>`).join(\"\");\r\n    }\r\n\r\n    getOptions(row, content) {\r\n        return this.getAnswerChoices(row, content).map((option) => option.split(/[abcd]\\. /)[1].trim());\r\n    }\r\n\r\n    getAnswerChoices(row, content) {\r\n        const answerChoices = this.getExactlyFieldOfRow(\"Answer Choices\", content[row]);\r\n        return answerChoices.split(\";\");\r\n    }\r\n\r\n    getCorrectAnswer(row) {\r\n        // {\"comps\":[{\"id\":\"802916_g6_q1_ans01\",\"value\":\"a\",\"type\":\"MultipleChoice\"}]}\r\n\r\n\r\n        return this.getCorrectAnswerContent(row);\r\n    }\r\n\r\n    getCorrectAnswerContent(row) {\r\n        let content = this.getWordAssoc();\r\n\r\n        if (row >= 0 && row <= 14) {\r\n            content = this.getSyn();\r\n        }\r\n\r\n        if (row >= 15 && row <= 29) {\r\n            content = this.getChTheRWS();\r\n        }\r\n        const newRow = row % 15;\r\n        const correctAnswer = {\r\n            comps: [\r\n                {\r\n                    id: this.getCID(row),\r\n                    value: this.getCorrectAnswerValue(newRow, content),\r\n                    type: \"MultipleChoice\"\r\n                }\r\n            ]\r\n        }\r\n        return JSON.stringify(correctAnswer);\r\n    }\r\n\r\n    getCorrectTextHTML(row) {\r\n        let content = this.getWordAssoc();\r\n\r\n        if (row >= 0 && row <= 14) {\r\n            content = this.getSyn();\r\n        }\r\n\r\n        if (row >= 15 && row <= 29) {\r\n            content = this.getChTheRWS();\r\n        }\r\n        return this.getCorrectAnswerValue(row % 15, content);\r\n    }\r\n\r\n\r\n    getCorrectAnswerValue(row, content) {\r\n        const correctAnswer = this.getFieldOfRow(\"Correct Answer\", content[row]);\r\n        return correctAnswer.split(\".\")[0].toLowerCase();\r\n    }\r\n\r\n    // ------------------ get field ------------------ //\r\n    getDirectionLineHTML(row) {\r\n        let content = this.getWordAssoc();\r\n\r\n        if (row >= 0 && row <= 14) {\r\n            content = this.getSyn();\r\n        }\r\n\r\n        if (row >= 15 && row <= 29) {\r\n            content = this.getChTheRWS();\r\n        }\r\n        return this.getDirectionLine(content[row % 15]);\r\n    }\r\n\r\n    getDirectionLine(row) {\r\n        return '';\r\n    }\r\n\r\n    getWordId(row) {\r\n        let content = this.getWordAssoc();\r\n\r\n        if (row >= 0 && row <= 14) {\r\n            content = this.getSyn();\r\n        }\r\n\r\n        if (row >= 15 && row <= 29) {\r\n            content = this.getChTheRWS();\r\n        }\r\n        return this.getFieldOfRow(\"Word ID\", content[row % 15]);\r\n    }\r\n\r\n    getStandard(row) {\r\n        let content = this.getWordAssoc();\r\n\r\n        if (row >= 0 && row <= 14) {\r\n            content = this.getSyn();\r\n        }\r\n\r\n        if (row >= 15 && row <= 29) {\r\n            content = this.getChTheRWS();\r\n        }\r\n        return this.getFieldOfRow(\"Standard\", content[row % 15]);\r\n    }\r\n\r\n    getPathway1(row) {\r\n        return '';\r\n    }\r\n\r\n    getPathway2(row) {\r\n        return '';\r\n    }\r\n\r\n    // ------------------ other process ------------------ //\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/EOYTestProcess.js b/scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/EOYTestProcess.js
+--- a/scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/EOYTestProcess.js	(revision 6ddf587fc870f33138d8e6f7cd43b88ec420d158)
++++ b/scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/EOYTestProcess.js	(date 1701674750893)
+@@ -15,7 +15,13 @@
+ 
+     getGrade() {
+         const globalResourceId = this.getGlobalResourceId();
+-        return globalResourceId[globalResourceId.length - 1];
++        // get last 2 character
++        const grade = globalResourceId.substr(globalResourceId.length - 2);
++        // if first character is 0 then remove it
++        if (grade[0] === "0") {
++            return grade[1];
++        }
++        return grade;
+     }
+ 
+     getFullContent() {
+Index: scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/CumulativeTestProcess.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>class CumulativeTestProcess extends VWAProcess {\r\n    getDescription() {\r\n        return `g${this.getGrade()}_cml${this.getUnit()}`;\r\n    }\r\n\r\n    getGrade() {\r\n        // const globalResourceId = this.getGlobalResourceId();\r\n        // return globalResourceId[globalResourceId.length - 1];\r\n        // todo: get grade from file name\r\n        return 7;\r\n    }\r\n\r\n    getUnit() {\r\n        // todo:\r\n        const number = this.fileName.match(/\\d+/g);\r\n        // return number ? number[0] : 1;\r\n        return 2;\r\n    }\r\n\r\n    getLengthData() {\r\n        return 45;\r\n    }\r\n\r\n    getCID(row) {\r\n        return `${this.getGlobalResourceId()}_${this.getDescription()}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;\r\n    }\r\n\r\n    getFullContent() {\r\n        const synonyms = this.getSynonymsSheet();\r\n        const chTheRW2 = this.getCHTheRWSheet();\r\n        const wordAssociations = this.getWordAssociationsSheet();\r\n        return {\r\n            first: [{\r\n                \"syn\": synonyms,\r\n                \"chTheRW2\": chTheRW2,\r\n                \"wordAssoc\": wordAssociations\r\n            }],\r\n            second: []\r\n        }\r\n    }\r\n\r\n    mapping({first, second}) {\r\n        return first;\r\n    }\r\n\r\n    getSynonymsSheet() {\r\n        const synonymsSheetName = `Synonyms`;\r\n        const synonymsSheet = this.getSheet(synonymsSheetName);\r\n        const synonymsHeader = this.getHeader(synonymsSheet);\r\n        return this.getContent(synonymsSheet, synonymsHeader);\r\n    }\r\n\r\n    getCHTheRWSheet() {\r\n        const chTheRWSheetName = `ChtheRW2`;\r\n        const chTheRWSheet = this.getSheet(chTheRWSheetName);\r\n        const chTheRWHeader = this.getHeader(chTheRWSheet);\r\n        return this.getContent(chTheRWSheet, chTheRWHeader);\r\n    }\r\n\r\n    getWordAssociationsSheet() {\r\n        const wordAssociationsSheetName = `WordAssoc`;\r\n        const wordAssociationsSheet = this.getSheet(wordAssociationsSheetName);\r\n        const wordAssociationsHeader = this.getHeader(wordAssociationsSheet);\r\n        return this.getContent(wordAssociationsSheet, wordAssociationsHeader);\r\n    }\r\n\r\n    getSyn() {\r\n        return this.data[0][\"syn\"];\r\n    }\r\n\r\n    getCHTheRW() {\r\n        return this.data[0][\"chTheRW2\"];\r\n    }\r\n\r\n    getWordAssoc() {\r\n        return this.data[0][\"wordAssoc\"];\r\n    }\r\n\r\n    getComponentScoreRules(row) {\r\n        // {\"test\":null,\"scoringGroups\":[{\"componentGradingRules\":[{\"componentId\":\"802916_g6_cml1_q1_ans01\",\"componentType\":\"MultipleChoice\",\"componentSubtype\":null,\"autoScore\":true,\"rubricRule\":null}],\"maxScore\":1}]}\r\n        const componentScoreRules = {\r\n            test: null,\r\n            scoringGroups: [\r\n                {\r\n                    componentGradingRules: [\r\n                        {\r\n                            componentId: this.getCID(row),\r\n                            componentType: \"MultipleChoice\",\r\n                            componentSubtype: null,\r\n                            autoScore: true,\r\n                            rubricRule: null\r\n                        }\r\n                    ],\r\n                    maxScore: this.getMaxScore()\r\n                }\r\n            ],\r\n        };\r\n        return JSON.stringify(componentScoreRules);\r\n    }\r\n\r\n    getPathway1(row) {\r\n        return '';\r\n    }\r\n    getPathway2(row) {\r\n        return '';\r\n    }\r\n\r\n    getWordId(row) {\r\n        return this._getField(\"Word ID\", row);\r\n    }\r\n\r\n    getStandard(row) {\r\n        return this._getField(\"Standard\", row);\r\n    }\r\n\r\n    _getField(header, row) {\r\n        let content = this.getSyn();\r\n        if (row >= 15 && row <= 29) {\r\n            content = this.getCHTheRW();\r\n        }\r\n        if (row >= 30 && row <= 44) {\r\n            content = this.getWordAssoc();\r\n        }\r\n        row = row % 15;\r\n        return this.getExactlyFieldOfRow(header, content[row]);\r\n    }\r\n\r\n    getQuestionHTML(row) {\r\n        return `<div class=\"question-questionStem question-questionStem-1-column \">\r\n                    <div class=\"question-stem-content\">${this.getItems(row)}\r\n                        <div cid=\"${this.getCID(row)}\" ctype=\"MultipleChoice\" layout=\"Vertical\" qname=\"a${row + 1}\" subtype=\"MC\">\r\n                            ${this.getOptionHTML(row)}\r\n                        </div>\r\n                    </div>\r\n                </div>`;\r\n    }\r\n\r\n    getItems(row) {\r\n        const searchValue = \"[WOL]\";\r\n        const replaceValue = \"__________\"; // \"_\" x6\r\n        return this._getField(\"Item\", row).replace(searchValue, replaceValue);\r\n    }\r\n\r\n    getOptionHTML(row) {\r\n        const answerChoices = this.getAnswerChoices(row);\r\n        const step1 = answerChoices.split(\";\");\r\n        const step2 = step1.map((value) => value.split(\".\")[1].trim());\r\n        if (step2.length !== 4) this.addError(\"Question Content\", \"Answer Choices must have 4 options\");\r\n        return step2.map((value, index) => `<div itemid=\"${String.fromCharCode(index + 97)}\" itemlabel=\"\">${value}</div>`).join(\"\");\r\n    }\r\n\r\n    getCorrectAnswer(row) {\r\n        // {\"comps\":[{\"id\":\"802916_g6_cml1_q1_ans01\",\"value\":\"a\",\"type\":\"MultipleChoice\"}]}\r\n        const correctAnswer = {\r\n            comps: [\r\n                {\r\n                    id: this.getCID(row),\r\n                    value: this.getCorrectAnswerValue(row),\r\n                    type: \"MultipleChoice\"\r\n                }\r\n            ]\r\n        };\r\n        return JSON.stringify(correctAnswer);\r\n    }\r\n\r\n    getCorrectTextHTML(row) {\r\n        return this.getCorrectAnswerValue(row);\r\n    }\r\n\r\n    getCorrectAnswerValue(row) {\r\n        const correctAnswer = this._getField(\"Correct Answer\", row);\r\n        return correctAnswer.split(\".\")[0].trim();\r\n    }\r\n\r\n    getAnswerChoices(row) {\r\n        return this._getField(\"Answer Choices\", row);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/CumulativeTestProcess.js b/scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/CumulativeTestProcess.js
+--- a/scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/CumulativeTestProcess.js	(revision 6ddf587fc870f33138d8e6f7cd43b88ec420d158)
++++ b/scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/CumulativeTestProcess.js	(date 1701676640712)
+@@ -7,14 +7,14 @@
+         // const globalResourceId = this.getGlobalResourceId();
+         // return globalResourceId[globalResourceId.length - 1];
+         // todo: get grade from file name
+-        return 7;
++        return 10;
+     }
+ 
+     getUnit() {
+         // todo:
+         const number = this.fileName.match(/\d+/g);
+         // return number ? number[0] : 1;
+-        return 2;
++        return 4;
+     }
+ 
+     getLengthData() {

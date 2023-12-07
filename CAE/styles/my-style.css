@@ -1,0 +1,157 @@
+.window {
+    border-radius: 0;
+    background-color: #181d24;
+    border: 1px solid black;
+    z-index: 9999 !important;
+    color: snow;
+}
+
+.window .filter {
+    border-radius: 0;
+    border: 1px solid #3d444e;
+    background: #2c3138;
+}
+
+.window .gold {
+    border-radius: 0;
+    border: 1px solid #3d444e;
+    background: #2c3138;
+}
+
+.window .btn {
+    border-radius: 0;
+    border: 1px solid #3d444e;
+}
+
+.window .btn:hover {
+    border-radius: 0;
+    border: 1px solid #f1f1f1;
+}
+
+.window .title-frame .text-primary {
+    color: #FFF;
+}
+
+.window .title-frame .title-icon {
+    display: none;
+}
+
+.window .title-frame .svg-icon {
+    background: #2c3138;
+    border: 1px solid black;
+    height: 12px;
+    width: 12px;
+    border-radius: 0;
+    padding: 2px;
+}
+
+
+.window .slot-container .slot, .window .upgrade-slot .slot, .window .upgrade .slot {
+    border-radius: 0;
+    background: #2c3138;
+}
+
+.window .items .slot {
+    border-radius: 0;
+    background: #2c3138;
+}
+
+.window .formatted {
+    border-radius: 0;
+    background: #2c3138;
+}
+
+.panel-black {
+    border-radius: 0;
+}
+
+.c-window {
+    height: fit-content;
+    width: fit-content;
+}
+
+.c-window .title-frame-custom .svg-icon {
+    background: #2c3138;
+    border: 1px solid black;
+    height: 12px;
+    width: 12px;
+    border-radius: 0;
+    padding: 2px;
+}
+
+.c-window .slot {
+    min-height: 0;
+}
+
+.c-window .wrapper {
+    min-width: 230px;
+}
+
+.c-window .buttons {
+    line-height: 1;
+    font-size: 13px;
+}
+
+.title-frame {
+    display: flex;
+    justify-content: space-between;
+}
+
+.optionsButton,
+.fast-insert-button {
+    position: fixed;
+    min-width: 50px;
+    min-height: 50px;
+    border-radius: 50%;
+    top: 100%;
+    left: 0;
+    transform: translate(0, -120%);
+    background: #5be8e8;
+    color: #000000;
+    border: 1px solid #5be8e8;
+    cursor: pointer;
+    z-index: 99999999 !important;
+    margin-left: 25px;
+    margin-bottom: 25px;
+}
+
+.optionsModal {
+    position: fixed;
+    top: 100%;
+    transform: translate(30%, -115%);
+    min-width: 300px;
+    min-height: 400px;
+    cursor: pointer;
+    z-index: 99999999 !important;
+    margin-left: 10px;
+    margin-bottom: 50px;
+}
+
+.optionsModalInnerHtml {
+    padding: 10px;
+    font-size: medium;
+    &.file-content,
+    .preview,
+    .choose-unit,
+    .insert-data,
+    .choose-program {
+        margin-top: 25px;
+        overflow: auto;
+        font-size: medium;
+        #unit-select,
+        #file-input-button,
+        #insert-button,
+        #preview-button,
+        #program-select {
+            color: #000000;
+        }
+    }
+    .insert-data {
+        margin-top: 40px;
+    }
+}
+
+.fast-insert-button {
+    left: 100px;
+}
+

@@ -1,0 +1,41 @@
+Index: UI/popup.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <title>This is Extension Help Typing Fastest</title>\r\n    <style>\r\n        body {\r\n            background-color: #bdbdbd;\r\n            font-family: Arial, Helvetica, sans-serif;\r\n            font-size: 12px;\r\n            margin: 0;\r\n            padding: 10px;\r\n\r\n            width: 250px;\r\n            height: 300px;\r\n\r\n            border-radius: 10px;\r\n\r\n            -webkit-user-select: none;\r\n            -moz-user-select: none;\r\n            -ms-user-select: none;\r\n            user-select: none;\r\n        }\r\n    </style>\r\n</head>\r\n<body>\r\n    <h2>How to use this extension</h2>\r\n    <h2>DownLoad Video</h2>\r\n    <label for=\"video-list-file\">Input File</label>\r\n    <input type=\"file\" id=\"video-list-file\">\r\n    <button id=\"download-popup\">Download</button>\r\n    <p id=\"message\"></p>\r\n\r\n\r\n    <h2>Auto Insert</h2>\r\n    <label for=\"number-question\">Number Question Want To Add</label>\r\n    <input type=\"number\" id=\"number-question\"  />\r\n    <br />\r\n    <label for=\"isAuto\">Auto Insert</label>\r\n    <input type=\"checkbox\" id=\"isAuto\" />\r\n    <br />\r\n    <button id=\"start\">Start</button>\r\n    <br />\r\n    <label for=\"isAutoWordList\">Auto Insert Word List</label>\r\n    <input type=\"checkbox\" id=\"isAutoWordList\" />\r\n<script src=\"../scripts/Modules/Background.js\"></script>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/UI/popup.html b/UI/popup.html
+--- a/UI/popup.html	
++++ b/UI/popup.html	
+@@ -24,14 +24,6 @@
+     </style>
+ </head>
+ <body>
+-    <h2>How to use this extension</h2>
+-    <h2>DownLoad Video</h2>
+-    <label for="video-list-file">Input File</label>
+-    <input type="file" id="video-list-file">
+-    <button id="download-popup">Download</button>
+-    <p id="message"></p>
+-
+-
+     <h2>Auto Insert</h2>
+     <label for="number-question">Number Question Want To Add</label>
+     <input type="number" id="number-question"  />
+@@ -43,6 +35,14 @@
+     <br />
+     <label for="isAutoWordList">Auto Insert Word List</label>
+     <input type="checkbox" id="isAutoWordList" />
++    <br />
++    <label for="isAutoResourceSettings">Auto Insert Resource Settings</label>
++    <input type="checkbox" id="isAutoResourceSettings" />
++    <br />
++    <label for="unit">Unit</label>
++    <select id="unit"></select>
++    <button id="startAutoInsertResourceSettings">Start</button>
++
+ <script src="../scripts/Modules/Background.js"></script>
+ </body>
+ </html>
+\ No newline at end of file
