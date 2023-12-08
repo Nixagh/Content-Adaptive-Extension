@@ -67,7 +67,7 @@ class WWiAProcess extends VWAProcess {
                 "Item": _item,
                 "Standard": standard
             }
-            newData.push(item);
+            if (item["Choice Page Photo"]) newData.push(item);
         });
 
         return newData;
