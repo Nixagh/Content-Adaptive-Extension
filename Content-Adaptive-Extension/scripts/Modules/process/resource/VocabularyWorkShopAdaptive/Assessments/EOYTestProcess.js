@@ -205,7 +205,7 @@ class EOYTestProcess extends VWAProcess {
     }
 
     getDirectionLine(row) {
-        return '';
+        return this.getFieldOfRow("Direction Line", row);
     }
 
     getWordId(row) {
