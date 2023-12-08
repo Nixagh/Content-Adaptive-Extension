@@ -7,12 +7,12 @@
     },
     "gt": {
       "width": "2027px",
-      "top": "-87px",
-      "left": "-89px"
+      "top": "-106px",
+      "left": "89px"
     },
     "oyo": {
       "width": "1921px",
-      "top": "60px",
+      "top": "79px",
       "left": "0px"
     }
   },
@@ -25,11 +25,11 @@
     "gt": {
       "width": "2099px",
       "top": "-154px",
-      "left": "-655px  "
+      "left": "-655px"
     },
     "oyo": {
       "width": "1853px",
-      "top": "0px",
+      "top": "430px",
       "left": "-742px"
     }
   },
