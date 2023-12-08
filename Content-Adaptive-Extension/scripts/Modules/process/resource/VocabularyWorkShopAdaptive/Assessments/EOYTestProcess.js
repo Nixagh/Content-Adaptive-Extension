@@ -44,7 +44,7 @@ class EOYTestProcess extends VWAProcess {
     }
 
     getChTheRWSSheet() {
-        const chTheRWSSheetName = `ChtheRW2`;
+        const chTheRWSSheetName = `ChtheRW`;
         const chTheRWSSheet = this.getSheet(chTheRWSSheetName);
         const chTheRWSHeader = this.getHeader(chTheRWSSheet);
         return this.getContent(chTheRWSSheet, chTheRWSHeader);
@@ -89,17 +89,6 @@ class EOYTestProcess extends VWAProcess {
             ],
         }
         return JSON.stringify(componentScoreRules);
-    }
-
-    getPassageContent(row) {
-        // if (row >= 0 && row <= 14) {
-        //     return "<I>Choose the word or phrase that most nearly expresses the meaning of the word in boldface type in each phrase.</I>"
-        // }
-        // if (row >= 15 && row <= 29) {
-        //     return "<i>Choose the word that best completes the sentence.</i>"
-        // }
-        // return "<i>Select the word or phrase that best completes the sentence or answers the question.</i>";
-        return '';
     }
 
     getQuestionHTML(row) {
@@ -191,7 +180,7 @@ class EOYTestProcess extends VWAProcess {
     }
 
     // ------------------ get field ------------------ //
-    getDirectionLineHTML(row) {
+    getPassageContent(row) {
         let content = this.getWordAssoc();
 
         if (row >= 0 && row <= 14) {
@@ -205,7 +194,7 @@ class EOYTestProcess extends VWAProcess {
     }
 
     getDirectionLine(row) {
-        return this.getFieldOfRow("Direction Line", row);
+        return `<div class="direction_section">${this.getFieldOfRow("Direction Line", row)}</div>`;
     }
 
     getWordId(row) {
