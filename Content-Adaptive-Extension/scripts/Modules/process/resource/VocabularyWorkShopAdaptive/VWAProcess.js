@@ -114,7 +114,7 @@ class VWAProcess {
             autoScoreParentElement.classList.add("checked");
         }
 
-        if(this.getScramble()) {
+        if (this.getScramble()) {
             const scramble = document.getElementById(ids.scrambleOption);
             scramble.checked = true;
 
@@ -169,7 +169,7 @@ class VWAProcess {
             passageSummary.setHtml(this.getPassageSummaryText(row));
         }
 
-        const listType = ["DP1", "DP2", "OLV-P1", "OLV-P2" , "WWiAC"];
+        const listType = ["DP1", "DP2", "OLV-P1", "OLV-P2", "WWiAC"];
         if (listType.includes(this.type)) {
             choicePassageCheckBox.element.checked = true;
             choicePassageCheckBox.element.parentElement.classList.add("checked");
@@ -186,10 +186,6 @@ class VWAProcess {
             passageContentHTML: result["content"],
             passageSummaryHTML: result["passageSummary"]
         };
-    }
-
-    getPassageSummaryText(row) {
-        return '';
     }
 
     setQuestionContent(row) {
@@ -413,7 +409,7 @@ class VWAProcess {
     createError(tab, message, row) {
         const _errors = this._errors;
         const arrays = [];
-        if(row) {
+        if (row) {
             arrays.push({
                 tab: tab,
                 message: message
@@ -461,7 +457,7 @@ class VWAProcess {
 
     replaceItalicOfItem(item, regex) {
         regex = regex || /<i>(.+?)<(\/|)i>/g;
-        if(item.match(regex)) {
+        if (item.match(regex)) {
             item = item.replaceAll(regex, '<i style="white-space:nowrap;display:inline;">$1</i>');
         }
         return item;
@@ -497,7 +493,7 @@ class VWAProcess {
 
         const match = item.match(regex);
 
-        if(match) {
+        if (match) {
             match.forEach(match => {
                 item = item.replaceAll(_regex(match), replace(match));
             });
@@ -550,6 +546,9 @@ class VWAProcess {
 
     getPassageSummaryText(row) {
         const passageSummaryText = this.getField("Choice Page Summary Text", row);
+
+        if (!passageSummaryText) return "";
+
         const image = this.getField("Choice Page Photo", row)
             .replaceAll("<image>", "")
             .replaceAll("</image>", "")
