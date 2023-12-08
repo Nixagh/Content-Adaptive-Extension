@@ -160,14 +160,15 @@ class WWiAProcess extends VWAProcess {
 
 
     getGrade() {
+
+   // ['6' , '7' , '9' , | '0'  ]
         const globalResourceId = this.getGlobalResourceId();
 
-        if (globalResourceId[globalResourceId.length - 2] === 0) {
-            return globalResourceId[globalResourceId.length - 1]
-        }
-
-        return '1' + globalResourceId[globalResourceId.length - 1]
-        // return 10;
+        var lastS = globalResourceId[globalResourceId.length - 1];
+        if(lastS == '0')
+            return '1' + lastS;
+        return lastS;
+        
     }
 
 
@@ -184,8 +185,7 @@ class WWiAProcess extends VWAProcess {
     }
 
     getMaxScore() {
-        const id = "maxscore";
-        return parseInt($(`#${id}`).val());
+        return "4"
     }
 
     getPathway1(row) {
