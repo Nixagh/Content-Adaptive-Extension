@@ -7,7 +7,10 @@ class CumulativeTestProcess extends VWAProcess {
         // const globalResourceId = this.getGlobalResourceId();
         // return globalResourceId[globalResourceId.length - 1];
         // todo: get grade from file name
-        return 7;
+        const globalResourceId = this.getGlobalResourceId();
+
+        const lastS = globalResourceId[globalResourceId.length - 1];
+        return lastS === '0' ? '10' : lastS;
     }
 
     getUnit() {
