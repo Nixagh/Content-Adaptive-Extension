@@ -12,9 +12,9 @@ class CumulativeTestProcess extends VWAProcess {
 
     getUnit() {
         // todo:
-        const number = this.fileName.match(/\d+/g);
+        const number = parseInt(this.fileName.match(/\d+/g));
         // return number ? number[0] : 1;
-        return 2;
+        return Math.cell(number / 4);
     }
 
     getLengthData() {
