@@ -432,11 +432,6 @@ class VWAProcess {
     }
 
     replaceItemQuestion(item) {
-        // template : <i>-dub-</i> => <i style="white-space:nowrap;display:inline;">-dub-</i>
-        // <i>dub</i> => <i>dub</i>
-        // <i> -dub- </i> => <i style="white-space:nowrap;display:inline;">-dub-</i>
-        // <i>-dub</i> => <i style="white-space:nowrap;display:inline;">-dub</i>
-        // <i>dub-</i> => <i style="white-space:nowrap;display:inline;">dub-</i>
         item = this.replaceItalicOfItem(item);
 
         // bold tag and replace item in bold tag
@@ -459,10 +454,19 @@ class VWAProcess {
         return item.match(regex_) ? item.replaceAll(item.match(regex_)[0], '').trim() : item.trim();
     }
 
-    replaceItalicOfItem(item, regex) {
-        regex = regex || /<i>(.+?)<(\/|)i>/g;
-        if(item.match(regex)) {
-            item = item.replaceAll(regex, '<i style="white-space:nowrap;display:inline;">$1</i>');
+    replaceItalicOfItem(item) {
+        // template : <i>-dub-</i> => <i style="white-space:nowrap;display:inline;">-dub-</i>
+        // <i>dub</i> => <i>dub</i>
+        // <i>-dub</i> => <i style="white-space:nowrap;display:inline;">-dub</i>
+        // <i>dub-</i> => <i style="white-space:nowrap;display:inline;">dub-</i>
+
+        const _regex_1 = /<i>-(.+?)(-|)<(\/|)i>/g;
+        const _regex_2 = /<i>(-|)(.+?)-<(\/|)i>/g;
+        const replaceValue = '<i style="white-space:nowrap;display:inline;">$1$2</i>';
+
+        if(item.match(_regex_1) || item.match(_regex_2)) {
+            item = item.replaceAll(_regex_1, replaceValue);
+            item = item.replaceAll(_regex_2, replaceValue);
         }
         return item;
     }

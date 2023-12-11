@@ -104,4 +104,11 @@ class CRWOYOProcess extends VWAProcess {
 	getDescription() {
 		return "OYO_CTRW";
 	}
+
+	getPathway2(row) {
+		const pathway2 = this.getField("Pathway 2", row);
+		if (pathway2) return pathway2;
+		if (row > 20) return "B";
+		return "A";
+	}
 }
