@@ -61,8 +61,15 @@ class ExcelUtil {
     }
 
     static beautifyContent(content) {
+        content = this.replaceStarInWord(content);
         content = this.replaceAnswerChoice(content);
         return content;
+    }
+
+    static replaceStarInWord(content) {
+        const key = "Word";
+        const method = (value) => value.replaceAll("*", "");
+        return this.replaceWithMethod(content, method, key);
     }
 
     static replaceAnswerChoice(content) {

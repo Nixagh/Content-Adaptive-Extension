@@ -1,11 +1,20 @@
 class Cke {
 	element;
 	constructor(id) {
+		// just add to this.element when loaded
 		this.element = document.getElementById(id);
 	}
 
 	getIframe() {
-		return this.element.getElementsByTagName("iframe")[0];
+		const iframe = $(this.element).find('iframe');
+
+		// wait for iframe to load
+		if (iframe.length === 0) {
+			iframe.load(() => {
+				return iframe[0];
+			});
+		}
+		return iframe[0];
 	}
 
 	getDocument() {
