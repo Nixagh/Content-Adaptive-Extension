@@ -110,7 +110,7 @@ class WSProcess extends VWAProcess {
 	}
 
 	getCharacterImage(row) {
-		const characterImage = this.getField("Characteristic Image", row);
+		const characterImage = this.getField("Characteristic Image", row) || this.getField("Characteristics Image", row);
 		// if characterImage is Multiple Meaning, convert to Multiple-meaning
 
 		return characterImage.includes("Multiple") || characterImage.includes("Meaning")

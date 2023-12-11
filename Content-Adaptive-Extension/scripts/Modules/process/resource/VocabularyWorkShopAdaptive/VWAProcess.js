@@ -263,7 +263,7 @@ class VWAProcess {
     getPathway2(row) {
         const pathway2 = this.getField("P2 Set", row);
         if (!pathway2) {
-            this.addError("Question", `Can't find P2 Set in row ${row + 1}`);
+            this.createError("Question", `Can't find P2 Set in row ${row + 1}`, row);
             return 'A';
         }
         return pathway2;
