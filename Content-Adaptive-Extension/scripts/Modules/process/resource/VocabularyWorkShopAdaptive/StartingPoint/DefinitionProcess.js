@@ -87,13 +87,15 @@ class DefinitionProcess extends VWAProcess {
 		const inputRex = /<input.*?\/>/g;
 
 		const input = questionContent.match(inputRex);
-		if (input === null) this.createError("questionContent", "Question content does not have input tag", row);
+		if (input === null) {
+			this.createError("questionContent", "Question content does not have input tag", row);
+		} else {
+			const inputCID = input[0].match(/cid="(?<cid>\d+)"/);
+			if (inputCID === null) this.createError("questionContent", "Question content does not have cid attribute", row);
 
-		const inputCID = input[0].match(/cid="(?<cid>\d+)"/);
-		if (inputCID === null) this.createError("questionContent", "Question content does not have cid attribute", row);
-
-		const inputQName = input[0].match(/qname="(?<qname>.*?)"/);
-		if (inputQName === null) this.createError("questionContent", "Question content does not have qname attribute", row);
+			const inputQName = input[0].match(/qname="(?<qname>.*?)"/);
+			if (inputQName === null) this.createError("questionContent", "Question content does not have qname attribute", row);
+		}
 
 		// check correct answer text
 		if (correctAnswerText !== this.getCorrectAnswerValue(row)) this.createError("correctAnswerText", "Correct answer text is not correct", row);
