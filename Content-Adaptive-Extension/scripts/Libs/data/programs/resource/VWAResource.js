@@ -19,8 +19,8 @@ const VWAResource = {
 	"CS": {value: "Completing the Sentence", new: () => new CSProcess("CS", 1, [1, 1, 1, 0])},
 	"EOY": {value: "End of Year Test", new: () => new EOYTestProcess("EOY", 1, [1, 1, 1, 0])},
 	"BOY": {value: "Begin of Year Test", new: () => new BOYTestProcess("BOY", 1, [1, 1, 1, 0])},
-	"PreTest": {value: "Pre Test", new: () => new PreTestProcess("PreTest", 1, [1, 0, 1, 0])},
-	"PostTest": {value: "Post Test", new: () => new PostTestProcess("PostTest", 1, [1, 0, 1, 0])},
+	"PreTest": {value: "Pre Test", new: () => new PreTestProcess("PreTest", 1, [1, 1, 1, 0])},
+	"PostTest": {value: "Post Test", new: () => new PostTestProcess("PostTest", 1, [1, 1, 1, 0])},
 	"CumTest": {value: "Cumulative Test", new: () => new CumulativeTestProcess("CumTest", 1, [1, 0, 1, 0])},
 	"WWiAC": {value: "Writing Words in Action" , new : () => new WWiAProcess("WWiAC" , 1 , [1, 1, 1, 0])}
 }

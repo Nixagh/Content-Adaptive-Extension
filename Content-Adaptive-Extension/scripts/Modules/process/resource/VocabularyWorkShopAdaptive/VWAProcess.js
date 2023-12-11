@@ -188,16 +188,16 @@ class VWAProcess {
         };
     }
 
-    getPassageSummaryText(row) {
-        return '';
-    }
+    // getPassageSummaryText(row) {
+    //     return '';
+    // }
 
     setQuestionContent(row) {
         const question = new Cke("cke_5_contents");
         const correctAnswer = new Area("pojo.correctAnswer");
         const correctAnswerHTML = new Cke("cke_38_contents");
 
-        const questionContent = this.getQuestionHTML(row);
+        const questionContent = this.replaceItem(this.getQuestionHTML(row));
         const correctText = this.getCorrectTextHTML(row);
         const correctAnswerText = this.getCorrectAnswer(row);
 
@@ -506,50 +506,87 @@ class VWAProcess {
     }
 
     passageConverterV02(content) {
+        content = this.removeTitleTag(content);
+        content = this.replaceBulletTag(content, "<li>", "</li>");
+        content = this.replaceParagraphTag(content);
+        content = this.wordIdConverter(content);
+
+        // add space before and after <b> tag, <i> tag, <word\d+> tag
+        content = this.addSpaceBeforeTag(content);
+        content = this.addSpaceAfterTag(content);
+
+        return content;
+    }
+
+    removeTitleTag(content) {
+        const regex = /<title>.*<(\/|)title>/g;
+        return content.replace(regex, "");
+    }
+
+    addUlTag(content) {
+        // if content have <li> tag, add <ul> tag before first <li> tag and add </ul> tag after last <li> tag
+        const firstLiIndex = content.indexOf("<li>");
+        // if before first <li> tag have <ul> tag don't add <ul> tag
+        if (firstLiIndex !== -1 && !content.slice(0, firstLiIndex).endsWith("<ul>")) {
+            content = content.slice(0, firstLiIndex) + "<ul>" + content.slice(firstLiIndex);
+        }
+
+        const lastLiIndex = content.lastIndexOf("</li>");
+        // if after last <li> tag have </ul> tag don't add </ul> tag
+        if (lastLiIndex !== -1 && !content.slice(lastLiIndex).startsWith("</ul>")) {
+            content = content.slice(0, lastLiIndex) + "</ul>" + content.slice(lastLiIndex);
+        }
+
+        return content;
+    }
+
+    replaceBulletTag(content, f_tag, l_tag) {
+        const f_regex = /<bullet>/g;
+        const l_regex = /<\/bullet>/g;
+
+        content = content.replaceAll(f_regex, f_tag);
+        content = content.replaceAll(l_regex, l_tag);
+
+        content = this.addUlTag(content);
+
+        return content;
+    }
+
+    replaceParagraphTag(content) {
+        // replace <title> tag to <b> tag, </title> tag to </b> tag
+        content = content.replaceAll("<title>", "<b>");
+        content = content.replaceAll("</title>", "</b>");
+
         const f_regex = /<paragraph (id|ID|)( |)=( |)(\d+)>/g;
         const l_regex = /<\/paragraph( (id|ID|)( |)=( |)(\d+)|)>/g;
 
-        const word_regex = /<word(\d+)>.+?<(\/|)word(\d+)>/g;
+        // content = content.replaceAll(f_regex, replaceDiv) // replace <paragraph id=0> to <div class="paragraph" id="0">
+        const match = content.match(f_regex);
+        if(match) {
+            match.forEach(match => {
+                const regexNumber = /\d+/;
+                const matchNumber = match.match(regexNumber);
+                const paragraphId = matchNumber ? matchNumber[0] : '';
 
-        const title_regex = /<title>.*<(\/|)title>/g;
+                const replaceDiv = `<div class="paragraph" id="${paragraphId}">`;
 
-        content = content
-            .replace(title_regex, "")                                   // remove title tag
-            .replaceAll(/<bullet>/g, "<li>")                            // replace <bullet> tag to <li> tag
-            .replaceAll(/<\/bullet>/g, "</li>")   // replace </bullet> tag to </li> tag
-            .replaceAll(/[“”]/g, '"')             // replace “ or ” to "
+                // check if <div> tag is exist in content, if not exist add <div> tag, if exist add </div> tag
+                const isExist = content.includes(replaceDiv);
+                const _replaceValue = !isExist ? replaceDiv : `</div>`;
 
-        // add <ul> tag before first <li> tag
-        const firstLiIndex = content.indexOf("<li>");
-        const passageBodyWithUl = firstLiIndex !== -1 ? content.slice(0, firstLiIndex) + "<ul>" + content.slice(firstLiIndex) : content;
-        // add </ul> tag after last <li> tag
-        const lastLiIndex = passageBodyWithUl.lastIndexOf("</li>");
-        const passageBodyWithUlAndLi = lastLiIndex !== -1 ? passageBodyWithUl.slice(0, lastLiIndex) + "</ul>" + passageBodyWithUl.slice(lastLiIndex) : passageBodyWithUl;
-
-        // replace <paragraph id=0> to <div class="paragraph" id="0">
-        const replaceDiv = (match) => {
-            const regexNumber = /\d+/;
-            const matchNumber = match.match(regexNumber);
-            const paragraphId = matchNumber ? matchNumber[0] : '';
-            return `<div class="paragraph" id="${paragraphId}">`;
+                content = content.replace(match, _replaceValue);
+            });
         }
 
-        // replace <word3186>inanimate</word3186> to <word3186>word3186:inanimate</word3186>
-        const replaceWord = (match) => {
-            const regexNumber = /\d+/;
-            const matchNumber = match.match(regexNumber);
-            const wordId = matchNumber ? matchNumber[0] : '';
-            const word = match.replaceAll(/<(\/|)word\d+>/g, '').trim();
-            return `<word${wordId}>word${wordId}:${word}</word${wordId}>`;
-        }
+        content = content.replaceAll(l_regex, "</div>");  // replace </paragraph> tag to </div> tag
 
-        return passageBodyWithUlAndLi.replaceAll(f_regex, replaceDiv) // replace <paragraph id=0> to <div class="paragraph" id="0">
-            .replaceAll(l_regex, "</div>")  // replace </paragraph> tag to </div> tag
-            .replaceAll(word_regex, replaceWord); // replace <word3186>inanimate</word3186> to <word3186>word3186:inanimate</word3186>
+        return content;
     }
 
     getPassageSummaryText(row) {
         const passageSummaryText = this.getField("Choice Page Summary Text", row);
+        if (!passageSummaryText) return "";
+
         const image = this.getField("Choice Page Photo", row)
             .replaceAll("<image>", "")
             .replaceAll("</image>", "")

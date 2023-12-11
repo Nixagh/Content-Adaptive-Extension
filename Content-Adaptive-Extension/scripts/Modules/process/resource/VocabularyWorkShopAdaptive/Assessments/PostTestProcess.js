@@ -44,7 +44,7 @@ class PostTestProcess extends VWAProcess {
     }
 
     getPassageContent(row) {
-        return this.getDirectionLine(row);
+        return `<div class="direction_section">Choose the word that best completes each of the following sentences.</div>`;
     }
 
     getQuestionHTML(row) {
