@@ -197,7 +197,7 @@ class VWAProcess {
         const correctAnswer = new Area("pojo.correctAnswer");
         const correctAnswerHTML = new Cke("cke_38_contents");
 
-        const questionContent = this.replaceItem(this.getQuestionHTML(row));
+        const questionContent = this.replaceItemQuestion(this.getQuestionHTML(row));
         const correctText = this.getCorrectTextHTML(row);
         const correctAnswerText = this.getCorrectAnswer(row);
 
@@ -431,7 +431,7 @@ class VWAProcess {
         return true;
     }
 
-    replaceItem(item) {
+    replaceItemQuestion(item) {
         // template : <i>-dub-</i> => <i style="white-space:nowrap;display:inline;">-dub-</i>
         // <i>dub</i> => <i>dub</i>
         // <i> -dub- </i> => <i style="white-space:nowrap;display:inline;">-dub-</i>
