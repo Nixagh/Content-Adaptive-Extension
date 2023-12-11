@@ -19,6 +19,13 @@ class WWiAProcess extends VWAProcess {
         return this.getContent(olvSheet, olvHeader);
     }
 
+    getUnitSheet() {
+        const unitSheetName = `Unit`;
+        const unitSheet = this.getSheet(unitSheetName);
+        const unitHeader = this.getHeader(unitSheet);
+        return this.getContent(unitSheet, unitHeader);
+    }
+
     //DATA
     mapping({first, second}) {
         return this.replaceItem('On Level');
@@ -31,20 +38,39 @@ class WWiAProcess extends VWAProcess {
     replaceItem(type) {
         const body = "On-Level Passage Body";
         const olvContent = this.getSheetValue();
+        const unitContent = this.getUnitSheet();
         const newData = [];
 
         olvContent.forEach(element => {
-            const item = {
-                "Choice Page Summary Text": element[`Choice Page Summary Text`],
-                "Choice Page Photo": element[`Choice Page Photo`],
-                "Passage Body": element[`${body}`]
+            const choicePageSummaryText = Utility.getFieldOfRow("Choice Page Summary Text", element);
+            const choicePagePhoto = Utility.getFieldOfRow("Choice Page Photo", element);
+            const passageBody = Utility.getFieldOfRow(body, element);
+
+            const unit = unitContent.find(item => {
+                const passage = Utility.getFieldOfRow("Passage", item);
+                if (choicePageSummaryText.includes(passage) || passageBody.includes(passage)) {
+                    return item;
+                }
+            });
+
+            let _item;
+            let standard;
+            if(unit) {
+                _item = Utility.getFieldOfRow("Item", unit);
+                standard = Utility.getFieldOfRow("Standard", unit);
             }
-            newData.push(item);
+
+            const item = {
+                "Choice Page Summary Text": choicePageSummaryText,
+                "Choice Page Photo": choicePagePhoto,
+                "Passage Body": passageBody,
+                "Item": _item,
+                "Standard": standard
+            }
+            if (item["Choice Page Photo"]) newData.push(item);
         });
 
-
         return newData;
-
     }
 
     // COMPONENT
@@ -139,9 +165,13 @@ class WWiAProcess extends VWAProcess {
     getQuestionHTML(row) {
         return `<div class="question-questionStem question-questionStem-1-column Q000000_Pre_K_03">
         <div class="question-stem-content">
-        <div class="question"><input autocapitalize="off" autocomplete="off" autocorrect="off" cid="${this.getCID(row)}" ctype="Fill_in_Blank" qname="a1" spellcheck="false" subtype="essay" type="text" /></div>
+        <div class="question">${this.getItem(row)}<input autocapitalize="off" autocomplete="off" autocorrect="off" cid="${this.getCID(row)}" ctype="Fill_in_Blank" qname="a1" spellcheck="false" subtype="essay" type="text" /></div>
         </div>
     </div>`;
+    }
+
+    getItem(row) {
+        return this.getField("Item", row);
     }
 
     getCID(row) {
@@ -196,7 +226,7 @@ class WWiAProcess extends VWAProcess {
         return "";
     }
 
-    getStandard() {
-        return "";
+    getStandard(row) {
+        return this.getField("Standard", row);
     }
 }

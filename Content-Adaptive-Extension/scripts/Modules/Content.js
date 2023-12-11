@@ -1,4 +1,6 @@
 class OptionContent {
+    static fileStorage = [];
+
     init() {
         OptionContent.initButton();
         OptionContent.initOptionsModal().then();
@@ -49,6 +51,8 @@ class OptionContent {
         this.showAndHideModal(Storage.Get("CurrentShowModal") || ListModalIds.questionModal);
         // this.showCurrentQuestionNumber();
 
+        this.fileInit();
+
         UI.Delegate(`.emptyWindow`, "click", `#${Ids.openInsertQuestion}`, () => {
             this.showAndHideModal(ListModalIds.questionModal);
         });
@@ -60,7 +64,7 @@ class OptionContent {
         UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.fileInputButton}`, async () => {
             console.log("Load file");
             const fileReader = new FileReader();
-            const result = await fileReader.loadFile();
+            const result = await fileReader.loadFileFromStorage(this.fileStorage);
             if (result !== true) alert(result);
             else alert("file loaded");
 
@@ -196,6 +200,23 @@ class OptionContent {
         return error;
     }
 
+    static fileInit() {
+        const fileStorageShow = $(`#${Ids.fileStorageShow}`);
+        UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "change", `#${Ids.fileInput}`, async (e) => {
+            this.fileStorage.push(e.target.files[0]);
+            fileStorageShow.empty();
+            this.fileStorage.forEach((file) => {
+                fileStorageShow.append(`<div>${file.name}</div>`);
+            });
+        });
+
+        // clear storage
+        UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.fileClear}`, async () => {
+            this.fileStorage = [];
+            fileStorageShow.empty();
+        });
+    }
+
     static getOptionsModalInnerHtml() {
         return `
             <div style="display: flex; justify-content: flex-start">
@@ -206,7 +227,11 @@ class OptionContent {
                 <div class="${Classes.optionsModalInnerHtml}">
                     <div class="file-content">
                         <h1>Load file</h1>
-                        <input type="file" id="${Ids.fileInput}" />
+                        <div style="display: flex; justify-content: space-between">
+                            <input type="file" id="${Ids.fileInput}" />
+                            <input type="button" id="${Ids.fileClear}" style="color: #181d24" value="clear file"/>
+                        </div>
+                        <div style="margin-top: 10px" id="${Ids.fileStorageShow}"></div>
                     </div>
                     
                     <div class="choose-load">

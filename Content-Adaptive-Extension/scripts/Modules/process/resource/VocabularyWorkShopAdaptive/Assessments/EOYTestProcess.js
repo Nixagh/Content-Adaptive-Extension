@@ -9,6 +9,10 @@ class EOYTestProcess extends VWAProcess {
     //     return row % limit;
     // }
 
+    getLengthData() {
+        return 45;
+    }
+
     getCID(row) {
         return `${this.getGlobalResourceId()}_${this.getDescription()}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
     }

@@ -1,5 +1,6 @@
 const Ids = {
 	fileInput: "file-input",
+	fileClear: "file-clear",
 	fileInputButton: "file-input-button",
 	unitSelect: "unit-select",
 	insertButton: "insert-button",
@@ -26,6 +27,8 @@ const Ids = {
 	type: "type-select",
 	insertSettings: "insert-settings",
 	insertWordContinuum: "insert-word-continuum",
+
+	fileStorageShow: "file-storage-show",
 }
 
 const ListModalIds = {

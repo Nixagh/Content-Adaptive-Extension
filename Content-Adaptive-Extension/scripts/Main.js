@@ -103,7 +103,15 @@ class Main {
         const urlOfPageCreateWordList = "http://192.168.200.26:8090/cms/program/adaptiveword.html";
         if (!url.includes(editWordListPage) && !url.includes(urlOfPageCreateWordList)) return;
 
+        const totalWordList = parseInt($(`#totalWordList`).text());
+        const currentWordList = parseInt($(`#currentWordList`).text());
+
         if(url.includes(urlOfPageCreateWordList)) {
+            if (currentWordList >= totalWordList) {
+                chrome.storage.local.set({isAutoWordList: false});
+                return;
+            }
+
             // set ?programTocId=19774
             const regex = /programTocId=(?<programToWordId>\d+)/g;
             const programTocId = regex.exec(url).groups.programToWordId;
@@ -121,8 +129,6 @@ class Main {
             if (message_alert[0].innerText.includes("Item has been inserted into database successfully.")) {
 
                 // if total word list = current word list
-                const totalWordList = parseInt($(`#totalWordList`).text());
-                const currentWordList = parseInt($(`#currentWordList`).text());
                 if (currentWordList >= totalWordList) {
                     chrome.storage.local.set({isAutoWordList: false});
                     return;
@@ -143,7 +149,6 @@ class Main {
                 // click button insert and save
                 $(`#${Ids.insertWordList}`).click();
             }, 1000);
-
         });
     }
 

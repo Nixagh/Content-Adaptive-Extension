@@ -114,7 +114,7 @@ class VWAProcess {
             autoScoreParentElement.classList.add("checked");
         }
 
-        if(this.getScramble()) {
+        if (this.getScramble()) {
             const scramble = document.getElementById(ids.scrambleOption);
             scramble.checked = true;
 
@@ -187,10 +187,6 @@ class VWAProcess {
             passageSummaryHTML: result["passageSummary"]
         };
     }
-
-    // getPassageSummaryText(row) {
-    //     return '';
-    // }
 
     setQuestionContent(row) {
         const question = new Cke("cke_5_contents");
@@ -413,7 +409,7 @@ class VWAProcess {
     createError(tab, message, row) {
         const _errors = this._errors;
         const arrays = [];
-        if(row) {
+        if (row) {
             arrays.push({
                 tab: tab,
                 message: message
@@ -501,7 +497,7 @@ class VWAProcess {
 
         const match = item.match(regex);
 
-        if(match) {
+        if (match) {
             match.forEach(match => {
                 item = item.replaceAll(_regex(match), replace(match));
             });
