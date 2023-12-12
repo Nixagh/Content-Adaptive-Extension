@@ -493,7 +493,7 @@ class VWAProcess {
 
     addSpaceBeforeAndAfterTag(item, regex, before = true) {
         const replace = (match) => before ? `$1 ${match}` : `${match} $1`;
-        const _regex = (match) => before ? new RegExp(`([^ ])${match}`, 'g') : new RegExp(`${match}([^ ])`, 'g');
+        const _regex = (match) => before ? new RegExp(`([^ ])${match}`, 'g') : new RegExp(`${match}\w`, 'g');
 
         const match = item.match(regex);
 

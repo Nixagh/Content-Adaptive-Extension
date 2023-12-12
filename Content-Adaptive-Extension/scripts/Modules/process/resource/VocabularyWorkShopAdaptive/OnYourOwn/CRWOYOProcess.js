@@ -106,9 +106,9 @@ class CRWOYOProcess extends VWAProcess {
 	}
 
 	getPathway2(row) {
-		const pathway2 = this.getField("Pathway 2", row);
+		const pathway2 = this.getField("P2 Set", row);
 		if (pathway2) return pathway2;
-		if (row > 20) return "B";
+		if (row > 12) return "B";
 		return "A";
 	}
 }
