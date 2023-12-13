@@ -14,9 +14,7 @@ class ExcelUtil {
 
     static getHeader(sheet) {
         try {
-            return XLSX.utils
-                .sheet_to_json(sheet, {header: 1})[0]
-                .map((header) => header.trim());
+            return XLSX.utils.sheet_to_json(sheet, {header: 1})[0]
         } catch (e) {
             alert(
                 `Wrong format in excel file, please check your excel file, or not found sheet ${sheet}`
