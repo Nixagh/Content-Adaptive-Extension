@@ -141,7 +141,7 @@ class WSProcess extends VWAProcess {
 	}
 
 	getFirstExample(row) {
-		let firstExample = this.getField("Sample Sentence 1", row);
+		let firstExample = this.getField("Sample Sentence 1", row) || this.getField("Sample Sentence", row);
 		// firstExample = this.beautifulParagraph(firstExample);
 		return this.exampleReplace(firstExample);
 	}
