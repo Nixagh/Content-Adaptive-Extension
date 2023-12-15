@@ -472,12 +472,15 @@ class VWAProcess {
         if (item.match(regex)) {
             item = item.replaceAll(regex, '<b>$1</b>');
         }
-        regex = /<b>(?<word>.+?)<(\/|)b>/g;
-        if (item.match(regex)) {
-            const word = regex.exec(item).groups.word;
-            const _regex_ = new RegExp(`([^<b>])${word}([^</b>])`, 'g');
-            item = item.replaceAll(_regex_, `<b>${word}</b>`);
-        }
+        // todo:
+        // regex = /<b>(?<word>.+?)<(\/|)b>/g;
+        // if (item.match(regex)) {
+        //     const word = regex.exec(item).groups.word;
+        //     const _regex_ = new RegExp(`([^<b>])${word}([^</b>])`, 'g');
+        //     item = item.replaceAll(_regex_, `<b>${word}</b>`);
+        //     // or Uppercase first character
+        //     item = item.replaceAll(_regex_, `<b>${Utility.upFirst(word)}</b>`);
+        // }
         return item;
     }
 
