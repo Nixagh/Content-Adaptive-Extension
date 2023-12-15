@@ -202,6 +202,7 @@ class OptionContent {
 
     static fileInit() {
         const fileStorageShow = $(`#${Ids.fileStorageShow}`);
+        const fileInput = $(`#${Ids.fileInput}`);
         UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "change", `#${Ids.fileInput}`, async (e) => {
             this.fileStorage.push(e.target.files[0]);
             fileStorageShow.empty();
@@ -213,6 +214,7 @@ class OptionContent {
         // clear storage
         UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.fileClear}`, async () => {
             this.fileStorage = [];
+            fileInput.val(null);
             fileStorageShow.empty();
         });
     }
