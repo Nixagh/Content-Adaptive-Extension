@@ -2,17 +2,17 @@
   "desktop": {
     "sp": {
       "width": "2405px",
-      "top": "-305px",
-      "left": "-87px"
+      "top": "-290px",
+      "left": "-115px"
     },
     "gt": {
       "width": "1968px",
-      "top": "-80px",
+      "top": "-78px",
       "left": "-39px"
     },
     "oyo": {
       "width": "2136px",
-      "top": "59px",
+      "top": "69px",
       "left": "-41px"
     }
   },
@@ -25,7 +25,7 @@
     "gt": {
       "width": "2071px",
       "top": "-86px",
-      "left": "-981px"
+      "left": "-981px  "
     },
     "oyo": {
       "width": "2165px",

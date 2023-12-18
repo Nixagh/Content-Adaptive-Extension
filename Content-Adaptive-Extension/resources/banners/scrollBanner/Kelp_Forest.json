@@ -18,36 +18,36 @@
   },
   "tablet": {
     "sp": {
-      "width": "820px",
-      "top": "52px",
-      "left": "0px"
+      "width": "2186px",
+      "top": "-310px",
+      "left": "-1296px"
     },
     "gt": {
-      "width": "2045px",
-      "top": "-60px",
-      "left": "-278px"
+      "width": "2186px",
+      "top": "-147px",
+      "left": "-510px"
     },
     "oyo": {
-      "width": "2260px",
+      "width": "2186px",
       "top": "0px",
-      "left": "-424px"
+      "left": "-71px"
     }
   },
   "mobile": {
     "sp": {
-      "width": "1696px",
-      "top": "-196px",
-      "left": "-1021px"
+      "width": "1820px",
+      "top": "-225px",
+      "left": "-1308px"
     },
     "gt": {
-      "width": "1696px",
-      "top": "-71px",
-      "left": "-337px"
+      "width": "1820px",
+      "top": "-90px",
+      "left": "-401px"
     },
     "oyo": {
-      "width": "2192px",
+      "width": "1954px",
       "top": "0px",
-      "left": "-516px"
+      "left": "-247px"
     }
   }
 }

@@ -2,17 +2,17 @@
   "desktop": {
     "sp": {
       "width": "2114px",
-      "top": "-245px",
+      "top": "-294px",
       "left": "-97px"
     },
     "gt": {
       "width": "2454px",
-      "top": "-157px",
+      "top": "-208px",
       "left": "-146px"
     },
     "oyo": {
-      "width": "2114px",
-      "top": "63px",
+      "width": "2363px",
+      "top": "0px",
       "left": "-131px"
     }
   },
