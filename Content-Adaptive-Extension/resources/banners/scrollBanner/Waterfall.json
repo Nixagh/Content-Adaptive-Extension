@@ -2,17 +2,17 @@
   "desktop": {
     "sp": {
       "width": "2114px",
-      "top": "-294px",
+      "top": "-245px",
       "left": "-97px"
     },
     "gt": {
       "width": "2454px",
-      "top": "-208px",
+      "top": "-157px",
       "left": "-146px"
     },
     "oyo": {
-      "width": "2363px",
-      "top": "0px",
+      "width": "2114px",
+      "top": "63px",
       "left": "-131px"
     }
   },
@@ -29,7 +29,7 @@
     },
     "oyo": {
       "width": "2491px",
-      "top": "0px",
+      "top": "10px",
       "left": "-274px"
     }
   },
@@ -40,14 +40,14 @@
       "left": "-1024px"
     },
     "gt": {
-      "width": "1696px",
-      "top": "-71px",
-      "left": "-337px"
+      "width": "1649px",
+      "top": "-87px",
+      "left": "-275px"
     },
     "oyo": {
-      "width": "2192px",
-      "top": "0px",
-      "left": "-516px"
+      "width": "1202px",
+      "top": "47px",
+      "left": "-90px"
     }
   }
 }

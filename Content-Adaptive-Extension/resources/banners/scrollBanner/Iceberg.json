@@ -7,7 +7,7 @@
     },
     "gt": {
       "width": "2170px",
-      "top": "-78px",
+      "top": "-98px",
       "left": "-125px"
     },
     "oyo": {
@@ -18,36 +18,36 @@
   },
   "tablet": {
     "sp": {
-      "width": "820px",
-      "top": "52px",
-      "left": "0px"
+      "width": "1920px",
+      "top": "-247px",
+      "left": "-60px"
     },
     "gt": {
-      "width": "2045px",
-      "top": "-60px",
-      "left": "-278px"
+      "width": "1692px",
+      "top": "-153px",
+      "left": "-861px"
     },
     "oyo": {
-      "width": "2260px",
-      "top": "0px",
-      "left": "-424px"
+      "width": "1356px",
+      "top": "3px",
+      "left": "-191px"
     }
   },
   "mobile": {
     "sp": {
-      "width": "1696px",
-      "top": "-196px",
-      "left": "-1021px"
+      "width": "1674px",
+      "top": "-190px",
+      "left": "-217px"
     },
     "gt": {
-      "width": "1696px",
-      "top": "-71px",
-      "left": "-337px"
+      "width": "1472px",
+      "top": "-108px",
+      "left": "-969px"
     },
     "oyo": {
-      "width": "2192px",
-      "top": "0px",
-      "left": "-516px"
+      "width": "1472px",
+      "top": "43px",
+      "left": "-190px"
     }
   }
 }
