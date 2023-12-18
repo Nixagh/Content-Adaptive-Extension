@@ -159,6 +159,9 @@ class WordTieProcess extends VWAProcess {
     }
 
     hover(context, wordId) {
+      if (Utility.isEmpty(context)) {
+        return [""];
+      }
         return context.replace(`<${wordId}>`, `<${wordId}>${wordId}:`).split("\n").filter(value => value !== "");
     }
 
