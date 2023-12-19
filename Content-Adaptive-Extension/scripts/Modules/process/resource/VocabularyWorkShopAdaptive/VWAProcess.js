@@ -456,14 +456,29 @@ class VWAProcess {
         // <i>-dub</i> => <i style="white-space:nowrap;display:inline;">-dub</i>
         // <i>dub-</i> => <i style="white-space:nowrap;display:inline;">dub-</i>
 
-        const _regex_1 = /<i>-(.+?)(-|)<(\/|)i>/g;
-        const _regex_2 = /<i>(-|)(.+?)-<(\/|)i>/g;
-        const replaceValue = '<i style="white-space:nowrap;display:inline;">$1$2</i>';
+        // const _regex_1 = /<i>-(.+?)(-|)<(\/|)i>/g;
+        // const _regex_2 = /<i>(-|)(.+?)-<(\/|)i>/g;
+        // const replaceValue = '<i style="white-space:nowrap;display:inline;">$1$2</i>';
 
-        if(item.match(_regex_1) || item.match(_regex_2)) {
-            item = item.replaceAll(_regex_1, replaceValue);
-            item = item.replaceAll(_regex_2, replaceValue);
-        }
+        // if(item.match(_regex_1) || item.match(_regex_2)) {
+        //     item = item.replaceAll(_regex_1, replaceValue);
+        //     item = item.replaceAll(_regex_2, replaceValue);
+        // }
+
+
+        const regex = /<i>(.*?)<\/i>/g;
+
+        const replace = '<i style="white-space:nowrap;display:inline;">'
+
+        let arrayMatch = item.match(regex)
+
+        arrayMatch.forEach(e => {
+            if (e.includes('-')) {
+                let position = item.indexOf(e);
+                if(position !== -1)
+                item = item.substring(0, position) + replace + item.substring(position + 3)
+            }
+        })
         return item;
     }
 
