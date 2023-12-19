@@ -195,25 +195,23 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getWordIDWithWord(word) {
-        const data = this.getOptions();
-        const _word = data.find(row => row.value === word);
-        // const data = this.getWordIdFull();
-        // const _word = data.find(row => row.value.includes(word));
+        const data = this.getWordIdFull();
+        const _word = data.find(row => row.value.includes(word));
         if (_word) return _word.word;
         this.addError("Question Content", `Word ID not found with word: ${word}`);
         return "";
     }
 
-    // getWordIdFull() {
-    //     const wordList = this.getWordListSheet();
-    //     return wordList.map((row, index) => {
-    //         return {
-    //             "itemid": String.fromCharCode(97 + index),
-    //             word: row["Word ID"],
-    //             value: row["Word"]
-    //         }
-    //     });
-    // }
+    getWordIdFull() {
+        const wordList = this.getWordListSheet();
+        return wordList.map((row, index) => {
+            return {
+                "itemid": String.fromCharCode(97 + index),
+                word: row["WordID"] || row["Word ID"],
+                value: row["Word"]
+            }
+        });
+    }
 
     getOptionsHTML() {
         const data = this.getOptions();
