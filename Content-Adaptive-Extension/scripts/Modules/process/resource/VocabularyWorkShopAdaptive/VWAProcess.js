@@ -472,7 +472,7 @@ class VWAProcess {
 
         let arrayMatch = item.match(regex)
 
-        arrayMatch.forEach(e => {
+        arrayMatch && arrayMatch.forEach(e => {
             if (e.includes('-')) {
                 let position = item.indexOf(e);
                 if(position !== -1)
