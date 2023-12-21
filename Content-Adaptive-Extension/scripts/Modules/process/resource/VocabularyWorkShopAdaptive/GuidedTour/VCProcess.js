@@ -189,11 +189,28 @@ class VCProcess extends VWAProcess {
     }
 
     getCorrectAnswerValue(row) {
-        const correctAnswer = this.getField("Item Correct Answer", row);
-        // const answerChoices = this.getListAnswerChoices(row);
-        // const index = answerChoices.findIndex(value => value.includes(correctAnswer));
-        // return String.fromCharCode(97 + index);
-        return correctAnswer.split(".")[0].trim().toLowerCase();
+        // try {
+        //     const correctAnswer = this.getExactlyField("Item Correct Answer", row);
+        //     const regex = /(?<choice>[abcd])\. (?<text>.[^.](.*))/;
+        //     const match = correctAnswer.match(regex);
+        //
+        //     const text = match.groups.text;
+        //     const choice = match.groups.choice;
+        //     const answerChoices = this.getListAnswerChoices(row);
+        //     // find index of answer in answerChoices
+        //     const index = answerChoices.findIndex(choice => choice.trim() === text);
+        //
+        //     if (index) return String.fromCharCode(index + 97);
+        //
+        //     return choice;
+        // }
+        // catch (error) {
+        //     console.log(error);
+        //     return '';
+        // }
+        const choices = this.getListAnswerChoices(row);
+        const field = "Item Correct Answer";
+        return this.getCorrectAnswerValueLocal(row, choices, field);
     }
 
     getItem(row) {

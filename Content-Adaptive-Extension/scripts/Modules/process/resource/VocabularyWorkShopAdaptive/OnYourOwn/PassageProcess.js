@@ -228,11 +228,8 @@ class PassageProcess extends VWAProcess {
     }
 
     getCorrectAnswerValue(row) {
-        const correctAnswer = this.getExactlyField("Item Correct Answer", row);
-        const regex = /[abcd]\. .[^.](.*)/;
-        const match = correctAnswer.match(regex);
-        const answer = match ? match[0] : "";
-        return answer.split(".")[0].trim().toLowerCase();
+        const choices = this.getItemChoicesList(row);
+        return this.getCorrectAnswerValueLocal(row, choices);
     }
 
     getCorrectTextHTML(row) {

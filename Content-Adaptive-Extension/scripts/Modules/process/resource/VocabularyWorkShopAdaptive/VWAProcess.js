@@ -169,7 +169,7 @@ class VWAProcess {
             passageSummary.setHtml(this.getPassageSummaryText(row));
         }
 
-        const listType = ["DP1", "DP2", "OLV-P1", "OLV-P2" , "WWiAC"];
+        const listType = ["DP1", "DP2", "OLV-P1", "OLV-P2", "WWiAC"];
         if (listType.includes(this.type)) {
             choicePassageCheckBox.element.checked = true;
             choicePassageCheckBox.element.parentElement.classList.add("checked");
@@ -427,6 +427,42 @@ class VWAProcess {
         return true;
     }
 
+    getCorrectAnswerValueLocal(row, choices, field = "Item Correct Answer", multiple = false, stringSplit = ";", joinString = ",", getChoiceRegex = /(?<choice>[abcd])\. (?<text>.[^.](.*))/) {
+        const correctAnswer = this.getExactlyField(field, row);
+
+        const getChoice = (choice, choices) => {
+            const index = choices.findIndex(item => item.trim() === choice.trim());
+            return String.fromCharCode(index + 97);
+        }
+
+        const getMatch = (correctAnswer) => {
+            const match = correctAnswer.match(getChoiceRegex);
+            if (match) {
+                const text = match.groups.text;
+                const choice = match.groups.choice;
+                return {text, choice};
+            }
+            return null;
+        }
+
+        const getChoiceFromAnswer = (answer, choices) => {
+            const match = getMatch(answer);
+            if (!match) return answer[0];
+
+            const {text, choice} = match;
+            const _choice = getChoice(text, choices);
+            return _choice === "`" ? choice : _choice;
+        }
+
+        if (multiple) {
+            const correctAnswers = correctAnswer.split(stringSplit).map(answer => answer.trim());
+
+            return correctAnswers.map((answer) => getChoiceFromAnswer(answer, choices)).join(joinString);
+        }
+
+        return getChoiceFromAnswer(correctAnswer, choices);
+    }
+
     replaceItemQuestion(item) {
         item = this.replaceItalicOfItem(item);
 
@@ -475,8 +511,8 @@ class VWAProcess {
         arrayMatch && arrayMatch.forEach(e => {
             if (e.includes('-')) {
                 let position = item.indexOf(e);
-                if(position !== -1)
-                item = item.substring(0, position) + replace + item.substring(position + 3)
+                if (position !== -1)
+                    item = item.substring(0, position) + replace + item.substring(position + 3)
             }
         })
         return item;
@@ -580,7 +616,7 @@ class VWAProcess {
 
         // content = content.replaceAll(f_regex, replaceDiv) // replace <paragraph id=0> to <div class="paragraph" id="0">
         const match = content.match(f_regex);
-        if(match) {
+        if (match) {
             match.forEach(match => {
                 const regexNumber = /\d+/;
                 const matchNumber = match.match(regexNumber);
