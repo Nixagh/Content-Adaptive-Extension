@@ -14,12 +14,7 @@ class EOYTestProcess extends VWAProcess {
     }
 
     getCID(row) {
-        return `${this.getGlobalResourceId()}_${this.getDescription()}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
-    }
-
-    getGrade() {
-        const globalResourceId = this.getGlobalResourceId();
-        return globalResourceId[globalResourceId.length - 1];
+        return `${this.getProductCode()}_${this.getDescription()}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
     }
 
     getFullContent() {

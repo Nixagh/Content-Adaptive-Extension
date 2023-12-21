@@ -176,42 +176,7 @@ class WWiAProcess extends VWAProcess {
 
     getCID(row) {
         // 802930_g10_unit15_action_q01_ans01
-
-        return `${this.getGlobalResourceId()}_g${this.getGrade()}_unit${this.getUnit()}_action_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
-    }
-
-    getUnit() {
-        const unit = this.fileName.split("_")[2].toLowerCase();
-        // get digit in unit
-        // template: U01 -> 1 | U10 -> 10
-        const unitDigit = unit.match(/\d+/)[0];
-        return this.convertDigit(unitDigit);
-    }
-
-
-    getGrade() {
-
-   // ['6' , '7' , '9' , | '0'  ]
-        const globalResourceId = this.getGlobalResourceId();
-
-        var lastS = globalResourceId[globalResourceId.length - 1];
-        if(lastS == '0')
-            return '1' + lastS;
-        return lastS;
-        
-    }
-
-
-    convertDigit(digits) {
-        // if digit in unit has 1 digit, add 0 before digit
-        // template: 1 -> 01 | 10 -> 10
-        digits += "";
-        return digits.length === 1 ? `0${digits}` : digits;
-    }
-
-    getGlobalResourceId() {
-        const id = "programs-id";
-        return $(`#${id}`).val();
+        return `${this.getProductCode()}_g${this.getGrade()}_unit${this.getUnit().replace("u", "")}_action_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
     }
 
     getMaxScore() {

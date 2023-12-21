@@ -49,7 +49,7 @@ class VisualProcess extends VWAProcess {
 	}
 
 	getVideoPickup(row) {
-		const productId =  this.getGlobalResourceId();
+		const productId =  this.getProductCode();
 		const word = this.getWord(row).replace("*", "").trim();
 		let videoNumber = this.getField("Instructional Video Pickup Code", row);
 
