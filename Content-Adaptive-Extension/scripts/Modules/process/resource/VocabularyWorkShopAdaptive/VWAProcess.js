@@ -643,7 +643,7 @@ class VWAProcess {
         const word_regex = /<word(\d+)>.+?<(\/|)word(\d+)>/g;
         const word_with_bold_regex = /<b>(?<word>.*?)<(\/|)b>/g;
 
-        if (content.match(word_with_bold_regex)) return this.wordIdConvertByBoldTag(content, word_with_bold_regex);
+        if (content.match(word_with_bold_regex)) content = this.wordIdConvertByBoldTag(content, word_with_bold_regex);
 
         const replaceWord = (match) => {
             const regexNumber = /\d+/;
