@@ -202,17 +202,6 @@ class AdaptivePracticeProcess extends VWAProcess {
         return "";
     }
 
-    getWordIdFull() {
-        const wordList = this.getWordListSheet();
-        return wordList.map((row, index) => {
-            return {
-                "itemid": String.fromCharCode(97 + index),
-                word: row["WordID"] || row["Word ID"],
-                value: row["Word"]
-            }
-        });
-    }
-
     getOptionsHTML() {
         const data = this.getOptions();
         if (data.length === 0) this.addError(`Question Content`, `Options: Row ${row + 1} is empty`);

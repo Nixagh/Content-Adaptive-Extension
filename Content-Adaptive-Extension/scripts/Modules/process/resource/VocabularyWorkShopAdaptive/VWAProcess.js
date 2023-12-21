@@ -628,8 +628,22 @@ class VWAProcess {
                 </div>`;
     }
 
+    getWordIdFull() {
+        const wordList = this.getWordListSheet();
+        return wordList.map((row, index) => {
+            return {
+                "itemid": String.fromCharCode(97 + index),
+                word: row["WordID"] || row["Word ID"],
+                value: row["Word"]
+            }
+        });
+    }
+
     wordIdConverter(content) {
         const word_regex = /<word(\d+)>.+?<(\/|)word(\d+)>/g;
+        const word_with_bold_regex = /<b>(?<word>.*?)<(\/|)b>/g;
+
+        if (content.match(word_with_bold_regex)) return this.wordIdConvertByBoldTag(content, word_with_bold_regex);
 
         const replaceWord = (match) => {
             const regexNumber = /\d+/;
@@ -640,5 +654,18 @@ class VWAProcess {
         }
 
         return content.replaceAll(word_regex, replaceWord);
+    }
+
+    wordIdConvertByBoldTag(content, regex) {
+        const wordIdList = this.getWordIdFull();
+
+        return content.replaceAll(regex, (match, word) => {
+            const wordId = wordIdList.find(row => row.value.includes(word));
+            if (wordId) {
+                const wordIdValue = wordId.word;
+                return `<${wordIdValue}>${wordIdValue}:${word}</${wordIdValue}>`;
+            }
+            return `<b>${word}</b>`;
+        });
     }
 }
