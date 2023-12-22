@@ -22,7 +22,7 @@ class setting {
     disableExport; //true/false
 
 
-    constructor(alternativeResourceTitle, keyword, allowShuffled, subCategory, assetFormat, cssClass, sourceBrand, productResourceBrand, resourceTemplate, pathway, wordJournalPrompt, groupActivity, resourceGroupActivity, resourceSubGroupActivity, retryCount, choicePassage, programTocExam, singleQuestion, visible, disableExport) {
+    constructor(alternativeResourceTitle, keyword, allowShuffled, subCategory, assetFormat, cssClass, sourceBrand, productResourceBrand, resourceTemplate, pathway, wordJournalPrompt, groupActivity, resourceGroupActivity, resourceSubGroupActivity, retryCount, choicePassage, programTocExam, singleQuestion, visible, disableExport = true, resourceType = "LS") {
         this.alternativeResourceTitle = alternativeResourceTitle;
         this.keyword = keyword;
         this.allowShuffled = allowShuffled;
@@ -43,6 +43,7 @@ class setting {
         this.singleQuestion = singleQuestion;
         this.visible = visible;
         this.disableExport = disableExport;
+        this.resourceType = resourceType;
     }
 }
 
@@ -157,43 +158,52 @@ const ResourceSetting = {
         null, false, "", false, true, false),
 
     //Games
-    "WPG": new setting("Static", "", true, "ASSESSMENT.png","HTML",
+    "WPG": new setting("", "", true, "ASSESSMENT.png","HTML",
         "", "WPG", "", "", "1,2", "",
         "", "", "",
-        null, false, "", false, true, false),
+        null, false, "", false, true, false, "Static"),
 
-    "FC1": new setting("Static", "", true, "ASSESSMENT.png","HTML",
+    "FC1": new setting("", "", true, "ASSESSMENT.png","HTML",
         "", "FC", "", "", "1", "",
         "", "", "",
-        null, false, "", false, true, false),
+        null, false, "", false, true, false, "Static"),
 
-    "FC2": new setting("Static", "", true, "ASSESSMENT.png","HTML",
+    "FC2": new setting("", "", true, "ASSESSMENT.png","HTML",
         "", "FC", "", "", "2", "",
         "", "", "",
-        null, false, "", false, true, false),
+        null, false, "", false, true, false, "Static"),
 
-    "IW1": new setting("Static", "", true, "audio.png","HTML",
+    "IW1": new setting("", "", true, "audio.png","HTML",
         "", "IW", "", "", "1", "",
         "", "", "",
-        null, false, "", false, true, false),
+        null, false, "", false, true, false, "Static"),
 
-    "IW2": new setting("Static", "", true, "audio.png","HTML",
+    "IW2": new setting("", "", true, "audio.png","HTML",
         "", "IW", "", "", "2", "",
         "", "", "",
-        null, false, "", false, true, false),
+        null, false, "", false, true, false, "Static"),
 
-
-    "WW": new setting("Static", "", true, "resources.png","HTML",
+    "WW": new setting("", "", true, "resources.png","HTML",
         "", "WW", "", "", "1,2", "",
         "", "", "",
-        null, false, "", false, true, false),
+        null, false, "", false, true, false, "Static"),
 
-    "WWiA": new setting("LS", "WWIA", true, "resources.png","HTML",
+    "SolveIt": new setting("", "", true, "games.png","Game",
+        "", "PRONK", "", "", "1,2", "",
+        "", "", "",
+        null, false, "", false, true, false, "Static"),
+
+    "WTW": new setting("", "", true, "games.png","Game",
+        "", "PRONK", "", "", "1,2", "",
+        "", "", "",
+        null, false, "", false, true, false, "Static"),
+
+    "WWiA": new setting("", "WWIA", true, "resources.png","HTML",
         "", "WWIA", "ADAP", "Adaptive ISE Assessment 2023", "1,2", "",
         "", "", "",
-        null, false, "", false, true, false),
+        null, true, "", false, true, false),
 
-    "WC": new setting("LS", "", true, "resources.png","HTML",
+    "WC": new setting("", "", true, "resources.png","HTML",
         "", "WORD_CONTINUUM", "", "", "1,2", "",
         "", "", "",
         null, false, "", false, true, false),
@@ -262,7 +272,7 @@ class Screen {
 
         choicePassage.element.checked = setting.choicePassage;
         singleQuestion.element.checked = setting.singleQuestion;
-        disableExport.element.checked = (setting.disableExport || true);
+        disableExport.element.checked = setting.disableExport;
         visible.element.checked = setting.visible;
 
         // todo:
