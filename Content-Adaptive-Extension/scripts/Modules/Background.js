@@ -35,12 +35,17 @@ import ('../Libs/external/Jui.js');
 // insert resource settings
 (function insertResourceSettings() {
     const insertResourceSettingsButton = document.getElementById('isAutoResourceSettings');
+    const autoSaveForResourceSettingsButton = document.getElementById('isAutoSaveForResourceSettings');
     const startButton = document.getElementById('start-resource-settings');
 
     const unitSelect = document.getElementById('unit-select');
 
     chrome.storage.local.get(['isAutoResourceSettings'], (result) => {
         insertResourceSettingsButton.checked = result.isAutoResourceSettings;
+    });
+
+    chrome.storage.local.get(['isAutoSaveForResourceSettings'], (result) => {
+        autoSaveForResourceSettingsButton.checked = result.isAutoSaveForResourceSettings;
     });
 
     chrome.storage.local.get(['currentUnit'], (result) => {
@@ -57,6 +62,10 @@ import ('../Libs/external/Jui.js');
         chrome.storage.local.set({isAutoResourceSettings: e.target.checked});
     });
 
+    autoSaveForResourceSettingsButton.addEventListener('click', (e) => {
+        chrome.storage.local.set({isAutoSaveForResourceSettings: e.target.checked});
+    });
+
     startButton.addEventListener('click', (e) => {
         chrome.storage.local.set({currentUnit: unitSelect.value});
         window.close();
@@ -64,6 +73,21 @@ import ('../Libs/external/Jui.js');
         chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
             chrome.tabs.update(tabs[0].id, {url: tabs[0].url});
         });
+    });
+})();
+
+(function deleteWrongResource() {
+    const deleteWrongResourceButton = document.getElementById('isAutoDeleteWrongResource');
+    const startButton = document.getElementById('start-resource-settings');
+
+    const unitSelect = document.getElementById('unit-select');
+
+    chrome.storage.local.get(['isAutoDeleteWrongResource'], (result) => {
+        deleteWrongResourceButton.checked = result.isAutoDeleteWrongResource;
+    });
+
+    deleteWrongResourceButton.addEventListener('click', (e) => {
+        chrome.storage.local.set({isAutoDeleteWrongResource: e.target.checked});
     });
 })();
 
