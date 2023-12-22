@@ -69,6 +69,9 @@ const getProcess = () => {
 		process.fileName = parse.fileName;
 		process.data = parse.data;
 		process.type = parse.type;
+		process.unit = parse.unit;
+		process.grade = parse.grade;
+		process.productCode = parse.productCode;
 		if (process.type === "WordList") {
 			process.themeDataWithWordId = parse.themeDataWithWordId;
 		}

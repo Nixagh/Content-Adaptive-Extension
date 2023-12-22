@@ -17,6 +17,9 @@ class VWAProcess {
         this.rowMinus = rowMinus;
         this.setTab = setTab;
         this.errors = [];
+        this.productCode = "";
+        this.grade = "";
+        this.unit = "";
     }
 
     getScramble() {
@@ -24,6 +27,10 @@ class VWAProcess {
     }
 
     process() {
+        const {code, grade} = this.getProductCodeFromFileName();
+        this.productCode = code;
+        this.grade = grade;
+        this.unit = this.getUnitFromFileName();
         this.data = this.mapping(this.getFullContent());
         // this.data = this.getFullContent();
         this.showErrors();
@@ -361,11 +368,7 @@ class VWAProcess {
     }
 
     getUnit() {
-        const unit = this.fileName.split("_")[2].toLowerCase();
-        // get digit in unit
-        // template: U01 -> 1 | U10 -> 10
-        const unitDigit = unit.match(/\d+/)[0];
-        return 'u' + this.convertDigit(unitDigit);
+        return this.unit;
     }
 
     convertDigit(digits) {
@@ -375,9 +378,35 @@ class VWAProcess {
         return digits.length === 1 ? `0${digits}` : digits;
     }
 
-    getGlobalResourceId() {
-        const id = "programs-id";
-        return $(`#${id}`).val();
+    getUnitFromFileName() {
+        const unit_regex = /_U(?<unit>\d+?)_/;
+        const match = this.fileName.match(unit_regex);
+        const unit = match ? match.groups.unit : "";
+
+        if (!unit) return "";
+
+        return 'u' + this.convertDigit(unit);
+    }
+
+    getProductCodeFromFileName() {
+        const level_regex = /_Lev(?<level>\w+?)_/;
+        const match = this.fileName.match(level_regex);
+        const level = match ? match.groups.level : "";
+
+        if (!level) {
+            this.addError("Product Code", `Can't find level in file name`);
+            return "";
+        }
+
+        return getProductType(this.type, `Level ${level}`);
+    }
+
+    getProductCode() {
+        return this.productCode;
+    }
+
+    getGrade() {
+        return this.grade;
     }
 
     getMaxScore() {
@@ -386,7 +415,7 @@ class VWAProcess {
     }
 
     getCID(row) {
-        return `${this.getGlobalResourceId()}_${this.getDescription()}_${this.getUnit()}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
+        return `${this.getProductCode()}_${this.getDescription()}_${this.getUnit()}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
     }
 
     getDescription() {

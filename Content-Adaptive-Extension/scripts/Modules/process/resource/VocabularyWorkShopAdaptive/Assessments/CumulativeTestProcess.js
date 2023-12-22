@@ -3,16 +3,6 @@ class CumulativeTestProcess extends VWAProcess {
         return `g${this.getGrade()}_cml${this.getUnit()}`;
     }
 
-    getGrade() {
-        // const globalResourceId = this.getGlobalResourceId();
-        // return globalResourceId[globalResourceId.length - 1];
-        // todo: get grade from file name
-        const globalResourceId = this.getGlobalResourceId();
-
-        const lastS = globalResourceId[globalResourceId.length - 1];
-        return lastS === '0' ? '10' : lastS;
-    }
-
     getUnit() {
         // todo:
         const number = parseInt(this.fileName.match(/\d+/g));
@@ -25,7 +15,7 @@ class CumulativeTestProcess extends VWAProcess {
     }
 
     getCID(row) {
-        return `${this.getGlobalResourceId()}_${this.getDescription()}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
+        return `${this.getProductCode()}_${this.getDescription()}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
     }
 
     getFullContent() {

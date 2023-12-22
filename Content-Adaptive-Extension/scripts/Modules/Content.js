@@ -192,7 +192,7 @@ class OptionContent {
     static async insert() {
         const questionNumber = $(`#${Ids.questionNumber}`).val();
         const totalLine = $(`#${Ids.totalLine}`).text();
-        // if (parseInt(totalLine) < +questionNumber) return alert("Đã hết dữ liệu");
+        if (parseInt(totalLine) < +questionNumber) return alert("Đã hết dữ liệu");
 
         const error = await GProcess.insert();
         Storage.Set("currentCode", $(`#${Ids.globalResourceId}`).val());
@@ -261,7 +261,8 @@ class OptionContent {
                     <div class="insert-data">
                         <h1>Insert data</h1>
                         <div style="margin-top: 10px">
-                            <input id="${Ids.globalResourceId}" placeholder="insert product Code" style="color: #181d24" value="${OptionContent.initCurrentCode()}">
+<!--                            <input id="${Ids.globalResourceId}" placeholder="insert product Code" style="color: #181d24" value="${OptionContent.initCurrentCode()}">-->
+                            <label for="${Ids.questionNumber}">Insert Question Number</label>
                             <input id="${Ids.questionNumber}" placeholder="insert question number" style="color: #181d24" value="${this.initNextCurrentQuestionNumber()}">
                         </div>
                         <button id="${Ids.insertButton}">Insert</button>

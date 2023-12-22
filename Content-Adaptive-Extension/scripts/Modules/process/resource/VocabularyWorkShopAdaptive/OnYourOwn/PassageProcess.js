@@ -131,14 +131,14 @@ class PassageProcess extends VWAProcess {
 
     getPassageContent(row) {
         return `<div class="direction_section">
-                    <div audio-source="/content/${this.getGlobalResourceId()}/AudioPassages/${this.getAudioSource()}" class="audio-inline" style="display: inline-flex; width: auto;"></div>
+                    <div audio-source="/content/${this.getProductCode()}/AudioPassages/${this.getAudioSource()}" class="audio-inline" style="display: inline-flex; width: auto;"></div>
                     ${this.getPassageTitle(row)}
                     ${this.getPassageContentHTML(row)}
                 </div>`;
     }
 
     getAudioSource() {
-        return `${this.getGlobalResourceId()}_ipA_U1_Choice_P1_Drivers.mp3`;
+        return `${this.getProductCode()}_ipA_U1_Choice_P1_Drivers.mp3`;
     }
 
     getDirectionLineHTML(row) {
