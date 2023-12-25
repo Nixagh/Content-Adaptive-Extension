@@ -192,12 +192,24 @@ class OptionContent {
     static async insert() {
         const questionNumber = $(`#${Ids.questionNumber}`).val();
         const totalLine = $(`#${Ids.totalLine}`).text();
-        if (parseInt(totalLine) < +questionNumber) return alert("Đã hết dữ liệu");
+        if (parseInt(totalLine) < +questionNumber) {
+            OptionContent.turnOffAuto();
+            return alert("Đã hết dữ liệu");
+        }
 
         const error = await GProcess.insert();
         Storage.Set("currentCode", $(`#${Ids.globalResourceId}`).val());
         Storage.Set("CurrentQuestionNumber", questionNumber);
         return error;
+    }
+
+    static turnOffAuto() {
+        chrome.storage.local.set({isAuto: false});
+        chrome.storage.local.set({isAutoWordList: false});
+        chrome.storage.local.set({isAutoWordContinuum: false});
+        chrome.storage.local.set({isAutoVWA: false});
+        chrome.storage.local.set({isAutoResourceSettings: false});
+        chrome.storage.local.set({isAutoDeleteWrongResource: false});
     }
 
     static fileInit() {
