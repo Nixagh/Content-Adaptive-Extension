@@ -165,7 +165,7 @@ class WWiAProcess extends VWAProcess {
     getQuestionHTML(row) {
         return `<div class="question-questionStem question-questionStem-1-column Q000000_Pre_K_03">
         <div class="question-stem-content">
-        <div class="question">${this.getItem(row)}<input autocapitalize="off" autocomplete="off" autocorrect="off" cid="${this.getCID(row)}" ctype="Fill_in_Blank" qname="a1" spellcheck="false" subtype="essay" type="text" /></div>
+        <div class="question">${this.getItem(row)}<input autocapitalize="off" autocomplete="off" autocorrect="off" cid="${this.getCID(row)}" ctype="Fill_in_Blank" qname="a${row+1}" spellcheck="false" subtype="essay" type="text" /></div>
         </div>
     </div>`;
     }
