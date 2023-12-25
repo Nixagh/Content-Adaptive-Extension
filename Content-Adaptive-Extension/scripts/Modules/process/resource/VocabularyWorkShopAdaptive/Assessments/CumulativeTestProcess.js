@@ -7,7 +7,7 @@ class CumulativeTestProcess extends VWAProcess {
         // todo:
         const number = parseInt(this.fileName.match(/\d+/g));
         // return number ? number[0] : 1;
-        return Math.cell(number / 4);
+        return Math.ceil(number / 4) + "";
     }
 
     getLengthData() {
@@ -44,7 +44,7 @@ class CumulativeTestProcess extends VWAProcess {
     }
 
     getCHTheRWSheet() {
-        const chTheRWSheetName = `ChtheRW2`;
+        const chTheRWSheetName = `ChtheRW`;
         const chTheRWSheet = this.getSheet(chTheRWSheetName);
         const chTheRWHeader = this.getHeader(chTheRWSheet);
         return this.getContent(chTheRWSheet, chTheRWHeader);
