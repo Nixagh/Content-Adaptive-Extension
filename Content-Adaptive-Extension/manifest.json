@@ -98,7 +98,10 @@
         "scripts/Modules/process/settings/ResourceSetting.js",
         "scripts/Libs/data/programs/resource/VWAResourceSetting.js",
 
+        "scripts/Modules/process/AutoInsert.js",
+
         "scripts/Modules/log/LogStorage.js",
+        "scripts/Modules/log/CheckLog.js",
 
         "scripts/Modules/Prepare.js",
         "scripts/Modules/Content.js",

@@ -111,3 +111,16 @@ import ('../Libs/external/Jui.js');
         chrome.tabs.create({url: "UI/log.html"});
     });
 })();
+
+// time out
+(function timeOut() {
+    const timeOutInput = document.getElementById('time-out');
+
+    chrome.storage.local.get(['timeOut'], (result) => {
+        timeOutInput.value = result.timeOut;
+    });
+
+    timeOutInput.addEventListener('change', (e) => {
+        chrome.storage.local.set({timeOut: e.target.value});
+    });
+})();
