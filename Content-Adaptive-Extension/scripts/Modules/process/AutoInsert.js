@@ -13,7 +13,7 @@ class AutoInsert {
         this.currentUnitKey = "currentUnit";
 
         this.event = {};
-        this.timeOut = parseInt(this.getTimeOut()) * 1000 || 1000;
+        this.timeOut = parseFloat(this.getTimeOut()) * 1000 || 1000;
     }
 
     getTimeOut() {
