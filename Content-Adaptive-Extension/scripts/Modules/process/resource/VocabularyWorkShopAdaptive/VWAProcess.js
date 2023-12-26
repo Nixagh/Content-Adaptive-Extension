@@ -160,29 +160,57 @@ class VWAProcess {
         const passageContent = new Cke("cke_2_contents");
         const passageSummary = new Cke("cke_3_contents");
         const choosePassage = document.querySelectorAll("#questionTypeSelection")[1];
-        // const scramble = new BasicInput("scrambleCheckbox");
+
+        const scrambleCheckBox = new BasicInput("scrambleCheckbox");
         const choicePassageCheckBox = new BasicInput("choicePassageCheckbox");
 
-        if (row !== 0) {
-            choosePassage.value = choosePassage.options[1].value;
-            const result = await this.getAjaxPassage(choosePassage.value);
+        const {directionLineHTML, passageContentHTML, passageSummaryHTML} = await this.getPassageValue(row, choosePassage);
 
-            directionLine.setHtml(result.directionLineHTML);
-            passageContent.setHtml(result.passageContentHTML);
-            passageSummary.setHtml(result.passageSummaryHTML);
-        } else {
-            directionLine.setHtml(this.getDirectionLineHTML(row));
-            passageContent.setHtml(this.getPassageContent(row));
-            passageSummary.setHtml(this.getPassageSummaryText(row));
-        }
+        directionLine.setHtml(directionLineHTML);
+        passageContent.setHtml(passageContentHTML);
+        passageSummary.setHtml(passageSummaryHTML);
 
-        const listType = ["DP1", "DP2", "OLV-P1", "OLV-P2", "WWiAC"];
-        if (listType.includes(this.type)) {
+        const choicePassages = ["DP1", "DP2", "OLV-P1", "OLV-P2", "WWiAC"];
+        if (choicePassages.includes(this.type)) {
             choicePassageCheckBox.element.checked = true;
             choicePassageCheckBox.element.parentElement.classList.add("checked");
         }
 
+        const scrambles = ["PreTest", "PostTest", "CumTest", "EOY", "BOY"];
+        if (scrambles.includes(this.type)) {
+            scrambleCheckBox.element.checked = true;
+            scrambleCheckBox.element.parentElement.classList.add("checked");
+        }
+
+
         console.log("Set passage");
+    }
+
+    async getPassageValue(row, choosePassage) {
+        const value = {
+            directionLineHTML: this.getDirectionLineHTML(row),
+            passageContentHTML: this.getPassageContent(row),
+            passageSummaryHTML: this.getPassageSummaryText(row)
+        }
+
+        const {condition, value: rowValue} = this.getConditionAndValueChoice(row);
+
+        if (condition) {
+            choosePassage.value = choosePassage.options[rowValue].value;
+            const result = await this.getAjaxPassage(choosePassage.value);
+
+            value.directionLineHTML = result.directionLineHTML;
+            value.passageContentHTML = result.passageContentHTML;
+            value.passageSummaryHTML = result.passageSummaryHTML;
+        }
+        return value;
+    }
+
+    getConditionAndValueChoice(row) {
+        return {
+            condition: row !== 0,
+            value: 1
+        }
     }
 
     async getAjaxPassage(passageId) {

@@ -141,6 +141,30 @@ class LogStorage {
         return log;
     }
 
+    createLogWithAllQuestion(type, data) {
+        const length = data.length;
+        const log = {
+            id: this.logs[type] ? this.logs[type].length + 1 : 1,
+            name: type,
+            totalQuestion: length,
+            timestamp: new Date().toLocaleString(),
+            questionStatus: []
+        };
+
+        for (let i = 1; i <= length; i++) {
+            const question = {
+                index: i,
+                questionNumber: i,
+                status: data[i]["isCorrect"] ? "correct" : "incorrect",
+                errors: []
+            };
+
+            log.questionStatus.push(question);
+        }
+
+        return log;
+    }
+
     getAllStorageSyncData(top_key) {
         // Immediately return a promise and start asynchronous work
         return new Promise((resolve, reject) => {

@@ -180,20 +180,19 @@ class EOYTestProcess extends VWAProcess {
 
     // ------------------ get field ------------------ //
     getPassageContent(row) {
-        let content = this.getWordAssoc();
-
-        if (row >= 0 && row <= 14) {
-            content = this.getSyn();
+        switch (row) {
+            case 0: return `<div class="direction_section">Choose the word or phrase that most nearly expresses the meaning of the word in boldface type in each phrase.</div>`;
+            case 15: return `<div class="direction_section">Choose the word that best completes the sentence.</div>`;
+            case 30: return `<div class="direction_section">Select the word or phrase that best completes the sentence or answers the question.</div>`;
+            default: return ``;
         }
-
-        if (row >= 15 && row <= 29) {
-            content = this.getChTheRWS();
-        }
-        return this.getDirectionLine(content[row % 15]);
     }
 
-    getDirectionLine(row) {
-        return `<div class="direction_section">${this.getFieldOfRow("Direction Line", row)}</div>`;
+    getConditionAndValueChoice(row) {
+        return {
+            condition: row !== 0 && row !== 15 && row !== 30,
+            value: Math.ceil(row / 15)
+        }
     }
 
     getWordId(row) {

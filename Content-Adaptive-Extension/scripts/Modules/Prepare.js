@@ -1,11 +1,17 @@
+const url = window.location.href;
 class Prepare {
+	constructor() {
+		this.explore = `http://192.168.200.26:8090/cms/product/explore.html`;
+	}
+
 	init() {
 		Prepare.initUIBase();
 		Prepare.initLayout();
 		Prepare.initMainMenu();
 		// Prepare.initScript();
-		// Prepare.getCodeAction();
 		Prepare.initProcess();
+
+		if (url.includes(this.explore)) Prepare.getCodeAction();
 	}
 
 	static initUIBase() {
@@ -50,30 +56,20 @@ class Prepare {
 	}
 
 	static getCodeAction() {
-		const parent = `#tableList`;
-		UI.Delegate(parent, "click", `.tip-top`, Prepare.getCode, this);
-
-		// const explores = $(`.tip-top`);
-		// // when click on explore
-		// explores.forEach((explore) => {
-		// 	explore.addEventListener("click", () => {
-		// 		// get parent of parent
-		// 		const parent = explore.parentElement.parentElement;
-		// 		// get second td child
-		// 		const td = parent.children[1];
-		// 		// get code
-		// 		const code = td.innerText;
-		// 		console.log(code);
-		// 	});
-		// });
+		const panels = document.querySelectorAll('.panel.panel-default');
+		for (let _ of panels) _.onclick = () => Prepare.eventOnUnit(_);
 	}
 
-	static getCode(element) {
-		const parent = element.parentElement.parentElement;
-		// get second td child
-		const td = parent.children[1];
-		// get code
-		const code = td.innerText;
-		console.log(code);
+	static eventOnUnit(panel) {
+		const as = panel.querySelectorAll('a[data-original-title="View Question Pool"]');
+		for (let _ of as) _.onclick = () => Prepare.setCode2Storage(_);
+	}
+
+	static setCode2Storage(element) {
+		const parent = element.parentElement.parentElement.parentElement; // tr
+		const code = parent.cells[1].innerText
+
+		// save to local storage
+		Storage.Set("CurrentResourceCode", code);
 	}
 }

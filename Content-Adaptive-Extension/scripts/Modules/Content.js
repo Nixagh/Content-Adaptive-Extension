@@ -194,7 +194,10 @@ class OptionContent {
         const totalLine = $(`#${Ids.totalLine}`).text();
         if (parseInt(totalLine) < +questionNumber) {
             OptionContent.turnOffAuto();
-            return alert("Đã hết dữ liệu");
+            // open check log if ok
+            // const checkLog = new CheckLog();
+            // checkLog.createLog(GProcess.type);
+            return alert("All data inserted, and log created in background");
         }
 
         const error = await GProcess.insert();
