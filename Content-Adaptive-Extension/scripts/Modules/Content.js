@@ -87,7 +87,9 @@ class OptionContent {
         UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.insertAndSave}`, async () => {
             if (!GProcess) return alert("No file loaded");
             OptionContent.insert().then((result) => {
-                if (result) document.getElementById(Ids.saveBtn).click()
+                setTimeout(() => {
+                    if (result) document.getElementById(Ids.saveBtn).click()
+                }, 250);
             });
         })
 
