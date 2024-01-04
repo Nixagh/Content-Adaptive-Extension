@@ -576,10 +576,11 @@ class VWAProcess {
     }
 
     replaceBoldOfItemAndAddBoldTag(item) {
-        let regex = /<b>(.+?)<b>/g;
-        if (item.match(regex)) {
-            item = item.replaceAll(regex, '<b>$1</b>');
-        }
+        // let regex = /<b>(.+?)<b>/g;
+        // if (item.match(regex)) {
+        //     if (item.includes('</b>')) return item;
+        //     item = item.replaceAll(regex, '<b>$1</b>');
+        // }
         // todo:
         // regex = /<b>(?<word>.+?)<(\/|)b>/g;
         // if (item.match(regex)) {
