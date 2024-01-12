@@ -370,7 +370,9 @@ class WordListProcess {
     }
 
     getRolloverDefinition(row) {
-        const rollover = Utility.getFieldOfRow("Rollover Definition", row);
+        let rollover = Utility.getFieldOfRow("Rollover Definition", row);
+        const firstRegex = /(?<short>^.\.) /g;
+        rollover = rollover.replace(firstRegex, `($<short>) `);
         if (Utility.isNotNull(rollover)) return rollover;
 
         const definition = Utility.getExactlyFieldOfRow("D_Definition", row);
