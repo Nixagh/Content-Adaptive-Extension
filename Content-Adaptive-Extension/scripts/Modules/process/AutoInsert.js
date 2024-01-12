@@ -12,7 +12,7 @@ class AutoInsert {
         this.currentResourceKey = "currentResource";
         this.currentUnitKey = "currentUnit";
 
-        this.event = {};
+        this.event = this._event();
         this.timeOut = parseFloat(this.getTimeOut()) * 1000 || 1000;
     }
 
@@ -57,7 +57,7 @@ class AutoInsert {
     }
 
     _event() {
-        this.event = {
+        return {
             autoResourceSettings: (resources) => resources.forEach(resource => window.open(resource.link)),
             autoDeleteWrongResource: (resources) => resources[0].delete()
         };
@@ -184,7 +184,7 @@ class AutoInsert {
             // get panel has unit
             const panel = this.getAndOpenPanel(currentUnit);
 
-            await this.attackEventOnPanel(panel, this.event.autoDeleteWrongResource());
+            await this.attackEventOnPanel(panel, this.event.autoDeleteWrongResource);
         }
     }
 
@@ -197,7 +197,7 @@ class AutoInsert {
             // get panel has unit
             const panel = this.getAndOpenPanel(currentUnit);
 
-            await this.attackEventOnPanel(panel, this.event.autoResourceSettings());
+            await this.attackEventOnPanel(panel, this.event.autoResourceSettings);
         }
 
         if (url.includes(this.urlOPageEditResource)) {
