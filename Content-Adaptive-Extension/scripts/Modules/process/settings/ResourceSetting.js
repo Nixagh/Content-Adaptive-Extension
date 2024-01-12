@@ -55,12 +55,12 @@ const ResourceSetting = {
         null, false, "", true, true, false ),
 
     "Visuals": new setting("Visual", "", false, "video.png","ASSESSMENT",
-        "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "",
+        "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "Draw or place a picture or audio file that is meaningful to you to help you quickly understand and remember the word.",
         "", "", "",
         null, false, "", true, true, false),
 
     "WordStudy": new setting("", "", false, "rs_practice_quiz.png","ASSESSMENT",
-        "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "",
+        "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "Now write your own sentence using the vocabulary word.",
         "", "", "",
         null, false, "", true, true, false),
 
@@ -106,12 +106,20 @@ const ResourceSetting = {
         "Student Choice Activity", "", "",
         1, false, "", true, true, false),
 
-    "D-P": new setting("Passage", "", false, "ASSESSMENT.png","ASSESSMENT",
+    "D-P1": new setting("Passage", "", false, "ASSESSMENT.png","ASSESSMENT",
+        "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "2", "",
+        "Student Choice Activity", "Passage", "Differentiated Passage",
+        1, false, "", true, true, false),
+    "D-P2": new setting("Passage", "", false, "ASSESSMENT.png","ASSESSMENT",
         "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "2", "",
         "Student Choice Activity", "Passage", "Differentiated Passage",
         1, false, "", true, true, false),
 
-    "OLV-P": new setting("Passage", "", false, "ASSESSMENT.png","ASSESSMENT",
+    "OLV-P1": new setting("Passage", "", false, "ASSESSMENT.png","ASSESSMENT",
+        "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "",
+        "Student Choice Activity", "Passage", "On Level Passage",
+        1, false, "", true, true, false),
+    "OLV-P2": new setting("Passage", "", false, "ASSESSMENT.png","ASSESSMENT",
         "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "",
         "Student Choice Activity", "Passage", "On Level Passage",
         1, false, "", true, true, false),

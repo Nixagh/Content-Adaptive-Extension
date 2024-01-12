@@ -9,8 +9,10 @@ const VWAResourceSetting = {
   "E/N": {value: "Example/Nonexample"},
   "AP": {value: "Adaptive Practice"},
   "CRW-OYO": {value: "Choosing the Right Word - On Your Own"},
-  "OLV-P": {value: "On-level Passage"},
-  "D-P": {value: "Differentiated Passage"},
+  "OLV-P1": {value: "On-level Passage 1"},
+  "OLV-P2": {value: "On-level Passage 2"},
+  "D-P1": {value: "Differentiated Passage 1"},
+  "D-P2": {value: "Differentiated Passage 2"},
   "CS": {value: "Completing the Sentence"},
 
   //Assessment
