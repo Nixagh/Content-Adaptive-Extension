@@ -442,7 +442,7 @@ class WordListProcess {
             return _value;
         })
         const step2 = newSplit.join("<br/>").split("<br/><b>");
-        if (!stringStyle) return step2.join("\n");
+        if (!stringStyle) return step2.join("<b>");
         return step2.map((value, index) => {
             if (index % 2 === 1) return stringStyle(`<b>${value}`);
             return stringStyle(value);
