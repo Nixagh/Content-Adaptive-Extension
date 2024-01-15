@@ -228,11 +228,23 @@ class VCProcess extends VWAProcess {
         const answerChoices = this.getField("Item Answer Choices", row);
         // template : a. spiritless b. alive c. energetic d. sprightly
         // result : ["spiritless", "alive", "energetic", "sprightly"]
-        const listAnswerChoices = [];
-        listAnswerChoices[0] = answerChoices.split("a. ")[1].split("b. ")[0].replaceAll("\n", "").replace(";", "");
-        listAnswerChoices[1] = answerChoices.split("b. ")[1].split("c. ")[0].replaceAll("\n", "").replace(";", "");
-        listAnswerChoices[2] = answerChoices.split("c. ")[1].split("d. ")[0].replaceAll("\n", "").replace(";", "");
-        listAnswerChoices[3] = answerChoices.split("d. ")[1].replaceAll("\n", "").replace(";", "");
+        let listAnswerChoices = [];
+        try {
+            listAnswerChoices[0] = answerChoices.split("a. ")[1].split("b. ")[0].replaceAll("\n", "").replace(";", "");
+            listAnswerChoices[1] = answerChoices.split("b. ")[1].split("c. ")[0].replaceAll("\n", "").replace(";", "");
+            listAnswerChoices[2] = answerChoices.split("c. ")[1].split("d. ")[0].replaceAll("\n", "").replace(";", "");
+            listAnswerChoices[3] = answerChoices.split("d. ")[1].replaceAll("\n", "").replace(";", "");
+        } catch (e) {
+            console.log(e);
+            // replace by
+            const _split = answerChoices.split(";");
+            listAnswerChoices = _split.map(value => value
+                .replace(/[abcd]\. /g, "")
+                .replaceAll("\n", "")
+                .trim()
+            );
+        }
+
         return listAnswerChoices;
     }
 
