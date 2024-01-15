@@ -140,7 +140,7 @@ class VWAProcess {
         wordIdElement.setValue(this.getWordId(row));
         maxScoreElement.setValue(this.getMaxScore());
         questionNumberElement.setValue(this.getQuestionNumber(row));
-        standardsElement.setValue(this.getStandard(row));
+        standardsElement.setValue(this.beautifyStandard(this.getStandard(row)));
         questionTypeElement.setValue(this.getQuestionTypeSelect(row));
         const textShow = questionTypeElement.element.options[questionTypeElement.element.selectedIndex].text;
         questionTypeValueElement.setValue(this.getQuestionTypeValue(row));
@@ -266,6 +266,12 @@ class VWAProcess {
         const standard = this.getField("Standard", row);
         if (!standard) this.addError("Question", `Can't find Standard in row ${row + 1}`);
         return standard;
+    }
+
+    beautifyStandard(standard) {
+        return standard
+            .replaceAll(";", ",")
+            .replaceAll("\n", ",");
     }
 
     getQuestionTypeSelect() {
