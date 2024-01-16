@@ -2,52 +2,52 @@
   "desktop": {
     "sp": {
       "width": "2250px",
-      "top": "-250px",
+      "top": "-253px",
       "left": "0px"
     },
     "gt": {
-      "width": "1913px",
-      "top": "-26px",
-      "left": "-2px"
+      "width": "1920px",
+      "top": "-30px",
+      "left": "0px"
     },
     "oyo": {
-      "width": "2391px",
-      "top": "93px",
-      "left": "-95px"
+      "width": "2425px",
+      "top": "88px",
+      "left": "-282px"
     }
   },
   "tablet": {
     "sp": {
-      "width": "820px",
-      "top": "52px",
-      "left": "0px"
+      "width": "2176px",
+      "top": "-253px",
+      "left": "-872px"
     },
     "gt": {
-      "width": "2045px",
-      "top": "-60px",
-      "left": "-278px"
+      "width": "1858px",
+      "top": "-73px",
+      "left": "-201px"
     },
     "oyo": {
-      "width": "2260px",
-      "top": "0px",
-      "left": "-424px"
+      "width": "1768px",
+      "top": "39px",
+      "left": "-474px"
     }
   },
   "mobile": {
     "sp": {
-      "width": "1696px",
-      "top": "-196px",
-      "left": "-1021px"
+      "width": "1816px",
+      "top": "-207px",
+      "left": "-208px"
     },
     "gt": {
-      "width": "1696px",
-      "top": "-71px",
-      "left": "-337px"
+      "width": "1816px",
+      "top": "-104px",
+      "left": "-1238px"
     },
     "oyo": {
-      "width": "2192px",
-      "top": "0px",
-      "left": "-516px"
+      "width": "1430px",
+      "top": "47px",
+      "left": "-416px"
     }
   }
 }
