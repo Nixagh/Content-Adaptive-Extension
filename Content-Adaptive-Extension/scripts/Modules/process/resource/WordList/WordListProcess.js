@@ -375,7 +375,8 @@ class WordListProcess {
         rollover = rollover.replace(firstRegex, `($<short>) `);
         if (Utility.isNotNull(rollover)) return rollover;
 
-        const definition = Utility.getExactlyFieldOfRow("D_Definition", row);
+        const definition = Utility.getExactlyFieldOfRow("D_Definition", row)
+            .replaceAll("\n", " ");
         const partOfSpeech = this.covertPartOfSpeech(this.getPartOfSpeech(row));
         // add ( ) to part of speech
 
