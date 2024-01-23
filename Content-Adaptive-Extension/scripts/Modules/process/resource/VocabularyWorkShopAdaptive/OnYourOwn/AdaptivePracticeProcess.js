@@ -221,7 +221,7 @@ class AdaptivePracticeProcess extends VWAProcess {
 
     getMeanOfGo(row) {
         const mean = this.getFieldOfRow("What It Means", row);
-        return mean.trim();
+        return mean.replaceAll(/(.*?)/g, "").trim();
     }
 
     getItemOfGo(row) {
