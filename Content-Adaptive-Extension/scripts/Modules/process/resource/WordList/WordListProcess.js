@@ -330,32 +330,23 @@ class WordListProcess {
     }
 
     covertPartOfSpeech(partOfSpeech) {
-        const _get = (partOfSpeech) => {
-            switch (partOfSpeech) {
-                case "noun":
-                    return "n.";
-                case "verb":
-                    return "v.";
-                case "adjective":
-                    return "adj.";
-                case "adverb":
-                    return "adv.";
-                case "pronoun":
-                    return "pron.";
-                case "preposition":
-                    return "prep.";
-                case "conjunction":
-                    return "conj.";
-                case "interjection":
-                    return "interj.";
-                default:
-                    return "";
-            }
+        const _get = {
+            "noun": "n.",
+            "verb": "v.",
+            "adjective": "adj.",
+            "adverb": "adv.",
+            "pronoun": "pron.",
+            "preposition": "prep.",
+            "conjunction": "conj.",
+            "interjection": "interj.",
+            "transitive": "tr.",
+            "intransitive": "intr.",
+            "plural": "pl.",
         }
 
         const split = partOfSpeech.split("[;,/|]");
         const newSplit = split.map((value) => {
-            return _get(value.trim());
+            return _get[value.trim()] ?? value.trim();
         });
         return newSplit.join(", ");
     }
