@@ -770,4 +770,22 @@ class VWAProcess {
             return `<b>${word}</b>`;
         });
     }
+
+    sortInThemeByWord(_super) {
+        // group by theme "Themes"
+        const groupByTheme = this.groupBy(_super, "Themes");
+        // sort word in theme by alphabet
+        for (const theme in groupByTheme) {
+            groupByTheme[theme].sort((a, b) => a["Word"].localeCompare(b["Word"]));
+        }
+        // flat data to array
+        return Object.values(groupByTheme).flat();
+    }
+
+    groupBy(data, key) {
+        return data.reduce((acc, item) => {
+            (acc[item[key]] = acc[item[key]] || []).push(item);
+            return acc;
+        }, {});
+    }
 }

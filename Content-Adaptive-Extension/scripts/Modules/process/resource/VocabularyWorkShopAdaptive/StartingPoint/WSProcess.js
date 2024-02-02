@@ -13,6 +13,11 @@ class WSProcess extends VWAProcess {
 		return {first: firstMapping, second: wordListContent};
 	}
 
+	mapping({first, second}) {
+		const _super = super.mapping({first, second});
+		return this.sortInThemeByWord(_super);
+	}
+
 	getFirstMapping(wordStudy, definitions) {
 		return wordStudy.map((row) => {
 			const wordID_1 = this.getFieldOfRow("WordID", row);

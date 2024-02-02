@@ -17,6 +17,11 @@ class VisualProcess extends VWAProcess {
 		return this.getContent(definitionSheet, definitionsHeader);
 	}
 
+	mapping({first, second}) {
+		const _super = super.mapping({first, second});
+		return this.sortInThemeByWord(_super);
+	}
+
 	getQuestionHTML(row) {
 		return `<div class="question-questionStem question-questionStem-1-column">
 					<div class="question-stem-content">

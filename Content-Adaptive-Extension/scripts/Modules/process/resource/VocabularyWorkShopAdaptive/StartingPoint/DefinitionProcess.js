@@ -13,6 +13,11 @@ class DefinitionProcess extends VWAProcess {
         return this.getContent(definitionSheet, definitionsHeader);
     }
 
+    mapping({first, second}) {
+        const _super = super.mapping({first, second});
+        return this.sortInThemeByWord(_super);
+    }
+
     getComponentScoreRules(row) {
         const CSR = {
             "test": null,
