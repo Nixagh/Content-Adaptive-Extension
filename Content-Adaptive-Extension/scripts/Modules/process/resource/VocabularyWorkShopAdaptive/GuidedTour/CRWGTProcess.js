@@ -112,8 +112,7 @@ class CRWGTProcess extends VWAProcess {
 	}
 
 	getCorrectFeedback(row) {
-		const correctFeedback = this.getField("Correct Feedback", row);
-		const correctAnswer = this.getCorrectAnswerText(row);
+		const correctFeedback = this.getField("Correct Feedback", row).replaceAll("\n", "").replaceAll("\r", "").trim();
 
 		return this.toArray(correctFeedback).map(item => this.replaceCorrectFeedback(item));
 	}
