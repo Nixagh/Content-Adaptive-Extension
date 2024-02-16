@@ -243,9 +243,9 @@ class VCProcess extends VWAProcess {
                 .replaceAll("\n", "")
                 .trim()
             );
-            if (listAnswerChoices.length !== 4) {
-                this.addError("Answer Choices", `Answer Choices is not valid at row ${row + 1}`);
-            }
+            // if (listAnswerChoices.length !== 4) {
+            //     this.addError("Answer Choices", `Answer Choices is not valid at row ${row + 1}`);
+            // }
         }
 
         return listAnswerChoices;
