@@ -6,6 +6,7 @@ const productCode = {
         "Level D": {code: "802919", grade: "9",},
         "Level E": {code: "802920", grade: "10",},
         "Level F": {code: "802921", grade: "11",},
+        "Level G": {code: "802922", grade: "12",},
     },
     DR: {
         "Level A": {code: "802926", grade: "6",},
@@ -14,6 +15,7 @@ const productCode = {
         "Level D": {code: "802929", grade: "9",},
         "Level E": {code: "802930", grade: "10",},
         "Level F": {code: "802931", grade: "11",},
+        "Level G": {code: "802932", grade: "12",},
     },
     IP: {
         "Level A": {code: "802906", grade: "6",},
@@ -22,6 +24,7 @@ const productCode = {
         "Level D": {code: "802909", grade: "9",},
         "Level E": {code: "802910", grade: "10"},
         "Level F": {code: "802911", grade: "11",},
+        "Level G": {code: "802912", grade: "12",},
     },
 }
 
