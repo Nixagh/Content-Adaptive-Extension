@@ -423,6 +423,11 @@ class VWAProcess {
     }
 
     getProductCodeFromFileName() {
+        const level = this.getLevelFromFileName();
+        return getProductType(this.type, `Level ${level}`);
+    }
+
+    getLevelFromFileName() {
         const level_regex = /_Lev(?<level>\w+?)_/;
         const match = this.fileName.match(level_regex);
         const level = match ? match.groups.level : "";
@@ -432,7 +437,7 @@ class VWAProcess {
             return "";
         }
 
-        return getProductType(this.type, `Level ${level}`);
+        return `Level ${level}`;
     }
 
     getProductCode() {
