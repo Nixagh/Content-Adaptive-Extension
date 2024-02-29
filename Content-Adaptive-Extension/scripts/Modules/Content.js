@@ -47,7 +47,7 @@ class OptionContent {
         const data = OptionContent.getOptionsModalData();
         const innerHtml = OptionContent.getOptionsModalInnerHtml();
         await Modal.Create(data, {html: innerHtml}, false);
-        this.showAndHideInsertButton(Storage.Get("CurrentProgram") || "WL" || "WC");
+        this.showAndHideInsertButton(Storage.Get("CurrentProgram") || "PT");
         this.showAndHideModal(Storage.Get("CurrentShowModal") || ListModalIds.questionModal);
         // this.showCurrentQuestionNumber();
 
@@ -263,7 +263,7 @@ class OptionContent {
                     <div class="choose-unit">
                         <h1>Description</h1>
                         <select id="${Ids.description}" style="color: #181d24">
-                            ${OptionContent.getDescriptions(WordListResource)}
+                            ${OptionContent.getDescriptions(ProgramTocResource)}
                         </select>
                     </div>
                     <div class="preview">
@@ -313,12 +313,14 @@ class OptionContent {
         // Object.entries(ProgramSeries).forEach(([key, value]) => {
         //     html += `<option value="${key}">${value}</option>`;
         // });
-        return `
-        <option value="WL">Insert Word List</option>
-        <option value="WC">Insert WordContinuum</option>
-        <option value="VWA">Insert Resource</option>
-		`;
-
+        // return `
+        // <option value="WL">Insert Word List</option>
+        // <option value="WC">Insert WordContinuum</option>
+        // <option value="VWA">Insert Resource</option>
+		// `;
+        return Object.entries(Resource).map(([key, value]) => {
+            return `<option value="${key}">${value.name}</option>`;
+        }).join("");
     }
 
     static getOptionsModalData() {
