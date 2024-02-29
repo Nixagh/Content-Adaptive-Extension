@@ -24,7 +24,7 @@
     "tabs",
     "activeTab"
   ],
-  "host_permissions": ["http://192.168.200.26:8090/*"],
+  "host_permissions": ["http://192.168.200.26:8090/*","http://localhost:8080/cms/*"],
   "web_accessible_resources": [
     {
       "resources": [
@@ -41,7 +41,8 @@
   "content_scripts": [
     {
       "matches": [
-        "http://192.168.200.26:8090/*"
+        "http://192.168.200.26:8090/*",
+        "http://localhost:8080/cms/*"
       ],
       "js": [
         "scripts/Libs/external/Jui.js",
@@ -97,6 +98,9 @@
 
         "scripts/Modules/process/settings/ResourceSetting.js",
         "scripts/Libs/data/programs/resource/VWAResourceSetting.js",
+
+        "scripts/Modules/process/resource/ProgramToc/ProgramToc.js",
+        "scripts/Modules/process/resource/ProgramToc/AutoRunEditProgramToc.js",
 
         "scripts/Modules/process/AutoInsert.js",
 
