@@ -1,3 +1,3 @@
 const ProgramSeries = {
-	VWA: VWAResource
+	VWA: InstructionNPractice
 }

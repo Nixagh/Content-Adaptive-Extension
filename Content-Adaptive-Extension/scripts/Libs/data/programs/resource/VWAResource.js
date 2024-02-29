@@ -1,7 +1,4 @@
-
-
-
-const VWAResource = {
+const InstructionNPractice = {
 	"Definitions": {value: "Definitions", new: () => new DefinitionProcess("Definitions", 1, [1, 0, 1, 0])},
 	"Visuals": {value: "Visuals", new: () => new VisualProcess("Visuals", 1, [1, 0, 1, 0])},
 	"WS": {value: "Word Study", new: () => new WSProcess("WS", 1, [1, 0, 1, 0])},
@@ -17,44 +14,58 @@ const VWAResource = {
 	"DP1": {value: "Differentiated Passage 1", new: () => new DP1Process("DP1", 1, [1, 1, 1, 1])},
 	"DP2": {value: "Differentiated Passage 2", new: () => new DP2Process("DP2", 1, [1, 1, 1, 1])},
 	"CS": {value: "Completing the Sentence", new: () => new CSProcess("CS", 1, [1, 1, 1, 0])},
-	"EOY": {value: "End of Year Test", new: () => new EOYTestProcess("EOY", 1, [1, 1, 1, 0])},
+}
+
+const DigitalAssignmentResource = {
 	"BOY": {value: "Begin of Year Test", new: () => new BOYTestProcess("BOY", 1, [1, 1, 1, 0])},
+	"EOY": {value: "End of Year Test", new: () => new EOYTestProcess("EOY", 1, [1, 1, 1, 0])},
+	"CumTest": {value: "Cumulative Test", new: () => new CumulativeTestProcess("CumTest", 1, [1, 0, 1, 0])},
 	"PreTest": {value: "Pre Test", new: () => new PreTestProcess("PreTest", 1, [1, 1, 1, 0])},
 	"PostTest": {value: "Post Test", new: () => new PostTestProcess("PostTest", 1, [1, 1, 1, 0])},
-	"CumTest": {value: "Cumulative Test", new: () => new CumulativeTestProcess("CumTest", 1, [1, 0, 1, 0])},
+}
+
+const DigitalResourcesResource = {
 	"WWiAC": {value: "Writing Words in Action" , new : () => new WWiAProcess("WWiAC" , 1 , [1, 1, 1, 0])}
 }
 
-const WordListResource = {
-	"WordList": {value: "Word List", new: () => new WordListProcess()}
-}
-
-const WordContinuumResource = {
+const ProgramTocResource = {
+	"WordList": {value: "Word List", new: () => new WordListProcess()},
 	"WordContinuum": {value: "Word Continuum", new: () => new WordContinuumProcess()}
 }
 
 const Resource = {
-	"WL": {
-		resource: WordListResource,
+	"PT": {
+		name: "ProgramToc",
+		resource: ProgramTocResource,
 		insertButton: {
-			show: [Ids.insertWordList],
-			hide: [Ids.insertButton, Ids.insertAndSave, Ids.insertWordContinuum]
+			show: [Ids.insertWordList, Ids.insertWordContinuum],
+			hide: [Ids.insertButton, Ids.insertAndSave]
 		},
 
 	},
-	"VWA": {
-		resource: VWAResource,
+	"IP": {
+		name: "Instruction & Practice",
+		resource: InstructionNPractice,
 		insertButton: {
 			show: [Ids.insertButton, Ids.insertAndSave],
 			hide: [Ids.insertWordList, Ids.insertWordContinuum]
 		}
 	},
-	"WC": {
-		resource: WordContinuumResource,
+	"DA": {
+		name: "Digital Assignments",
+		resource: DigitalAssignmentResource,
 		insertButton: {
-			show: [Ids.insertWordContinuum],
-			hide: [Ids.insertButton, Ids.insertAndSave, Ids.insertWordList]
-		},
+			show: [Ids.insertButton, Ids.insertAndSave],
+			hide: [Ids.insertWordList, Ids.insertWordContinuum]
+		}
+	},
+	"DR": {
+		name: "Digital Resources",
+		resource: DigitalResourcesResource,
+		insertButton: {
+			show: [Ids.insertButton, Ids.insertAndSave],
+			hide: [Ids.insertWordList, Ids.insertWordContinuum]
+		}
 
 	}
 }
