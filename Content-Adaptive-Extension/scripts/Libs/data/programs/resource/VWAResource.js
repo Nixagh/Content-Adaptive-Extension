@@ -30,7 +30,8 @@ const DigitalResourcesResource = {
 
 const ProgramTocResource = {
 	"WordList": {value: "Word List", new: () => new WordListProcess()},
-	"WordContinuum": {value: "Word Continuum", new: () => new WordContinuumProcess()}
+	"WordContinuum": {value: "Word Continuum", new: () => new WordContinuumProcess()},
+	"Json": {value: "Json (WIP)", new: () => new ProgramTocProcess("Json")}
 }
 
 const Resource = {
@@ -38,17 +39,16 @@ const Resource = {
 		name: "ProgramToc",
 		resource: ProgramTocResource,
 		insertButton: {
-			show: [Ids.insertWordList, Ids.insertWordContinuum],
+			show: [Ids.insertWordList, Ids.insertWordContinuum, Ids.insertJson],
 			hide: [Ids.insertButton, Ids.insertAndSave]
 		},
-
 	},
 	"IP": {
 		name: "Instruction & Practice",
 		resource: InstructionNPractice,
 		insertButton: {
 			show: [Ids.insertButton, Ids.insertAndSave],
-			hide: [Ids.insertWordList, Ids.insertWordContinuum]
+			hide: [Ids.insertWordList, Ids.insertWordContinuum, Ids.insertJson]
 		}
 	},
 	"DA": {
@@ -56,7 +56,7 @@ const Resource = {
 		resource: DigitalAssignmentResource,
 		insertButton: {
 			show: [Ids.insertButton, Ids.insertAndSave],
-			hide: [Ids.insertWordList, Ids.insertWordContinuum]
+			hide: [Ids.insertWordList, Ids.insertWordContinuum, Ids.insertJson]
 		}
 	},
 	"DR": {
@@ -64,9 +64,8 @@ const Resource = {
 		resource: DigitalResourcesResource,
 		insertButton: {
 			show: [Ids.insertButton, Ids.insertAndSave],
-			hide: [Ids.insertWordList, Ids.insertWordContinuum]
+			hide: [Ids.insertWordList, Ids.insertWordContinuum, Ids.insertJson]
 		}
-
 	}
 }
 
