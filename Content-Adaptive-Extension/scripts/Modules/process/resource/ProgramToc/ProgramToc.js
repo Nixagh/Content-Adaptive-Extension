@@ -14,6 +14,20 @@ class ProgramToc {
     #jsonGear;
     #jsonCompleteTheme;
 
+    #data;
+
+    constructor(unit, grade) {
+        const data = GProcess.data;
+        const gearAvatar = data.gearAvatar;
+
+        this.#data = gearAvatar[`Grade ${grade}`][this.#getUnitNumber(unit) - 1];
+    }
+
+    #getUnitNumber(unit) {
+        const numberRegex = /\d+/;
+        return numberRegex.exec(unit)[0];
+    }
+
     set programTocId(value) {
         this.#programTocId = value;
     }
@@ -136,9 +150,11 @@ class ProgramToc {
     }
 
     processJsonGear() {
+        const str = `/content/assets/images/programseries/VWA_A/Unit ${this.#getUnitNumber()}/`;
+        const regex = new RegExp(str, "g");
+        this.#jsonGear = JSON.stringify(this.#data).replaceAll(regex, "/content/adaptive/");
     }
 
     processJsonCompleteTheme() {
-        this.#jsonCompleteTheme = "this is a new value for jsonCompleteTheme V3";
     }
 }

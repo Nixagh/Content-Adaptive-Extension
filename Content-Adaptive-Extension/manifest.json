@@ -101,6 +101,7 @@
 
         "scripts/Modules/process/resource/ProgramToc/ProgramToc.js",
         "scripts/Modules/process/resource/ProgramToc/AutoRunEditProgramToc.js",
+        "scripts/Modules/process/resource/ProgramToc/ProgramTocProcess.js",
 
         "scripts/Modules/process/AutoInsert.js",
 

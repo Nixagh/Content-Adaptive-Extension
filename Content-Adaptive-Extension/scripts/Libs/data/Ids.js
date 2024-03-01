@@ -23,15 +23,20 @@ const Ids = {
 
 	openInsertQuestion: "open-insert-question",
 	openInsertType: "open-insert-word-list",
+	openInsertJson: "open-insert-json",
 
 	type: "type-select",
 	insertSettings: "insert-settings",
 	insertWordContinuum: "insert-word-continuum",
+	insertJson: "insert-json",
 
 	fileStorageShow: "file-storage-show",
+
+
 }
 
 const ListModalIds = {
 	questionModal: "question-modal",
 	typeModal: "type-modal",
+	jsonModal: "json-modal",
 }

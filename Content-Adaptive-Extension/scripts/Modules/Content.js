@@ -104,6 +104,12 @@ class OptionContent {
             await OptionContent.insert();
         });
 
+        UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.insertJson}`, async () => {
+            if (!GProcess) return alert("No file loaded");
+            const autoEditProgramToc = new AutoRunEditProgramToc();
+            autoEditProgramToc.run().then(() => console.log("AutoRunEditProgramToc finished"));
+        });
+
         UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "onload", `#${Ids.globalResourceId}`, async () => {
             console.log("initCurrentCode")
             this.initCurrentCode();
@@ -286,6 +292,7 @@ class OptionContent {
                         <button id="${Ids.insertAndSave}" style="color: #181d24">Insert And Save</button>
                         <button id="${Ids.insertWordList}" style="color: #181d24">Insert Word List</button>
                         <button id="${Ids.insertWordContinuum}" style="color: #181d24">Insert Word Continnuum</button>
+                        <button id="${Ids.insertJson}" style="color: #181d24">Insert Json</button>
                     </div>
                 </div>
             </div>

@@ -65,6 +65,13 @@ class AutoRunEditProgramToc {
         element.value = value;
     }
 
+    #getGrade() {
+        const grade = this.#getElementByName(document, this.#key.programId)[0];
+        const text = grade.text.trim().replaceAll("\n", "");
+        const gradeText = text.split(": ")[1];
+        return productCode["DA"][gradeText].grade;
+    }
+
     async run() {
         const programId = this.getProgramId();
         const unitList = this.getUnitList();
@@ -72,7 +79,7 @@ class AutoRunEditProgramToc {
         let i = 0;
         let len = unitList.length;
 
-        while (i < len - 1) {
+        while (i <= len - 1) {
             const programTocId = unitList[i];
 
             const res = await this.#editProgramToc(programTocId);
@@ -87,11 +94,14 @@ class AutoRunEditProgramToc {
             this.#editForm(form, programToc);
 
             // this.#submitForm(form);
-            const result = await this.saveProgramToc();
-            console.log(result);
-            if(result["array"][0]["result"] === "success") {
-                this.#deleteContainer(container);
-            }
+            // const result = await this.saveProgramToc();
+            // console.log("done unit: ", programToc.name, "result: ", result["array"][0]["result"]);
+            // if(result["array"][0]["result"] === "success") {
+            //     this.#deleteContainer(container);
+            // }
+            console.log("done unit: ", programToc.name, "result: ", "success");
+            this.#deleteContainer(container);
+            console.log(programToc);
 
             i++;
         }
@@ -129,8 +139,10 @@ class AutoRunEditProgramToc {
     }
 
      #createProgramToc(form) {
-        const programToc = new ProgramToc();
-        programToc.name = this.#getElementByName(form, this.#key.name).value;
+        const unit = this.#getElementByName(form, this.#key.name).value;
+
+        const programToc = new ProgramToc(unit, this.#getGrade());
+        programToc.name = unit;
         programToc.nameOnTab = this.#getElementByName(form, this.#key.nameOnTab).value;
         programToc.description = this.#getElementByName(form, this.#key.description).value;
         programToc.essentialQuestions = this.#getElementByName(form, this.#key.essentialQuestions).value;
@@ -142,7 +154,7 @@ class AutoRunEditProgramToc {
         programToc.displayOrder = this.#getElementByName(form, this.#key.displayOrder).value;
         programToc.jsonInfor = this.#getElementByName(form, this.#key.jsonInfor).value;
         programToc.jsonGear = this.#getElementByName(form, this.#key.jsonGear).value;
-        programToc.jsonCompleteTheme = this.#getElementByName(form, this.#key.jsonCompleteTheme).value;
+        // programToc.jsonCompleteTheme = this.#getElementByName(form, this.#key.jsonCompleteTheme).value || "";
 
         programToc.programTocId = this.#getElementByName(form, this.#key.programTocId).value;
 
@@ -163,6 +175,6 @@ class AutoRunEditProgramToc {
         this.#setElementByName(form, this.#key.displayOrder, programToc.displayOrder);
         this.#setElementByName(form, this.#key.jsonInfor, programToc.jsonInfor);
         this.#setElementByName(form, this.#key.jsonGear, programToc.jsonGear);
-        this.#setElementByName(form, this.#key.jsonCompleteTheme, programToc.jsonCompleteTheme);
+        // this.#setElementByName(form, this.#key.jsonCompleteTheme, programToc.jsonCompleteTheme);
     }
 }

@@ -5,9 +5,6 @@ class Main {
         const option = new OptionContent();
         option.init();
         const autoInsert = new AutoInsert();
-
-        const autoEditProgramToc = new AutoRunEditProgramToc();
-        // autoEditProgramToc.run().then(() => console.log("AutoRunEditProgramToc finished"));
     }
 }
 
