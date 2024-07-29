@@ -1,6 +1,7 @@
 const VWAResourceSetting = {
   "Definitions": {value: "Definitions"},
   "Visuals": {value: "Visuals"},
+  "DefinitionsAndVideo": {value: "Definitions & Video"},
   "WordStudy": {value: "Word Study"},
   "CRW-GT": {value: "Choosing the Right Word - Guided Tour"},
   "VC-OLV": {value: "Vocabulary in Context (On-level)"},

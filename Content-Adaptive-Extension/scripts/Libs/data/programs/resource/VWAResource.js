@@ -1,6 +1,7 @@
 const InstructionNPractice = {
 	"Definitions": {value: "Definitions", new: () => new DefinitionProcess("Definitions", 1, [1, 0, 1, 0])},
 	"Visuals": {value: "Visuals", new: () => new VisualProcess("Visuals", 1, [1, 0, 1, 0])},
+	"DefinitionsAndVideo": {value: "Definitions & Video", new: () => new DefinitionAndVideoProcess("DefinitionsAndVideo", 1, [1, 0, 1, 0])},
 	"WS": {value: "Word Study", new: () => new WSProcess("WS", 1, [1, 0, 1, 0])},
 	"CRW-GT": {value: "Choosing the Right Word - Guided Tour", new: () => new CRWGTProcess("CRW-GT", 1, [1, 1, 1, 1])},
 	"VC-OLV": {value: "Vocabulary in Context (On-level)", new: () => new VCOLVProcess("VC-OLV", 1, [1, 1, 1, 1])},

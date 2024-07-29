@@ -59,6 +59,11 @@ const ResourceSetting = {
         "", "", "",
         null, false, "", true, true, false),
 
+    "Definitions & Video": new setting("Definitions & Video", "", false, "rs_practice_quiz.png","ASSESSMENT",
+        "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "Restate the definition(s) in your own words.",
+        "", "", "",
+        null, false, "", true, true, false ),
+
     "WordStudy": new setting("", "", false, "rs_practice_quiz.png","ASSESSMENT",
         "", "ADAPTIVE", "ISE", "Adaptive ISE Assessment 2023", "1,2", "Now write your own sentence using the vocabulary word.",
         "", "", "",

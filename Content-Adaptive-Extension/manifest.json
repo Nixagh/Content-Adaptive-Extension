@@ -90,6 +90,7 @@
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/OnYourOwn/CSProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/OnYourOwn/AdaptivePracticeProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/StartingPoint/DefinitionProcess.js",
+        "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/StartingPoint/DefinitionAndVideoProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/StartingPoint/WSProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/StartingPoint/VisualProcess.js",
 

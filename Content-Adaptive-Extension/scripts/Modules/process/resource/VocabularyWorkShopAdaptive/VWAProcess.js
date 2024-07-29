@@ -78,7 +78,7 @@ class VWAProcess {
         // set feedback tab
         if (this.setTab[3]) this.setFeedback(row);
 
-        console.log(`Insert Vocabulary Word Adaptive, resource: ${VWAResource[this.type].value}`);
+        // console.log(`Insert Vocabulary Word Adaptive, resource: ${VWAResource[this.type].value}`);
         return this.showErrors();
     }
 
