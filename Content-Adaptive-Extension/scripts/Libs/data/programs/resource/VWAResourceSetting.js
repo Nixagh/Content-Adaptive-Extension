@@ -8,6 +8,7 @@ const VWAResourceSetting = {
   "VC-D": {value: "Vocabulary in Context (Differentiated)"},
   "WT": {value: "Word Ties"},
   "E/N": {value: "Example/Nonexample"},
+  "E/N-VWSEL": {value: "Example/Non Example VWSEL"},
   "AP": {value: "Adaptive Practice"},
   "CRW-OYO": {value: "Choosing the Right Word - On Your Own"},
   "OLV-P1": {value: "On-level Passage 1"},

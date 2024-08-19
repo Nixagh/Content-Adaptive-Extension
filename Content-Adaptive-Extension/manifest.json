@@ -74,6 +74,7 @@
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/CumulativeTestProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/WWiAProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/CRWGTProcess.js",
+        "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/EN_VWSELProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/ENProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/VCProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/GuidedTour/VCOLVProcess.js",

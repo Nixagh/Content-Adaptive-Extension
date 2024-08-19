@@ -38,7 +38,7 @@ const productType = {
         productCode: productCode.DR
     },
     IP: {
-        resourceType: ["Definitions", "Visuals","DefinitionsAndVideo" , "WS", "CRW-GT", "VC-OLV", "VC-D", "WT", "E/N", "AP", "CRW-OYO", "OLV-P1", "OLV-P2", "DP1", "DP2", "CS"],
+        resourceType: ["Definitions", "Visuals","DefinitionsAndVideo" , "WS", "CRW-GT", "VC-OLV", "VC-D", "WT", "E/N", "E/N-VWSEL", "AP", "CRW-OYO", "OLV-P1", "OLV-P2", "DP1", "DP2", "CS"],
         productCode: productCode.IP
     },
 }
