@@ -211,13 +211,13 @@ class EN_VWSELProcess extends VWAProcess {
 		return this.getFieldOfRow("Standard", this.data[row][0]);
 	}
 
-	// getPathway1(row) {
-	// 	return this.getFieldOfRow("P1 Set", this.data[row][0]);
-	// }
-	//
-	// getPathway2(row) {
-	// 	return this.getFieldOfRow("P2 Set", this.data[row][0]);
-	// }
+	getPathway1(row) {
+		return 'A';
+	}
+	
+	getPathway2(row) {
+		return this.getFieldOfRow("Achieve Set", this.data[row][0]);
+	}
 
 	// ----------------- other ----------------- //
 	checkNumberAnswerType(value, key) {

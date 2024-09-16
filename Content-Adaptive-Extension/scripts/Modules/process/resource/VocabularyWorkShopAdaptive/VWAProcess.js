@@ -148,8 +148,8 @@ class VWAProcess {
         linkToQuestionElement.setValue(this.getLinkToQuestion(row));
         componentGradingRulesElement.setValue(this.getComponentScoreRules(row));
 
-        // pathway1Element.setValue(this.getPathway1(row));
-        // pathway2Element.setValue(this.getPathway2(row));
+        pathway1Element.setValue(this.getPathway1(row));
+        pathway2Element.setValue(this.getPathway2(row));
         setTypeElement.setValue(this.getSetType(row));
         adaptiveAnswerCountElement.setValue(this.getAdaptiveAnswerCount(row));
         console.log("Set question")
@@ -293,19 +293,20 @@ class VWAProcess {
     }
 
     getPathway1(row) {
-        const pathway1 = this.getField("P1 Set", row);
-        if (!pathway1) {
-            this.addError("Question", `Can't find P1 Set in row ${row + 1}`);
-            return 'A';
-        }
-        return pathway1;
+        // const pathway1 = this.getField("P1 Set", row);
+        // if (!pathway1) {
+        //     this.addError("Question", `Can't find P1 Set in row ${row + 1}`);
+        //     return 'A';
+        // }
+        // return pathway1;
+        return 'A';
     }
 
     getPathway2(row) {
-        const pathway2 = this.getField("P2 Set", row);
+        const pathway2 = this.getField("Achieve Set", row);
         if (!pathway2) {
             this.createError("Question", `Can't find P2 Set in row ${row + 1}`, row);
-            return 'A';
+            return '';
         }
         return pathway2;
     }
@@ -365,7 +366,7 @@ class VWAProcess {
     }
 
     getWordListSheet() {
-        const wordListSheetName = "Unit1_WordList";
+        const wordListSheetName = this.getUnitVWSELFromFileName() + "_WordList";
         const wordListSheet = this.getSheet(wordListSheetName);
         const wordListHeader = this.getHeader(wordListSheet);
         // i need trim() all field in row because some field have space in first and last
@@ -382,9 +383,9 @@ class VWAProcess {
     }
 
     getFieldOfRow(header, row) {
-        const simplifyHeader = Utility.simplifyString(header);
+        const simplifyHeader = Utility.simplifyString(header.trim());
         for (let key in row) {
-            const simplifyKey = Utility.simplifyString(Utility.beautifullyHeader(key));
+            const simplifyKey = Utility.simplifyString(Utility.beautifullyHeader(key.trim()));
             if (simplifyKey.includes(simplifyHeader)) return row[key];
         }
         // this.addError("Field", `Can't find field ${header} in row ${row + 1} please check your data`);
@@ -420,6 +421,16 @@ class VWAProcess {
         if (!unit) return "";
 
         return 'u' + this.convertDigit(unit);
+    }
+
+    getUnitVWSELFromFileName() {
+        const unit_regex = /_U(?<unit>\d+?)_/;
+        const match = this.fileName.match(unit_regex);
+        const unit = match ? match.groups.unit : "";
+
+        if (!unit) return "";
+
+        return 'Unit' + unit;
     }
 
     getProductCodeFromFileName() {

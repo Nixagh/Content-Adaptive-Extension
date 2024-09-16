@@ -11,7 +11,7 @@ class WordTieProcess extends VWAProcess {
     }
 
     getWordTieSheet() {
-        const wordTieSheetName = `WordTies`;
+        const wordTieSheetName = `Word Ties`;
         const wordTieSheet = this.getSheet(wordTieSheetName);
         const wordTieHeader = this.getHeader(wordTieSheet);
         return this.getContent(wordTieSheet, wordTieHeader);
