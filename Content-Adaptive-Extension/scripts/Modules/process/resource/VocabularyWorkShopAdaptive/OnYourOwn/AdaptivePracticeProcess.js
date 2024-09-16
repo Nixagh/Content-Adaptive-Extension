@@ -10,7 +10,7 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getLengthData() {
-        return 36;
+        return 60;
     }
 
     getFullContent() {
@@ -36,14 +36,14 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getAdaptivePracticeSheet() {
-        const adaptivePracticeSheetName = 'Adaptive Practice';
+        const adaptivePracticeSheetName = 'AP';
         const adaptivePracticeSheet = this.getSheet(adaptivePracticeSheetName);
         const header = this.getHeader(adaptivePracticeSheet);
         return this.getContent(adaptivePracticeSheet, header);
     }
 
     getGoTicketSheet() {
-        const goTicketSheetName = 'GO Ticket';
+        const goTicketSheetName = 'GoTicket';
         const goTicketSheet = this.getSheet(goTicketSheetName);
         const header = this.getHeader(goTicketSheet);
         return this.getContent(goTicketSheet, header);
@@ -61,8 +61,8 @@ class AdaptivePracticeProcess extends VWAProcess {
                 "Incorrect Emoji": this.getFieldOfRow("Incorrect emoji for feedback 1 and growth mindset phrases randomly shown:", row),
                 "Correct Feedback": this.getFieldOfRow("Correct Feedback", row),
                 "Incorrect Feedback": this.getFieldOfRow("Incorrect Feedback", row),
-                "P1 Set": this.getFieldOfRow("P1 Set", row),
-                "P2 Set": this.getFieldOfRow("P2 Set", row),
+                "P1 Set": "A",
+                "P2 Set": this.getFieldOfRow("Achieve Set", row),
                 "Standard": this.getFieldOfRow("Standard", row),
             }
         });
@@ -78,8 +78,8 @@ class AdaptivePracticeProcess extends VWAProcess {
                 "Adaptive Item Correct Answer": this.getFieldOfRow("Adaptive Item Correct Answer", row),
                 "Adaptive Item Correct Feedback": this.getFieldOfRow("Adaptive Item Correct Feedback", row),
                 "Adaptive Item Incorrect Feedback": this.getFieldOfRow("Adaptive Item Incorrect Feedback", row),
-                "P1 Set": this.getFieldOfRow("P1 Set", row),
-                "P2 Set": this.getFieldOfRow("P2 Set", row),
+                "P1 Set": "A",
+                "P2 Set": this.getFieldOfRow("Achieve Set", row),
                 "Standard": this.getFieldOfRow("Standard", row),
             }
         });
@@ -114,8 +114,8 @@ class AdaptivePracticeProcess extends VWAProcess {
         const passageSummary = new Cke("cke_3_contents");
         const choosePassage = document.querySelectorAll("#questionTypeSelection")[1];
 
-        if (row !== 0 && row !== 24) {
-            const index = row > 23 ? 2 : 1;
+        if (row !== 0 && row !== 40) {
+            const index = row > 39 ? 2 : 1;
             choosePassage.value = choosePassage.options[index].value;
             this.getAjaxPassage(choosePassage.value).then(result => {
                 directionLine.setHtml(result.directionLineHTML);
@@ -123,7 +123,7 @@ class AdaptivePracticeProcess extends VWAProcess {
                 passageSummary.setHtml(result.passageSummaryHTML);
             });
         } else {
-            directionLine.setHtml(row === 0 ? this.getDirectionLineHTML(row) : this.getDirectionLineHTMLOfGo(row % 12));
+            directionLine.setHtml(row === 0 ? this.getDirectionLineHTML(row) : this.getDirectionLineHTMLOfGo(row % 20));
             passageContent.setHtml(this.getPassageContent(row));
             passageSummary.setHtml(this.getPassageSummaryText(row));
         }
@@ -135,7 +135,7 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getSetType(row) {
-        return row > 23 ? this.adType.GO : row > 11 && row < 24 ? this.adType.B : this.adType.A;
+        return row > 39 ? this.adType.GO : row > 19 && row < 40 ? this.adType.B : this.adType.A;
     }
 
     getDataRow(type) {
@@ -148,7 +148,7 @@ class AdaptivePracticeProcess extends VWAProcess {
 
     getQuestionHTML(rowNumber) {
         let adaptiveType = this.getSetType(rowNumber);
-        const newRowNumber = rowNumber % 12;
+        const newRowNumber = rowNumber % 20;
         const row = this.getDataRow(adaptiveType);
 
         return `<div adaptivetype="${adaptiveType}" class="question-questionStem question-questionStem-1-column">
@@ -182,7 +182,7 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getTotalOfOption(adaptiveType) {
-        return adaptiveType === this.adType.A ? 12 : 4;
+        return adaptiveType === this.adType.A ? 20 : 4;
     }
 
     getOptionsHTMLSetB(row) {
@@ -205,7 +205,7 @@ class AdaptivePracticeProcess extends VWAProcess {
     getOptionsHTML() {
         const data = this.getOptions();
         if (data.length === 0) this.addError(`Question Content`, `Options: Row ${row + 1} is empty`);
-        if (data.length !== 12) this.addError(`Question Content`, `Options: Row ${row + 1} must have 12 options`);
+        if (data.length !== 20) this.addError(`Question Content`, `Options: Row ${row + 1} must have 20 options`);
         return data.map(row => `<div itemid="${row.itemid}" itemlabel="" word="${row.word}">${row.value}</div>`).join('');
     }
 
@@ -258,9 +258,9 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getCorrectAnswerValue(row) {
-        const newRowValue = row % 12;
-        if (row > 23) return this.getCorrectAnswerValueOfGo(newRowValue);
-        if (row > 11 && row < 24) return this.getCorrectAnswerValueOfSetB(newRowValue);
+        const newRowValue = row % 20;
+        if (row > 39) return this.getCorrectAnswerValueOfGo(newRowValue);
+        if (row > 19 && row < 40) return this.getCorrectAnswerValueOfSetB(newRowValue);
         return this.getCorrectAnswerValueOfSetA(newRowValue);
     }
 
@@ -300,9 +300,9 @@ class AdaptivePracticeProcess extends VWAProcess {
 
     getFeedback(rowNumber) {
         // let newRowValue = row % 12;
-        if (rowNumber > 23) return '';
+        if (rowNumber > 39) return '';
         let row = this.data.setA;
-        if (rowNumber > 11 && rowNumber < 24) row = this.data.setB;
+        if (rowNumber > 19 && rowNumber < 40) row = this.data.setB;
 
         const feedback = {
             "correctFeedback": this.getCorrectFeedback(row, rowNumber),
@@ -314,14 +314,14 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getCorrectFeedback(row, rowNumber) {
-        const newRowValue = rowNumber % 12;
-        const correctFeedback = rowNumber > 11 ? this.getFieldOfRow("Adaptive Item Correct Feedback", row[newRowValue]) : this.getFieldOfRow("Correct Feedback", row[newRowValue]);
+        const newRowValue = rowNumber % 20;
+        const correctFeedback = rowNumber > 19 ? this.getFieldOfRow("Adaptive Item Correct Feedback", row[newRowValue]) : this.getFieldOfRow("Correct Feedback", row[newRowValue]);
         return this.toArray(this.wordIdConverter(correctFeedback));
     }
 
     getIncorrectFeedback(row, rowNumber) {
-        const newRowValue = rowNumber % 12;
-        const incorrectFeedback = rowNumber > 11 ? this.getFieldOfRow("Adaptive Item Incorrect Feedback", row[newRowValue]) : this.getFieldOfRow("Incorrect Feedback", row[newRowValue]);
+        const newRowValue = rowNumber % 20;
+        const incorrectFeedback = rowNumber > 19 ? this.getFieldOfRow("Adaptive Item Incorrect Feedback", row[newRowValue]) : this.getFieldOfRow("Incorrect Feedback", row[newRowValue]);
         const replaceValue = '<b>{0}</b>';
         const regex = /\[(.*)[\]|>]/g;
         const matches = incorrectFeedback.match(regex);
@@ -346,22 +346,26 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getWordId(row) {
-        const rowData = this.getDataRow(this.getSetType(row))[row % 12];
+        const rowData = this.getDataRow(this.getSetType(row))[row % 20];
         return this.getFieldOfRow("Word ID", rowData);
     }
 
     getPathway1(row) {
-        const rowData = this.getDataRow(this.getSetType(row))[row % 12];
-        return this.getFieldOfRow("P1 Set", rowData);
+        // const rowData = this.getDataRow(this.getSetType(row))[row % 20];
+        // return this.getFieldOfRow("P1 Set", rowData);
+        return "A";
     }
 
     getPathway2(row) {
-        const rowData = this.getDataRow(this.getSetType(row))[row % 12];
+        const rowData = this.getDataRow(this.getSetType(row))[row % 20];
+        if (this.getFieldOfRow("P2 Set", rowData) == "" || this.getFieldOfRow("P2 Set", rowData) == undefined) {
+            return this.getFieldOfRow("Achieve Set ", rowData);
+        }
         return this.getFieldOfRow("P2 Set", rowData);
     }
 
     getStandard(row) {
-        const rowData = this.getDataRow(this.getSetType(row))[row % 12];
+        const rowData = this.getDataRow(this.getSetType(row))[row % 20];
         return this.getFieldOfRow("Standard", rowData);
     }
 }

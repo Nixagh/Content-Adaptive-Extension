@@ -26,7 +26,7 @@ class WordTieProcess extends VWAProcess {
                     componentGradingRules: [
                         {
                             componentId: this.getCID(row),
-                            componentType: "MultipleChoice",
+                            componentType: "MultipleChoiceAdaptive",
                             componentSubtype: null,
                             autoScore: true,
                             rubricRule: null
@@ -52,7 +52,7 @@ class WordTieProcess extends VWAProcess {
                     <div class="question-stem-content">
                     <div class="question">${this.getItem(row)}
                         <br />
-                        <div cid="${this.getCID(row)}" ctype="MultipleChoice" layout="Vertical" qname="a${row + 1}" subtype="MSC">
+                        <div cid="${this.getCID(row)}" ctype="MultipleChoiceAdaptive" layout="Vertical" qname="a${row + 1}" subtype="MSC">
                                 ${this.getOptionHTML(row)}
                         </div>
                     </div>
@@ -86,7 +86,7 @@ class WordTieProcess extends VWAProcess {
                 {
                     id: this.getCID(row),
                     value: this.getCorrectAnswerValue(row),
-                    type: "MultipleChoice"
+                    type: "MultipleChoiceAdaptive"
                 }
             ]
         }
@@ -162,7 +162,7 @@ class WordTieProcess extends VWAProcess {
       if (Utility.isEmpty(context)) {
         return [""];
       }
-        return context.replace(`<${wordId}>`, `<${wordId}>${wordId}:`).split("\n").filter(value => value !== "");
+        return context.replace(/<b>(.*?)<\/b>/g, `<${wordId}>${wordId}:$1</${wordId}>`).split("\n").filter(value => value !== "");
     }
 
     getCorrectEmoji(row) {
