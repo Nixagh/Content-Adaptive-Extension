@@ -43,7 +43,7 @@ class VWAProcess {
 
     mapping({first, second}) {
         return first.map(row => {
-            const wordID_1 = this.getFieldOfRow("WordID", row);
+            const wordID_1 = this.getFieldOfRow("Word ID", row);
             const wordList = second.find(wordList => Utility.equalsWordId(this.getFieldOfRow("WordID", wordList), wordID_1));
             if (wordList === undefined) {
                 this.addError(`Question Content`, `Word ID: ${row["Word ID"]} not found in Word List`);
@@ -365,7 +365,7 @@ class VWAProcess {
     }
 
     getWordListSheet() {
-        const wordListSheetName = "wordList";
+        const wordListSheetName = "Unit1_WordList";
         const wordListSheet = this.getSheet(wordListSheetName);
         const wordListHeader = this.getHeader(wordListSheet);
         // i need trim() all field in row because some field have space in first and last
@@ -423,7 +423,7 @@ class VWAProcess {
     }
 
     getProductCodeFromFileName() {
-        const level_regex = /_Lev(?<level>\w+?)_/;
+        const level_regex = /VWSLCT_(?<level>\w+?)_/;
         const match = this.fileName.match(level_regex);
         const level = match ? match.groups.level : "";
 
