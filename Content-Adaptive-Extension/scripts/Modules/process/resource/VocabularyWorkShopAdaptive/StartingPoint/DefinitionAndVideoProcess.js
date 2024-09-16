@@ -13,7 +13,7 @@ class DefinitionAndVideoProcess extends VWAProcess {
     }
 
     getDefinitionSheet() {
-        const definitionSheetName = `Definitions`;
+        const definitionSheetName = `_VWIE`;
         const definitionSheet = this.getSheet(definitionSheetName);
         const definitionsHeader = this.getHeader(definitionSheet);
         return this.getContent(definitionSheet, definitionsHeader);
@@ -65,10 +65,11 @@ class DefinitionAndVideoProcess extends VWAProcess {
 
         const video = Utility.isNotNull(this.getDataSourceUrl) ? `
         <div class="video" 
-            ${captionsUrl ? `captions-url="${captionsUrl}"` : ``} 
-            ${dataDescUrl ? `data-desc-url="${dataDescUrl}"` : ``} 
-            data-source="${this.getDataSourceUrl()}"
-            ${descriptionsUrl ? `descriptions-url="${descriptionsUrl}"` : ``}>
+            captionsUrl='${captionsUrl}' 
+            dataDescUrl='${dataDescUrl}' 
+            data-source='${this.getDataSourceUrl()}' 
+            descriptionsUrl='${descriptionsUrl}'
+        >
         </div>` : ``;
 
         return `<div class="question-questionStem question-questionStem-1-column">
