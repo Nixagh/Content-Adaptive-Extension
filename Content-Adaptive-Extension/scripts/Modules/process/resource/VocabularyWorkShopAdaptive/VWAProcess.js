@@ -148,8 +148,8 @@ class VWAProcess {
         linkToQuestionElement.setValue(this.getLinkToQuestion(row));
         componentGradingRulesElement.setValue(this.getComponentScoreRules(row));
 
-        pathway1Element.setValue(this.getPathway1(row));
-        pathway2Element.setValue(this.getPathway2(row));
+        // pathway1Element.setValue(this.getPathway1(row));
+        // pathway2Element.setValue(this.getPathway2(row));
         setTypeElement.setValue(this.getSetType(row));
         adaptiveAnswerCountElement.setValue(this.getAdaptiveAnswerCount(row));
         console.log("Set question")
