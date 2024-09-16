@@ -437,7 +437,13 @@ class VWAProcess {
     }
 
     getProductCodeFromFileName() {
-        const level_regex = /VWSLCT_(?<level>\w+?)_/;
+        let level_regex = "";
+        if (this.fileName.includes("VWSLCT_Lev")) {
+            level_regex = /VWSLCT_Lev(?<level>\w+?)_/;
+        } else {
+            level_regex = /VWSLCT_(?<level>\w+?)_/;
+        }
+        //const level_regex = /VWSLCT_Lev(?<level>\w+?)_/;
         const match = this.fileName.match(level_regex);
         const level = match ? match.groups.level : "";
 
