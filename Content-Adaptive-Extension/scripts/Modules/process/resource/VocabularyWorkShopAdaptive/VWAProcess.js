@@ -424,6 +424,9 @@ class VWAProcess {
     }
 
     getUnitVWSELFromFileName() {
+        if (this.fileName.includes("_BU_")) {
+            return "BonUnit";
+        }
         const unit_regex = /_U(?<unit>\d+?)_/;
         const match = this.fileName.match(unit_regex);
         const unit = match ? match.groups.unit : "";
@@ -460,7 +463,10 @@ class VWAProcess {
     }
 
     getCID(row) {
-        return `${this.getProductCode()}_${this.getDescription()}_${this.getUnit()}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
+        if (this.getUnitVWSELFromFileName() == "BonUnit") {
+            return `${this.getProductCode()}_BonusUnit_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
+        }
+        return `${this.getProductCode()}_${this.getUnit()}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
     }
 
     getDescription() {
