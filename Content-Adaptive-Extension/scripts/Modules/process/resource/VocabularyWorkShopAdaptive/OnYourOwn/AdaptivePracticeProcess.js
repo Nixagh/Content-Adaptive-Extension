@@ -10,7 +10,11 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getLengthData() {
-        return 60;
+        return this.data.setA.length + this.data.setB.length + this.data.go.length;
+    }
+
+    getOneThird() {
+        return this.getLengthData() / 3;
     }
 
     getFullContent() {
@@ -123,8 +127,9 @@ class AdaptivePracticeProcess extends VWAProcess {
         const passageSummary = new Cke("cke_3_contents");
         const choosePassage = document.querySelectorAll("#questionTypeSelection")[1];
 
-        if (row !== 0 && row !== 40) {
-            const index = row > 39 ? 2 : 1;
+        const twoThirds = this.getOneThird() * 2;
+        if (row !== 0 && row !== twoThirds) {
+            const index = row > twoThirds - 1 ? 2 : 1;
             choosePassage.value = choosePassage.options[index].value;
             this.getAjaxPassage(choosePassage.value).then(result => {
                 directionLine.setHtml(result.directionLineHTML);
@@ -132,7 +137,7 @@ class AdaptivePracticeProcess extends VWAProcess {
                 passageSummary.setHtml(result.passageSummaryHTML);
             });
         } else {
-            directionLine.setHtml(row === 0 ? this.getDirectionLineHTML(row) : this.getDirectionLineHTMLOfGo(row % 20));
+            directionLine.setHtml(row === 0 ? this.getDirectionLineHTML(row) : this.getDirectionLineHTMLOfGo(row % this.getOneThird()));
             passageContent.setHtml(this.getPassageContent(row));
             passageSummary.setHtml(this.getPassageSummaryText(row));
         }
@@ -144,7 +149,9 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getSetType(row) {
-        return row > 39 ? this.adType.GO : row > 19 && row < 40 ? this.adType.B : this.adType.A;
+        const oneThird = this.getOneThird();
+        const twoThirds = oneThird * 2;
+        return row > twoThirds - 1 ? this.adType.GO : row > oneThird - 1 && row < twoThirds ? this.adType.B : this.adType.A;
     }
 
     getDataRow(type) {
@@ -157,7 +164,7 @@ class AdaptivePracticeProcess extends VWAProcess {
 
     getQuestionHTML(rowNumber) {
         let adaptiveType = this.getSetType(rowNumber);
-        const newRowNumber = rowNumber % 20;
+        const newRowNumber = rowNumber % this.getOneThird();
         const row = this.getDataRow(adaptiveType);
 
         return `<div adaptivetype="${adaptiveType}" class="question-questionStem question-questionStem-1-column">
@@ -191,7 +198,7 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getTotalOfOption(adaptiveType) {
-        return adaptiveType === this.adType.A ? 20 : 4;
+        return adaptiveType === this.adType.A ? this.getOneThird() : 4;
     }
 
     getOptionsHTMLSetB(row) {
@@ -214,7 +221,7 @@ class AdaptivePracticeProcess extends VWAProcess {
     getOptionsHTML() {
         const data = this.getOptions();
         if (data.length === 0) this.addError(`Question Content`, `Options: Row ${row + 1} is empty`);
-        if (data.length !== 20) this.addError(`Question Content`, `Options: Row ${row + 1} must have 20 options`);
+        if (data.length !== this.getOneThird()) this.addError(`Question Content`, `Options: Row ${row + 1} must have 20 options`);
         return data.map(row => `<div itemid="${row.itemid}" itemlabel="" word="${row.word}">${row.value}</div>`).join('');
     }
 
@@ -267,9 +274,11 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getCorrectAnswerValue(row) {
-        const newRowValue = row % 20;
-        if (row > 39) return this.getCorrectAnswerValueOfGo(newRowValue);
-        if (row > 19 && row < 40) return this.getCorrectAnswerValueOfSetB(newRowValue);
+        const oneThird = this.getOneThird();
+        const twoThirds = oneThird * 2;
+        const newRowValue = row % oneThird;
+        if (row > twoThirds - 1) return this.getCorrectAnswerValueOfGo(newRowValue);
+        if (row > oneThird - 1 && row < twoThirds) return this.getCorrectAnswerValueOfSetB(newRowValue);
         return this.getCorrectAnswerValueOfSetA(newRowValue);
     }
 
@@ -309,9 +318,11 @@ class AdaptivePracticeProcess extends VWAProcess {
 
     getFeedback(rowNumber) {
         // let newRowValue = row % 12;
-        if (rowNumber > 39) return '';
+        const oneThird = this.getOneThird();
+        const twoThirds = oneThird * 2;
+        if (rowNumber > twoThirds - 1) return '';
         let row = this.data.setA;
-        if (rowNumber > 19 && rowNumber < 40) row = this.data.setB;
+        if (rowNumber > oneThird - 1 && rowNumber < twoThirds) row = this.data.setB;
 
         const feedback = {
             "correctFeedback": this.getCorrectFeedback(row, rowNumber),
@@ -323,14 +334,16 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getCorrectFeedback(row, rowNumber) {
-        const newRowValue = rowNumber % 20;
-        const correctFeedback = rowNumber > 19 ? this.getFieldOfRow("Adaptive Item Correct Feedback", row[newRowValue]) : this.getFieldOfRow("Correct Feedback", row[newRowValue]);
+        const oneThird = this.getOneThird();
+        const newRowValue = rowNumber % oneThird;
+        const correctFeedback = rowNumber > oneThird - 1 ? this.getFieldOfRow("Adaptive Item Correct Feedback", row[newRowValue]) : this.getFieldOfRow("Correct Feedback", row[newRowValue]);
         return this.toArray(this.wordIdConverter(correctFeedback));
     }
 
     getIncorrectFeedback(row, rowNumber) {
-        const newRowValue = rowNumber % 20;
-        const incorrectFeedback = rowNumber > 19 ? this.getFieldOfRow("Adaptive Item Incorrect Feedback", row[newRowValue]) : this.getFieldOfRow("Incorrect Feedback", row[newRowValue]);
+        const oneThird = this.getOneThird();
+        const newRowValue = rowNumber % oneThird;
+        const incorrectFeedback = rowNumber > oneThird - 1 ? this.getFieldOfRow("Adaptive Item Incorrect Feedback", row[newRowValue]) : this.getFieldOfRow("Incorrect Feedback", row[newRowValue]);
         const replaceValue = '<b>{0}</b>';
         const regex = /\[(.*)[\]|>]/g;
         const matches = incorrectFeedback.match(regex);
@@ -355,7 +368,7 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getWordId(row) {
-        const rowData = this.getDataRow(this.getSetType(row))[row % 20];
+        const rowData = this.getDataRow(this.getSetType(row))[row % this.getOneThird()];
         return this.getFieldOfRow("Word ID", rowData);
     }
 
@@ -366,7 +379,7 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getPathway2(row) {
-        const rowData = this.getDataRow(this.getSetType(row))[row % 20];
+        const rowData = this.getDataRow(this.getSetType(row))[row % this.getOneThird()];
         if (this.getFieldOfRow("P2 Set", rowData) == "" || this.getFieldOfRow("P2 Set", rowData) == undefined) {
             return this.getFieldOfRow("Achieve Set ", rowData);
         }
@@ -374,7 +387,7 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getStandard(row) {
-        const rowData = this.getDataRow(this.getSetType(row))[row % 20];
+        const rowData = this.getDataRow(this.getSetType(row))[row % this.getOneThird()];
         return this.getFieldOfRow("Standard", rowData);
     }
 }
