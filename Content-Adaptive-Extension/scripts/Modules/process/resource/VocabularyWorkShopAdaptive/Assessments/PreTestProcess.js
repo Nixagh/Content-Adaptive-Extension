@@ -13,6 +13,16 @@ class PreTestProcess extends VWAProcess {
     }
 
     mapping({first, second}) {
+        let directionLine = "";
+        for (var i = 0; i < first.length; i++) {
+            const currDirectionLine = this.getFieldOfRow("Direction Line ", first[i]);
+            if (currDirectionLine) {
+                directionLine = currDirectionLine
+            } else {
+                first[i]["Direction Line"] = directionLine;
+            }
+        }
+
         return first;
     }
 

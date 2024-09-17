@@ -499,15 +499,15 @@ class VWAProcess {
         }
 
         if (this.getUnitVWSELFromFileName() == "BonUnit") {
-            return `${this.getProductCode()}_BonusUnit${set}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
+            return `${this.getProductCode()}_${this.getDescription()}${set}_BonusUnit_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
         }
         if (this.getUnitVWSELFromFileName() == "U1-3") {
-            return `${this.getProductCode()}_U1-3${set}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
+            return `${this.getProductCode()}_${this.getDescription()}${set}_U1-3_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
         }
         if (this.fileName.includes("Test_U")) {
-            return `${this.getProductCode()}_${this.getDescription()}_${this.getUnit()}${set}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
+            return `${this.getProductCode()}_${this.getDescription()}${set}_${this.getUnit()}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
         }
-        return `${this.getProductCode()}_${this.getDescription()}_${this.getUnit()}${set}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
+        return `${this.getProductCode()}_${this.getDescription()}${set}_${this.getUnit()}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
     }
 
     getDescription() {
