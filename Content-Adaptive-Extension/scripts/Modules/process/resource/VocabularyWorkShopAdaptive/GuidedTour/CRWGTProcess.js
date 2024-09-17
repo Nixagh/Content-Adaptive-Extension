@@ -10,7 +10,7 @@ class CRWGTProcess extends VWAProcess {
 	}
 
 	getCRWGTSheet() {
-		const crwSheetName = `CtheRW`;
+		const crwSheetName = `CtRW`;
 		const crwSheet = this.getSheet(crwSheetName);
 		const crwHeader = this.getHeader(crwSheet);
 		return this.getContent(crwSheet, crwHeader);

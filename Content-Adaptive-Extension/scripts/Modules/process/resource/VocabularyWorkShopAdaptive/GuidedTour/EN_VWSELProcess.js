@@ -23,7 +23,7 @@ class EN_VWSELProcess extends VWAProcess {
 	}
 
 	getEAN() {
-		const sheetName = `Examples and NonEx`;
+		const sheetName = `ENE`;
 		const sheet = this.getSheet(sheetName);
 		const header = this.getHeader(sheet);
 		return this.getContent(sheet, header);
@@ -160,8 +160,8 @@ class EN_VWSELProcess extends VWAProcess {
 		return `Answer will vary.`;
 	}
 
-	getNonExampleColumnDirectionPOPUP(row) {
-		return this.getFieldOfRow("Non Example column direction pop-up", this.data[row][0]);
+		getNonExampleColumnDirectionPOPUP(row) {
+		return this.getFieldOfRow("Nonexample column direction pop-up", this.data[row][0]);
 	}
 
 	getExampleColumnDirectionPOPUP(row) {
@@ -212,11 +212,11 @@ class EN_VWSELProcess extends VWAProcess {
 	}
 
 	getPathway1(row) {
-		return this.getFieldOfRow("P1 Set", this.data[row][0]);
+		return 'A';
 	}
-
+	
 	getPathway2(row) {
-		return this.getFieldOfRow("P2 Set", this.data[row][0]);
+		return this.getFieldOfRow("Achieve Set", this.data[row][0]);
 	}
 
 	// ----------------- other ----------------- //
@@ -249,7 +249,6 @@ class EN_VWSELProcess extends VWAProcess {
 	}
 
 	updateFeedback2(incorrectFeedback2, wordId) {
-		const _ = `<${wordId}>`;
-		return incorrectFeedback2.replace(_, `${_}${wordId}:`);
+		return incorrectFeedback2.replace(/<b>(.*?)<\/b>/g, `<${wordId}>${wordId}:$1</${wordId}>`);
 	}
 }
