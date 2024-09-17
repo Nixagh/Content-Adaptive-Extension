@@ -71,6 +71,12 @@ const Resource = {
 	}
 }
 
+const AchieveSet = {
+	"ALL": {value: "All", display: "All"},
+	"A" : {value: "A", display: "only set A"},
+	"B" : {value: "B", display: "only set B"},
+}
+
 const getProcess = () => {
 	const program = Storage.Get("CurrentProgram");
 
