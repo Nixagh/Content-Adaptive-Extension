@@ -35,6 +35,13 @@ class AdaptivePracticeProcess extends VWAProcess {
         return first[0];
     }
 
+    filterAchieveSet(data) {
+        for(let set in data) {
+            data[set] = super.filterAchieveSet(data[set]);
+        }
+        return data;
+    }
+
     getAdaptivePracticeSheet() {
         const adaptivePracticeSheetName = 'AP';
         const adaptivePracticeSheet = this.getSheet(adaptivePracticeSheetName);
@@ -64,6 +71,7 @@ class AdaptivePracticeProcess extends VWAProcess {
                 "P1 Set": "A",
                 "P2 Set": this.getFieldOfRow("Achieve Set", row),
                 "Standard": this.getFieldOfRow("Standard", row),
+                "Achieve Set": this.getFieldOfRow("Achieve Set", row)
             }
         });
     }
@@ -81,6 +89,7 @@ class AdaptivePracticeProcess extends VWAProcess {
                 "P1 Set": "A",
                 "P2 Set": this.getFieldOfRow("Achieve Set", row),
                 "Standard": this.getFieldOfRow("Standard", row),
+                "Achieve Set": this.getFieldOfRow("Achieve Set", row)
             }
         });
     }
