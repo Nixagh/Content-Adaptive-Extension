@@ -67,7 +67,7 @@ class FileReader {
         GProcess = Resource[program].resource[desc].new();
         GProcess.fileName = fileStorage.map(file => file.name).join(" - ");
 
-        const moreThanOneFile = ["WWiAC"];
+        const moreThanOneFile = ["WWiAC", "WordList"];
 
 		let arrayBuffers = [await FileReader.getArrayBuffer(fileStorage[0])];
 

@@ -175,11 +175,12 @@ class WordListProcess {
         const wordStudy = this.getWordStudy();
 
         return wordLists.map((wordList) => {
-            const word = Utility.getFieldOfRow("Word ID", wordList);
-            const definitionRow = definitions.find((definition) => Utility.equalsWordId(Utility.getFieldOfRow("Word ID", definition), word));
-            const wordStudyRow = wordStudy.find((wordStudy) => Utility.equalsWordId(Utility.getFieldOfRow("Word ID", wordStudy), word));
+            const word = Utility.getFieldOfRow("WordID", wordList);
+            const pos = Utility.getFieldOfRow("Part of Speech", wordList);
+            const definitionRow = definitions.find((definition) => Utility.equalsWordId(Utility.getFieldOfRow("WordID", definition), word) && pos === Utility.getFieldOfRow("Part of Speech", definition));
+            const wordStudyRow = wordStudy.find((wordStudy) => Utility.equalsWordId(Utility.getFieldOfRow("Word ID", wordStudy), word) && pos === Utility.getFieldOfRow("Part of Speech", wordStudy));
 
-            definitionRow["D_Definition"] = Utility.getFieldOfRow("Definition", definitionRow);
+            if (definitionRow) definitionRow["D_Definition"] = Utility.getFieldOfRow("Definition", definitionRow);
 
             return {
                 ...wordList,
@@ -266,15 +267,15 @@ class WordListProcess {
     }
 
     getWordLists() {
-        return this.getSheetData("wordList");
+        return this.getSheetData("_WordList");
     }
 
     getDefinitions() {
-        return this.getSheetData("Definition");
+        return this.getSheetData("_VWIE");
     }
 
     getWordStudy() {
-        return this.getSheetData("WordStudy");
+        return this.getSheetData("Units");
     }
 
     getSheetData(sheetName) {
