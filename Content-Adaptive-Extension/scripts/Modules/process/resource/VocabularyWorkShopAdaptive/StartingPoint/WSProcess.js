@@ -9,18 +9,14 @@ class WSProcess extends VWAProcess {
 		const definitionsContent = this.getDefinitionSheet();
 
 		const firstMapping = this.getFirstMapping(wsContent, definitionsContent);
-
 		return {first: firstMapping, second: wordListContent};
 	}
 
 	getFirstMapping(wordStudy, definitions) {
-		return wordStudy.map((row) => {
-			const wordID_1 = this.getFieldOfRow("WordID", row);
-
-			const wsRowNumber = definitions.findIndex(definition => Utility.equalsWordId(this.getFieldOfRow("WordID", definition), wordID_1));
+		return wordStudy.map((row, index) => {
 			return {
 				...row,
-				"Question Number": wsRowNumber + 1
+				"Question Number": index + 1
 			}
 		});
 	}
@@ -34,7 +30,7 @@ class WSProcess extends VWAProcess {
 	}
 
 	getDefinitionSheet(header, row) {
-		const definitionSheetName = `Definitions`;
+		const definitionSheetName = `Unit 1_VWIE`;
 		const definitionSheet = this.getSheet(definitionSheetName);
 		const definitionsHeader = this.getHeader(definitionSheet);
 		return this.getContent(definitionSheet, definitionsHeader);
@@ -213,6 +209,6 @@ class WSProcess extends VWAProcess {
 	}
 
 	genImageDetail(image, number) {
-		return image ? `<img src="/cms/repository/cms/images2020/${image}.jpg" style="width: 334px; height: 234px;" />` : "";
+		return image ? `<img src="/cms/repository/cms/images2020/${image}" style="width: 334px; height: 234px;" />` : "";
 	}
 }

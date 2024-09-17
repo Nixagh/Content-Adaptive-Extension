@@ -422,6 +422,15 @@ class VWAProcess {
     }
 
     getUnitFromFileName() {
+        if (this.fileName.includes("Test_U")) {
+            const unit_regex = /Test_U(?<unit>\d+?)/;
+            const match = this.fileName.match(unit_regex);
+            const unit = match ? match.groups.unit : "";
+
+            if (!unit) return "";
+
+            return 'u' + unit;
+        }
         const unit_regex = /_U(?<unit>\d+?)_/;
         const match = this.fileName.match(unit_regex);
         const unit = match ? match.groups.unit : "";
@@ -435,6 +444,9 @@ class VWAProcess {
         if (this.fileName.includes("_BU_")) {
             return "BonUnit";
         }
+        else if (this.fileName.includes("WordStudy_U")) {
+            return "U1-3";
+        } 
         const unit_regex = /_U(?<unit>\d+?)_/;
         const match = this.fileName.match(unit_regex);
         const unit = match ? match.groups.unit : "";
@@ -479,6 +491,12 @@ class VWAProcess {
     getCID(row) {
         if (this.getUnitVWSELFromFileName() == "BonUnit") {
             return `${this.getProductCode()}_BonusUnit_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
+        }
+        if (this.getUnitVWSELFromFileName() == "U1-3") {
+            return `${this.getProductCode()}_U1-3_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
+        }
+        if (this.fileName.includes("Test_U")) {
+            return `${this.getProductCode()}_${this.getDescription()}_${this.getUnit()}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
         }
         return `${this.getProductCode()}_${this.getUnit()}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
     }
