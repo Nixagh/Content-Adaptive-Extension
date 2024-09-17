@@ -198,6 +198,6 @@ class DefinitionAndVideoProcess extends VWAProcess {
     }
 
     getDescription() {
-        return "definitions";
+        return "DV";
     }
 }

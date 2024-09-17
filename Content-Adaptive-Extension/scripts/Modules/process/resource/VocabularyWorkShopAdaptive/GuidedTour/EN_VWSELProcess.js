@@ -1,6 +1,6 @@
 class EN_VWSELProcess extends VWAProcess {
 	getDescription() {
-		return "GT_EN";
+		return "ENE";
 	}
 
 	getFullContent() {

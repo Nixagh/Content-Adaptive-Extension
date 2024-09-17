@@ -6,7 +6,7 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getDescription() {
-        return 'OYO_AP';
+        return 'AP';
     }
 
     getLengthData() {

@@ -498,7 +498,7 @@ class VWAProcess {
         if (this.fileName.includes("Test_U")) {
             return `${this.getProductCode()}_${this.getDescription()}_${this.getUnit()}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
         }
-        return `${this.getProductCode()}_${this.getUnit()}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
+        return `${this.getProductCode()}_${this.getDescription()}_${this.getUnit()}_q${this.convertDigit(this.getQuestionNumber(row))}_ans01`;
     }
 
     getDescription() {

@@ -1,6 +1,6 @@
 class CRWGTProcess extends VWAProcess {
 	getDescription() {
-		return "GT_CTRW";
+		return "CTRW";
 	}
 
 	getFullContent() {

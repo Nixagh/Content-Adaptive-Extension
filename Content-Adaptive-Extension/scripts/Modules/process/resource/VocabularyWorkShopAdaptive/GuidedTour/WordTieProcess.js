@@ -1,6 +1,6 @@
 class WordTieProcess extends VWAProcess {
     getDescription() {
-        return "GT_WT";
+        return "WT";
     }
 
     getFullContent() {

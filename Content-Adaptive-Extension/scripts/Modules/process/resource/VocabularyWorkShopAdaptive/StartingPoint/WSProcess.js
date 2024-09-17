@@ -1,6 +1,6 @@
 class WSProcess extends VWAProcess {
 	getDescription() {
-		return "wordstudy";
+		return "WS";
 	}
 
 	getFullContent() {
