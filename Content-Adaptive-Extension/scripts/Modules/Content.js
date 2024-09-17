@@ -271,6 +271,10 @@ class OptionContent {
                         <select id="${Ids.description}" style="color: #181d24">
                             ${OptionContent.getDescriptions(ProgramTocResource)}
                         </select>
+                        <h4>Achieve Set</h4>
+                        <select id="${Ids.achieveSet}" style="color: #181d24">
+                            ${OptionContent.getAchieveSet(AchieveSet)}
+                        </select>
                     </div>
                     <div class="preview">
                         <h1>Load Data</h1>
@@ -349,5 +353,13 @@ class OptionContent {
             },
             resize: true
         }
+    }
+
+    static getAchieveSet(AchieveSet) {
+        let html = ``;
+        Object.entries(AchieveSet).forEach(([key, value]) => {
+            html += `<option value="${key}">${value.display}</option>`;
+        });
+        return html;
     }
 }

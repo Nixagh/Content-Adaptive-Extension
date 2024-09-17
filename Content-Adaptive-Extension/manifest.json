@@ -24,7 +24,7 @@
     "tabs",
     "activeTab"
   ],
-  "host_permissions": ["http://192.168.200.26:8090/*","http://localhost:8080/cms/*"],
+  "host_permissions": ["http://192.168.200.26:8090/*","http://localhost:8080/cms/*","https://example.com/*"],
   "web_accessible_resources": [
     {
       "resources": [
@@ -42,7 +42,8 @@
     {
       "matches": [
         "http://192.168.200.26:8090/*",
-        "http://localhost:8080/cms/*"
+        "http://localhost:8080/cms/*",
+        "https://example.com/*"
       ],
       "js": [
         "scripts/Libs/external/Jui.js",

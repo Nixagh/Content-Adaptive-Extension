@@ -1,7 +1,7 @@
 class ExcelUtil {
     static getSheet(sheetName, allSheets) {
         const _sheetName = allSheets.SheetNames.find((sheet) =>
-            sheet.includes(sheetName)
+            sheet.toLowerCase().includes(sheetName.toLowerCase())
         );
         return allSheets.Sheets[_sheetName];
     }

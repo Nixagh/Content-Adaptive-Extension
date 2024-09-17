@@ -9,6 +9,7 @@ class VWAProcess {
     errors;
     scramble = false;
     _errors = [];
+    achieveSet = "ALL";
 
     constructor(type, rowMinus = 1, setTab = [1, 1, 1, 1]) {
         this.type = type;
@@ -31,7 +32,7 @@ class VWAProcess {
         this.productCode = code;
         this.grade = grade;
         this.unit = this.getUnitFromFileName();
-        this.data = this.mapping(this.getFullContent());
+        this.data = this.filterAchieveSet(this.mapping(this.getFullContent()));
         // this.data = this.getFullContent();
         this.showErrors();
         Storage.Set("GProcess", JSON.stringify(this));
@@ -39,6 +40,13 @@ class VWAProcess {
 
     getLengthData() {
         return this.data.length;
+    }
+
+    filterAchieveSet(data) {
+        return data.filter(row => {
+            const achieveSet = this.getFieldOfRow("Achieve Set", row).toLowerCase();
+            return achieveSet === this.achieveSet.toLowerCase() || this.achieveSet.toLowerCase() === "ALL".toLowerCase();
+        })
     }
 
     mapping({first, second}) {

@@ -66,6 +66,7 @@ class FileReader {
 
         GProcess = Resource[program].resource[desc].new();
         GProcess.fileName = fileStorage.map(file => file.name).join(" - ");
+        GProcess.achieveSet = AchieveSet[$(`#${Ids.achieveSet}`).val()].value;
 
         const moreThanOneFile = ["WWiAC"];
 
