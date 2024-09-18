@@ -66,7 +66,15 @@ class PreTestProcess extends VWAProcess {
     }
 
     getPassageContent(row) {
-        return `<div class="direction_section">Choose the word that best completes each of the following sentences.</div>`;
+        const content =  this.getExactlyField("Direction Line ", row);
+        return `<div class="direction_section">${content}</div>`;
+    }
+    
+    getConditionAndValueChoice(row) {
+        return {
+            condition: row !== 0 && row !== 5 && row !== 15,
+            value: row > 14 ? 3 : row > 4 ? 2 : 1,
+        }
     }
 
     getQuestionHTML(row) {

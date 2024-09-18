@@ -15,9 +15,19 @@ class PostTestProcess extends VWAProcess {
     }
 
     getPretestSheet() {
-        const postTestSheetName = `POSTTEST`;
+
+        if (this.fileName.includes("_BonusUnit")) {
+            return "";
+        }
+        const unit_regex = /PreTest_U(?<unit>\d+?)/;
+        const match = this.fileName.match(unit_regex);
+        const unit = match ? match.groups.unit : "";
+
+        if (!unit) return "";
+
+        const postTestSheetName = this.fileName.includes("_BonusUnit") ? "PostTest" : `Unit ${unit} PostTest`;
         const postTestSheet = this.getSheet(postTestSheetName);
-        const postTestHeader = this.getHeader(postTestSheet);
+        const postTestHeader = this.getHeader(pretestSheet);
         return this.getContent(postTestSheet, postTestHeader);
     }
 
@@ -42,9 +52,16 @@ class PostTestProcess extends VWAProcess {
         }
         return JSON.stringify(componentScoreRules);
     }
-
     getPassageContent(row) {
-        return `<div class="direction_section">Choose the word that best completes each of the following sentences.</div>`;
+        const content =  this.getExactlyField("Direction Line ", row);
+        return `<div class="direction_section">${content}</div>`;
+    }
+    
+    getConditionAndValueChoice(row) {
+        return {
+            condition: row !== 0 && row !== 5 && row !== 15,
+            value: row > 14 ? 3 : row > 4 ? 2 : 1,
+        }
     }
 
     getQuestionHTML(row) {
