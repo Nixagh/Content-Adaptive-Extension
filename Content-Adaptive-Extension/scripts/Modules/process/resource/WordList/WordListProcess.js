@@ -2,8 +2,8 @@ const wordListIds = {
     wordId: "wordIdSection",
     word: "wordSection",
     multiMeaning: "pojo.multiMeaning1",
-    themeResult: "select2-chosen-3",
-    themeSelect: "themeSelect",
+    // themeResult: "select2-chosen-3",
+    // themeSelect: "themeSelect",
     pronunciation: "pojo.pronunciation",
     partOfSpeech: "partOfSpeech",
     partOfSpeechShort: "partOfSpeechShort",
@@ -26,8 +26,8 @@ const wordListObject = {
     wordId: "",
     word: "",
     multiMeaning: "",
-    themeResult: "",
-    themeSelect: "",
+    // themeResult: "",
+    // themeSelect: "",
     pronunciation: "",
     partOfSpeech: "",
     partOfSpeechShort: "",
@@ -56,7 +56,7 @@ class WordListProcess {
 
     process() {
         this.data = this.getData();
-        this.themeDataWithWordId = this.getThemeDataWithWordId();
+        // this.themeDataWithWordId = this.getThemeDataWithWordId();
         Storage.Set("GProcess", JSON.stringify(this));
     }
 
@@ -80,8 +80,8 @@ class WordListProcess {
             wordId: this.getWordId(this.data[rowNumber]),
             word: this.getWord(this.data[rowNumber]),
             multiMeaning: this.getMultiMeaning(this.data[rowNumber]),
-            themeResult: this.getThemeResult(this.data[rowNumber]),
-            themeSelect: this.getThemeSelect(this.data[rowNumber]),
+            // themeResult: this.getThemeResult(this.data[rowNumber]),
+            // themeSelect: this.getThemeSelect(this.data[rowNumber]),
             pronunciation: this.getPronunciation(this.data[rowNumber]),
             partOfSpeech: this.getPartOfSpeech(this.data[rowNumber]),
             partOfSpeechShort: this.getPartOfSpeechShort(this.data[rowNumber]),
@@ -89,10 +89,10 @@ class WordListProcess {
             rolloverDefinition: this.getRolloverDefinition(this.data[rowNumber]),
             synonyms: this.getSynonyms(this.data[rowNumber]),
             antonyms: this.getAntonyms(this.data[rowNumber]),
-            pathway1: this.getPathway1(this.data[rowNumber]),
-            pathway2: this.getPathway2(this.data[rowNumber]),
-            wordType: this.getWordType(this.data[rowNumber]),
-            wjEntryField: this.getWjEntryField(this.data[rowNumber]),
+            // pathway1: this.getPathway1(this.data[rowNumber]),
+            // pathway2: this.getPathway2(this.data[rowNumber]),
+            // wordType: this.getWordType(this.data[rowNumber]),
+            // wjEntryField: this.getWjEntryField(this.data[rowNumber]),
             prefix: this.getPrefix(this.data[rowNumber]),
             rootOrBase: this.getRootOrBase(this.data[rowNumber]),
             suffix: this.getSuffix(this.data[rowNumber]),
@@ -106,8 +106,8 @@ class WordListProcess {
         const word = new BasicInput(wordListIds.word);
         const multiMeaning = document.getElementById(wordListIds.multiMeaning);
 
-        const themeResult = new BasicInput(wordListIds.themeResult);
-        const themeSelect = new BasicInput(wordListIds.themeSelect);
+        // const themeResult = new BasicInput(wordListIds.themeResult);
+        // const themeSelect = new BasicInput(wordListIds.themeSelect);
 
         const pronunciation = new BasicInput(wordListIds.pronunciation);
         const partOfSpeech = new BasicInput(wordListIds.partOfSpeech);
@@ -116,10 +116,10 @@ class WordListProcess {
         const rolloverDefinition = new Cke(wordListIds.rolloverDefinition);
         const synonyms = new Cke(wordListIds.synonyms);
         const antonyms = new Cke(wordListIds.antonyms);
-        const pathway1 = new BasicInput(wordListIds.pathway1);
-        const pathway2 = new BasicInput(wordListIds.pathway2);
+        // const pathway1 = new BasicInput(wordListIds.pathway1);
+        // const pathway2 = new BasicInput(wordListIds.pathway2);
         const wordType = new BasicInput(wordListIds.wordType);
-        const wjEntryField = new BasicInput(wordListIds.wjEntryField);
+        // const wjEntryField = new BasicInput(wordListIds.wjEntryField);
         const prefix = new BasicInput(wordListIds.prefix);
         const rootOrBase = new BasicInput(wordListIds.rootOrBase);
         const suffix = new BasicInput(wordListIds.suffix);
@@ -130,16 +130,16 @@ class WordListProcess {
         multiMeaning.checked = wordListObject.multiMeaning;
 
         // get value from themeDataWithWordId
-        const themeData = this.themeDataWithWordId.find((themeData) => themeData.wordIds.includes(wordListObject.wordId));
-        const regex = /<(\/|)i>|<(\/|)b>/g;
-        const themeCode = themeData.header.replaceAll(regex, "");
+        // const themeData = this.themeDataWithWordId.find((themeData) => themeData.wordIds.includes(wordListObject.wordId));
+        // const regex = /<(\/|)i>|<(\/|)b>/g;
+        // const themeCode = themeData.header.replaceAll(regex, "");
         // get value of theme select
-        const themeOptions = themeSelect.element.options;
-        const themeOption = Array.from(themeOptions).find((option) => option.text === themeCode) || themeOptions[0];
+        // const themeOptions = themeSelect.element.options;
+        // const themeOption = Array.from(themeOptions).find((option) => option.text === themeCode) || themeOptions[0];
 
-        themeSelect.setValue(themeOption.value);
-        const displayThemeSelect = document.getElementById("select2-chosen-3");
-        displayThemeSelect.innerHTML = themeOption.text;
+        // themeSelect.setValue(themeOption.value);
+        // const displayThemeSelect = document.getElementById("select2-chosen-3");
+        // displayThemeSelect.innerHTML = themeOption.text;
 
         pronunciation.setValue(wordListObject.pronunciation);
         partOfSpeech.setValue(wordListObject.partOfSpeech);
@@ -149,9 +149,9 @@ class WordListProcess {
         synonyms.setHtml(wordListObject.synonyms);
         antonyms.setHtml(wordListObject.antonyms);
 
-        pathway1.setValue(wordListObject.pathway1);
-        pathway2.setValue(wordListObject.pathway2);
-        wordType.setValue(wordListObject.wordType === "Priority" ? 1 : 2);
+        // pathway1.setValue(wordListObject.pathway1);
+        // pathway2.setValue(wordListObject.pathway2);
+        wordType.setValue(1);
 
         const displayPathWay1 = document.getElementById("select2-chosen-4");
         const displayPathWay2 = document.getElementById("select2-chosen-5");
@@ -161,7 +161,7 @@ class WordListProcess {
         displayPathWay2.innerHTML = wordListObject.pathway2;
         displayWordType.innerHTML = wordListObject.wordType;
 
-        wjEntryField.setValue(wordListObject.wjEntryField);
+        // wjEntryField.setValue(wordListObject.wjEntryField);
         prefix.setValue(wordListObject.prefix);
         rootOrBase.setValue(wordListObject.rootOrBase);
         suffix.setValue(wordListObject.suffix);
@@ -190,81 +190,81 @@ class WordListProcess {
         });
     }
 
-    getThemeDataWithWordId() {
-        const sheetNames = Utility.getSheetNames("Theme", this.allSheets);
-        const themeData = [];
+    // getThemeDataWithWordId() {
+    //     const sheetNames = Utility.getSheetNames("Theme", this.allSheets);
+    //     const themeData = [];
+    //
+    //     const getWordIdsInWordList = (wordIDs) => {
+    //         const regex = /<(word|)(?<id>\d+)>(?<word>.*?)<(\/|)(word|)(\d+)>/g
+    //         let match = regex.exec(wordIDs);
+    //         const wordIds = [];
+    //         while (match != null) {
+    //             wordIds.push(`word${match.groups.id}`);
+    //             match = regex.exec(wordIDs);
+    //         }
+    //         return wordIds;
+    //     }
+    //
+    //     sheetNames.forEach((sheetName) => {
+    //         const data = this.getSheetData(sheetName)[0];
+    //
+    //         const header = Utility.getFieldOfRow("Head", data);
+    //         const bodyText = Utility.getFieldOfRow("Body Text", data);
+    //         const wordIds = [] /*|| getWordIdsInWordList(wordIDs)*/;
+    //
+    //         themeData.push({
+    //             header,
+    //             bodyText,
+    //             wordIds,
+    //         });
+    //     });
+    //
+    //     // set Theme
+    //     return this.getTheme(themeData);
+    // }
 
-        const getWordIdsInWordList = (wordIDs) => {
-            const regex = /<(word|)(?<id>\d+)>(?<word>.*?)<(\/|)(word|)(\d+)>/g
-            let match = regex.exec(wordIDs);
-            const wordIds = [];
-            while (match != null) {
-                wordIds.push(`word${match.groups.id}`);
-                match = regex.exec(wordIDs);
-            }
-            return wordIds;
-        }
-
-        sheetNames.forEach((sheetName) => {
-            const data = this.getSheetData(sheetName)[0];
-
-            const header = Utility.getFieldOfRow("Head", data);
-            const bodyText = Utility.getFieldOfRow("Body Text", data);
-            const wordIds = [] /*|| getWordIdsInWordList(wordIDs)*/;
-
-            themeData.push({
-                header,
-                bodyText,
-                wordIds,
-            });
-        });
-
-        // set Theme
-        return this.getTheme(themeData);
-    }
-
-    getTheme(themeData) {
-        const wordLists = this.getWordLists();
-        const length = wordLists.length;
-
-        const challengeWords1 = {
-            header: "Challenge Words 01",
-            bodyText: "Challenge Words 01",
-            wordIds: [],
-        }
-        const challengeWords2 = {
-            header: "Challenge Words 02",
-            bodyText: "Challenge Words 02",
-            wordIds: [],
-        }
-
-        const challengeWords = [challengeWords1, challengeWords2];
-
-        let index = 0;
-        const ChallengeWord = "Challenge";
-
-        // set challenge words 1
-        for (let i = 0; i < length; i++) {
-            const wordList = wordLists[i];
-            const wordId = this.getWordId(wordList);
-            const wordType = this.getWordType(wordList);
-            const _theme = this.getThemeResult(wordList);
-            if (wordType.includes(ChallengeWord)) {
-                challengeWords[index]['wordIds'].push(wordId);
-                if (this.getWordType(wordLists[i + 1]) !== ChallengeWord) index++;
-            } else {
-                // find theme in themeData with header
-                for (const theme of themeData) {
-                    if (_theme === theme.header) {
-                        theme.wordIds.push(wordId);
-                        break;
-                    }
-                }
-            }
-        }
-        themeData.push(...challengeWords);
-        return themeData;
-    }
+    // getTheme(themeData) {
+    //     const wordLists = this.getWordLists();
+    //     const length = wordLists.length;
+    //
+    //     const challengeWords1 = {
+    //         header: "Challenge Words 01",
+    //         bodyText: "Challenge Words 01",
+    //         wordIds: [],
+    //     }
+    //     const challengeWords2 = {
+    //         header: "Challenge Words 02",
+    //         bodyText: "Challenge Words 02",
+    //         wordIds: [],
+    //     }
+    //
+    //     const challengeWords = [challengeWords1, challengeWords2];
+    //
+    //     let index = 0;
+    //     const ChallengeWord = "Challenge";
+    //
+    //     // set challenge words 1
+    //     for (let i = 0; i < length; i++) {
+    //         const wordList = wordLists[i];
+    //         const wordId = this.getWordId(wordList);
+    //         const wordType = this.getWordType(wordList);
+    //         const _theme = this.getThemeResult(wordList);
+    //         if (wordType.includes(ChallengeWord)) {
+    //             challengeWords[index]['wordIds'].push(wordId);
+    //             if (this.getWordType(wordLists[i + 1]) !== ChallengeWord) index++;
+    //         } else {
+    //             // find theme in themeData with header
+    //             for (const theme of themeData) {
+    //                 if (_theme === theme.header) {
+    //                     theme.wordIds.push(wordId);
+    //                     break;
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     themeData.push(...challengeWords);
+    //     return themeData;
+    // }
 
     getWordLists() {
         return this.getSheetData("_WordList");
@@ -298,13 +298,13 @@ class WordListProcess {
         return multiMeaning.toLowerCase().trim() === "yes";
     }
 
-    getThemeResult(row) {
-        return Utility.getFieldOfRow("Themes", row);
-    }
-
-    getThemeSelect(row) {
-        return Utility.getFieldOfRow("Theme Select", row);
-    }
+    // getThemeResult(row) {
+    //     return Utility.getFieldOfRow("Themes", row);
+    // }
+    //
+    // getThemeSelect(row) {
+    //     return Utility.getFieldOfRow("Theme Select", row);
+    // }
 
     getPronunciation(row) {
         return Utility.getFieldOfRow("Pronunciation", row);
@@ -367,7 +367,7 @@ class WordListProcess {
         rollover = rollover.replace(firstRegex, `($<short>) `);
         if (Utility.isNotNull(rollover)) return rollover;
 
-        const definition = Utility.getExactlyFieldOfRow("D_Definition", row)
+        const definition = Utility.getExactlyFieldOfRow("Definition", row)
             .replaceAll("\n", " ");
         const partOfSpeech = this.covertPartOfSpeech(this.getPartOfSpeech(row));
         // add ( ) to part of speech
@@ -385,21 +385,21 @@ class WordListProcess {
         return Utility.isNotNull(antonyms) ? antonyms : "";
     }
 
-    getPathway1(row) {
-        return Utility.getFieldOfRow("P1 Set", row);
-    }
+    // getPathway1(row) {
+    //     return Utility.getFieldOfRow("P1 Set", row);
+    // }
+    //
+    // getPathway2(row) {
+    //     return Utility.getFieldOfRow("P2 Set", row);
+    // }
+    //
+    // getWordType(row) {
+    //     return Utility.getFieldOfRow("Priority/Challenge", row);
+    // }
 
-    getPathway2(row) {
-        return Utility.getFieldOfRow("P2 Set", row);
-    }
-
-    getWordType(row) {
-        return Utility.getFieldOfRow("Priority/Challenge", row);
-    }
-
-    getWjEntryField(row) {
-        return Utility.getFieldOfRow("WJ", row);
-    }
+    // getWjEntryField(row) {
+    //     return Utility.getFieldOfRow("WJ", row);
+    // }
 
     getPrefix(row) {
         const prefix = Utility.getFieldOfRow("Prefix", row);
