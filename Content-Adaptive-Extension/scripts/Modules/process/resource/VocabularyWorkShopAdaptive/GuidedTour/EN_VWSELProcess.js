@@ -22,6 +22,14 @@ class EN_VWSELProcess extends VWAProcess {
 		return first;
 	}
 
+	filterAchieveSet(data) {
+		return data.filter(row => {
+			const first = row.filter(e => this.getFieldOfRow("Achieve Set", e) !== "")[0];
+			const achieveSet = this.getFieldOfRow("Achieve Set", first);
+			return achieveSet.toLowerCase() === this.achieveSet.toLowerCase() || this.achieveSet.toLowerCase() === "ALL".toLowerCase();
+		})
+	}
+
 	getEAN() {
 		const sheetName = `ENE`;
 		const sheet = this.getSheet(sheetName);
