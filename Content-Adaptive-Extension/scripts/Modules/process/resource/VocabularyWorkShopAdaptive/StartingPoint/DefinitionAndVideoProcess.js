@@ -65,10 +65,10 @@ class DefinitionAndVideoProcess extends VWAProcess {
 
         const video = Utility.isNotNull(this.getDataSourceUrl) ? `
         <div class="video" 
-            captionsUrl='${captionsUrl}' 
-            dataDescUrl='${dataDescUrl}' 
+            captions-url='${captionsUrl}' 
+            data-desc-url='${dataDescUrl}' 
             data-source='${this.getDataSourceUrl()}' 
-            descriptionsUrl='${descriptionsUrl}'
+            descriptions-url='${descriptionsUrl}'
         >
         </div>` : ``;
 
