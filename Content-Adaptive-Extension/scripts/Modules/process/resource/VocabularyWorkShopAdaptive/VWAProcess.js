@@ -441,7 +441,7 @@ class VWAProcess {
     }
 
     getUnitVWSELFromFileName() {
-        if (this.fileName.includes("_BU_")) {
+        if (this.fileName.includes("_BU_") || (this.fileName.includes("_BU"))) {
             return "BonUnit";
         }
         else if (this.fileName.includes("WordStudy_U")) {

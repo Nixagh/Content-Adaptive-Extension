@@ -203,7 +203,7 @@ class EN_VWSELProcess extends VWAProcess {
 			const incorrectFeedback2 = this.getFieldOfRow("Incorrect Feedback 2", row);
 
 			return {
-				item: row["Item"],
+				item: row["Item"].trim(),
 				correctAnswerFeedback: "",
 				incorrectFeedback1: this.updateFeedback1(incorrectFeedback1, wordId) || "",
 				incorrectFeedback2: this.updateFeedback2(incorrectFeedback2, wordId) || ""
