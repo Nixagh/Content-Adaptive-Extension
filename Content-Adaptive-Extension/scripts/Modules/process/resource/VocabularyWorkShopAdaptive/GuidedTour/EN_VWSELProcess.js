@@ -125,7 +125,7 @@ class EN_VWSELProcess extends VWAProcess {
 	}
 
 	getCorrectAnswer(row) {
-		const a = this.getIndexAnswerType(row, "Non Example");
+		const a = this.getIndexAnswerType(row, "NonExample");
 		const b = this.getIndexAnswerType(row, "Example");
 		const c = this.getIndexAnswerType(row, "Neither");
 		const value = [this.checkNumberAnswerType(a, "a"), this.checkNumberAnswerType(b, "b"), this.checkNumberAnswerType(c, "c")]
