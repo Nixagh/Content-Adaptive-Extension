@@ -36,6 +36,18 @@ const ProgramTocResource = {
 	"Json": {value: "Json (WIP)", new: () => new ProgramTocProcess("Json")}
 }
 
+const VocabularyWorkshopSelectResource = {
+	"ChoosingTheRightWord": {value: "Choosing the Right Word", new: () => new VWSChoosingTheRightWordProcess("ChoosingTheRightWord",1, [1, 1, 1, 0])},
+	"CompletingTheSentence": {value: "Completing the Sentence", new: () => new VWSCompletingTheSentenceProcess("CompletingTheSentence",1, [1, 1, 1, 0])},
+	"BuildAnAssessment": {value: "Build an Assessment", new: () => new VWSBuildAnAssessmentProcess("BuildAnAssessment",1, [1, 1, 1, 0]),
+		specialSet: {
+			"CtheS": "CtheS",
+			"Synonyms": "Synonyms",
+			"WordTies": "WordTies",
+		}
+	},
+}
+
 const Resource = {
 	"PT": {
 		name: "ProgramToc",
@@ -64,6 +76,14 @@ const Resource = {
 	"DR": {
 		name: "Digital Resources",
 		resource: DigitalResourcesResource,
+		insertButton: {
+			show: [Ids.insertButton, Ids.insertAndSave],
+			hide: [Ids.insertWordList, Ids.insertWordContinuum, Ids.insertJson]
+		}
+	},
+	"VocabularyWorkshopSelect": {
+		name: "Vocabulary Workshop Select",
+		resource: VocabularyWorkshopSelectResource,
 		insertButton: {
 			show: [Ids.insertButton, Ids.insertAndSave],
 			hide: [Ids.insertWordList, Ids.insertWordContinuum, Ids.insertJson]

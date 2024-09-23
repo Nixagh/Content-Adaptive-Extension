@@ -140,6 +140,24 @@ class OptionContent {
             console.log("insertSettings" + type);
         });
 
+        UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "change", `#${Ids.description}`, async () => {
+            const program = $(`#${Ids.program}`).val();
+            const getResource = Resource[program].resource;
+            const resource = getResource[$(`#${Ids.description}`).val()];
+            // has
+            if (resource.hasOwnProperty("specialSet")) {
+                const specialSet = $(`#${Ids.specialSet}`);
+                specialSet.empty();
+                specialSet.append(this.getSpecialSet(resource.specialSet));
+
+                // show special set
+                specialSet.parent().show();
+            }
+            else {
+                $(`#${Ids.specialSet}`).parent().hide();
+            }
+        });
+
 
         //
         UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "change", `#${Ids.questionNumber}`, async () => {
@@ -271,6 +289,12 @@ class OptionContent {
                         <select id="${Ids.description}" style="color: #181d24">
                             ${OptionContent.getDescriptions(ProgramTocResource)}
                         </select>
+                        <div class="special select" style="display: none">
+                            <h4>Special Set</h4>
+                            <select id="${Ids.specialSet}" style="color: #181d24">
+                                ${OptionContent.getSpecialSet({})}
+                            </select>
+                        </div>
                         <h4>Achieve Set</h4>
                         <select id="${Ids.achieveSet}" style="color: #181d24">
                             ${OptionContent.getAchieveSet(AchieveSet)}
@@ -359,6 +383,14 @@ class OptionContent {
         let html = ``;
         Object.entries(AchieveSet).forEach(([key, value]) => {
             html += `<option value="${key}">${value.display}</option>`;
+        });
+        return html;
+    }
+
+    static getSpecialSet(specialSet) {
+        let html = ``;
+        Object.entries(specialSet).forEach(([key, value]) => {
+            html += `<option value="${key}">${value}</option>`;
         });
         return html;
     }

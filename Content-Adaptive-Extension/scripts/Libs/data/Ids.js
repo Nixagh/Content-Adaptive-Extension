@@ -32,7 +32,7 @@ const Ids = {
 
 	fileStorageShow: "file-storage-show",
 	achieveSet: "achieve-set",
-
+	specialSet: "special-set",
 
 }
 
