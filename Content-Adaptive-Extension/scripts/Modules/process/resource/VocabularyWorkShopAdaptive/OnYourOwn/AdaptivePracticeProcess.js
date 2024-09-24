@@ -110,7 +110,7 @@ class AdaptivePracticeProcess extends VWAProcess {
                     "autoScore": true,
                     "rubricRule": null
                 }],
-                "maxScore": 1
+                "maxScore": this.getMaxScore(row)
             }]
         }
 
@@ -389,5 +389,9 @@ class AdaptivePracticeProcess extends VWAProcess {
     getStandard(row) {
         const rowData = this.getDataRow(this.getSetType(row))[row % this.getOneThird()];
         return this.getFieldOfRow("Standard", rowData);
+    }
+
+    getMaxScore(row) {
+        return row < this.getOneThird() ? 1 : 0;
     }
 }

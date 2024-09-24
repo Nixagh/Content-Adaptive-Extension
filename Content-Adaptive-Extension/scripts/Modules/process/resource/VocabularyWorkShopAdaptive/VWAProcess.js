@@ -146,7 +146,7 @@ class VWAProcess {
         const adaptiveAnswerCountElement = new BasicInput(ids.adaptiveAnswerCount);
 
         wordIdElement.setValue(this.getWordId(row));
-        maxScoreElement.setValue(this.getMaxScore());
+        maxScoreElement.setValue(this.getMaxScore(row));
         questionNumberElement.setValue(this.getQuestionNumber(row));
         standardsElement.setValue(this.beautifyStandard(this.getStandard(row)));
         questionTypeElement.setValue(this.getQuestionTypeSelect(row));
