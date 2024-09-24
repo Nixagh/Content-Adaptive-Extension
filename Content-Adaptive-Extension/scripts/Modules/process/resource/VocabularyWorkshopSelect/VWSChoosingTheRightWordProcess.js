@@ -33,7 +33,8 @@ class VWSChoosingTheRightWordProcess extends VWSProcess {
     }
 
     getCorrectAnswer(row) {
-        return this.getField("Correct Answer", row) || this.getField("Correct Answer ", row);
+        const answer = this.getField("Correct Answer", row) || this.getField("Correct Answer ", row) || "";
+        return answer.trim();
     }
 
     getOptions(row) {
@@ -49,10 +50,10 @@ class VWSChoosingTheRightWordProcess extends VWSProcess {
 
     getAnswerChoices(row) {
         const answer = this.getField("Answer Choices ", row) || this.getField("Answer Choices", row);
-        // abrupt: extensive: conspicuous
-        const split = answer.split(":");
+        // abrupt: extensive: conspicuous or invaluable; uncertain; worthwhile
+        const split = answer.replaceAll(";", ":").split(":");
         // remove empty strings
-        return split.filter(e => e.trim() !== "");
+        return split.filter(e => e.trim() !== "").map(e => e.trim());
     }
 
     getDirectionLineHTML(row) {
