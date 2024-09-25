@@ -50,7 +50,8 @@ class WordTieProcess extends VWAProcess {
     getQuestionHTML(row) {
         return `<div class="question-questionStem question-questionStem-1-column">
                     <div class="question-stem-content">
-                    <div class="question">${this.getItem(row)}<br /><br />
+                    <div class="question">${this.getItem(row)}
+                        <br />
                         <div cid="${this.getCID(row)}" ctype="MultipleChoiceAdaptive" layout="Vertical" qname="a${row + 1}" subtype="MSC">
                                 ${this.getOptionHTML(row)}
                         </div>
