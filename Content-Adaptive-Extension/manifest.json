@@ -96,6 +96,8 @@
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/StartingPoint/WSProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/StartingPoint/VisualProcess.js",
 
+        "scripts/Modules/process/resource/VocabularyWorkShopAdaptive/Assessments/CustomWWIAProcess.js",
+
         "scripts/Modules/process/resource/WordList/WordListProcess.js",
         "scripts/Modules/process/resource/WordList/WordContinuumProcess.js",
 

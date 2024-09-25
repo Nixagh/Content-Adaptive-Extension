@@ -24,15 +24,23 @@ const Ids = {
 	openInsertQuestion: "open-insert-question",
 	openInsertType: "open-insert-word-list",
 	openInsertJson: "open-insert-json",
+	openInsertCustomWWIA: "open-insert-custom-wwia",
 
 	type: "type-select",
 	insertSettings: "insert-settings",
 	insertWordContinuum: "insert-word-continuum",
 	insertJson: "insert-json",
 
+
 	fileStorageShow: "file-storage-show",
 	achieveSet: "achieve-set",
 
+	loadContentNewCustomWWIA: "load-content-new-custom-wwia",
+	insertNewCustomWWIA: "insert-new-custom-wwia",
+	loadAndInsertNewCustomWWIA: "load-and-insert-new-custom-wwia",
+	oldPassage: "old-passage",
+	oldSummary: "old-summary",
+	oldQuestionContent: "old-questions-content",
 
 }
 
@@ -40,4 +48,5 @@ const ListModalIds = {
 	questionModal: "question-modal",
 	typeModal: "type-modal",
 	jsonModal: "json-modal",
+	customWWIAModal: "custom-wwia-modal",
 }
