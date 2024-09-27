@@ -28,16 +28,16 @@ class PreTestProcess extends VWAProcess {
 
     getPretestSheet() {
 
-        if (this.fileName.includes("_BonusUnit")) {
-            return "";
-        }
+        // if (this.fileName.includes("_BonusUnit")) {
+        //     return "";
+        // }
         const unit_regex = /PreTest_U(?<unit>\d+?)/;
         const match = this.fileName.match(unit_regex);
         const unit = match ? match.groups.unit : "";
 
-        if (!unit) return "";
+        // if (!unit) return "";
 
-        const pretestSheetName = this.fileName.includes("_BonusUnit") ? "PreTest" : `Unit ${unit} PreTest`;
+        const pretestSheetName = this.fileName.includes("Test_BU") ? "PreTest" : `Unit ${unit} PreTest`;
         const pretestSheet = this.getSheet(pretestSheetName);
         const pretestHeader = this.getHeader(pretestSheet);
         return this.getContent(pretestSheet, pretestHeader);

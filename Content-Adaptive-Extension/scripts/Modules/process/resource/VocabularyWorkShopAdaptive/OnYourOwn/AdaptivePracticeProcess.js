@@ -74,7 +74,7 @@ class AdaptivePracticeProcess extends VWAProcess {
                 "Incorrect Feedback": this.getFieldOfRow("Incorrect Feedback", row),
                 "P1 Set": "A",
                 "P2 Set": this.getFieldOfRow("Achieve Set", row),
-                "Standard": this.getFieldOfRow("Standard", row),
+                "Standard": this.getFieldOfRow("Standard A", row),
                 "Achieve Set": this.getFieldOfRow("Achieve Set", row)
             }
         });
@@ -92,7 +92,7 @@ class AdaptivePracticeProcess extends VWAProcess {
                 "Adaptive Item Incorrect Feedback": this.getFieldOfRow("Adaptive Item Incorrect Feedback", row),
                 "P1 Set": "A",
                 "P2 Set": this.getFieldOfRow("Achieve Set", row),
-                "Standard": this.getFieldOfRow("Standard", row),
+                "Standard": this.getFieldOfRow("Standard B", row),
                 "Achieve Set": this.getFieldOfRow("Achieve Set", row)
             }
         });

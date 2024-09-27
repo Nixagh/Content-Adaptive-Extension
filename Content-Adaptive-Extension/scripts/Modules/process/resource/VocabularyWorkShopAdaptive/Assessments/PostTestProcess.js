@@ -16,16 +16,12 @@ class PostTestProcess extends VWAProcess {
 
     getPretestSheet() {
 
-        if (this.fileName.includes("_BonusUnit")) {
-            return "";
-        }
         const unit_regex = /PreTest_U(?<unit>\d+?)/;
         const match = this.fileName.match(unit_regex);
         const unit = match ? match.groups.unit : "";
 
-        if (!unit) return "";
 
-        const postTestSheetName = this.fileName.includes("_BonusUnit") ? "PostTest" : `Unit ${unit} PostTest`;
+        const postTestSheetName = this.fileName.includes("Test_BU") ? "PostTest" : `Unit ${unit} PostTest`;
         const postTestSheet = this.getSheet(postTestSheetName);
         const postTestHeader = this.getHeader(pretestSheet);
         return this.getContent(postTestSheet, postTestHeader);
