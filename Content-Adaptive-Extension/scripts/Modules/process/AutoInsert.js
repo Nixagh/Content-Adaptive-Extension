@@ -57,7 +57,7 @@ class AutoInsert {
         });
 
         chrome.storage.local.get(['isAutoReplaceWordId'], (result) => {
-            if (result.isAutoReplaceWordId) this.autoReplaceWordId().then();
+            if (result.isAutoReplaceWordId) this.autoReplaceWordId(result.isAutoSaveReplaceWordId).then();
         });
     }
 
@@ -321,11 +321,15 @@ class AutoInsert {
         saveBtn[0].click();
     }
 
-    async autoReplaceWordId() {
+    async autoReplaceWordId(isAutoSave) {
         if (!url.includes(this.urlOfPagePassageEdit)) return;
 
         const replaceBtn = $(`#${Ids.replaceButton}`);
+        const saveBtn = $('#btnSave');
         replaceBtn.click();
+
+        await new Promise(resolve => setTimeout(resolve, this.timeOut));
+        if (isAutoSave) saveBtn[0].click();
 
         // change title page
         document.title = "Replace Word Id Done";

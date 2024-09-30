@@ -127,12 +127,21 @@ import ('../Libs/external/Jui.js');
 
 (function AutoReplaceWordId() {
     const autoInsertButton = document.getElementById('isAutoReplaceWordId');
+    const isAutoSaveReplaceWordId = document.getElementById('isAutoSaveReplaceWordId');
 
     chrome.storage.local.get(['isAutoReplaceWordId'], (result) => {
         autoInsertButton.checked = result.isAutoReplaceWordId;
     });
 
+    chrome.storage.local.get(['isAutoSaveReplaceWordId'], (result) => {
+        isAutoSaveReplaceWordId.checked = result.isAutoSaveReplaceWordId;
+    });
+
     autoInsertButton.addEventListener('click', (e) => {
         chrome.storage.local.set({isAutoReplaceWordId: e.target.checked});
+    });
+
+    isAutoSaveReplaceWordId.addEventListener('click', (e) => {
+        chrome.storage.local.set({isAutoSaveReplaceWordId: e.target.checked});
     });
 })();
