@@ -81,8 +81,8 @@ class CustomWWIAProcess extends VWAProcess {
 
     replaceAllWordsToBold(passage) {
         // <word1>word1:in</word1> => <word1>in</word1>
-        const wordRegex = /<word(\d+)>word\d+:([^<]+)<\/word\d+>/g;
-        return passage.replaceAll(wordRegex, `<word$1>$2</word$1>`);
+        const wordRegex = /<word([^<]+)>word([^<]+):([^<]+)<\/word([^<]+)>/g;
+        return passage.replaceAll(wordRegex, `<word$1>$3</word$1>`);
     }
 
     replaceTitle(passage) {
