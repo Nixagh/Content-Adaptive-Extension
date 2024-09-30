@@ -16,6 +16,7 @@ class ReplaceWordIdProcess extends VWAProcess {
 
     async insert() {
         await this.replace();
+        document.title = "Replace Word Id Done";
     }
 
     createMapWordIdOldNew() {

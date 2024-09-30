@@ -56,8 +56,8 @@ class AutoInsert {
             if (result.isAutoDeleteWrongResource) this.autoDeleteWrongResource().then();
         });
 
-        chrome.storage.local.get(['isAutoReplaceWordId'], (result) => {
-            if (result.isAutoReplaceWordId) this.autoReplaceWordId(result.isAutoSaveReplaceWordId).then();
+        chrome.storage.local.get(['isAutoReplaceWordId', 'isAutoSaveReplaceWordId'], async (result) => {
+            if (result.isAutoReplaceWordId) await this.autoReplaceWordId(result.isAutoSaveReplaceWordId);
         });
     }
 
@@ -330,9 +330,12 @@ class AutoInsert {
         replaceBtn.click();
 
         await new Promise(resolve => setTimeout(resolve, this.timeOut));
-        if (isAutoSave) saveBtn[0].click();
-
-        // change title page
-        document.title = "Replace Word Id Done";
+        if (isAutoSave) {
+            const message_alert = document.getElementsByClassName('alert-success');
+            if (message_alert.length > 0) {
+                return;
+            }
+            saveBtn[0].click();
+        }
     }
 }
