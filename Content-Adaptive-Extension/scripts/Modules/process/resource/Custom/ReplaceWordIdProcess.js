@@ -1,6 +1,4 @@
 class ReplaceWordIdProcess extends VWAProcess {
-    type = "ReplaceWordId";
-
     process() {
         this.data = this.getWordNotes();
         this.showErrors();
