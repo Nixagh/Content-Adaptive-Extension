@@ -322,6 +322,7 @@ class AutoInsert {
     }
 
     async autoReplaceWordId(isAutoSave) {
+        await new Promise(resolve => setTimeout(resolve, this.timeOut));
         if (!url.includes(this.urlOfPagePassageEdit)) return;
 
         const replaceBtn = $(`#${Ids.replaceButton}`);
