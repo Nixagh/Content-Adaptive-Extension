@@ -51,7 +51,7 @@ class OptionContent {
         this.showAndHideModal(Storage.Get("CurrentShowModal") || ListModalIds.questionModal);
         // this.showCurrentQuestionNumber();
 
-        this.fileInit();
+        this.fileInit(Classes.optionsModalInnerHtml);
 
         UI.Delegate(`.emptyWindow`, "click", `#${Ids.openInsertQuestion}`, () => {
             this.showAndHideModal(ListModalIds.questionModal);
@@ -120,7 +120,7 @@ class OptionContent {
             this.initNextCurrentQuestionNumber();
         });
 
-		UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "change", `#${Ids.program}`, async () => {
+        UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "change", `#${Ids.program}`, async () => {
             console.log("change program")
             const program = $(`#${Ids.program}`).val();
             const getResource = Resource[program].resource;
@@ -144,6 +144,42 @@ class OptionContent {
         //
         UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "change", `#${Ids.questionNumber}`, async () => {
             Storage.Set("CurrentQuestionNumber", $(`#${Ids.questionNumber}`).val());
+        });
+
+        OptionContent.initReplaceWordModal();
+    }
+
+    static initReplaceWordModal() {
+        UI.Delegate(`.emptyWindow`, "click", `#${Ids.openReplaceWordId}`, () => {
+            this.showAndHideModal(ListModalIds.replaceWordIdModal);
+        });
+
+        //ListModalIds.replaceWordIdModal
+        OptionContent.fileInit("emptyWindow", Ids.replaceFileInput, Ids.replaceFileClear);
+
+        // load file
+        UI.Delegate(`.emptyWindow`, "click", `#${Ids.replaceFileInputButton}`, async () => {
+            console.log("Load file");
+            const files = [document.getElementById('replace-file-input').files[0]];
+
+            const fileReader = new FileReader();
+            const program = "Custom";
+            const desc = "ReplaceWordId";
+            $(`#${Ids.program}`).val(program);
+            $(`#${Ids.description}`).val(desc);
+
+            const result = await fileReader.loadFileFromStorage(files, desc);
+            if (result !== true) alert(result);
+            else alert("file loaded");
+
+            // set current program
+            Storage.Set("CurrentProgram", program);
+        });
+
+        // replace
+        UI.Delegate(`.emptyWindow`, "click", `#${Ids.replaceButton}`, async () => {
+            console.log("Replace");
+            await GProcess.insert();
         });
     }
 
@@ -223,10 +259,10 @@ class OptionContent {
         chrome.storage.local.set({isAutoDeleteWrongResource: false});
     }
 
-    static fileInit() {
+    static fileInit(parentId, childId = Ids.fileInput, childClearId = Ids.fileClear) {
         const fileStorageShow = $(`#${Ids.fileStorageShow}`);
         const fileInput = $(`#${Ids.fileInput}`);
-        UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "change", `#${Ids.fileInput}`, async (e) => {
+        UI.Delegate(`.${parentId}`, "change", `#${childId}`, async (e) => {
             this.fileStorage.push(e.target.files[0]);
             fileStorageShow.empty();
             this.fileStorage.forEach((file) => {
@@ -235,7 +271,7 @@ class OptionContent {
         });
 
         // clear storage
-        UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.fileClear}`, async () => {
+        UI.Delegate(`.${parentId}`, "click", `#${childClearId}`, async () => {
             this.fileStorage = [];
             fileInput.val(null);
             fileStorageShow.empty();
@@ -247,6 +283,7 @@ class OptionContent {
             <div style="display: flex; justify-content: flex-start">
                 <button id="${Ids.openInsertQuestion}" style="color: black">Insert Question</button>
                 <button id="${Ids.openInsertType}" style="color: black">Insert Type</button>
+                <button id="${Ids.openReplaceWordId}" style="color: black">Replace Word Id</button>
             </div>
             <div id="${ListModalIds.questionModal}">
                 <div class="${Classes.optionsModalInnerHtml}">
@@ -308,7 +345,20 @@ class OptionContent {
                     </select>
                     <button id="${Ids.insertSettings}" style="color: black">Insert</button>
                 </div>
-            </div>`;
+            </div>
+            <div id="${ListModalIds.replaceWordIdModal}">
+                <div class="file-content">
+                    <h1>Load file</h1>
+                    <div style="display: flex; justify-content: space-between">
+                        <input type="file" id="${Ids.replaceFileInput}" />
+                        <input type="button" id="${Ids.replaceFileClear}" style="color: #181d24" value="clear file"/>
+                    </div>
+                    <div style="margin-top: 10px" id="${Ids.fileStorageShow}"></div>
+                </div>
+                <button id="${Ids.replaceFileInputButton}" style="color: #181d24">Load</button>
+                <button id="${Ids.replaceButton}" style="color: #181d24">Replace</button>
+            </div>
+            `;
     }
 
     static getDescriptions(resource) {
@@ -328,7 +378,7 @@ class OptionContent {
         // <option value="WL">Insert Word List</option>
         // <option value="WC">Insert WordContinuum</option>
         // <option value="VWA">Insert Resource</option>
-		// `;
+        // `;
         return Object.entries(Resource).map(([key, value]) => {
             return `<option value="${key}">${value.name}</option>`;
         }).join("");

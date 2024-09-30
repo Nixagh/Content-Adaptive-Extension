@@ -58,11 +58,11 @@ class FileReader {
         return file.arrayBuffer();
     }
 
-    async loadFileFromStorage(fileStorage) {
+    async loadFileFromStorage(fileStorage, customDesc) {
         if (fileStorage.length === 0) return "No file selected";
 
         const program = this.getProgram();
-        const desc = await FileReader.getDesc();
+        const desc = customDesc || await FileReader.getDesc();
 
         GProcess = Resource[program].resource[desc].new();
         GProcess.fileName = fileStorage.map(file => file.name).join(" - ");
