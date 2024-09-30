@@ -7,6 +7,7 @@ class AutoInsert {
         this.urlOfPageCreateWordList = "http://192.168.200.26:8090/cms/program/adaptiveword.html";
         this.urlOfPageExploreProduct = "http://192.168.200.26:8090/cms/product/explore.html";
         this.urlOPageEditResource = "http://192.168.200.26:8090/cms/resource/edit.html";
+        this.urlOfPagePassageEdit = "http://192.168.200.26:8090/cms/passage/edit.html";
 
         this.currentQuestionKey = "currentQuestion";
         this.currentResourceKey = "currentResource";
@@ -53,6 +54,10 @@ class AutoInsert {
 
         chrome.storage.local.get(['isAutoDeleteWrongResource'], (result) => {
             if (result.isAutoDeleteWrongResource) this.autoDeleteWrongResource().then();
+        });
+
+        chrome.storage.local.get(['isAutoReplaceWordId'], (result) => {
+            if (result.isAutoReplaceWordId) this.autoReplaceWordId().then();
         });
     }
 
@@ -314,5 +319,15 @@ class AutoInsert {
             // });
         }
         saveBtn[0].click();
+    }
+
+    async autoReplaceWordId() {
+        if (!url.includes(this.urlOfPagePassageEdit)) return;
+
+        const replaceBtn = $(`#${Ids.replaceButton}`);
+        replaceBtn.click();
+
+        // change title page
+        document.title = "Replace Word Id Done";
     }
 }

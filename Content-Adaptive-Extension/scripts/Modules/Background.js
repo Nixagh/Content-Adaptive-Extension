@@ -124,3 +124,15 @@ import ('../Libs/external/Jui.js');
         chrome.storage.local.set({timeOut: e.target.value});
     });
 })();
+
+(function AutoReplaceWordId() {
+    const autoInsertButton = document.getElementById('isAutoReplaceWordId');
+
+    chrome.storage.local.get(['isAutoReplaceWordId'], (result) => {
+        autoInsertButton.checked = result.isAutoReplaceWordId;
+    });
+
+    autoInsertButton.addEventListener('click', (e) => {
+        chrome.storage.local.set({isAutoReplaceWordId: e.target.checked});
+    });
+})();
