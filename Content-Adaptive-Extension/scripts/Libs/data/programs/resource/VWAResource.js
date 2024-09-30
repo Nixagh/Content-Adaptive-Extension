@@ -68,6 +68,16 @@ const Resource = {
 			show: [Ids.insertButton, Ids.insertAndSave],
 			hide: [Ids.insertWordList, Ids.insertWordContinuum, Ids.insertJson]
 		}
+	},
+	"Custom": {
+		name: "Custom",
+		resource: {
+			"ReplaceWordId": {value: "Replace Word Id", new: () => new ReplaceWordIdProcess()},
+		},
+		insertButton: {
+			show: [Ids.insertButton, Ids.insertAndSave],
+			hide: [Ids.insertWordList, Ids.insertWordContinuum, Ids.insertJson]
+		}
 	}
 }
 

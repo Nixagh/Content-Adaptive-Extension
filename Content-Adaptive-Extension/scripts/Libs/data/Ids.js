@@ -34,10 +34,17 @@ const Ids = {
 	achieveSet: "achieve-set",
 
 
+	openReplaceWordId: "replace-word-id",
+	replaceButton: "replace-button",
+	replaceFileInputButton: "replace-file-input-button",
+	replaceFileInput: "replace-file-input",
+	replaceFileClear: "replace-file-clear",
 }
 
 const ListModalIds = {
 	questionModal: "question-modal",
 	typeModal: "type-modal",
 	jsonModal: "json-modal",
+	replaceWordIdModal: "replace-word-id-modal",
+
 }
