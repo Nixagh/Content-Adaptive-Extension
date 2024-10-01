@@ -14,11 +14,21 @@ class VWSBuildAnAssessmentProcess extends VWSProcess {
 
     fillDirectionLine(ret) {
         let currentDirectionLine = "";
+        let value = 0;
         ret.forEach(row => {
-            if (row["Direction Line"] === "") {
+            if (!row["Direction Line"]) {
                 row["Direction Line"] = currentDirectionLine;
+                row["Condition"] = true;
+                row["Value"] = value;
             } else {
+                if (currentDirectionLine !== row["Direction Line"]) {
+                    value += 1;
+                    row["Condition"] = false;
+                } else {
+                    row["Condition"] = true;
+                }
                 currentDirectionLine = row["Direction Line"];
+                row["Value"] = value;
             }
         })
 
@@ -26,14 +36,20 @@ class VWSBuildAnAssessmentProcess extends VWSProcess {
     }
 
     getContentBySheetName(sheetName) {
-        const header = this.getHeader(sheetName);
         const content = this.getSheet(sheetName);
+        const header = this.getHeader(content);
         const result = this.getContent(content, header);
 
         // app field learning objective
         const learningObjective = LearningObjectives[sheetName];
         result.forEach(row => row["Learning Objective"] = learningObjective);
         return result;
+    }
+
+    getConditionAndValueChoice(row) {
+        const condition = this.getField("Condition", row);
+        const value = this.getField("Value", row);
+        return {condition, value};
     }
 
     getFullContent() {
@@ -61,6 +77,7 @@ class VWSBuildAnAssessmentProcess extends VWSProcess {
         await super.insert();
         const row = this.getRow();
         this.setLearningObjective(row);
+        return true;
     }
 
     setLearningObjective(row) {
@@ -93,6 +110,14 @@ class VWSBuildAnAssessmentProcess extends VWSProcess {
         const choicePassageCheckBox = new BasicInput("choicePassageCheckbox");
         choicePassageCheckBox.element.checked = true;
         choicePassageCheckBox.element.parentElement.classList.add("checked");
+    }
+
+    getPassageContent(row) {
+        return this.getField("Direction Line", 0) || this.getField("Direction Line ", 0)
+    }
+
+    getDirectionLineHTML(row) {
+        return ";"
     }
 
     setQuestionContent(row) {
