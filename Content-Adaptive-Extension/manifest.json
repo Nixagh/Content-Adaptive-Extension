@@ -56,6 +56,7 @@
         "scripts/Libs/data/programs/resource/VWAResource.js",
         "scripts/Libs/data/programs/ProgramSeries.js",
         "scripts/Libs/data/ProductCode.js",
+        "scripts/Libs/data/LearningObjectives.js",
         "scripts/Libs/Utility.js",
         "scripts/Libs/Elements.js",
         "scripts/Libs/Modal.js",

@@ -1,9 +1,39 @@
 class VWSBuildAnAssessmentProcess extends VWSProcess {
     getContentSheet() {
-        const contentSheetName = this.sheetName;
-        const contentSheet = this.getSheet(contentSheetName);
-        const contentHeader = this.getHeader(contentSheet);
-        return this.getContent(contentSheet, contentHeader);
+        const sheetNames = this.allSheets.SheetNames;
+        let ret = [];
+        sheetNames.forEach(sheetName => {
+            ret.push(...this.getContentBySheetName(sheetName));
+        });
+
+        // fill Direction Line
+        ret = this.fillDirectionLine(ret);
+
+        return ret;
+    }
+
+    fillDirectionLine(ret) {
+        let currentDirectionLine = "";
+        ret.forEach(row => {
+            if (row["Direction Line"] === "") {
+                row["Direction Line"] = currentDirectionLine;
+            } else {
+                currentDirectionLine = row["Direction Line"];
+            }
+        })
+
+        return ret;
+    }
+
+    getContentBySheetName(sheetName) {
+        const header = this.getHeader(sheetName);
+        const content = this.getSheet(sheetName);
+        const result = this.getContent(content, header);
+
+        // app field learning objective
+        const learningObjective = LearningObjectives[sheetName];
+        result.forEach(row => row["Learning Objective"] = learningObjective);
+        return result;
     }
 
     getFullContent() {
@@ -25,6 +55,18 @@ class VWSBuildAnAssessmentProcess extends VWSProcess {
 
     getQuestionTypeValue() {
         return "MC";
+    }
+
+    async insert() {
+        await super.insert();
+        const row = this.getRow();
+        this.setLearningObjective(row);
+    }
+
+    setLearningObjective(row) {
+        const value = this.getField("Learning Objective", row);
+        const element = document.querySelector(`input[name="checkListObj"][value="${value}"]`);
+        element.checked = true;
     }
 
     setQuestion(row, autoScore) {
