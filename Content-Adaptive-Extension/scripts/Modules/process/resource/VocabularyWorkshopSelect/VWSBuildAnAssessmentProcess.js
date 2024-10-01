@@ -117,7 +117,7 @@ class VWSBuildAnAssessmentProcess extends VWSProcess {
     }
 
     getDirectionLineHTML(row) {
-        return ";"
+        return ""
     }
 
     setQuestionContent(row) {
