@@ -392,6 +392,6 @@ class AdaptivePracticeProcess extends VWAProcess {
     }
 
     getMaxScore(row) {
-        return row < this.getOneThird() ? 1 : 0;
+        return row < this.getOneThird() * 2 ? 1 : 0;
     }
 }
