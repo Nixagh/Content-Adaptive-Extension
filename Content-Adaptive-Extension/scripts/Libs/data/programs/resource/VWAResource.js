@@ -27,7 +27,8 @@ const DigitalAssignmentResource = {
 }
 
 const DigitalResourcesResource = {
-	"WWiAC": {value: "Writing Words in Action" , new : () => new WWiAProcess("WWiAC" , 1 , [1, 1, 1, 0])}
+	"WWiAC": {value: "Writing Words in Action" , new : () => new WWiAProcess("WWiAC" , 1 , [1, 1, 1, 0])},
+	"CustomWWIA": {value: "Custom Writing Words in Action" , new : () => new CustomWWIAProcess("CustomWWIA" , 1 , [1, 1, 1, 0], {})}
 }
 
 const ProgramTocResource = {

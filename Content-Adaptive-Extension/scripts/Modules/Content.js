@@ -61,6 +61,10 @@ class OptionContent {
             this.showAndHideModal(ListModalIds.typeModal);
         });
 
+        UI.Delegate(`.emptyWindow`, "click", `#${Ids.openInsertCustomWWIA}`, () => {
+            this.showAndHideModal(ListModalIds.customWWIAModal);
+        });
+
         UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "click", `#${Ids.fileInputButton}`, async () => {
             console.log("Load file");
             const fileReader = new FileReader();
@@ -140,6 +144,22 @@ class OptionContent {
             console.log("insertSettings" + type);
         });
 
+        UI.Delegate(`#${ListModalIds.customWWIAModal}`, "click", `#${Ids.loadContentNewCustomWWIA}`, async () => {
+            OptionContent.loadContentNewCustomWWIA();
+        });
+
+        UI.Delegate(`#${ListModalIds.customWWIAModal}`, "click", `#${Ids.insertNewCustomWWIA}`, async () => {
+            if (!GProcess) return alert("No file loaded");
+            await GProcess.insert();
+        });
+
+        UI.Delegate(`#${ListModalIds.customWWIAModal}`, "click", `#${Ids.loadAndInsertNewCustomWWIA}`, async () => {
+            OptionContent.loadContentNewCustomWWIA();
+
+            if (!GProcess) return alert("No file loaded");
+            await GProcess.insert();
+
+        });
 
         //
         UI.Delegate(`.${Classes.optionsModalInnerHtml}`, "change", `#${Ids.questionNumber}`, async () => {
@@ -181,6 +201,22 @@ class OptionContent {
             console.log("Replace");
             await GProcess.insert();
         });
+    }
+
+    static loadContentNewCustomWWIA() {
+        const oldPassage = $(`#${Ids.oldPassage}`).val();
+        const oldSummary = $(`#${Ids.oldSummary}`).val();
+        const oldQuestionContent = $(`#${Ids.oldQuestionContent}`).val();
+
+        GProcess = new CustomWWIAProcess("CustomWWIA", 1, [1, 1, 1, 0], {
+            oldPassage,
+            oldSummary,
+            oldQuestionContent,
+        });
+
+        GProcess.process();
+
+        console.log("loadContentNewCustomWWIA");
     }
 
     static showAndHideInsertButton(program) {
@@ -283,6 +319,7 @@ class OptionContent {
             <div style="display: flex; justify-content: flex-start">
                 <button id="${Ids.openInsertQuestion}" style="color: black">Insert Question</button>
                 <button id="${Ids.openInsertType}" style="color: black">Insert Type</button>
+                <button id="${Ids.openInsertCustomWWIA}" style="color: black">Insert New WWIA</button>
                 <button id="${Ids.openReplaceWordId}" style="color: black">Replace Word Id</button>
             </div>
             <div id="${ListModalIds.questionModal}">
@@ -345,6 +382,25 @@ class OptionContent {
                     </select>
                     <button id="${Ids.insertSettings}" style="color: black">Insert</button>
                 </div>
+            </div>
+            <div id="${ListModalIds.customWWIAModal}">
+                <h1>Insert content need convert to new</h1>
+                <div>
+                    <h3>Old passage</h3>
+                    <textarea id="${Ids.oldPassage}" cols="60" rows="5" style="color: #2c3138"></textarea>
+                </div>
+                <div>
+                    <h3>Old Summary</h3>
+                    <textarea id="${Ids.oldSummary}" cols="60" rows="5" style="color: #2c3138;"></textarea>
+                </div>
+                <div>
+                    <h3>Old Question Content</h3>
+                    <textarea id="${Ids.oldQuestionContent}" cols="60" rows="5" style="color: #2c3138;"></textarea>
+                </div>
+                <button id="${Ids.loadContentNewCustomWWIA}" style="color: black">Load Data</button>
+                <button id="${Ids.insertNewCustomWWIA}" style="color: black">Insert Custom</button>
+                <button id="${Ids.loadAndInsertNewCustomWWIA}" style="color: black">Load And Insert Custom</button>
+            </div>
             </div>
             <div id="${ListModalIds.replaceWordIdModal}">
                 <div class="file-content">
