@@ -2520,5 +2520,7 @@ const LearningObjectives = {
     "Lesson 23": "2798",
     "Lesson 24": "2799",
     "Lesson 25": "2800",
-    "Lesson 26": "2801"
+    "Lesson 26": "2801", 
+    "CTRW": "2802"
+
 }
