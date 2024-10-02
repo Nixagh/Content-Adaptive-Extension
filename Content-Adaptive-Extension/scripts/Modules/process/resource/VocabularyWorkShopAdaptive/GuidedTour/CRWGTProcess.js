@@ -177,7 +177,7 @@ class CRWGTProcess extends VWAProcess {
 		let option = '';
 		// <div idx="a" word="802906_GT_CTRW_u05_q01_ans01">debits</div>
 		answerChoices.forEach((answerChoice, index) => {
-			const wordId = this.getWordIdFromWordList(answerChoice.trim()).trim();
+			const wordId = this.getWordIdFromWordList(answerChoice.trim());
 			if (!wordId) this.addError(`Question Content`, `Answer Choices wrong "${answerChoice}" can't find WordID in word list`);
 			option += `<div idx="${String.fromCharCode(97 + index)}" word="${wordId}">${answerChoice}</div>`;
 		});
@@ -191,7 +191,7 @@ class CRWGTProcess extends VWAProcess {
 		if(wordObj.length === 0 ){
 			wordObj = this.ConvertV(word);
 		}
-		return wordObj.length ? wordObj[0]["Word ID"] : "";
+		return wordObj.length ? wordObj[0]["WordID"] : "";
 	}
 
 	ConvertV(word){
