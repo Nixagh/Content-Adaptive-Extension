@@ -191,7 +191,7 @@ class CRWGTProcess extends VWAProcess {
 		if(wordObj.length === 0 ){
 			wordObj = this.ConvertV(word);
 		}
-		return wordObj.length ? wordObj[0]["WordID"] : "";
+		return wordObj.length ? wordObj[0]["Word ID"] : "";
 	}
 
 	ConvertV(word){
