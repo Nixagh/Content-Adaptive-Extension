@@ -33,10 +33,18 @@ class CustomWWIAProcess extends VWAProcess {
         console.log("convertData");
         return [];
     }
+
     setQuestion(row, autoScore) {
         super.setQuestion(row, autoScore);
         const writeOnLines = new BasicInput("pojo.writeOnLines");
         writeOnLines.setValue(5);
+    }
+
+    async setPassage(row) {
+        super.setPassage(row);
+        const choicePassageCheckBox = new BasicInput("choicePassageCheckbox");
+        choicePassageCheckBox.element.checked = false;
+        choicePassageCheckBox.element.parentElement.classList.remove("checked");
     }
 
     getPassageContent(row) {
