@@ -37,10 +37,20 @@ class CustomWWIAProcess extends VWAProcess {
     setQuestion(row, autoScore) {
         super.setQuestion(row, autoScore);
         const writeOnLines = new BasicInput("pojo.writeOnLines");
+        const questionNumber = new BasicInput("pojo.questionNumber");
         writeOnLines.setValue(5);
+        questionNumber.setValue(1);
+
+        const autoScoreTE = new BasicInput("pojo.autoScoreTE1");
+        autoScoreTE.element.checked = false;
+        autoScoreTE.element.parentElement.classList.remove("checked");
     }
 
-    async setPassage(row) {
+    setQuestionContent(row) {
+        super.setQuestionContent(row);
+    }
+
+    setPassage(row) {
         super.setPassage(row);
         const choicePassageCheckBox = new BasicInput("choicePassageCheckbox");
         choicePassageCheckBox.element.checked = false;
