@@ -48,6 +48,8 @@ class CustomWWIAProcess extends VWAProcess {
 
     setQuestionContent(row) {
         super.setQuestionContent(row);
+        const correctAnswerHTML = new Cke("cke_39_contents");
+        correctAnswerHTML.setHtml('Answers will vary.');
     }
 
     setPassage(row) {
