@@ -146,6 +146,10 @@ class CustomWWIAProcess extends VWAProcess {
         return 'Answers will vary.';
     }
 
+    getCorrectTextHTML(row) {
+        return 'Answers will vary.';
+    }
+
     getMaxScore() {
         return 4;
     }
