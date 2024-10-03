@@ -100,7 +100,7 @@ class CustomWWIAProcess extends VWAProcess {
     }
 
     getImgAlt(summary) {
-        const imgAltRegex = /<img alt="([^"]+)" src="([^"]+)" (.+?)\/>/g;
+        const imgAltRegex = /<img alt="([^"]+)" src="([^"]+)"(.+?|)\/>/g;
         return imgAltRegex.exec(summary);
     }
 
