@@ -46,11 +46,11 @@ class CustomWWIAProcess extends VWAProcess {
         autoScoreTE.element.parentElement.classList.remove("checked");
     }
 
-    setQuestionContent(row) {
-        super.setQuestionContent(row);
-        const correctAnswerHTML = new Cke("cke_39_contents");
-        correctAnswerHTML.setHtml('Answers will vary.');
-    }
+    // setQuestionContent(row) {
+    //     super.setQuestionContent(row);
+    //     const correctAnswerHTML = new Cke("cke_39_contents");
+    //     correctAnswerHTML.setHtml('Answers will vary.');
+    // }
 
     setPassage(row) {
         super.setPassage(row);
