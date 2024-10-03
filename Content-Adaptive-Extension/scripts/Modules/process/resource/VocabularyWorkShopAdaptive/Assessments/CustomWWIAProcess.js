@@ -73,7 +73,7 @@ class CustomWWIAProcess extends VWAProcess {
         return `
             <div class="passage_box_shadow">
             <div class="vw_la_u1_unit_passage_image_1" style="text-align: center;"><img alt="${this.getImgAlt(this.oldContent.oldSummary)[1]}" src="${this.getImgAlt(this.oldContent.oldSummary)[2]}"  style="width: 432px; height: 304px;" /></div>
-            <div><div id="passageAudio_1" audio-src="${this.getAudioSource(this.oldContent.oldPassage)[1]}" class="mediaElementPlayer center"><img id="audioControl_passageAudio_1" src="//static.assets.sadlierconnect.com/sc-content/images/sound.png"><audio id="mediaElementPlayer" style="display:none;" onended="endedDirectionAudio('passageAudio_1')" data-src="${this.getAudioSource(this.oldContent.oldPassage)[1]}" type="audio/mp3"><source src="" type="audio/mpeg"></audio></div>
+            <div><div id="passageAudio_1" audio-src="${(this.getAudioSource(this.oldContent.oldPassage) || [])[1] || ""}" class="mediaElementPlayer center"><img id="audioControl_passageAudio_1" src="//static.assets.sadlierconnect.com/sc-content/images/sound.png"><audio id="mediaElementPlayer" style="display:none;" onended="endedDirectionAudio('passageAudio_1')" data-src="${(this.getAudioSource(this.oldContent.oldPassage) || [])[1] || ""}" type="audio/mp3"><source src="" type="audio/mpeg"></audio></div>
             ${passage}
         `
     }
