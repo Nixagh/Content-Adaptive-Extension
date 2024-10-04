@@ -98,7 +98,8 @@ class WSProcess extends VWAProcess {
 
 	// ------------------ get field ------------------ //
 	getQuestionNumber(row) {
-		return this.getField("Question Number", row);
+		//return this.getField("Question Number", row);
+		return row + 1;
 	}
 
 	getInflectedForm(row) {
