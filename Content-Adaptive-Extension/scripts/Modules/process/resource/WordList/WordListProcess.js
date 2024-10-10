@@ -89,8 +89,8 @@ class WordListProcess {
             rolloverDefinition: this.getRolloverDefinition(this.data[rowNumber]),
             synonyms: this.getSynonyms(this.data[rowNumber]),
             antonyms: this.getAntonyms(this.data[rowNumber]),
-            // pathway1: this.getPathway1(this.data[rowNumber]),
-            // pathway2: this.getPathway2(this.data[rowNumber]),
+            pathway1: this.getPathway1(this.data[rowNumber]),
+            pathway2: this.getPathway2(this.data[rowNumber]),
             // wordType: this.getWordType(this.data[rowNumber]),
             // wjEntryField: this.getWjEntryField(this.data[rowNumber]),
             prefix: this.getPrefix(this.data[rowNumber]),
@@ -385,13 +385,13 @@ class WordListProcess {
         return Utility.isNotNull(antonyms) ? antonyms : "";
     }
 
-    // getPathway1(row) {
-    //     return Utility.getFieldOfRow("P1 Set", row);
-    // }
-    //
-    // getPathway2(row) {
-    //     return Utility.getFieldOfRow("P2 Set", row);
-    // }
+    getPathway1(row) {
+        return 'A';
+    }
+    
+    getPathway2(row) {
+        return Utility.getFieldOfRow("Achieve Set", row);
+    }
     //
     // getWordType(row) {
     //     return Utility.getFieldOfRow("Priority/Challenge", row);
