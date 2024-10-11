@@ -77,7 +77,10 @@ const Resource = {
 			"ReplaceWord": {value: "Replace Word", new: () => new ReplaceWordProcess("ReplaceWord", 1, [1, 1, 1, 0])},
 			
 			// update sp-cover image
-			"UpdateCoverImage": {value: "Update Cover Image", new: () => new UpdateCoverImageProcess()}
+			"UpdateCoverImage": {value: "Update Cover Image", new: () => new UpdateCoverImageProcess()},
+
+			// update bold tag
+			"UpdateBoldStyle":  {value: "Update Bold Style", new: () => new UpdateBoldStyleProcess()}
 		},
 		insertButton: {
 			show: [Ids.insertButton, Ids.insertAndSave],
