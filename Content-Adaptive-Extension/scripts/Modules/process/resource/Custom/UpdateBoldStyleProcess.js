@@ -17,7 +17,7 @@ class UpdateBoldStyleProcess {
         const doc_content = parser.parseFromString(value_content, "text/html");
 
         const boldElements = doc_content.querySelectorAll(
-          "div.passage-copy b, div.passage b"
+          "div.passage-copy b, div.paragraph b"
         );
 
         // Lọc các thẻ <b> mà có thẻ <br> ngay sau nó
