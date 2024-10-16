@@ -47,6 +47,9 @@ const Ids = {
 	replaceFileInputButton: "replace-file-input-button",
 	replaceFileInput: "replace-file-input",
 	replaceFileClear: "replace-file-clear",
+
+	updateCoverImage: "update-cover-image",
+	updateBoldStyle: "update-bold-style"
 }
 
 const ListModalIds = {

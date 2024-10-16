@@ -103,6 +103,8 @@
 
         "scripts/Modules/process/resource/Custom/ReplaceWordIdProcess.js",
         "scripts/Modules/process/resource/Custom/ReplaceWordProcess.js",
+        "scripts/Modules/process/resource/Custom/UpdateCoverImageProcess.js",
+        "scripts/Modules/process/resource/Custom/UpdateBoldStyleProcess.js",
 
         "scripts/Modules/process/settings/ResourceSetting.js",
         "scripts/Libs/data/programs/resource/VWAResourceSetting.js",

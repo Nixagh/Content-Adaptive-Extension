@@ -153,6 +153,18 @@ class OptionContent {
             await GProcess.insert();
         });
 
+        UI.Delegate(`.emptyWindow`, "click", `#${Ids.updateCoverImage}`, async () => {
+            //await GProcess.insert();
+            OptionContent.updateCoverImage();
+            //alert("update!");
+        });
+
+        UI.Delegate(`.emptyWindow`, "click", `#${Ids.updateBoldStyle}`, async () => {
+            //await GProcess.insert();
+            OptionContent.updateBoldStyle();
+            //alert("update!");
+        });
+
         UI.Delegate(`#${ListModalIds.customWWIAModal}`, "click", `#${Ids.loadAndInsertNewCustomWWIA}`, async () => {
             OptionContent.loadContentNewCustomWWIA();
 
@@ -217,6 +229,16 @@ class OptionContent {
         GProcess.process();
 
         console.log("loadContentNewCustomWWIA");
+    }
+    
+    static updateCoverImage() {
+        GProcess = new UpdateCoverImageProcess();
+        GProcess.update();
+    }
+
+    static updateBoldStyle() {
+        GProcess = new UpdateBoldStyleProcess();
+        GProcess.update();
     }
 
     static showAndHideInsertButton(program) {
@@ -321,6 +343,8 @@ class OptionContent {
                 <button id="${Ids.openInsertType}" style="color: black">Insert Type</button>
                 <button id="${Ids.openInsertCustomWWIA}" style="color: black">Insert New WWIA</button>
                 <button id="${Ids.openReplaceWordId}" style="color: black">Replace Word Id</button>
+                <button id="${Ids.updateCoverImage}" style="color: black">Update Cover Image</button>
+                <button id="${Ids.updateBoldStyle}" style="color: black">Update Bold Style</button>
             </div>
             <div id="${ListModalIds.questionModal}">
                 <div class="${Classes.optionsModalInnerHtml}">
