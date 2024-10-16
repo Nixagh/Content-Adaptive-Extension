@@ -124,7 +124,39 @@ class CustomWWIAProcess extends VWAProcess {
         // replace passage 1 with <div class="paragraph"><span class="paragraph_index passage-number">1</span>
         const passage1Regex = /<div class="passage-copy"><span class="paragraph_index passage-number">1<\/span>/g;
 
-        return passage.replace(passage1Regex, `<div class="paragraph"><span class="paragraph_index passage-number">1<\/span>`);
+        passage =  passage.replace(passage1Regex, `<div class="paragraph"><span class="paragraph_index passage-number">1<\/span>`);
+
+        const parser = new DOMParser();
+
+        const doc_content = parser.parseFromString(passage, "text/html");
+
+        let currentNode = doc_content.querySelectorAll('div.passage-copy, div.paragraph');
+
+        currentNode.forEach(element => {
+            const bNode = element.previousElementSibling;
+            if (bNode.tagName.toLowerCase() === "b") {
+
+                // Tìm thẻ span "<span class="paragraph_index passage-number">" ngay sau currentNode
+                const spanNode = element.querySelector('span.paragraph_index.passage-number');
+
+                // tạo 1 thẻ b mới từ thẻ b cũ và thêm class para-title
+                const newBNode = document.createElement('b');
+                newBNode.innerHTML = bNode.innerHTML;
+                newBNode.classList.add('para-title');
+
+                // xóa thẻ b cũ
+                bNode.remove();
+
+                // thêm thẻ b mới vào sau span
+                spanNode.insertAdjacentElement('afterend', newBNode);
+
+                // tạo và thêm thẻ br vào sau thẻ b mới
+                const brElement = document.createElement('br');
+                newBNode.insertAdjacentElement('afterend', brElement);
+                
+            }
+        });
+        return doc_content.body.innerHTML;
     }
 
     getQuestionHTML(row) {
