@@ -1,8 +1,9 @@
 class DefinitionAndVideoProcess extends VWAProcess {
 
     replacePath(filename) {
+        let resourceCode = document.getElementById('pojo.resource.resourceCode').value;
         const productId = this.getProductCode();
-        return `/content/${productId}/resourcecode/${filename}`;
+        return `/content/${productId}/${resourceCode}/${filename}`;
     }
 
     getFullContent() {
@@ -59,16 +60,16 @@ class DefinitionAndVideoProcess extends VWAProcess {
         const question = Utility.isNotNull(_question) ? `<div class="question">${_question}</div>` : ``;
 
         // Conditional attributes with default paths
-        const captionsUrl = Utility.isNotNull(this.getCaptionsUrl(row)) ? this.replacePath(this.getCaptionsUrl(row)) : ``;
-        const dataDescUrl = Utility.isNotNull(this.getDataDescUrl(row)) ? this.replacePath(this.getDataDescUrl(row)) : ``;
-        const descriptionsUrl = Utility.isNotNull(this.getDescriptionsUrl(row)) ? this.replacePath(this.getDescriptionsUrl(row)) : ``;
+        // const captionsUrl = Utility.isNotNull(this.getCaptionsUrl(row)) ? this.replacePath(this.getCaptionsUrl(row)) : ``;
+        // const dataDescUrl = Utility.isNotNull(this.getDataDescUrl(row)) ? this.replacePath(this.getDataDescUrl(row)) : ``;
+        // const descriptionsUrl = Utility.isNotNull(this.getDescriptionsUrl(row)) ? this.replacePath(this.getDescriptionsUrl(row)) : ``;
 
         const video = Utility.isNotNull(this.getDataSourceUrl) ? `
         <div class="video" 
-            captions-url='${captionsUrl}' 
-            data-desc-url='${dataDescUrl}' 
-            data-source='${this.getDataSourceUrl()}' 
-            descriptions-url='${descriptionsUrl}'
+            captions-url='${this.getCaptionsUrl(row)}' 
+            data-desc-url='${this.getDataDescUrl(row)}' 
+            data-source='${this.getDataSourceUrl(row)}' 
+            descriptions-url='${this.getDescriptionsUrl(row)}'
         >
         </div>` : ``;
 
@@ -83,15 +84,18 @@ class DefinitionAndVideoProcess extends VWAProcess {
     }
 
     getDataSourceUrl(row) {
-        const dataSource = this.getDataSource();
-        // const productId =  this.getProductCode();
-        // const word = this.getWord(row).replace("*", "").trim();
         let videoNumber = this.getField("Instructional Video Pickup Code", row);
 
-        if (isNaN(videoNumber) || !dataSource) {
+        if (videoNumber === 'TK') {
             return "/content/802906/007744939/VW_unavailablevideo.mp4";
         }
-        return this.replacePath(dataSource);
+
+        const videoName = this.getField('Video Name', row);
+        return this.replacePath(videoName + ".mp4");
+    }
+
+    isNumeric(str) {
+        return /^\d+$/.test(str);
     }
 
     getSynAntBody(row) {
@@ -173,15 +177,31 @@ class DefinitionAndVideoProcess extends VWAProcess {
     }
 
     getCaptionsUrl(row) {
-        return this.getField("CaptionsUrl"); // TODO
+        if (this.checkVideoSub(row)) {
+            let videoName = this.getField("Video Name", row);
+            return this.replacePath(videoName + "_AD.vtt")
+        }
+        return "";
     }
 
     getDataDescUrl(row) {
-        return this.getField("DataDescUrl"); // TODO
+        if (this.checkVideoSub(row)) {
+            let videoName = this.getField("Video Name", row);
+            return this.replacePath(videoName + "_AD.mp4")
+        }
+        return "";
     }
 
     getDescriptionsUrl(row) {
-     return this.getField("DescriptionsUrl"); // TODO
+        if (this.checkVideoSub(row)) {
+            let videoName = this.getField("Video Name", row);
+            return this.replacePath(videoName + ".srt")
+        }
+        return "";
+    }
+
+    checkVideoSub(row) {
+        return this.getField('VideoSub', row) === 'Yes';
     }
 
     getItemType(row) {
