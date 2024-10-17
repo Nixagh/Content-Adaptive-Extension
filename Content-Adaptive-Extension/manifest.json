@@ -99,6 +99,7 @@
 
         "scripts/Modules/process/resource/VocabularyWorkshopSelect/VWSProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkshopSelect/VWSBuildAnAssessmentProcess.js",
+        "scripts/Modules/process/resource/VocabularyWorkshopSelect/VWSUnitPostTestProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkshopSelect/VWSChoosingTheRightWordProcess.js",
         "scripts/Modules/process/resource/VocabularyWorkshopSelect/VWSCompletingTheSentenceProcess.js",
 
